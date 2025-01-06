@@ -1365,3 +1365,9 @@
 /mnt/pre_reboot_dexopt                                            pre_reboot_dexopt_file
 
 /second_stage_resources/overlay_remounter                         overlay_remounter_exec
+
+/system/system_ext/bin/iode-snort                                 iodesnort_exec
+/data/snort                                                       snort_data_file
+/system/system_ext/etc/iode-snort                                 iodesnort_etc_file
+/dev/socket/iode-snort-control                                    iodesnortcontrol_socket
+/dev/socket/iode-snort-netd                                       iodesnortnetd_socket

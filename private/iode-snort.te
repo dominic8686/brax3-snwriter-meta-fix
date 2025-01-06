@@ -1,0 +1,7 @@
+typeattribute iodesnort coredomain;
+
+init_daemon_domain(iodesnort)
+
+allow iodesnort { fs_bpf fs_bpf_netd_shared}:dir search;
+allow iodesnort { fs_bpf fs_bpf_netd_shared}:file read;
+allow iodesnort bpfloader:bpf prog_run;

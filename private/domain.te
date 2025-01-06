@@ -2228,6 +2228,7 @@ neverallow {
   domain
   -dexopt_chroot_setup
   -init
+  -iodesnort
   userdebug_or_eng(`-overlay_remounter')
   userdebug_or_eng(`-zygote')
 } {

@@ -21,6 +21,13 @@
     hal_mediaquality_service
     hal_vm_capabilities_service
     intrusion_detection_service
+    iodesnort
+    snort_data_file
+    iodesnort_etc_file
+    iodesnort_exec
+    iodesnortcontrol_socket
+    iodesnortnetd_socket
+    iodesnort_prop
     media_quality_service
     proc_cgroups
     proc_compaction_proactiveness

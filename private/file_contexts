@@ -970,3 +970,10 @@
 #############################
 # For overlays
 /second_stage_resources/overlay_remounter u:object_r:overlay_remounter_exec:s0
+
+# iodesnort additions
+/(system_ext|system/system_ext)/bin/iode-snort   u:object_r:iodesnort_exec:s0
+/data/snort(/.*)?          u:object_r:snort_data_file:s0
+/(system_ext|system/system_ext)/etc/iode-snort(/.*)?     u:object_r:iodesnort_etc_file:s0
+/dev/socket/iode-snort-control	u:object_r:iodesnortcontrol_socket:s0
+/dev/socket/iode-snort-netd	u:object_r:iodesnortnetd_socket:s0

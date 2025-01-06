@@ -1,0 +1,62 @@
+type iodesnort, domain, mlstrustedsubject;
+type iodesnort_exec, exec_type, file_type, system_file_type;
+type snort_data_file, file_type, data_file_type, core_data_file_type;
+type iodesnort_etc_file, system_file_type, file_type;
+type iodesnortcontrol_socket, file_type, coredomain_socket, mlstrustedobject;
+type iodesnortnetd_socket, file_type, coredomain_socket, mlstrustedobject;
+system_restricted_prop(iodesnort_prop)
+
+net_domain(iodesnort)
+
+# iptables
+
+allow iodesnort system_file:file { lock execute_no_trans };
+allow iodesnort shell_exec:file rx_file_perms;
+allow iodesnort self:global_capability_class_set {
+    net_raw
+    net_admin
+};
+dontaudit iodesnort system_file:dir write;
+
+# package list
+
+allow iodesnort packages_list_file:file r_file_perms;
+
+# sockets
+
+allow iodesnort self:netlink_netfilter_socket create_socket_perms_no_ioctl;
+allow iodesnort proc_net:file r_file_perms;
+unix_socket_connect(platform_app, iodesnortcontrol, iodesnort);
+unix_socket_connect(system_server, iodesnortcontrol, iodesnort);
+unix_socket_connect(netd, iodesnortnetd, iodesnort);
+
+# default config
+
+r_dir_file(iodesnort, iodesnort_etc_file)
+
+# saved data
+
+allow iodesnort snort_data_file:dir create_dir_perms;
+allow iodesnort snort_data_file:file create_file_perms;
+
+# system properties
+
+get_prop(iodesnort, boot_status_prop);
+set_prop(iodesnort, iodesnort_prop);
+set_prop(init, iodesnort_prop);
+
+# network interfaces
+
+r_dir_file(iodesnort, sysfs_net)
+
+# default apps management
+
+allow iodesnort package_service:service_manager find;
+binder_call(iodesnort, servicemanager)
+binder_call(iodesnort, system_server)
+binder_call(system_server, iodesnort)
+selinux_check_access(iodesnort)
+allow iodesnort toolbox_exec:file rx_file_perms;
+allow iodesnort tmpfs:dir create_dir_perms;
+allow iodesnort system_file:dir mounton;
+allow iodesnort self:capability sys_admin;

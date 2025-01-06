@@ -9,7 +9,7 @@ neverallow {
 } self:global_capability_class_set { net_admin net_raw };
 
 # any domain which uses bpf is a bpfdomain
-neverallow { domain -bpfdomain } *:bpf *;
+neverallow { domain -bpfdomain -iodesnort } *:bpf *;
 
 allow bpfdomain fs_bpf:dir search;
 
