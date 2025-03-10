@@ -17,6 +17,14 @@ binder_use(virtualizationmanager)
 allow virtualizationmanager virtualization_service:service_manager find;
 binder_call(virtualizationmanager, virtualizationservice)
 
+# Let virtualizationmanager find host services to proxy for payload clients
+# All calls between the host and payload clients are forwarded through
+# virtualizationmanager.
+# If this list becomes too large, we may want to split virtualizationmanager
+# into multiple domains.
+allow virtualizationmanager fwk_stats_service:service_manager find;
+binder_call(virtualizationmanager, fwk_stats_service);
+
 # Allow calling into the system server to find native services. "permission_service" to check
 # permissions, and "package_native" for staged apex info.
 binder_call(virtualizationmanager, system_server)
