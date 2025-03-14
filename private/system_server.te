@@ -1161,6 +1161,9 @@ userdebug_or_eng(`
   allow system_server accessibility_trace_data_file:file { getattr setattr create unlink w_file_perms };
 ')
 
+# Allow system server to write heap dumps to /data/local/traces.
+allow system_server trace_data_file:file { read write getattr };
+
 # For AppFuse.
 allow system_server vold:fd use;
 allow system_server fuse_device:chr_file { read write ioctl getattr };

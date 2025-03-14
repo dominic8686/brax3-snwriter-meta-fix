@@ -814,3 +814,9 @@ is_flag_enabled(RELEASE_UNLOCKED_STORAGE_API, `
     -sdk_sandbox_all
   } storage_area_dir:{ notdevfile_class_set dir } storage_area_content_file;
 ')
+
+# Apps should not be able to open trace data files, they should depend upon traceur to pass a file descriptor.
+# 'write' is granted to allow apps to write heap dumps.
+allow appdomain trace_data_file:file { read write getattr };
+neverallow { appdomain -traceur_app -platform_app -system_app -shell } trace_data_file:file ~{ read write getattr };
+neverallow { appdomain -traceur_app -platform_app -system_app -shell } trace_data_file:dir *;
