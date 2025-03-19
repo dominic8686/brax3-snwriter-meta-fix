@@ -1775,6 +1775,9 @@ ro.quick_start.device_id u:object_r:quick_start_prop:s0 exact string
 # Properties for sensor service
 sensors.aosp_low_power_sensor_fusion.maximum_rate u:object_r:sensors_config_prop:s0 exact uint
 
+# Properties for sensor hal
+sensors_hal.dynamic_sensor_hal.op_timeout_ms u:object_r:sensors_hal_prop:s0 exact uint
+
 # Whether the device has a high quality barometer as defined on the CDD.
 # Set by OEMs, read for xTS verifier tests
 sensor.barometer.high_quality.implemented  u:object_r:high_barometer_quality_prop:s0 exact bool

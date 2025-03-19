@@ -122,6 +122,7 @@ system_vendor_config_prop(high_barometer_quality_prop)
 system_vendor_config_prop(mmd_prop)
 system_vendor_config_prop(mmd_shared_prop)
 system_vendor_config_prop(prefetch_boot_prop)
+system_vendor_config_prop(sensors_hal_prop)
 
 typeattribute log_prop log_property_type;
 typeattribute log_tag_prop log_property_type;
