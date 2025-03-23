@@ -125,6 +125,9 @@ on fs
     write /proc/bootprof "INIT:fs"
     start vendor.boot-hal-1-2
 
+    wait /toto 5
+    start earlylog
+
     # mount fstab
     write /proc/bootprof "INIT:Mount_START"
     write /sys/kernel/tracing/trace_marker "B|1|Mount"
@@ -140,7 +143,6 @@ on fs
 on late-fs
     write /proc/bootprof "INIT:late-fs"
     wait_for_prop hwservicemanager.ready "true"
-
     write /proc/bootprof "INIT:Mount_START --late"
     write /sys/kernel/tracing/trace_marker "B|1|Mount late"
     mount_all --late
@@ -286,6 +288,9 @@ on post-fs-data
     chown root system /vendor/etc/tp_sfnr/
     chmod 0771 /vendor/etc/tp_sfnr/
 
+    # Create Audio HAL data directory
+    mkdir /data/vendor/audiohal 0771 system audio
+    
     # Set SELinux security contexts on upgrade or policy update.
     restorecon_recursive /mnt/vendor/nvdata
 
@@ -1009,6 +1014,15 @@ on property:vold.decrypt=trigger_shutdown_framework
     setprop sys.boot_completed 0
     setprop dev.bootcomplete 0
 
+# bugreport is triggered by holding down volume down, volume up and power
+service bugreport /system/bin/dumpstate -d -p -B -z \
+        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+    class late_start
+    user root
+    disabled
+    oneshot
+    keycodes 114 115 116
+
 # end boot time fs tune
 on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/iostats 1
@@ -1139,4 +1153,12 @@ service osi /system/bin/osi
     oneshot
     #seclabel u:r:osi:s0
 
+service earlylog /system/bin/logcat -b all -f /metadata/logcat
+    class core
+    user root
+    disabled
+    oneshot
 
+#on late-fs
+#   rm /metadata/logcat
+#   start earlylog

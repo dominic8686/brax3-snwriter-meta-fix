@@ -1,0 +1,1 @@
+/(vendor|system/vendor)/bin/hw/android\.hardware\.security\.keymint@2\.0-service\.trustonic u:object_r:hal_keymint_default_exec:s0

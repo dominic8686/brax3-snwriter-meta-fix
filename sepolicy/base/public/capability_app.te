@@ -1,0 +1,6 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+# Policy File of /system/priv-app/CapabilityTest/CapabilityTest.apk Executable File
+
+type capability_app, domain, coredomain;

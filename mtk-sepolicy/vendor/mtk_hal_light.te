@@ -1,0 +1,16 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+type mtk_hal_light, domain;
+type mtk_hal_light_exec, exec_type, file_type, vendor_file_type;
+
+# drv-mod bu shenwenbin for RGB led have no selinux 20240411 start
+allow mtk_hal_light brightness_sysfs:file {rw_file_perms open};
+allow mtk_hal_light brightness_sysfs:lnk_file read;
+allow mtk_hal_light brightness_sysfs:dir r_dir_perms;
+# drv-mod bu shenwenbin for RGB led have no selinux 20240411 end
+
+init_daemon_domain(mtk_hal_light)
+
+hal_server_domain(mtk_hal_light, hal_light)

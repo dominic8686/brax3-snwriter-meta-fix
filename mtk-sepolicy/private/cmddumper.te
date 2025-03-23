@@ -1,0 +1,25 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+type cmddumper_exec, system_file_type, exec_type, file_type;
+typeattribute cmddumper coredomain;
+
+init_daemon_domain(cmddumper)
+
+# modem logger socket access
+allow cmddumper platform_app:unix_stream_socket connectto;
+allow cmddumper shell_exec:file rx_file_perms;
+allow cmddumper system_file:file x_file_perms;
+
+# Save C2K modem log into data
+allow cmddumper debuglog_data_file:dir { relabelto create_dir_perms };
+allow cmddumper debuglog_data_file:file create_file_perms;
+
+# allow emdlogger to set property
+set_prop(cmddumper, system_mtk_debug_mdlogger_prop)
+set_prop(cmddumper, debug_prop)
+
+# Android P migration
+set_prop(cmddumper, system_mtk_persist_mtklog_prop)
+set_prop(cmddumper, system_mtk_mdl_prop)

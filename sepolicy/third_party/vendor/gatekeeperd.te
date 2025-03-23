@@ -1,0 +1,7 @@
+# MICROTRUST Policy Rule
+# Date : 2016/06/01
+# Operation: TEEI integration
+# Purpose: Microtrust HW-backed Gatekeeper
+hal_client_domain(hal_gatekeeper_default, hal_teei_capi)
+hal_client_domain(hal_gatekeeper_default, hal_allocator)
+allow hal_gatekeeper_default teei_client_device:chr_file rw_file_perms;

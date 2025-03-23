@@ -1,0 +1,7 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+userdebug_or_eng(`
+  add_hwservice(hal_dplanner, mtk_hal_dplanner_hwservice)
+')

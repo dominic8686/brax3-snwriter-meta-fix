@@ -1,0 +1,3 @@
+# MICROTRUST Policy Rule
+vendor_restricted_prop(vendor_mtk_soter_teei_prop)
+typeattribute vendor_mtk_soter_teei_prop              mtk_core_property_type;

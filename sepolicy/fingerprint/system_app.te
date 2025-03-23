@@ -1,0 +1,4 @@
+
+allow system_app ff_hwservice:hwservice_manager { add };
+allow system_app ff_hwservice:hwservice_manager { find };
+

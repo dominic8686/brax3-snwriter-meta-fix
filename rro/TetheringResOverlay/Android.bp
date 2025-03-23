@@ -1,0 +1,52 @@
+bootstrap_go_package {
+    name: "soong-TetheringResOverlay-mediatek",
+    pkgPath: "android/soong/TetheringResOverlay/mediatek",
+    deps: [
+        "soong-android",
+        "soong-java",
+    ],
+    srcs: [
+       "TetheringResOverlay.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+mtk_TetheringResOverlay_defaults {
+    name: "mediatek-TetheringResOverlay_defaults",
+}
+
+android_app {
+    name: "TetheringResOverlay",
+    proprietary: true,
+    owner: "mtk",
+    certificate: "platform",
+    manifest: "AndroidManifest.xml",
+    sdk_version: "system_current",
+    defaults: [
+        "mediatek-TetheringResOverlay_defaults",
+    ],
+}
+
+android_app {
+    name: "InProcessTetheringResOverlay",
+    proprietary: true,
+    owner: "mtk",
+    certificate: "platform",
+    manifest: "AndroidManifest_InProcess.xml",
+    sdk_version: "system_current",
+    defaults: [
+        "mediatek-TetheringResOverlay_defaults",
+    ],
+}
+
+android_app {
+    name: "GoogleTetheringResOverlay",
+    proprietary: true,
+    owner: "mtk",
+    certificate: "platform",
+    manifest: "AndroidManifest_Google.xml",
+    sdk_version: "system_current",
+    defaults: [
+        "mediatek-TetheringResOverlay_defaults",
+    ],
+}

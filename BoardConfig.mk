@@ -1,6 +1,9 @@
 DEVICE_PATH = device/alps/brax3
 TARGET_KERNEL_DIR := device/alps/brax3-kernel
 
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 # A/B
 AB_OTA_UPDATER := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
@@ -40,11 +43,10 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := k6835v1_64
 
 # Display
-TARGET_SCREEN_DENSITY := 480
+TARGET_SCREEN_DENSITY := 280
 
 # Kernel
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
-TARGET_KERNEL_USE := 5.15
 TARGET_PREBUILT_KERNEL := $(TARGET_KERNEL_DIR)/kernel
 BOARD_KERNEL_CMDLINE := \
     bootopt=64S3,32N2,64N2 \
@@ -65,7 +67,6 @@ BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_KERNEL_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_RAMDISK_USE_LZ4 := true
-#BOARD_PREBUILT_BOOTIMAGE := $(TARGET_KERNEL_DIR)/boot.img
 
 # Kernel modules
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(TARGET_KERNEL_DIR)/vendor_dlkm/modules.load))
@@ -80,16 +81,9 @@ BOARD_PREBUILT_DTBIMAGE_DIR := $(TARGET_KERNEL_DIR)
 BOARD_PREBUILT_DTBOIMAGE := $(BOARD_PREBUILT_DTBIMAGE_DIR)/dtbo.img
 
 # HIDL
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
-    hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    $(DEVICE_PATH)/framework_compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
-ODM_MANIFEST_FILES := \
-    $(DEVICE_PATH)/manifest_dsds.xml \
-    $(DEVICE_PATH)/manifest_qsqs.xml \
-    $(DEVICE_PATH)/manifest_ss.xml \
-    $(DEVICE_PATH)/manifest_tsts.xml
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
@@ -112,8 +106,8 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
-BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
-BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE := true
+# BOARD_BUILD_SUPER_IMAGE_BY_DEFAULT := true
+# BOARD_SUPER_IMAGE_IN_UPDATE_PACKAGE := true
 BOARD_SUPER_PARTITION_GROUPS := mediatek_dynamic_partitions
 BOARD_SUPER_PARTITION_SIZE := 6442450944 # 9663676416 ?
 BOARD_MEDIATEK_DYNAMIC_PARTITIONS_PARTITION_LIST := odm_dlkm product system system_dlkm system_ext vendor vendor_dlkm
@@ -141,6 +135,25 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
+
+# SELinux
+#include device/mediatek/sepolicy_vndr/SEPolicy.mk
+# SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += \
+#     system/sepolicy/vendor \
+#     $(DEVICE_PATH)/sepolicy/base/public
+# SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
+#     system/sepolicy/vendor \
+#     $(DEVICE_PATH)/sepolicy/base/private
+
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/base/vendor
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/fingerprint
+
+
+#    $(DEVICE_PATH)/sepolicy/third_party/vendor
+BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
+
+# SPL
+VENDOR_SECURITY_PATCH := 2024-07-05
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -183,7 +196,8 @@ WIFI_DRIVER_STATE_OFF := "0"
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WIFI_FEATURE_HOSTAPD_11AX := true
 
-BOARD_SHIPPING_API_LEVEL := 35
+BOARD_SHIPPING_API_LEVEL := 33
+BOARD_VNDK_VERSION := current
 
 # Include the proprietary files BoardConfig.
 include vendor/alps/brax3/BoardConfigVendor.mk

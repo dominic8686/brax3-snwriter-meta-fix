@@ -1,0 +1,213 @@
+<compatibility-matrix version="5.0" type="framework">
+    <hal format="hidl" optional="true">
+        <name>android.hardware.radio</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+        <interface>
+            <name>IRadio</name>
+            <instance>em1</instance>
+            <instance>em2</instance>
+            <instance>se1</instance>
+            <instance>se2</instance>
+            <instance>slot1</instance>
+            <instance>slot2</instance>
+        </interface>
+        <interface>
+            <name>ISap</name>
+            <instance>slot1</instance>
+            <instance>slot2</instance>
+        </interface>
+        <fqname>@1.2::IRadio/em1</fqname>
+        <fqname>@1.2::IRadio/em2</fqname>
+        <fqname>@1.2::IRadio/se1</fqname>
+        <fqname>@1.2::IRadio/se2</fqname>
+        <fqname>@1.2::IRadio/slot1</fqname>
+        <fqname>@1.2::IRadio/slot2</fqname>
+        <fqname>@1.2::ISap/slot1</fqname>
+        <fqname>@1.2::ISap/slot2</fqname>
+        <fqname>@1.6::IRadio/em1</fqname>
+        <fqname>@1.6::IRadio/em2</fqname>
+        <fqname>@1.6::IRadio/se1</fqname>
+        <fqname>@1.6::IRadio/se2</fqname>
+        <fqname>@1.6::IRadio/slot1</fqname>
+        <fqname>@1.6::IRadio/slot2</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.radio.modem</name>
+        <fqname>IRadioModem/imsSlot1</fqname>
+        <fqname>IRadioModem/imsSlot2</fqname>
+        <fqname>IRadioModem/se1</fqname>
+        <fqname>IRadioModem/se2</fqname>
+        <fqname>IRadioModem/slot1</fqname>
+        <fqname>IRadioModem/slot2</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.radio.network</name>
+        <fqname>IRadioNetwork/imsSlot1</fqname>
+        <fqname>IRadioNetwork/imsSlot2</fqname>
+        <fqname>IRadioNetwork/slot1</fqname>
+        <fqname>IRadioNetwork/slot2</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.radio.sim</name>
+        <fqname>IRadioSim/imsSlot1</fqname>
+        <fqname>IRadioSim/imsSlot2</fqname>
+        <fqname>IRadioSim/se1</fqname>
+        <fqname>IRadioSim/se2</fqname>
+        <fqname>IRadioSim/slot1</fqname>
+        <fqname>IRadioSim/slot2</fqname>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.radio.voice</name>
+        <fqname>IRadioVoice/imsSlot1</fqname>
+        <fqname>IRadioVoice/imsSlot2</fqname>
+        <fqname>IRadioVoice/slot1</fqname>
+        <fqname>IRadioVoice/slot2</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.camera.atms</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IATMs</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IATMs/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.camera.bgservice</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IBGService</name>
+            <instance>internal/0</instance>
+        </interface>
+        <fqname>@1.1::IBGService/internal/0</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.camera.isphal</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IISPModule</name>
+            <instance>internal/0</instance>
+        </interface>
+        <fqname>@1.1::IISPModule/internal/0</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.composer_ext</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IComposerExt</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IComposerExt/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.dmc</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+        <interface>
+            <name>IDmcService</name>
+            <instance>dmc_hidl_service</instance>
+        </interface>
+        <fqname>@1.2::IDmcService/dmc_hidl_service</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.mmagent</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IMMAgent</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.1::IMMAgent/default</fqname>
+    </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.mediatek.hardware.mms</name>
+        <transport>hwbinder</transport>
+        <version>1.0-7</version>
+        <interface>
+            <name>IMms</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.mtkpower</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+        <interface>
+            <name>IMtkPerf</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IMtkPower</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.2::IMtkPerf/default</fqname>
+        <fqname>@1.2::IMtkPower/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.netdagent</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>INetdagent</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::INetdagent/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.nvram</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>INvram</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.1::INvram/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.pq_aidl</name>
+        <fqname>IPictureQuality_AIDL/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.bluetooth.audio</name>
+        <transport>hwbinder</transport>
+        <version>2.2</version>
+        <interface>
+            <name>IBluetoothAudioProvidersFactory</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.2::IBluetoothAudioProvidersFactory/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.mediatek.hardware.bluetooth.audio</name>
+        <transport>hwbinder</transport>
+        <version>2.2</version>
+        <interface>
+            <name>IBluetoothAudioProvidersFactory</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.2::IBluetoothAudioProvidersFactory/default</fqname>
+    </hal>
+    <!-- <hal format="aidl"> -->
+    <!--     <name>vendor.mediatek.hardware.bluetooth.audio</name> -->
+    <!--     <interface> -->
+    <!--         <name>IBluetoothAudioProviderFactory</name> -->
+    <!--         <instance>default</instance> -->
+    <!--     </interface> -->
+    <!--     <fqname>IBluetoothAudioProviderFactory/default</fqname> -->
+    <!-- </hal> -->
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.gnss.batching</name>
+        <version>1</version>
+        <fqname>IMtkGnssBatching/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.mtkpower_applist</name>
+		<version>1</version>
+        <fqname>IMtkpower_applist/default</fqname>
+    </hal>
+</compatibility-matrix>

@@ -1,0 +1,26 @@
+This repo contains the MTK base SELinux policy configuration for all projects.
+It is built in all projectes by default.
+
+Configuration files:
+../../common/BoardConfig.mk
+../../system/common/BoardConfig.mk
+../../vendor/common/BoardConfig.mk
+../../vendor/common/BoardConfig-vext.mk
+
+Directory structure description:
+./vendor:
+These directories contains the MTK SELinux policy configuration for vendor.
+It defines the domains and types for MTK services running in /vendor all devices.
+It is built into vendor.img:/vendor/etc/selinux.
+
+./private:
+These directories contains the MTK SELinux policy configuration for platform private.
+It extends the domains and types for the AOSP services and apps common to all devices.
+It is built into system.img:/system/system_ext/etc/selinux or system_ext.img:
+/system_ext/etc/selinux.
+
+./public:
+These directories contains the MTK SELinux policy configuration for platform public.
+It defines the domains and types for MTK services running in /system all devices.
+It is built into vendor.img:/vendor/etc/selinux & system.img:/system/system_ext/etc/selinux
+or system_ext.img:/system_ext/etc/selinux.

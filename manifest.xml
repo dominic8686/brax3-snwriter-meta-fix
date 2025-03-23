@@ -29,16 +29,15 @@
         </interface>
         <fqname>@1.1::IBluetoothHci/default</fqname>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.boot</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IBootControl</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IBootControl/default</fqname>
-    </hal>
+    <!-- <hal format="aidl"> -->
+    <!--     <name>android.hardware.bluetooth.audio</name> -->
+    <!--     <version>2</version> -->
+    <!--     <interface> -->
+    <!--         <name>IBluetoothAudioProviderFactory</name> -->
+    <!--         <instance>default</instance> -->
+    <!--     </interface> -->
+    <!--     <fqname>IBluetoothAudioProviderFactory/default</fqname> -->
+    <!-- </hal> -->
     <hal format="hidl">
         <name>android.hardware.gatekeeper</name>
         <transport>hwbinder</transport>
@@ -70,43 +69,6 @@
         <fqname>@4.0::IMapper/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.radio</name>
-        <transport>hwbinder</transport>
-        <version>1.2</version>
-        <interface>
-            <name>IRadio</name>
-            <instance>em1</instance>
-            <instance>em2</instance>
-            <instance>se1</instance>
-            <instance>se2</instance>
-            <instance>slot1</instance>
-            <instance>slot2</instance>
-        </interface>
-        <interface>
-            <name>ISap</name>
-            <instance>slot1</instance>
-            <instance>slot2</instance>
-        </interface>
-        <fqname>@1.2::IRadio/em1</fqname>
-        <fqname>@1.2::IRadio/em2</fqname>
-        <fqname>@1.2::IRadio/se1</fqname>
-        <fqname>@1.2::IRadio/se2</fqname>
-        <fqname>@1.2::IRadio/slot1</fqname>
-        <fqname>@1.2::IRadio/slot2</fqname>
-        <fqname>@1.2::ISap/slot1</fqname>
-        <fqname>@1.2::ISap/slot2</fqname>
-        <fqname>@1.6::IRadio/em1</fqname>
-        <fqname>@1.6::IRadio/em2</fqname>
-        <fqname>@1.6::IRadio/se1</fqname>
-        <fqname>@1.6::IRadio/se2</fqname>
-        <fqname>@1.6::IRadio/slot1</fqname>
-        <fqname>@1.6::IRadio/slot2</fqname>
-    </hal>
-    <hal format="aidl">
-        <name>android.hardware.radio.config</name>
-        <fqname>IRadioConfig/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.renderscript</name>
         <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
@@ -128,16 +90,16 @@
         <fqname>@1.2::ISecureElement/SIM1</fqname>
         <fqname>@1.2::ISecureElement/SIM2</fqname>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.soundtrigger</name>
-        <transport>hwbinder</transport>
-        <version>2.3</version>
-        <interface>
-            <name>ISoundTriggerHw</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@2.3::ISoundTriggerHw/default</fqname>
-    </hal>
+    <!-- <hal format="hidl"> -->
+    <!--     <name>android.hardware.soundtrigger</name> -->
+    <!--     <transport>hwbinder</transport> -->
+    <!--     <version>2.3</version> -->
+    <!--     <interface> -->
+    <!--         <name>ISoundTriggerHw</name> -->
+    <!--         <instance>default</instance> -->
+    <!--     </interface> -->
+    <!--     <fqname>@2.3::ISoundTriggerHw/default</fqname> -->
+    <!-- </hal> -->
     <hal format="hidl">
         <name>android.hardware.tetheroffload.config</name>
         <transport>hwbinder</transport>
@@ -171,16 +133,6 @@
         <fqname>@2.0::IThermal/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>vendor.mediatek.hardware.apmonitor</name>
-        <transport>hwbinder</transport>
-        <version>2.0</version>
-        <interface>
-            <name>IApmService</name>
-            <instance>apm_hidl_service</instance>
-        </interface>
-        <fqname>@2.0::IApmService/apm_hidl_service</fqname>
-    </hal>
-    <hal format="hidl">
         <name>vendor.mediatek.hardware.bluetooth.audio</name>
         <transport>hwbinder</transport>
         <version>2.2</version>
@@ -190,14 +142,14 @@
         </interface>
         <fqname>@2.2::IBluetoothAudioProvidersFactory/default</fqname>
     </hal>
-    <hal format="aidl">
-        <name>vendor.mediatek.hardware.bluetooth.audio</name>
-        <interface>
-            <name>IBluetoothAudioProviderFactory</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>IBluetoothAudioProviderFactory/default</fqname>
-    </hal>
+    <!-- <hal format="aidl"> -->
+    <!--     <name>vendor.mediatek.hardware.bluetooth.audio</name> -->
+    <!--     <interface> -->
+    <!--         <name>IBluetoothAudioProviderFactory</name> -->
+    <!--         <instance>default</instance> -->
+    <!--     </interface> -->
+    <!--     <fqname>IBluetoothAudioProviderFactory/default</fqname> -->
+    <!-- </hal> -->
     <hal format="hidl">
         <name>vendor.mediatek.hardware.camera.atms</name>
         <transport>hwbinder</transport>
@@ -229,6 +181,15 @@
         <fqname>@1.1::IISPModule/internal/0</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.graphics.composer</name>
+        <transport>hwbinder</transport>
+        <fqname>@2.1::IComposer/default</fqname>
+    </hal>
+    <!-- <hal format="aidl"> -->
+    <!--     <name>vendor.mediatek.hardware.pq_aidl</name> -->
+    <!--     <fqname>IPictureQuality_AIDL/default</fqname> -->
+    <!-- </hal> -->
+    <hal format="hidl">
         <name>vendor.mediatek.hardware.composer_ext</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -249,56 +210,6 @@
         <fqname>@1.2::IDmcService/dmc_hidl_service</fqname>
     </hal>
     <hal format="hidl">
-        <name>vendor.mediatek.hardware.interfaces_tc1.mtkradioex_tc1</name>
-        <transport>hwbinder</transport>
-        <version>3.0</version>
-        <interface>
-            <name>IMtkRadioEx</name>
-            <instance>mtkAssist1</instance>
-            <instance>mtkAssist2</instance>
-            <instance>mtkCap1</instance>
-            <instance>mtkCap2</instance>
-            <instance>mtkEm1</instance>
-            <instance>mtkEm2</instance>
-            <instance>mtkSe1</instance>
-            <instance>mtkSe2</instance>
-            <instance>mtkSlot1</instance>
-            <instance>mtkSlot2</instance>
-            <instance>mtkSmartRatSwitch1</instance>
-            <instance>mtkSmartRatSwitch2</instance>
-        </interface>
-        <fqname>@3.0::IMtkRadioEx/mtkAssist1</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkAssist2</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkCap1</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkCap2</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkEm1</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkEm2</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkSe1</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkSe2</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkSlot1</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkSlot2</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkSmartRatSwitch1</fqname>
-        <fqname>@3.0::IMtkRadioEx/mtkSmartRatSwitch2</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.log</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ILog</name>
-            <instance>ATMWiFiHidlServer</instance>
-            <instance>ConnsysFWHidlServer</instance>
-            <instance>LoggerHidlServer</instance>
-            <instance>MobileLogHidlServer</instance>
-            <instance>ModemLogHidlServer</instance>
-        </interface>
-        <fqname>@1.0::ILog/ATMWiFiHidlServer</fqname>
-        <fqname>@1.0::ILog/ConnsysFWHidlServer</fqname>
-        <fqname>@1.0::ILog/LoggerHidlServer</fqname>
-        <fqname>@1.0::ILog/MobileLogHidlServer</fqname>
-        <fqname>@1.0::ILog/ModemLogHidlServer</fqname>
-    </hal>
-    <hal format="hidl">
         <name>vendor.mediatek.hardware.mmagent</name>
         <transport>hwbinder</transport>
         <version>1.1</version>
@@ -307,16 +218,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.1::IMMAgent/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.mms</name>
-        <transport>hwbinder</transport>
-        <version>1.7</version>
-        <interface>
-            <name>IMms</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.7::IMms/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.mediatek.hardware.mtkpower</name>
@@ -353,28 +254,19 @@
         </interface>
         <fqname>@1.1::INvram/default</fqname>
     </hal>
+    <!-- <hal format="aidl"> -->
+    <!--     <name>vendor.mediatek.hardware.gnss.batching</name> -->
+    <!--     <version>1</version> -->
+    <!--     <fqname>IMtkGnssBatching/default</fqname> -->
+    <!-- </hal> -->
+    <!-- <hal format="aidl"> -->
+    <!--     <name>vendor.mediatek.hardware.mtkpower_applist</name> -->
+    <!--     	<version>1</version> -->
+    <!--     <fqname>IMtkpower_applist/default</fqname> -->
+    <!-- </hal> -->
     <hal format="hidl">
-        <name>vendor.mediatek.hardware.nwk_opt</name>
+        <name>vendor.mediatek.hardware.mms</name>
         <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>INwkOpt</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::INwkOpt/default</fqname>
-    </hal>
-    <hal format="aidl">
-        <name>vendor.mediatek.hardware.pq_aidl</name>
-        <fqname>IPictureQuality_AIDL/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.videotelephony</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IVideoTelephony</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IVideoTelephony/default</fqname>
+        <fqname>@1.7::IMms/default</fqname>
     </hal>
 </manifest>

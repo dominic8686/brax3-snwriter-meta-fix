@@ -1,0 +1,51 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+# Date : WK15.29
+# Operation : Migration
+# Purpose : for device bring up, not to block early migration
+allow { domain -isolated_app } storage_file:dir search;
+
+# Date : W17.47
+# Allow system_server to enable/disable logmuch_prop for Wi-Fi logging purpose
+neverallow {
+  domain
+  -init
+  -mtkrild
+  -mtk_hal_camera
+  -vendor_init
+  } vendor_mtk_logmuch_prop:property_service set;
+
+# Grant read access to mtk core property type which represents all
+# mtk properties except those with ctl_xxx prefix.
+# Align Google change: f01453ad453b29dd723838984ea03978167491e5
+get_prop(domain, mtk_core_property_type)
+
+# Allow all processes to read /sys/bus/platform/drivers/dev_info/dev_info
+# as it is a public interface for all processes to read some OTP data.
+allow {
+  domain
+  -isolated_app
+} sysfs_devinfo:file r_file_perms;
+
+# Date: 2022/07/28
+# Purpose :allow appdomain to use gpu aidl
+allow {
+  domain
+  -isolated_app
+  -webview_zygote
+  -app_zygote
+  -vendor_init
+  -init
+  -hal_configstore_server
+  } mtk_hal_mali_platform_default_service:service_manager find;
+
+binder_call({
+  domain
+  -vold
+  -iorapd
+  -installd
+  -vendor_init
+  -init
+  }, mtk_hal_mali_platform_default)

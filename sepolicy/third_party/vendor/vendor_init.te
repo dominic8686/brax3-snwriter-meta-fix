@@ -1,0 +1,2 @@
+# MICROTRUST Policy Rule
+set_prop(vendor_init, vendor_mtk_soter_teei_prop)

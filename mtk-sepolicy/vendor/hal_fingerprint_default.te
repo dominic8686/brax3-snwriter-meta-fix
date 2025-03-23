@@ -1,0 +1,15 @@
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
+allow hal_fingerprint_default tkcore_admin_device:chr_file rw_file_perms;
+allow hal_fingerprint_default fingerprint_device:chr_file rw_file_perms;
+allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
+allow hal_fingerprint_default self:unix_stream_socket connectto;
+allow hal_fingerprint_default mobicore_user_device:chr_file rw_file_perms;
+allow hal_fingerprint_default mobicore_user_device:unix_stream_socket connectto;
+allow hal_fingerprint_default mobicore:unix_stream_socket connectto;
+allow hal_fingerprint_default tmpfs:chr_file rw_file_perms;
+allow hal_fingerprint_default debugfs_trace_marker:file rw_file_perms;
+allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
