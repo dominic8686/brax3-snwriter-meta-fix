@@ -48,8 +48,9 @@ allow { hal_drm -hal_widevine_system } tee_device:chr_file rw_file_perms;
 
 allow hal_drm_server { appdomain -isolated_app }:fd use;
 
-# Reduce the audit log spam caused by the Rikers anti-root check (b/401297280)
+# Reduce the audit log spam caused by the Rikers anti-root check (b/393637335)
 dontaudit hal_drm system_userdir_file:dir search;
+dontaudit hal_drm system_data_file:dir search;
 
 # only allow unprivileged socket ioctl commands
 allowxperm hal_drm self:{ rawip_socket tcp_socket udp_socket }

@@ -332,6 +332,7 @@ persist.device_config.global_settings.sys_traced u:object_r:device_config_sys_tr
 
 apexd.                  u:object_r:apexd_prop:s0
 apexd.config.           u:object_r:apexd_config_prop:s0
+apexd.config.apex_file_open.threads      u:object_r:apexd_config_prop:s0 exact uint
 apexd.config.dm_delete.timeout           u:object_r:apexd_config_prop:s0 exact uint
 apexd.config.dm_create.timeout           u:object_r:apexd_config_prop:s0 exact uint
 apexd.config.loop_wait.attempts          u:object_r:apexd_config_prop:s0 exact uint
@@ -398,6 +399,7 @@ ro.virtual_ab.num_verify_threads u:object_r:virtual_ab_prop:s0 exact int
 ro.virtual_ab.cow_op_merge_size u:object_r:virtual_ab_prop:s0 exact int
 ro.virtual_ab.verify_threshold_size u:object_r:virtual_ab_prop:s0 exact int
 ro.virtual_ab.verify_block_size u:object_r:virtual_ab_prop:s0 exact int
+ro.virtual_ab.skip_verification u:object_r:virtual_ab_prop:s0 exact bool
 
 # OEMs can set this prop at build time to configure how many seconds to delay
 # merge after installing a Virtual AB OTA. The default behavior is to start
@@ -508,6 +510,7 @@ ro.camera.enableCompositeAPI0JpegR u:object_r:camera_config_prop:s0 exact bool
 ro.camera.enableVirtualCamera      u:object_r:camera_config_prop:s0 exact bool
 ro.camera.disableHeicUltraHDR u:object_r:camera_config_prop:s0 exact bool
 ro.camera.enableSWHEVC        u:object_r:camera_config_prop:s0 exact bool
+ro.camera.resultFmqSize             u:object_r:camera_config_prop:s0 exact int
 
 ro.camerax.extensions.enabled u:object_r:camerax_extensions_prop:s0 exact bool
 
