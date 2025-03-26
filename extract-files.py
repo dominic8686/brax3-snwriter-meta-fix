@@ -21,7 +21,7 @@ from extract_utils.main import (
 namespace_imports = [
     'hardware/mediatek',
     'hardware/mediatek/libmtkperf_client',
-    'vendor/alps/brax3',
+    'vendor/brax/k6835v1_64',
     'hardware/mediatek',
 ]
 
@@ -39,9 +39,15 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'system_ext/lib64/libsource.so': blob_fixup()
+        .add_needed('libstagefright_foundation-v33.so'),
+    'vendor/bin/hw/android.hardware.health-service.example': blob_fixup()
+        .replace_needed('android.hardware.health-V1-ndk.so', 'android.hardware.health-V3-ndk.so'),
     (
         'vendor/lib64/android.hardware.bluetooth.audio-impl.so',
         'vendor/lib64/libbluetooth_audio_session_aidl.so',
+        'vendor/lib/android.hardware.bluetooth.audio-impl.so',
+        'vendor/lib/libbluetooth_audio_session_aidl.so',
     ): blob_fixup()
         .replace_needed('android.hardware.bluetooth.audio-V2-ndk', 'android.hardware.bluetooth.audio-V5-ndk'),
     (
@@ -94,12 +100,12 @@ blob_fixups: blob_fixups_user_type = {
 }  # fmt: skip
 
 module = ExtractUtilsModule(
-    'brax3',
-    'alps',
+    'k6835v1_64',
+    'brax',
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
-    # add_firmware_proprietary_file=True,
+    #add_firmware_proprietary_file=True,
 )
 
 if __name__ == '__main__':

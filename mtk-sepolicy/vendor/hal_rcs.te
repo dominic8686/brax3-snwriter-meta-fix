@@ -1,9 +1,0 @@
-# ==============================================
-# MTK Policy Rule
-# ==============================================
-
-add_hwservice(hal_rcs_server, volte_rcs_ua_hwservice)
-allow hal_rcs_client volte_rcs_ua_hwservice:hwservice_manager find;
-
-binder_call(hal_rcs_client, hal_rcs_server)
-binder_call(hal_rcs_server, hal_rcs_client)

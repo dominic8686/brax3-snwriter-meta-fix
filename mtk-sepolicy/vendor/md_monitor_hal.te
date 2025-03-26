@@ -1,8 +1,0 @@
-# ==============================================
-# MTK Policy Rule
-# ==============================================
-
-allow md_monitor_hal_client mtk_mdm_hidl_server:hwservice_manager find;
-
-binder_call(md_monitor_hal_client, md_monitor_hal_server)
-binder_call(md_monitor_hal_server, md_monitor_hal_client)

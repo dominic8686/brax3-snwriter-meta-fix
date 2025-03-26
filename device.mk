@@ -2,8 +2,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
 SELINUX_IGNORE_NEVERALLOWS := true
-PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
-BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
@@ -103,10 +101,18 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.mediatek \
     android.hardware.health-service.mediatek-recovery
 
-# PRODUCT_PACKAGES += \
-#     android.hardware.health@2.1-impl \
-#     android.hardware.health@2.1-impl.recovery \
-#     android.hardware.health@2.1-service
+# IMS
+# PRODUCT_BOOT_JARS += \
+#     mediatek-common \
+#     mediatek-framework \
+#     mediatek-ims-base \
+#     mediatek-ims-common \
+#     mediatek-telecom-common \
+#     mediatek-telephony-base \
+#     mediatek-telephony-common
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/privapp-permissions-com.mediatek.ims.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-com.mediatek.ims.xml
 
 # Init
 PRODUCT_PACKAGES += \
@@ -124,15 +130,13 @@ PRODUCT_COPY_FILES += \
 # PRODUCT_PACKAGES += \
 #     android.hardware.light-service.lineage
 
+# Lineage Health
+# PRODUCT_PACKAGES += \
+#     vendor.lineage.health-service.default
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.strongbox_keystore.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.strongbox_keystore.xml \
-    frameworks/native/data/etc/android.hardware.keystore.single_use_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.single_use_key.xml \
     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
-
-PRODUCT_PACKAGES += \
-    android.hardware.hardware_keystore.km41.xml
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -188,7 +192,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init/init.recovery.mt6835.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.mt6835.rc
 
 PRODUCT_COPY_FILES += \
-    device/alps/brax3-kernel/vendor_boot/modules.load.recovery:$(TARGET_COPY_OUT_RECOVERY)/root/lib/modules/modules.load.recovery
+    device/brax/brax3-kernel/vendor_boot/modules.load.recovery:$(TARGET_COPY_OUT_RECOVERY)/root/lib/modules/modules.load.recovery
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -210,9 +214,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl
-
-PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
     android.hardware.thermal@2.0.vendor
 
 # PRODUCT_PACKAGES += \
@@ -240,7 +242,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     FrameworkResOverlay \
+    TetheringResOverlayBrax3 \
     WifiResMainlineOverlay
 
 # Inherit from the proprietary files makefile.
-$(call inherit-product, vendor/alps/brax3/brax3-vendor.mk)
+$(call inherit-product, vendor/brax/k6835v1_64/k6835v1_64-vendor.mk)

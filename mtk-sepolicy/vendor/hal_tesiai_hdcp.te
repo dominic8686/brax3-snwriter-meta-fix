@@ -1,8 +1,0 @@
-# ==============================================
-# Microtrust Policy Rule
-# ==============================================
-
-hal_attribute_hwservice(hal_tesiai_hdcp, tesiai_hal_hdcp_hwservice)
-
-binder_call(hal_tesiai_hdcp_client, hal_tesiai_hdcp_server)
-binder_call(hal_tesiai_hdcp_server, hal_tesiai_hdcp_client)

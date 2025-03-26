@@ -1,1 +1,1 @@
-/build/v6/out/k6835v1_64-dbg/target/product/k6835v1_64/
+/build/v6/out/brax3-dbg/target/product/brax3/

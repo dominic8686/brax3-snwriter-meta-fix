@@ -1,6 +1,0 @@
-# ==============================================
-# MTK Policy Rule
-# ==============================================
-# Policy File of /system/bin/atci_service_sys Executable File
-
-type atci_service_sys, domain;

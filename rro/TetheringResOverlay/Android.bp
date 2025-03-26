@@ -16,7 +16,7 @@ mtk_TetheringResOverlay_defaults {
 }
 
 android_app {
-    name: "TetheringResOverlay",
+    name: "TetheringResOverlayBrax3",
     proprietary: true,
     owner: "mtk",
     certificate: "platform",
