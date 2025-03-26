@@ -380,7 +380,6 @@ prefetch_boot.replay u:object_r:prefetch_service_prop:s0 exact bool
 
 # Virtual A/B and snapuserd properties
 ro.virtual_ab.enabled   u:object_r:virtual_ab_prop:s0 exact bool
-ro.virtual_ab.retrofit  u:object_r:virtual_ab_prop:s0 exact bool
 ro.virtual_ab.compression.enabled  u:object_r:virtual_ab_prop:s0 exact bool
 ro.virtual_ab.compression.xor.enabled   u:object_r:virtual_ab_prop:s0 exact bool
 ro.virtual_ab.userspace.snapshots.enabled u:object_r:virtual_ab_prop:s0 exact bool
@@ -1781,6 +1780,9 @@ ro.quick_start.device_id u:object_r:quick_start_prop:s0 exact string
 
 # Properties for sensor service
 sensors.aosp_low_power_sensor_fusion.maximum_rate u:object_r:sensors_config_prop:s0 exact uint
+
+# Properties for sensor hal
+sensors_hal.dynamic_sensor_hal.op_timeout_ms u:object_r:sensors_hal_prop:s0 exact uint
 
 # Whether the device has a high quality barometer as defined on the CDD.
 # Set by OEMs, read for xTS verifier tests
