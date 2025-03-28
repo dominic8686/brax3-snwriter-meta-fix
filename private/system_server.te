@@ -223,6 +223,9 @@ allow system_server proc_uid_procstat_set:file { w_file_perms getattr };
 # Write to /proc/sysrq-trigger.
 allow system_server proc_sysrq:file rw_file_perms;
 
+# Read /proc/tty/drivers by the SerialService.
+allow system_server proc_tty_drivers:file r_file_perms;
+
 # Delete /data/misc/stats-service/ directories.
 allow system_server stats_config_data_file:dir { open read remove_name search write };
 allow system_server stats_config_data_file:file unlink;
