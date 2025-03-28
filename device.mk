@@ -1,4 +1,5 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
 SELINUX_IGNORE_NEVERALLOWS := true
@@ -50,10 +51,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     MtkInCallService
 
-PRODUCT_PACKAGES += \
-    libdynproc:32 \
-    libhapticgenerator:32
-
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
@@ -69,12 +66,6 @@ PRODUCT_COPY_FILES += \
 TARGET_SCREEN_HEIGHT := 1600
 TARGET_SCREEN_WIDTH := 720
 
-# Cgroup
-# PRODUCT_COPY_FILES += \
-#     system/core/libprocessgroup/profiles/cgroups_30.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
-
-#$(LOCAL_PATH)/configs/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service \
@@ -86,10 +77,13 @@ PRODUCT_PACKAGES += \
 
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-#PRODUCT_BUILD_SUPER_PARTITION := true
+PRODUCT_BUILD_SUPER_PARTITION := true
 
 PRODUCT_PACKAGES += \
     fastbootd
+
+PRODUCT_PACKAGES += \
+    android.hardware.biometrics.fingerprint@2.1-service
 
 # Gatekeeper
 PRODUCT_PACKAGES += \
@@ -118,25 +112,34 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fstab.mt6835 \
     fstab.mt6835.vendor_ramdisk \
+    init.cgroup.rc \
+    init.connectivity.common.rc \
+    init.connectivity.rc \
+    init_connectivity.rc \
+    init.modem.rc \
     init.mt6835.rc \
     init.mt6835.rc.vendor_ramdisk \
-    init.project.rc
+    init.mt6835.usb.rc \
+    init.mtkgki.rc \
+    init.project.rc \
+    init.sensor_2_0.rc \
+    ueventd.mt6835.rc
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init/fstab.mt6835:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.mt6835 \
-
-
-# # Light
-# PRODUCT_PACKAGES += \
-#     android.hardware.light-service.lineage
+# Light
+PRODUCT_PACKAGES += \
+    android.hardware.light-service.lineage
 
 # Lineage Health
 # PRODUCT_PACKAGES += \
 #     vendor.lineage.health-service.default
 
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \
-    frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
+# Overlays
+PRODUCT_PACKAGES += \
+    SettingsProviderRes \
+    FrameworksResTarget \
+    FrameworkResOverlay \
+    TetheringResOverlay \
+    WifiResMainlineOverlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -148,6 +151,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.faketouch.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.faketouch.xml \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
+    frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -170,6 +174,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.opengles.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.opengles.deqp.level.xml \
@@ -177,22 +182,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
-# Power
-# PRODUCT_PACKAGES += \
-#     android.hardware.power-service.lineage-libperfmgr \
-#     vendor.mediatek.hardware.mtkpower@1.2-service.stub \
-#     libmtkperf_client_vendor \
-#     libmtkperf_client
-
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
 
-# Recovery files
+# Recovery
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init/init.recovery.mt6835.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.mt6835.rc
-
-PRODUCT_COPY_FILES += \
-    device/brax/brax3-kernel/vendor_boot/modules.load.recovery:$(TARGET_COPY_OUT_RECOVERY)/root/lib/modules/modules.load.recovery
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -212,11 +207,6 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PACKAGES += \
     nvcfg_mdota.ini_symlink
 
-# Thermal
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@2.0.vendor
-
 # PRODUCT_PACKAGES += \
 #     android.hardware.usb@1.3.vendor \
 #     android.hardware.usb.gadget@1.1.vendor
@@ -233,6 +223,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vndservicemanager
 
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator-service.mediatek
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     wpa_supplicant \
@@ -240,10 +233,5 @@ PRODUCT_PACKAGES += \
     libwifi-hal-wrapper \
     android.hardware.wifi-service
 
-PRODUCT_PACKAGES += \
-    FrameworkResOverlay \
-    TetheringResOverlayBrax3 \
-    WifiResMainlineOverlay
-
 # Inherit from the proprietary files makefile.
-$(call inherit-product, vendor/brax/k6835v1_64/k6835v1_64-vendor.mk)
+$(call inherit-product, vendor/brax/brax3/brax3-vendor.mk)

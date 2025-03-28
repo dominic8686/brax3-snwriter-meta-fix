@@ -21,7 +21,7 @@ from extract_utils.main import (
 namespace_imports = [
     'hardware/mediatek',
     'hardware/mediatek/libmtkperf_client',
-    'vendor/brax/k6835v1_64',
+    'vendor/brax/brax3',
     'hardware/mediatek',
 ]
 
@@ -33,6 +33,7 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
+        'android.hardware.security.keymint-V1-ndk',
         'vendor.mediatek.hardware.videotelephony@1.0',
      ): lib_fixup_vendor_suffix,
     ('libsink',): lib_fixup_remove,
@@ -59,7 +60,7 @@ blob_fixups: blob_fixups_user_type = {
          .replace_needed('libutils.so', 'libutils-v32.so'),
     'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
-    ('vendor/bin/mnld', 'vendor/lib64/libaalservice.so', 'vendor/lib64/libcam.utils.sensorprovider.so', 'vendor/lib64/mt6835/libcam.utils.sensorprovider.so'): blob_fixup()
+    ('vendor/bin/mnld', 'vendor/lib64/libaalservice.so', 'vendor/lib64/mt6835/libcam.utils.sensorprovider.so', 'vendor/lib64/mt6835/libcam.utils.sensorprovider.so'): blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
     'vendor/lib64/mt6835/libmtkcam_featurepolicy.so': blob_fixup()
         .binary_regex_replace(b'\x34\xE8\x87\x40\xB9', b'\x34\x28\x02\x80\x52'),
@@ -88,11 +89,6 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/mt6835/libneuralnetworks_sl_driver_mtk_prebuilt.so'
      ): blob_fixup()
         .add_needed('libnativewindow.so'),
-    (
-        'vendor/lib/libspeech_enh_lib.so',
-        'vendor/lib64/hw/fingerprint.default.so',
-    ): blob_fixup()
-        .fix_soname(),
     'vendor/bin/hw/android.hardware.security.keymint@2.0-service.trustonic': blob_fixup()
         .replace_needed('android.hardware.security.keymint-V2-ndk.so', 'android.hardware.security.keymint-V3-ndk.so')
         .add_needed('android.hardware.security.rkp-V3-ndk.so'),
@@ -100,12 +96,12 @@ blob_fixups: blob_fixups_user_type = {
 }  # fmt: skip
 
 module = ExtractUtilsModule(
-    'k6835v1_64',
+    'brax3',
     'brax',
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
-    #add_firmware_proprietary_file=True,
+    add_firmware_proprietary_file=True,
 )
 
 if __name__ == '__main__':

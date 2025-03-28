@@ -1,8 +1,5 @@
-DEVICE_PATH = device/brax/k6835v1_64
+DEVICE_PATH = device/brax/brax3
 TARGET_KERNEL_DIR := device/brax/brax3-kernel
-
-BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 # A/B
 AB_OTA_UPDATER := true
@@ -74,7 +71,6 @@ BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(TARGET_KERNEL_DIR)/ven
 BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(TARGET_KERNEL_DIR)/vendor_dlkm/*.ko)
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(TARGET_KERNEL_DIR)/vendor_boot/modules.load))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(TARGET_KERNEL_DIR)/vendor_boot/*.ko)
-#BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_DIR)/vendor_dlkm/modules.blocklist
 
 # Device Tree
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
@@ -190,4 +186,4 @@ BOARD_SHIPPING_API_LEVEL := 33
 BOARD_VNDK_VERSION := current
 
 # Include the proprietary files BoardConfig.
-include vendor/brax/k6835v1_64/BoardConfigVendor.mk
+include vendor/brax/brax3/BoardConfigVendor.mk

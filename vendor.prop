@@ -334,3 +334,5 @@ ro.vendor.usb.kpoc_adb=0
 ro.vendor.mtk.c2.vdec.fmt.support.level=2
 ro.netflix.bsp_rev=MTK6835-36999-1
 ro.vendor.mgk_name=mgk_64_entry_level_k515
+bluetooth.device.default_name=BraX3
+vendor.usb.product_string=BraX3

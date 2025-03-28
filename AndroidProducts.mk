@@ -5,4 +5,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_k6835v1_64.mk
+    $(LOCAL_DIR)/lineage_brax3.mk

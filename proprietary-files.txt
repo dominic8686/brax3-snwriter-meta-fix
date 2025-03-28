@@ -5,7 +5,6 @@ vendor/lib64/libaedv.so
 # Audio
 vendor/lib/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib/hw/audio.primary.mt6835.so
 vendor/lib/hw/audio.r_submix.mediatek.so;SYMLINK=vendor/lib/hw/audio.r_submix.mt6835.so
-vendor/lib/libMtkSpeechEnh.so
 vendor/lib/lib_iir.so
 vendor/lib/libaudio_param_parser-vnd.so
 vendor/lib/libaudiocompensationfilter_vendor.so
@@ -19,25 +18,30 @@ vendor/lib/libaudioloudc.so
 vendor/lib/libaudioprimarydevicehalifclient.so
 vendor/lib/libaudiotoolkit_vendor.so
 vendor/lib/libaurisysdemo.so
+vendor/lib/libawinic_mtk_aurisys.so
 vendor/lib/libbessound_hd_mtk_vendor.so
 vendor/lib/libblisrc32_vendor.so
 vendor/lib/libbwc.so
-vendor/lib64/libbwc.so
 vendor/lib/libcvsd_mtk.so
 vendor/lib/libmsbc_mtk.so
 vendor/lib/libmtklimiter_vendor.so
 vendor/lib/libmtkshifter_vendor.so
+vendor/lib/libMtkSpeechEnh.so
 vendor/lib/libnxp_extamp_intf.so
 vendor/lib/librt_extamp_intf.so
 vendor/lib/libspeech_enh_lib.so;FIX_SONAME
 vendor/lib/libspeechparser_vendor.so
+vendor/lib/libtinycompress.so 
 vendor/lib/vendor.mediatek.hardware.audio@6.1.so
 vendor/lib/vendor.mediatek.hardware.audio@7.1.so
 vendor/lib/vendor.mediatek.hardware.audio@8.1.so
+vendor/lib64/libbwc.so
+vendor/lib64/libtinycompress.so 
 vendor/lib64/vendor.mediatek.hardware.audio@6.1.so
-vendor/lib/libawinic_mtk_aurisys.so
 
 # Audio Configs
+vendor/etc/audio_device.xml
+vendor/etc/audio_em.xml
 vendor/etc/audio_param/AudioParamOptions_mgvi.xml
 vendor/etc/audio_param/AudioParamOptions_vext.xml
 vendor/etc/audio_param/BtInfo_AudioParam.xml
@@ -50,15 +54,15 @@ vendor/etc/audio_param/HpImpedance_AudioParam.xml
 vendor/etc/audio_param/HpImpedance_ParamUnitDesc.xml
 vendor/etc/audio_param/MicInfo_AudioParam.xml
 vendor/etc/audio_param/MicInfo_ParamUnitDesc.xml
+vendor/etc/audio_param/Playback_AudioParam.xml
+vendor/etc/audio_param/Playback_ParamTreeView.xml
+vendor/etc/audio_param/Playback_ParamUnitDesc.xml
 vendor/etc/audio_param/PlaybackACF_AudioParam.xml
 vendor/etc/audio_param/PlaybackACF_ParamUnitDesc.xml
-vendor/etc/audio_param/Playback_AudioParam.xml
 vendor/etc/audio_param/PlaybackDRC_AudioParam.xml
 vendor/etc/audio_param/PlaybackDRC_ParamUnitDesc.xml
 vendor/etc/audio_param/PlaybackHCF_AudioParam.xml
 vendor/etc/audio_param/PlaybackHCF_ParamUnitDesc.xml
-vendor/etc/audio_param/Playback_ParamTreeView.xml
-vendor/etc/audio_param/Playback_ParamUnitDesc.xml
 vendor/etc/audio_param/PlaybackVolAna_AudioParam.xml
 vendor/etc/audio_param/PlaybackVolAna_ParamUnitDesc.xml
 vendor/etc/audio_param/PlaybackVolDigi_AudioParam.xml
@@ -66,12 +70,12 @@ vendor/etc/audio_param/PlaybackVolDigi_ParamUnitDesc.xml
 vendor/etc/audio_param/PlaybackVolUI_AudioParam.xml
 vendor/etc/audio_param/PlaybackVolUI_ParamUnitDesc.xml
 vendor/etc/audio_param/Record_AudioParam.xml
+vendor/etc/audio_param/Record_ParamTreeView.xml
+vendor/etc/audio_param/Record_ParamUnitDesc.xml
 vendor/etc/audio_param/RecordDMNR_AudioParam.xml
 vendor/etc/audio_param/RecordDMNR_ParamUnitDesc.xml
 vendor/etc/audio_param/RecordFIR_AudioParam.xml
 vendor/etc/audio_param/RecordFIR_ParamUnitDesc.xml
-vendor/etc/audio_param/Record_ParamTreeView.xml
-vendor/etc/audio_param/Record_ParamUnitDesc.xml
 vendor/etc/audio_param/RecordUI_AudioParam.xml
 vendor/etc/audio_param/RecordUI_ParamUnitDesc.xml
 vendor/etc/audio_param/RecordVol_AudioParam.xml
@@ -86,9 +90,11 @@ vendor/etc/audio_param/SmartPa_AudioParam.xml
 vendor/etc/audio_param/SmartPa_ParamUnitDesc.xml
 vendor/etc/audio_param/SoundEnhancement_AudioParam.xml
 vendor/etc/audio_param/SoundEnhancement_ParamUnitDesc.xml
+vendor/etc/audio_param/Speech_AudioParam.xml
+vendor/etc/audio_param/Speech_ParamTreeView.xml
+vendor/etc/audio_param/Speech_ParamUnitDesc.xml
 vendor/etc/audio_param/SpeechAcousticShock_AudioParam.xml
 vendor/etc/audio_param/SpeechAcousticShock_ParamUnitDesc.xml
-vendor/etc/audio_param/Speech_AudioParam.xml
 vendor/etc/audio_param/SpeechDMNR_AudioParam.xml
 vendor/etc/audio_param/SpeechDMNR_ParamUnitDesc.xml
 vendor/etc/audio_param/SpeechEchoRef_AudioParam.xml
@@ -99,8 +105,6 @@ vendor/etc/audio_param/SpeechMagiClarity_AudioParam.xml
 vendor/etc/audio_param/SpeechMagiClarity_ParamUnitDesc.xml
 vendor/etc/audio_param/SpeechNetwork_AudioParam.xml
 vendor/etc/audio_param/SpeechNetwork_ParamUnitDesc.xml
-vendor/etc/audio_param/Speech_ParamTreeView.xml
-vendor/etc/audio_param/Speech_ParamUnitDesc.xml
 vendor/etc/audio_param/SpeechUI_AudioParam.xml
 vendor/etc/audio_param/SpeechUI_ParamUnitDesc.xml
 vendor/etc/audio_param/SpeechVol_AudioParam.xml
@@ -116,21 +120,21 @@ vendor/etc/audio_param/USBCall_ParamUnitDesc.xml
 vendor/etc/audio_param/USBDevice_AudioParam.xml
 vendor/etc/audio_param/USBDevice_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIP_AudioParam.xml
+vendor/etc/audio_param/VoIP_ParamTreeView.xml
+vendor/etc/audio_param/VoIP_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPDMNR_AudioParam.xml
 vendor/etc/audio_param/VoIPDMNR_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPGeneral_AudioParam.xml
 vendor/etc/audio_param/VoIPGeneral_ParamUnitDesc.xml
-vendor/etc/audio_param/VoIP_ParamTreeView.xml
-vendor/etc/audio_param/VoIP_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPUI_AudioParam.xml
 vendor/etc/audio_param/VoIPUI_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPv2_AudioParam.xml
+vendor/etc/audio_param/VoIPv2_ParamTreeView.xml
+vendor/etc/audio_param/VoIPv2_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPv2DMNR_AudioParam.xml
 vendor/etc/audio_param/VoIPv2DMNR_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPv2General_AudioParam.xml
 vendor/etc/audio_param/VoIPv2General_ParamUnitDesc.xml
-vendor/etc/audio_param/VoIPv2_ParamTreeView.xml
-vendor/etc/audio_param/VoIPv2_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPv2UI_AudioParam.xml
 vendor/etc/audio_param/VoIPv2UI_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPVol_AudioParam.xml
@@ -138,11 +142,11 @@ vendor/etc/audio_param/VoIPVol_ParamUnitDesc.xml
 vendor/etc/audio_param/VoIPVolUI_AudioParam.xml
 vendor/etc/audio_param/VoIPVolUI_ParamUnitDesc.xml
 vendor/etc/audio_param/Volume_AudioParam.xml
+vendor/etc/audio_param/Volume_ParamUnitDesc.xml
 vendor/etc/audio_param/VolumeGainMap_AudioParam.xml
 vendor/etc/audio_param/VolumeGainMap_ParamUnitDesc.xml
 vendor/etc/audio_param/VolumeGainMapUL_AudioParam.xml
 vendor/etc/audio_param/VolumeGainMapUL_ParamUnitDesc.xml
-vendor/etc/audio_param/Volume_ParamUnitDesc.xml
 vendor/etc/audio_param/VoWCommonSetting_AudioParam.xml
 vendor/etc/audio_param/VoWCommonSetting_ParamUnitDesc.xml
 vendor/etc/audio_param/VoWCompatibilityCode_AudioParam.xml
@@ -157,6 +161,21 @@ vendor/etc/audio_param/VoWMicSetting_AudioParam.xml
 vendor/etc/audio_param/VoWMicSetting_ParamUnitDesc.xml
 vendor/etc/audio_param/VoWVoiceCommand_AudioParam.xml
 vendor/etc/audio_param/VoWVoiceCommand_ParamUnitDesc.xml
+vendor/etc/audio_policy_configuration_bluetooth_legacy_hal.xml
+vendor/etc/audio_policy_volumes.xml
+vendor/etc/aurisys_config_rv.xml
+vendor/etc/aurisys_config.xml
+vendor/etc/default_volume_tables.xml
+vendor/etc/media_codecs_google_audio.xml
+vendor/etc/media_codecs_performance.xml
+vendor/etc/media_codecs.xml
+vendor/etc/media_profiles_V1_0.xml
+vendor/etc/mtk_platform_codecs_config.xml
+vendor/etc/smartpa_param/AW_SINWAVE_DSP.bin
+vendor/etc/smartpa_param/AW_DSP.bin
+vendor/etc/smartpa_param/AW_VMAX_LEFT.bin
+vendor/etc/smartpa_param/AW_VMAX_RIGHT.bin
+vendor/etc/usb_audio_accessory_only_policy_configuration.xml
 
 # Bluetooth
 vendor/bin/hw/android.hardware.bluetooth@1.1-service-mediatek
@@ -164,25 +183,25 @@ vendor/etc/init/android.hardware.bluetooth@1.1-service-mediatek.rc
 vendor/etc/init/init.bt_drv.rc
 vendor/firmware/BT_FW.cfg
 vendor/lib/hw/android.hardware.bluetooth@1.1-impl-mediatek.so
-vendor/lib/libbluetooth_mtk.so
 vendor/lib/libbluetooth_mtk_pure.so
+vendor/lib/libbluetooth_mtk.so
 vendor/lib/libbt-vendor.so
 vendor/lib64/hw/android.hardware.bluetooth@1.1-impl-mediatek.so
-vendor/lib64/libbluetooth_mtk.so
 vendor/lib64/libbluetooth_mtk_pure.so
+vendor/lib64/libbluetooth_mtk.so
 vendor/lib64/libbt-vendor.so
 
 # Bluetooth (A2DP)
 vendor/lib/hw/vendor.mediatek.hardware.bluetooth.audio@2.2-impl.so
 vendor/lib/libbluetooth_audio_session_mediatek.so
+vendor/lib/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 vendor/lib/vendor.mediatek.hardware.bluetooth.audio@2.1.so
 vendor/lib/vendor.mediatek.hardware.bluetooth.audio@2.2.so
-vendor/lib/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 vendor/lib64/hw/vendor.mediatek.hardware.bluetooth.audio@2.2-impl.so
 vendor/lib64/libbluetooth_audio_session_mediatek.so
+vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.1.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.2.so
-vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 
 # Camera
 vendor/bin/hw/camerahalserver
@@ -194,82 +213,7 @@ vendor/lib64/hw/mt6835/vendor.mediatek.hardware.camera.ccap@1.0-impl.so;SYMLINK=
 vendor/lib64/hw/mt6835/vendor.mediatek.hardware.camera.isphal@1.0-impl.so;SYMLINK=vendor/lib64/hw/vendor.mediatek.hardware.camera.isphal@1.0-impl.so
 vendor/lib64/hw/mt6835/vendor.mediatek.hardware.camera.isphal@1.1-impl.so;SYMLINK=vendor/lib64/hw/vendor.mediatek.hardware.camera.isphal@1.1-impl.so
 vendor/lib64/hw/mt6835/vendor.mediatek.hardware.camera.lomoeffect@1.0-impl.so;SYMLINK=vendor/lib64/hw/vendor.mediatek.hardware.camera.lomoeffect@1.0-impl.so
-vendor/lib64/vendor.mediatek.hardware.camera.atms@1.0.so
-vendor/lib64/vendor.mediatek.hardware.camera.bgservice@1.0.so
-vendor/lib64/vendor.mediatek.hardware.camera.bgservice@1.1.so
-vendor/lib64/vendor.mediatek.hardware.camera.ccap@1.0.so
-vendor/lib64/vendor.mediatek.hardware.camera.frhandler@1.0.so
-vendor/lib64/vendor.mediatek.hardware.camera.isphal@1.0.so
-vendor/lib64/vendor.mediatek.hardware.camera.isphal@1.1.so
-vendor/lib64/vendor.mediatek.hardware.camera.lomoeffect@1.0.so
-vendor/lib64/vendor.mediatek.hardware.camera.postproc@1.0.so
-vendor/lib64/vendor.mediatek.hardware.camera.security@1.0.so
-vendor/lib64/mt6835/libmtkcam_3rdparty.core.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.core.so
-vendor/lib64/mt6835/libmtkcam_3rdparty.customer.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.customer.so
-vendor/lib64/mt6835/libmtkcam_3rdparty.mtk.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.mtk.so
-vendor/lib64/mt6835/libmtkcam_3rdparty.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.so
-vendor/lib64/mt6835/libmtkcam.atmseventmgr.so;SYMLINK=vendor/lib64/libmtkcam.atmseventmgr.so
-vendor/lib64/mt6835/libmtkcam_calibration_convertor.so;SYMLINK=vendor/lib64/libmtkcam_calibration_convertor.so
-vendor/lib64/mt6835/libmtkcam_calibration_provider.so;SYMLINK=vendor/lib64/libmtkcam_calibration_provider.so
-vendor/lib64/mt6835/libmtkcam_debugutils.so;SYMLINK=vendor/lib64/libmtkcam_debugutils.so
-vendor/lib64/mt6835/libmtkcam.debugwrapper.so;SYMLINK=vendor/lib64/libmtkcam.debugwrapper.so
-vendor/lib64/mt6835/libmtkcam_device3_app.so;SYMLINK=vendor/lib64/libmtkcam_device3_app.so
-vendor/lib64/mt6835/libmtkcam_device3_hal.so;SYMLINK=vendor/lib64/libmtkcam_device3_hal.so
-vendor/lib64/mt6835/libmtkcam_device3_hidl.so;SYMLINK=vendor/lib64/libmtkcam_device3_hidl.so
-vendor/lib64/mt6835/libmtkcam_device3_hidlutils.so;SYMLINK=vendor/lib64/libmtkcam_device3_hidlutils.so
-vendor/lib64/mt6835/libmtkcam_device3_utils.so;SYMLINK=vendor/lib64/libmtkcam_device3_utils.so
-vendor/lib64/mt6835/libmtkcam_devicesessionpolicy.so;SYMLINK=vendor/lib64/libmtkcam_devicesessionpolicy.so
-vendor/lib64/mt6835/libmtkcam_diputils.so;SYMLINK=vendor/lib64/libmtkcam_diputils.so
-vendor/lib64/mt6835/libmtkcam.eventcallback.so;SYMLINK=vendor/lib64/libmtkcam.eventcallback.so
-vendor/lib64/mt6835/libmtkcam_exif.so;SYMLINK=vendor/lib64/libmtkcam_exif.so
-vendor/lib64/mt6835/libmtkcam_fdvt.so;SYMLINK=vendor/lib64/libmtkcam_fdvt.so
-vendor/lib64/mt6835/libmtkcam.featurepipe.capture.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.capture.so
-vendor/lib64/mt6835/libmtkcam.featurepipe.depthmap.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.depthmap.so
-vendor/lib64/mt6835/libmtkcam.featurepipe.streaming.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.streaming.so
-vendor/lib64/mt6835/libmtkcam.featurepipe.vsdof_util.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.vsdof_util.so
-vendor/lib64/mt6835/libmtkcam_featurepolicy.so;SYMLINK=vendor/lib64/libmtkcam_featurepolicy.so
-vendor/lib64/mt6835/libmtkcam_featureutils.so;SYMLINK=vendor/lib64/libmtkcam_featureutils.so
-vendor/lib64/mt6835/libmtkcam_fwkutils.so;SYMLINK=vendor/lib64/libmtkcam_fwkutils.so
-vendor/lib64/mt6835/libmtkcam_grallocutils.so;SYMLINK=vendor/lib64/libmtkcam_grallocutils.so
-vendor/lib64/mt6835/libmtkcam_hwnode.so;SYMLINK=vendor/lib64/libmtkcam_hwnode.so
-vendor/lib64/mt6835/libmtkcam_hwutils.so;SYMLINK=vendor/lib64/libmtkcam_hwutils.so
-vendor/lib64/mt6835/libmtkcam_imem.so;SYMLINK=vendor/lib64/libmtkcam_imem.so
-vendor/lib64/mt6835/libmtkcam_imgbuf.so;SYMLINK=vendor/lib64/libmtkcam_imgbuf.so
-vendor/lib64/mt6835/libmtkcam.logicalmodule.so;SYMLINK=vendor/lib64/libmtkcam.logicalmodule.so
-vendor/lib64/mt6835/libmtkcam_mapping_mgr.so;SYMLINK=vendor/lib64/libmtkcam_mapping_mgr.so
-vendor/lib64/mt6835/libmtkcam_metadata.so;SYMLINK=vendor/lib64/libmtkcam_metadata.so
-vendor/lib64/mt6835/libmtkcam_metastore.so;SYMLINK=vendor/lib64/libmtkcam_metastore.so
-vendor/lib64/mt6835/libmtkcam_mfb.so;SYMLINK=vendor/lib64/libmtkcam_mfb.so
-vendor/lib64/mt6835/libmtkcam_modulefactory_aaa.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_aaa.so
-vendor/lib64/mt6835/libmtkcam_modulefactory_custom.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_custom.so
-vendor/lib64/mt6835/libmtkcam_modulefactory_drv.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_drv.so
-vendor/lib64/mt6835/libmtkcam_modulefactory_utils.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_utils.so
-vendor/lib64/mt6835/libmtkcam_modulehelper.so;SYMLINK=vendor/lib64/libmtkcam_modulehelper.so
-vendor/lib64/mt6835/libmtkcam_owe.so;SYMLINK=vendor/lib64/libmtkcam_owe.so
-vendor/lib64/mt6835/libmtkcam_pipeline_fbm.so;SYMLINK=vendor/lib64/libmtkcam_pipeline_fbm.so
-vendor/lib64/mt6835/libmtkcam_pipelinemodel_adapter.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_adapter.so
-vendor/lib64/mt6835/libmtkcam_pipelinemodel_capture.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_capture.so
-vendor/lib64/mt6835/libmtkcam_pipelinemodel_isp.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_isp.so
-vendor/lib64/mt6835/libmtkcam_pipelinemodel_session.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_session.so
-vendor/lib64/mt6835/libmtkcam_pipelinemodel.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel.so
-vendor/lib64/mt6835/libmtkcam_pipelinemodel_utils.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_utils.so
-vendor/lib64/mt6835/libmtkcam_pipelinemodel_zsl.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_zsl.so
-vendor/lib64/mt6835/libmtkcam_pipelinepolicy_factory.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy_factory.so
-vendor/lib64/mt6835/libmtkcam_pipelinepolicy-security.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy-security.so
-vendor/lib64/mt6835/libmtkcam_pipelinepolicy-smvr.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy-smvr.so
-vendor/lib64/mt6835/libmtkcam_pipelinepolicy.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy.so
-vendor/lib64/mt6835/libmtkcam_pipeline.so;SYMLINK=vendor/lib64/libmtkcam_pipeline.so
-vendor/lib64/mt6835/libmtkcam_prerelease.so;SYMLINK=vendor/lib64/libmtkcam_prerelease.so
-vendor/lib64/mt6835/libmtkcam_rsc.so;SYMLINK=vendor/lib64/libmtkcam_rsc.so
-vendor/lib64/mt6835/libmtkcam_scenariorecorder.so;SYMLINK=vendor/lib64/libmtkcam_scenariorecorder.so
-vendor/lib64/mt6835/libmtkcam_stdutils.so;SYMLINK=vendor/lib64/libmtkcam_stdutils.so
-vendor/lib64/mt6835/libmtkcam_streamutils.so;SYMLINK=vendor/lib64/libmtkcam_streamutils.so
-vendor/lib64/mt6835/libmtkcam_synchelper.so;SYMLINK=vendor/lib64/libmtkcam_synchelper.so
-vendor/lib64/mt6835/libmtkcam_sysutils.so;SYMLINK=vendor/lib64/libmtkcam_sysutils.so
-vendor/lib64/mt6835/libmtkcam_tuning_utils.so;SYMLINK=vendor/lib64/libmtkcam_tuning_utils.so
-vendor/lib64/mt6835/libmtkcam_ulog.so;SYMLINK=vendor/lib64/libmtkcam_ulog.so
-vendor/lib64/libmtkcam_pipelinepolicy-aov.so
-vendor/lib64/mtkcam/mt6835/libmtkcam_streaminfo_plugin-p1stt.so;SYMLINK=vendor/lib64/mtkcam/libmtkcam_streaminfo_plugin-p1stt.so
+vendor/lib64/libcam.seninfn3d.so
 vendor/lib64/libcamalgo.3dnr.so
 vendor/lib64/libcamalgo.dngop.so
 vendor/lib64/libcamalgo.fdft.so
@@ -277,108 +221,6 @@ vendor/lib64/libcamalgo.nr.so
 vendor/lib64/libcamalgo.platform.so
 vendor/lib64/libcamalgo.utility.so
 vendor/lib64/libcamalgo.warp.so
-vendor/lib64/libcamera2ndk_vendor.so
-vendor/lib64/libcam.seninfn3d.so
-vendor/lib64/mt6835/libcam.afhal.so;SYMLINK=vendor/lib64/libcam.afhal.so
-vendor/lib64/mt6835/libcamalgo.eis.so;SYMLINK=vendor/lib64/libcamalgo.eis.so
-vendor/lib64/mt6835/libcamalgo.fsc.so;SYMLINK=vendor/lib64/libcamalgo.fsc.so
-vendor/lib64/mt6835/libcamalgo.gyro.so;SYMLINK=vendor/lib64/libcamalgo.gyro.so
-vendor/lib64/mt6835/libcamalgo.ispfeature.so;SYMLINK=vendor/lib64/libcamalgo.ispfeature.so
-vendor/lib64/mt6835/libcamalgo.lmv.so;SYMLINK=vendor/lib64/libcamalgo.lmv.so
-vendor/lib64/mt6835/libcamalgo.lsc.so;SYMLINK=vendor/lib64/libcamalgo.lsc.so
-vendor/lib64/mt6835/libcamalgo.n3d.so;SYMLINK=vendor/lib64/libcamalgo.n3d.so
-vendor/lib64/mt6835/libcamalgo.platform2.so;SYMLINK=vendor/lib64/libcamalgo.platform2.so
-vendor/lib64/mt6835/libcamalgo.rotate.so;SYMLINK=vendor/lib64/libcamalgo.rotate.so
-vendor/lib64/mt6835/libcamalgo.vsf.so;SYMLINK=vendor/lib64/libcamalgo.vsf.so
-vendor/lib64/mt6835/libcam.chdr.so;SYMLINK=vendor/lib64/libcam.chdr.so
-vendor/lib64/mt6835/libcamdrv_isp.so;SYMLINK=vendor/lib64/libcamdrv_isp.so
-vendor/lib64/mt6835/libcamdrv_tuning_mgr.so;SYMLINK=vendor/lib64/libcamdrv_tuning_mgr.so
-vendor/lib64/mt6835/libcamdrv_twin.so;SYMLINK=vendor/lib64/libcamdrv_twin.so
-vendor/lib64/mt6835/libcamera.customae.so;SYMLINK=vendor/lib64/libcamera.customae.so
-vendor/lib64/mt6835/libcamera.customaf.so;SYMLINK=vendor/lib64/libcamera.customaf.so
-vendor/lib64/mt6835/libcamera.customawb.so;SYMLINK=vendor/lib64/libcamera.customawb.so
-vendor/lib64/mt6835/libcameracustom.camera.3a.so;SYMLINK=vendor/lib64/libcameracustom.camera.3a.so
-vendor/lib64/mt6835/libcameracustom.camera_exif.so;SYMLINK=vendor/lib64/libcameracustom.camera_exif.so
-vendor/lib64/mt6835/libcameracustom.camera.isp.so;SYMLINK=vendor/lib64/libcameracustom.camera.isp.so
-vendor/lib64/mt6835/libcameracustom.camera.sensors.so;SYMLINK=vendor/lib64/libcameracustom.camera.sensors.so
-vendor/lib64/mt6835/libcameracustom.flashlight.so;SYMLINK=vendor/lib64/libcameracustom.flashlight.so
-vendor/lib64/mt6835/libcamera.customflk.so;SYMLINK=vendor/lib64/libcamera.customflk.so
-vendor/lib64/mt6835/libcameracustom.lens.so;SYMLINK=vendor/lib64/libcameracustom.lens.so
-vendor/lib64/mt6835/libcamera.custom.pd_buf_mgr.so;SYMLINK=vendor/lib64/libcamera.custom.pd_buf_mgr.so
-vendor/lib64/mt6835/libcameracustom.plugin.so;SYMLINK=vendor/lib64/libcameracustom.plugin.so
-vendor/lib64/mt6835/libcameracustom.so;SYMLINK=vendor/lib64/libcameracustom.so
-vendor/lib64/mt6835/libcam.feature_utils.so;SYMLINK=vendor/lib64/libcam.feature_utils.so
-vendor/lib64/mt6835/libcam.hal3a.cctsvr.so;SYMLINK=vendor/lib64/libcam.hal3a.cctsvr.so
-vendor/lib64/mt6835/libcam.hal3a.log.so;SYMLINK=vendor/lib64/libcam.hal3a.log.so
-vendor/lib64/mt6835/libcam.hal3a.v3.ae.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.ae.so
-vendor/lib64/mt6835/libcam.hal3a.v3.ai3a.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.ai3a.so
-vendor/lib64/mt6835/libcam.hal3a.v3.awb.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.awb.so
-vendor/lib64/mt6835/libcam.hal3a.v3.dng.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.dng.so
-vendor/lib64/mt6835/libcam.hal3a.v3.fsmgr.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.fsmgr.so
-vendor/lib64/mt6835/libcam.hal3a.v3.lscMgr.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.lscMgr.so
-vendor/lib64/mt6835/libcam.hal3a.v3.lsctbl.50.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.lsctbl.50.so
-vendor/lib64/mt6835/libcam.hal3a.v3.nvram.50.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.nvram.50.so
-vendor/lib64/mt6835/libcam.hal3a.v3.platform.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.platform.so
-vendor/lib64/mt6835/libcam.hal3a.v3.resultpool.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.resultpool.so
-vendor/lib64/mt6835/libcam.hal3a.v3.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.so
-vendor/lib64/mt6835/libcam.halisp.buf.so;SYMLINK=vendor/lib64/libcam.halisp.buf.so
-vendor/lib64/mt6835/libcam.halisp.common.so;SYMLINK=vendor/lib64/libcam.halisp.common.so
-vendor/lib64/mt6835/libcam.halisp.so;SYMLINK=vendor/lib64/libcam.halisp.so
-vendor/lib64/mt6835/libcam.halsensor.hwintegration.so;SYMLINK=vendor/lib64/libcam.halsensor.hwintegration.so
-vendor/lib64/mt6835/libcam.halsensor.so;SYMLINK=vendor/lib64/libcam.halsensor.so
-vendor/lib64/mt6835/libcam.iopipe.so;SYMLINK=vendor/lib64/libcam.iopipe.so
-vendor/lib64/mt6835/libcam.isptuning.so;SYMLINK=vendor/lib64/libcam.isptuning.so
-vendor/lib64/mt6835/libcam.pdtblgen.so;SYMLINK=vendor/lib64/libcam.pdtblgen.so
-vendor/lib64/mt6835/libcam.tuning.cache.so;SYMLINK=vendor/lib64/libcam.tuning.cache.so
-vendor/lib64/mt6835/libcam.utils.sensorprovider.so;SYMLINK=vendor/lib64/libcam.utils.sensorprovider.so
-vendor/lib64/mt6835/libcam.vhdr.so;SYMLINK=vendor/lib64/libcam.vhdr.so
-vendor/lib64/mt6835/libSonyIMX230PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX230PdafLibrary.so
-vendor/lib64/mt6835/libSonyIMX230PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX230PdafLibraryWrapper.so
-vendor/lib64/mt6835/libSonyIMX338PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX338PdafLibrary.so
-vendor/lib64/mt6835/libSonyIMX338PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX338PdafLibraryWrapper.so
-vendor/lib64/mt6835/libSonyIMX386PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX386PdafLibrary.so
-vendor/lib64/mt6835/libSonyIMX386PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX386PdafLibraryWrapper.so
-vendor/lib64/mt6835/libSonyIMX519PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX519PdafLibrary.so
-vendor/lib64/mt6835/libSonyIMX519PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX519PdafLibraryWrapper.so
-vendor/lib64/mt6835/lib3a.ae.core.so;SYMLINK=vendor/lib64/lib3a.ae.core.so
-vendor/lib64/mt6835/lib3a.ae.so;SYMLINK=vendor/lib64/lib3a.ae.so
-vendor/lib64/mt6835/lib3a.ae.stat.so;SYMLINK=vendor/lib64/lib3a.ae.stat.so
-vendor/lib64/mt6835/lib3a.af.assist.so;SYMLINK=vendor/lib64/lib3a.af.assist.so
-vendor/lib64/mt6835/lib3a.af.assist.utils.so;SYMLINK=vendor/lib64/lib3a.af.assist.utils.so
-vendor/lib64/mt6835/lib3a.af.core.so;SYMLINK=vendor/lib64/lib3a.af.core.so
-vendor/lib64/mt6835/lib3a.af.so;SYMLINK=vendor/lib64/lib3a.af.so
-vendor/lib64/mt6835/lib3a.alsflicker.so;SYMLINK=vendor/lib64/lib3a.alsflicker.so
-vendor/lib64/mt6835/lib3a.awb.core.so;SYMLINK=vendor/lib64/lib3a.awb.core.so
-vendor/lib64/mt6835/lib3a.ccudrv.so;SYMLINK=vendor/lib64/lib3a.ccudrv.so
-vendor/lib64/mt6835/lib3a.ccuif.so;SYMLINK=vendor/lib64/lib3a.ccuif.so
-vendor/lib64/mt6835/lib3a.custom.ae.so;SYMLINK=vendor/lib64/lib3a.custom.ae.so
-vendor/lib64/mt6835/lib3a.dce.so;SYMLINK=vendor/lib64/lib3a.dce.so
-vendor/lib64/mt6835/lib3a.flash.so;SYMLINK=vendor/lib64/lib3a.flash.so
-vendor/lib64/mt6835/lib3a.flicker.so;SYMLINK=vendor/lib64/lib3a.flicker.so
-vendor/lib64/mt6835/lib3a.gma.so;SYMLINK=vendor/lib64/lib3a.gma.so
-vendor/lib64/mt6835/lib3a.lce.so;SYMLINK=vendor/lib64/lib3a.lce.so
-vendor/lib64/mt6835/lib3a.log.so;SYMLINK=vendor/lib64/lib3a.log.so
-vendor/lib64/mt6835/lib3a.n3d3a.so;SYMLINK=vendor/lib64/lib3a.n3d3a.so
-vendor/lib64/mt6835/lib3a.sensors.color.so;SYMLINK=vendor/lib64/lib3a.sensors.color.so
-vendor/lib64/mt6835/lib3a.sensors.flicker.so;SYMLINK=vendor/lib64/lib3a.sensors.flicker.so
-vendor/lib64/mt6835/gc05a2sub_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/gc05a2sub_mipi_raw_IdxMgr.so
-vendor/lib64/mt6835/gc05a2sub_mipi_raw_tuning.so;SYMLINK=vendor/lib64/gc05a2sub_mipi_raw_tuning.so
-vendor/lib64/mt6835/mtk000_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mtk000_mipi_raw_IdxMgr.so
-vendor/lib64/mt6835/mtk000_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mtk000_mipi_raw_tuning.so
-vendor/lib64/mt6835/ov50c40_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/ov50c40_mipi_raw_IdxMgr.so
-vendor/lib64/mt6835/ov50c40_mipi_raw_tuning.so;SYMLINK=vendor/lib64/ov50c40_mipi_raw_tuning.so
-vendor/lib64/mt6835/s5k3l8_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/s5k3l8_mipi_raw_IdxMgr.so
-vendor/lib64/mt6835/s5k3l8_mipi_raw_tuning.so;SYMLINK=vendor/lib64/s5k3l8_mipi_raw_tuning.so
-vendor/lib64/mt6835/libeffecthal.base.so;SYMLINK=vendor/lib64/libeffecthal.base.so
-vendor/lib64/mt6835/libfeature_3dnr.so;SYMLINK=vendor/lib64/libfeature_3dnr.so
-vendor/lib64/mt6835/libfeature.face.so;SYMLINK=vendor/lib64/libfeature.face.so
-vendor/lib64/mt6835/libfeature_fsc.so;SYMLINK=vendor/lib64/libfeature_fsc.so
-vendor/lib64/mt6835/libfeatureiodrv_mem.so;SYMLINK=vendor/lib64/libfeatureiodrv_mem.so
-vendor/lib64/mt6835/libfeature_lmv.so;SYMLINK=vendor/lib64/libfeature_lmv.so
-vendor/lib64/mt6835/libfeature_rss.so;SYMLINK=vendor/lib64/libfeature_rss.so
-vendor/lib64/mt6835/libfeature.stereo.provider.so;SYMLINK=vendor/lib64/libfeature.stereo.provider.so
-vendor/lib64/mt6835/libfeature.vsdof.hal.so;SYMLINK=vendor/lib64/libfeature.vsdof.hal.so
-vendor/lib64/libSQLiteModule_VER_ALL.so
 vendor/lib64/libCamera_gc05a2submipiraw_Face_Beauty.so
 vendor/lib64/libCamera_gc05a2submipiraw_Face_Portrait.so
 vendor/lib64/libCamera_ov50c40mipiraw_Coosea_Remosaic.so
@@ -395,10 +237,10 @@ vendor/lib64/libCamera_ov50c40mipiraw_Scene_HDR.so
 vendor/lib64/libCamera_ov50c40mipiraw_Scene_lowlight.so
 vendor/lib64/libCamera_ov50c40mipiraw_Scene_Portrait.so
 vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_120.so
-vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_60.so
 vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_60_Zoom_2x.so
 vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_60_Zoom_4x.so
 vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_60_Zoom_6x.so
+vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_60.so
 vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_Zoom_2x.so
 vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_Zoom_4x.so
 vendor/lib64/libCamera_ov50c40mipiraw_Video_1080_Zoom_6x.so
@@ -428,6 +270,84 @@ vendor/lib64/libCamera_s5k3l8mipiraw_Video_1080_Zoom_6x.so
 vendor/lib64/libCamera_s5k3l8mipiraw_Video_4k_Zoom_2x.so
 vendor/lib64/libCamera_s5k3l8mipiraw_Video_4k_Zoom_4x.so
 vendor/lib64/libCamera_s5k3l8mipiraw_Video_4k_Zoom_6x.so
+vendor/lib64/libcamera2ndk_vendor.so
+vendor/lib64/libgz_uree.so
+vendor/lib64/libheichal.so
+vendor/lib64/libimagebuffer_wrapper.so
+vendor/lib64/libmtkcam_pipelinepolicy-aov.so
+vendor/lib64/libmtkisp_metadata.so
+vendor/lib64/libremosaic_wrapper.so
+vendor/lib64/libSQLiteModule_VER_ALL.so
+vendor/lib64/mt6835/gc05a2sub_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/gc05a2sub_mipi_raw_IdxMgr.so
+vendor/lib64/mt6835/gc05a2sub_mipi_raw_tuning.so;SYMLINK=vendor/lib64/gc05a2sub_mipi_raw_tuning.so
+vendor/lib64/mt6835/lib3a.ae.core.so;SYMLINK=vendor/lib64/lib3a.ae.core.so
+vendor/lib64/mt6835/lib3a.ae.so;SYMLINK=vendor/lib64/lib3a.ae.so
+vendor/lib64/mt6835/lib3a.ae.stat.so;SYMLINK=vendor/lib64/lib3a.ae.stat.so
+vendor/lib64/mt6835/lib3a.af.assist.so;SYMLINK=vendor/lib64/lib3a.af.assist.so
+vendor/lib64/mt6835/lib3a.af.assist.utils.so;SYMLINK=vendor/lib64/lib3a.af.assist.utils.so
+vendor/lib64/mt6835/lib3a.af.core.so;SYMLINK=vendor/lib64/lib3a.af.core.so
+vendor/lib64/mt6835/lib3a.af.so;SYMLINK=vendor/lib64/lib3a.af.so
+vendor/lib64/mt6835/lib3a.alsflicker.so;SYMLINK=vendor/lib64/lib3a.alsflicker.so
+vendor/lib64/mt6835/lib3a.awb.core.so;SYMLINK=vendor/lib64/lib3a.awb.core.so
+vendor/lib64/mt6835/lib3a.ccudrv.so;SYMLINK=vendor/lib64/lib3a.ccudrv.so
+vendor/lib64/mt6835/lib3a.ccuif.so;SYMLINK=vendor/lib64/lib3a.ccuif.so
+vendor/lib64/mt6835/lib3a.custom.ae.so;SYMLINK=vendor/lib64/lib3a.custom.ae.so
+vendor/lib64/mt6835/lib3a.dce.so;SYMLINK=vendor/lib64/lib3a.dce.so
+vendor/lib64/mt6835/lib3a.flash.so;SYMLINK=vendor/lib64/lib3a.flash.so
+vendor/lib64/mt6835/lib3a.flicker.so;SYMLINK=vendor/lib64/lib3a.flicker.so
+vendor/lib64/mt6835/lib3a.gma.so;SYMLINK=vendor/lib64/lib3a.gma.so
+vendor/lib64/mt6835/lib3a.lce.so;SYMLINK=vendor/lib64/lib3a.lce.so
+vendor/lib64/mt6835/lib3a.log.so;SYMLINK=vendor/lib64/lib3a.log.so
+vendor/lib64/mt6835/lib3a.n3d3a.so;SYMLINK=vendor/lib64/lib3a.n3d3a.so
+vendor/lib64/mt6835/lib3a.sensors.color.so;SYMLINK=vendor/lib64/lib3a.sensors.color.so
+vendor/lib64/mt6835/lib3a.sensors.flicker.so;SYMLINK=vendor/lib64/lib3a.sensors.flicker.so
+vendor/lib64/mt6835/libaaa_ltm.so;SYMLINK=vendor/lib64/libaaa_ltm.so
+vendor/lib64/mt6835/libaaa_ltmx.so;SYMLINK=vendor/lib64/libaaa_ltmx.so
+vendor/lib64/mt6835/libaiawb_moon_model.so;SYMLINK=vendor/lib64/libaiawb_moon_model.so
+vendor/lib64/mt6835/libaiawb_moon.so;SYMLINK=vendor/lib64/libaiawb_moon.so
+vendor/lib64/mt6835/libaiawb_p1ggm.so;SYMLINK=vendor/lib64/libaiawb_p1ggm.so
+vendor/lib64/mt6835/libaiawb_sun_model.so;SYMLINK=vendor/lib64/libaiawb_sun_model.so
+vendor/lib64/mt6835/libaiawb_sun.so;SYMLINK=vendor/lib64/libaiawb_sun.so
+vendor/lib64/mt6835/libcam.afhal.so;SYMLINK=vendor/lib64/libcam.afhal.so
+vendor/lib64/mt6835/libcam.chdr.so;SYMLINK=vendor/lib64/libcam.chdr.so
+vendor/lib64/mt6835/libcam.feature_utils.so;SYMLINK=vendor/lib64/libcam.feature_utils.so
+vendor/lib64/mt6835/libcam.hal3a.cctsvr.so;SYMLINK=vendor/lib64/libcam.hal3a.cctsvr.so
+vendor/lib64/mt6835/libcam.hal3a.log.so;SYMLINK=vendor/lib64/libcam.hal3a.log.so
+vendor/lib64/mt6835/libcam.hal3a.v3.ae.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.ae.so
+vendor/lib64/mt6835/libcam.hal3a.v3.ai3a.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.ai3a.so
+vendor/lib64/mt6835/libcam.hal3a.v3.awb.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.awb.so
+vendor/lib64/mt6835/libcam.hal3a.v3.dng.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.dng.so
+vendor/lib64/mt6835/libcam.hal3a.v3.fsmgr.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.fsmgr.so
+vendor/lib64/mt6835/libcam.hal3a.v3.lscMgr.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.lscMgr.so
+vendor/lib64/mt6835/libcam.hal3a.v3.lsctbl.50.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.lsctbl.50.so
+vendor/lib64/mt6835/libcam.hal3a.v3.nvram.50.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.nvram.50.so
+vendor/lib64/mt6835/libcam.hal3a.v3.platform.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.platform.so
+vendor/lib64/mt6835/libcam.hal3a.v3.resultpool.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.resultpool.so
+vendor/lib64/mt6835/libcam.hal3a.v3.so;SYMLINK=vendor/lib64/libcam.hal3a.v3.so
+vendor/lib64/mt6835/libcam.halisp.buf.so;SYMLINK=vendor/lib64/libcam.halisp.buf.so
+vendor/lib64/mt6835/libcam.halisp.common.so;SYMLINK=vendor/lib64/libcam.halisp.common.so
+vendor/lib64/mt6835/libcam.halisp.so;SYMLINK=vendor/lib64/libcam.halisp.so
+vendor/lib64/mt6835/libcam.halsensor.hwintegration.so;SYMLINK=vendor/lib64/libcam.halsensor.hwintegration.so
+vendor/lib64/mt6835/libcam.halsensor.so;SYMLINK=vendor/lib64/libcam.halsensor.so
+vendor/lib64/mt6835/libcam.iopipe.so;SYMLINK=vendor/lib64/libcam.iopipe.so
+vendor/lib64/mt6835/libcam.isptuning.so;SYMLINK=vendor/lib64/libcam.isptuning.so
+vendor/lib64/mt6835/libcam.pdtblgen.so;SYMLINK=vendor/lib64/libcam.pdtblgen.so
+vendor/lib64/mt6835/libcam.tuning.cache.so;SYMLINK=vendor/lib64/libcam.tuning.cache.so
+vendor/lib64/mt6835/libcam.utils.sensorprovider.so;SYMLINK=vendor/lib64/libcam.utils.sensorprovider.so
+vendor/lib64/mt6835/libcam.vhdr.so;SYMLINK=vendor/lib64/libcam.vhdr.so
+vendor/lib64/mt6835/libcamalgo.eis.so;SYMLINK=vendor/lib64/libcamalgo.eis.so
+vendor/lib64/mt6835/libcamalgo.fsc.so;SYMLINK=vendor/lib64/libcamalgo.fsc.so
+vendor/lib64/mt6835/libcamalgo.gyro.so;SYMLINK=vendor/lib64/libcamalgo.gyro.so
+vendor/lib64/mt6835/libcamalgo.ispfeature.so;SYMLINK=vendor/lib64/libcamalgo.ispfeature.so
+vendor/lib64/mt6835/libcamalgo.lmv.so;SYMLINK=vendor/lib64/libcamalgo.lmv.so
+vendor/lib64/mt6835/libcamalgo.lsc.so;SYMLINK=vendor/lib64/libcamalgo.lsc.so
+vendor/lib64/mt6835/libcamalgo.n3d.so;SYMLINK=vendor/lib64/libcamalgo.n3d.so
+vendor/lib64/mt6835/libcamalgo.platform2.so;SYMLINK=vendor/lib64/libcamalgo.platform2.so
+vendor/lib64/mt6835/libcamalgo.rotate.so;SYMLINK=vendor/lib64/libcamalgo.rotate.so
+vendor/lib64/mt6835/libcamalgo.vsf.so;SYMLINK=vendor/lib64/libcamalgo.vsf.so
+vendor/lib64/mt6835/libcamdrv_isp.so;SYMLINK=vendor/lib64/libcamdrv_isp.so
+vendor/lib64/mt6835/libcamdrv_tuning_mgr.so;SYMLINK=vendor/lib64/libcamdrv_tuning_mgr.so
+vendor/lib64/mt6835/libcamdrv_twin.so;SYMLINK=vendor/lib64/libcamdrv_twin.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_E2EHDR_Preview.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_E2EHDR_Preview.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_E2EHDR_Video.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_E2EHDR_Video.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Face_Capture.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Face_Capture.so
@@ -444,8 +364,8 @@ vendor/lib64/mt6835/libCamera_gc05a2submipiraw_P1_YUV.so;SYMLINK=vendor/lib64/li
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Scene_Capture_4cell.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Scene_Capture_4cell.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Scene_Capture.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Scene_Capture.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Scene_Preview_4k.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Scene_Preview_4k.so
-vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Scene_Preview_ZSD_Flash.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Scene_Preview_ZSD_Flash.so
+vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Video_1080.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Video_1080.so
 vendor/lib64/mt6835/libCamera_gc05a2submipiraw_Video_4k.so;SYMLINK=vendor/lib64/libCamera_gc05a2submipiraw_Video_4k.so
 vendor/lib64/mt6835/libCamera_mtk000mipiraw_E2EHDR_Preview.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_E2EHDR_Preview.so
@@ -464,8 +384,8 @@ vendor/lib64/mt6835/libCamera_mtk000mipiraw_P1_YUV.so;SYMLINK=vendor/lib64/libCa
 vendor/lib64/mt6835/libCamera_mtk000mipiraw_Scene_Capture_4cell.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Scene_Capture_4cell.so
 vendor/lib64/mt6835/libCamera_mtk000mipiraw_Scene_Capture.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Scene_Capture.so
 vendor/lib64/mt6835/libCamera_mtk000mipiraw_Scene_Preview_4k.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Scene_Preview_4k.so
-vendor/lib64/mt6835/libCamera_mtk000mipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_mtk000mipiraw_Scene_Preview_ZSD_Flash.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Scene_Preview_ZSD_Flash.so
+vendor/lib64/mt6835/libCamera_mtk000mipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_mtk000mipiraw_Video_1080.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Video_1080.so
 vendor/lib64/mt6835/libCamera_mtk000mipiraw_Video_4k.so;SYMLINK=vendor/lib64/libCamera_mtk000mipiraw_Video_4k.so
 vendor/lib64/mt6835/libCamera_ov50c40mipiraw_E2EHDR_Preview.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_E2EHDR_Preview.so
@@ -484,8 +404,8 @@ vendor/lib64/mt6835/libCamera_ov50c40mipiraw_P1_YUV.so;SYMLINK=vendor/lib64/libC
 vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Scene_Capture_4cell.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Scene_Capture_4cell.so
 vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Scene_Capture.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Scene_Capture.so
 vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Scene_Preview_4k.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Scene_Preview_4k.so
-vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Scene_Preview_ZSD_Flash.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Scene_Preview_ZSD_Flash.so
+vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Video_1080.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Video_1080.so
 vendor/lib64/mt6835/libCamera_ov50c40mipiraw_Video_4k.so;SYMLINK=vendor/lib64/libCamera_ov50c40mipiraw_Video_4k.so
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_E2EHDR_Preview.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_E2EHDR_Preview.so
@@ -504,64 +424,163 @@ vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_P1_YUV.so;SYMLINK=vendor/lib64/libCa
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Scene_Capture_4cell.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Scene_Capture_4cell.so
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Scene_Capture.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Scene_Capture.so
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Scene_Preview_4k.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Scene_Preview_4k.so
-vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Scene_Preview_ZSD_Flash.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Scene_Preview_ZSD_Flash.so
+vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Scene_Preview.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Scene_Preview.so
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Video_1080_60.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Video_1080_60.so
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Video_1080.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Video_1080.so
 vendor/lib64/mt6835/libCamera_s5k3l8mipiraw_Video_4k.so;SYMLINK=vendor/lib64/libCamera_s5k3l8mipiraw_Video_4k.so
-vendor/lib64/libgz_uree.so
-vendor/lib64/libremosaic_wrapper.so
+vendor/lib64/mt6835/libcamera.custom.pd_buf_mgr.so;SYMLINK=vendor/lib64/libcamera.custom.pd_buf_mgr.so
+vendor/lib64/mt6835/libcamera.customae.so;SYMLINK=vendor/lib64/libcamera.customae.so
+vendor/lib64/mt6835/libcamera.customaf.so;SYMLINK=vendor/lib64/libcamera.customaf.so
+vendor/lib64/mt6835/libcamera.customawb.so;SYMLINK=vendor/lib64/libcamera.customawb.so
+vendor/lib64/mt6835/libcamera.customflk.so;SYMLINK=vendor/lib64/libcamera.customflk.so
+vendor/lib64/mt6835/libcameracustom.camera_exif.so;SYMLINK=vendor/lib64/libcameracustom.camera_exif.so
+vendor/lib64/mt6835/libcameracustom.camera.3a.so;SYMLINK=vendor/lib64/libcameracustom.camera.3a.so
+vendor/lib64/mt6835/libcameracustom.camera.isp.so;SYMLINK=vendor/lib64/libcameracustom.camera.isp.so
+vendor/lib64/mt6835/libcameracustom.camera.sensors.so;SYMLINK=vendor/lib64/libcameracustom.camera.sensors.so
+vendor/lib64/mt6835/libcameracustom.flashlight.so;SYMLINK=vendor/lib64/libcameracustom.flashlight.so
+vendor/lib64/mt6835/libcameracustom.lens.so;SYMLINK=vendor/lib64/libcameracustom.lens.so
+vendor/lib64/mt6835/libcameracustom.plugin.so;SYMLINK=vendor/lib64/libcameracustom.plugin.so
+vendor/lib64/mt6835/libcameracustom.so;SYMLINK=vendor/lib64/libcameracustom.so
 vendor/lib64/mt6835/libdip_drv.so;SYMLINK=vendor/lib64/libdip_drv.so
 vendor/lib64/mt6835/libdip_postproc.so;SYMLINK=vendor/lib64/libdip_postproc.so
-vendor/lib64/libheichal.so
+vendor/lib64/mt6835/libeffecthal.base.so;SYMLINK=vendor/lib64/libeffecthal.base.so
+vendor/lib64/mt6835/libfeature_3dnr.so;SYMLINK=vendor/lib64/libfeature_3dnr.so
+vendor/lib64/mt6835/libfeature_fsc.so;SYMLINK=vendor/lib64/libfeature_fsc.so
+vendor/lib64/mt6835/libfeature_lmv.so;SYMLINK=vendor/lib64/libfeature_lmv.so
+vendor/lib64/mt6835/libfeature_rss.so;SYMLINK=vendor/lib64/libfeature_rss.so
+vendor/lib64/mt6835/libfeature.face.so;SYMLINK=vendor/lib64/libfeature.face.so
+vendor/lib64/mt6835/libfeature.stereo.provider.so;SYMLINK=vendor/lib64/libfeature.stereo.provider.so
+vendor/lib64/mt6835/libfeature.vsdof.hal.so;SYMLINK=vendor/lib64/libfeature.vsdof.hal.so
+vendor/lib64/mt6835/libfeatureiodrv_mem.so;SYMLINK=vendor/lib64/libfeatureiodrv_mem.so
 vendor/lib64/mt6835/liblpcnr.so;SYMLINK=vendor/lib64/liblpcnr.so
 vendor/lib64/mt6835/libmsnr.so;SYMLINK=vendor/lib64/libmsnr.so
-vendor/lib64/libimagebuffer_wrapper.so
+vendor/lib64/mt6835/libmtkcam_3rdparty.core.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.core.so
+vendor/lib64/mt6835/libmtkcam_3rdparty.customer.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.customer.so
+vendor/lib64/mt6835/libmtkcam_3rdparty.mtk.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.mtk.so
+vendor/lib64/mt6835/libmtkcam_3rdparty.so;SYMLINK=vendor/lib64/libmtkcam_3rdparty.so
+vendor/lib64/mt6835/libmtkcam_calibration_convertor.so;SYMLINK=vendor/lib64/libmtkcam_calibration_convertor.so
+vendor/lib64/mt6835/libmtkcam_calibration_provider.so;SYMLINK=vendor/lib64/libmtkcam_calibration_provider.so
+vendor/lib64/mt6835/libmtkcam_debugutils.so;SYMLINK=vendor/lib64/libmtkcam_debugutils.so
+vendor/lib64/mt6835/libmtkcam_device3_app.so;SYMLINK=vendor/lib64/libmtkcam_device3_app.so
+vendor/lib64/mt6835/libmtkcam_device3_hal.so;SYMLINK=vendor/lib64/libmtkcam_device3_hal.so
+vendor/lib64/mt6835/libmtkcam_device3_hidl.so;SYMLINK=vendor/lib64/libmtkcam_device3_hidl.so
+vendor/lib64/mt6835/libmtkcam_device3_hidlutils.so;SYMLINK=vendor/lib64/libmtkcam_device3_hidlutils.so
+vendor/lib64/mt6835/libmtkcam_device3_utils.so;SYMLINK=vendor/lib64/libmtkcam_device3_utils.so
+vendor/lib64/mt6835/libmtkcam_devicesessionpolicy.so;SYMLINK=vendor/lib64/libmtkcam_devicesessionpolicy.so
+vendor/lib64/mt6835/libmtkcam_diputils.so;SYMLINK=vendor/lib64/libmtkcam_diputils.so
+vendor/lib64/mt6835/libmtkcam_exif.so;SYMLINK=vendor/lib64/libmtkcam_exif.so
+vendor/lib64/mt6835/libmtkcam_fdvt.so;SYMLINK=vendor/lib64/libmtkcam_fdvt.so
+vendor/lib64/mt6835/libmtkcam_featurepolicy.so;SYMLINK=vendor/lib64/libmtkcam_featurepolicy.so
+vendor/lib64/mt6835/libmtkcam_featureutils.so;SYMLINK=vendor/lib64/libmtkcam_featureutils.so
+vendor/lib64/mt6835/libmtkcam_fwkutils.so;SYMLINK=vendor/lib64/libmtkcam_fwkutils.so
+vendor/lib64/mt6835/libmtkcam_grallocutils.so;SYMLINK=vendor/lib64/libmtkcam_grallocutils.so
+vendor/lib64/mt6835/libmtkcam_hwnode.so;SYMLINK=vendor/lib64/libmtkcam_hwnode.so
+vendor/lib64/mt6835/libmtkcam_hwutils.so;SYMLINK=vendor/lib64/libmtkcam_hwutils.so
+vendor/lib64/mt6835/libmtkcam_imem.so;SYMLINK=vendor/lib64/libmtkcam_imem.so
+vendor/lib64/mt6835/libmtkcam_imgbuf.so;SYMLINK=vendor/lib64/libmtkcam_imgbuf.so
+vendor/lib64/mt6835/libmtkcam_mapping_mgr.so;SYMLINK=vendor/lib64/libmtkcam_mapping_mgr.so
+vendor/lib64/mt6835/libmtkcam_metadata.so;SYMLINK=vendor/lib64/libmtkcam_metadata.so
+vendor/lib64/mt6835/libmtkcam_metastore.so;SYMLINK=vendor/lib64/libmtkcam_metastore.so
+vendor/lib64/mt6835/libmtkcam_mfb.so;SYMLINK=vendor/lib64/libmtkcam_mfb.so
+vendor/lib64/mt6835/libmtkcam_modulefactory_aaa.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_aaa.so
+vendor/lib64/mt6835/libmtkcam_modulefactory_custom.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_custom.so
+vendor/lib64/mt6835/libmtkcam_modulefactory_drv.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_drv.so
+vendor/lib64/mt6835/libmtkcam_modulefactory_utils.so;SYMLINK=vendor/lib64/libmtkcam_modulefactory_utils.so
+vendor/lib64/mt6835/libmtkcam_modulehelper.so;SYMLINK=vendor/lib64/libmtkcam_modulehelper.so
+vendor/lib64/mt6835/libmtkcam_owe.so;SYMLINK=vendor/lib64/libmtkcam_owe.so
+vendor/lib64/mt6835/libmtkcam_pipeline_fbm.so;SYMLINK=vendor/lib64/libmtkcam_pipeline_fbm.so
+vendor/lib64/mt6835/libmtkcam_pipeline.so;SYMLINK=vendor/lib64/libmtkcam_pipeline.so
+vendor/lib64/mt6835/libmtkcam_pipelinemodel_adapter.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_adapter.so
+vendor/lib64/mt6835/libmtkcam_pipelinemodel_capture.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_capture.so
+vendor/lib64/mt6835/libmtkcam_pipelinemodel_isp.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_isp.so
+vendor/lib64/mt6835/libmtkcam_pipelinemodel_session.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_session.so
+vendor/lib64/mt6835/libmtkcam_pipelinemodel_utils.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_utils.so
+vendor/lib64/mt6835/libmtkcam_pipelinemodel_zsl.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel_zsl.so
+vendor/lib64/mt6835/libmtkcam_pipelinemodel.so;SYMLINK=vendor/lib64/libmtkcam_pipelinemodel.so
+vendor/lib64/mt6835/libmtkcam_pipelinepolicy_factory.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy_factory.so
+vendor/lib64/mt6835/libmtkcam_pipelinepolicy-security.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy-security.so
+vendor/lib64/mt6835/libmtkcam_pipelinepolicy-smvr.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy-smvr.so
+vendor/lib64/mt6835/libmtkcam_pipelinepolicy.so;SYMLINK=vendor/lib64/libmtkcam_pipelinepolicy.so
+vendor/lib64/mt6835/libmtkcam_prerelease.so;SYMLINK=vendor/lib64/libmtkcam_prerelease.so
+vendor/lib64/mt6835/libmtkcam_rsc.so;SYMLINK=vendor/lib64/libmtkcam_rsc.so
+vendor/lib64/mt6835/libmtkcam_scenariorecorder.so;SYMLINK=vendor/lib64/libmtkcam_scenariorecorder.so
+vendor/lib64/mt6835/libmtkcam_stdutils.so;SYMLINK=vendor/lib64/libmtkcam_stdutils.so
+vendor/lib64/mt6835/libmtkcam_streamutils.so;SYMLINK=vendor/lib64/libmtkcam_streamutils.so
+vendor/lib64/mt6835/libmtkcam_synchelper.so;SYMLINK=vendor/lib64/libmtkcam_synchelper.so
+vendor/lib64/mt6835/libmtkcam_sysutils.so;SYMLINK=vendor/lib64/libmtkcam_sysutils.so
+vendor/lib64/mt6835/libmtkcam_tuning_utils.so;SYMLINK=vendor/lib64/libmtkcam_tuning_utils.so
+vendor/lib64/mt6835/libmtkcam_ulog.so;SYMLINK=vendor/lib64/libmtkcam_ulog.so
+vendor/lib64/mt6835/libmtkcam.atmseventmgr.so;SYMLINK=vendor/lib64/libmtkcam.atmseventmgr.so
+vendor/lib64/mt6835/libmtkcam.debugwrapper.so;SYMLINK=vendor/lib64/libmtkcam.debugwrapper.so
+vendor/lib64/mt6835/libmtkcam.eventcallback.so;SYMLINK=vendor/lib64/libmtkcam.eventcallback.so
+vendor/lib64/mt6835/libmtkcam.featurepipe.capture.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.capture.so
+vendor/lib64/mt6835/libmtkcam.featurepipe.depthmap.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.depthmap.so
+vendor/lib64/mt6835/libmtkcam.featurepipe.streaming.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.streaming.so
+vendor/lib64/mt6835/libmtkcam.featurepipe.vsdof_util.so;SYMLINK=vendor/lib64/libmtkcam.featurepipe.vsdof_util.so
+vendor/lib64/mt6835/libmtkcam.logicalmodule.so;SYMLINK=vendor/lib64/libmtkcam.logicalmodule.so
+vendor/lib64/mt6835/libSonyIMX230PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX230PdafLibrary.so
+vendor/lib64/mt6835/libSonyIMX230PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX230PdafLibraryWrapper.so
+vendor/lib64/mt6835/libSonyIMX338PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX338PdafLibrary.so
+vendor/lib64/mt6835/libSonyIMX338PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX338PdafLibraryWrapper.so
+vendor/lib64/mt6835/libSonyIMX386PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX386PdafLibrary.so
+vendor/lib64/mt6835/libSonyIMX386PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX386PdafLibraryWrapper.so
+vendor/lib64/mt6835/libSonyIMX519PdafLibrary.so;SYMLINK=vendor/lib64/libSonyIMX519PdafLibrary.so
+vendor/lib64/mt6835/libSonyIMX519PdafLibraryWrapper.so;SYMLINK=vendor/lib64/libSonyIMX519PdafLibraryWrapper.so
 vendor/lib64/mt6835/libstereoinfoaccessor_vsdof.so;SYMLINK=vendor/lib64/libstereoinfoaccessor_vsdof.so
-vendor/lib64/mt6835/libaaa_ltm.so;SYMLINK=vendor/lib64/libaaa_ltm.so
-vendor/lib64/mt6835/libaaa_ltmx.so;SYMLINK=vendor/lib64/libaaa_ltmx.so
-vendor/lib64/mt6835/libaiawb_moon_model.so;SYMLINK=vendor/lib64/libaiawb_moon_model.so
-vendor/lib64/mt6835/libaiawb_moon.so;SYMLINK=vendor/lib64/libaiawb_moon.so
-vendor/lib64/mt6835/libaiawb_p1ggm.so;SYMLINK=vendor/lib64/libaiawb_p1ggm.so
-vendor/lib64/mt6835/libaiawb_sun_model.so;SYMLINK=vendor/lib64/libaiawb_sun_model.so
-vendor/lib64/mt6835/libaiawb_sun.so;SYMLINK=vendor/lib64/libaiawb_sun.so
-vendor/lib64/libmtkisp_metadata.so
+vendor/lib64/mt6835/mtk000_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mtk000_mipi_raw_IdxMgr.so
+vendor/lib64/mt6835/mtk000_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mtk000_mipi_raw_tuning.so
+vendor/lib64/mt6835/ov50c40_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/ov50c40_mipi_raw_IdxMgr.so
+vendor/lib64/mt6835/ov50c40_mipi_raw_tuning.so;SYMLINK=vendor/lib64/ov50c40_mipi_raw_tuning.so
+vendor/lib64/mt6835/s5k3l8_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/s5k3l8_mipi_raw_IdxMgr.so
+vendor/lib64/mt6835/s5k3l8_mipi_raw_tuning.so;SYMLINK=vendor/lib64/s5k3l8_mipi_raw_tuning.so
+vendor/lib64/mtkcam/mt6835/libmtkcam_streaminfo_plugin-p1stt.so;SYMLINK=vendor/lib64/mtkcam/libmtkcam_streaminfo_plugin-p1stt.so
+vendor/lib64/vendor.mediatek.hardware.camera.atms@1.0.so
+vendor/lib64/vendor.mediatek.hardware.camera.bgservice@1.0.so
+vendor/lib64/vendor.mediatek.hardware.camera.bgservice@1.1.so
+vendor/lib64/vendor.mediatek.hardware.camera.ccap@1.0.so
+vendor/lib64/vendor.mediatek.hardware.camera.frhandler@1.0.so
+vendor/lib64/vendor.mediatek.hardware.camera.isphal@1.0.so
+vendor/lib64/vendor.mediatek.hardware.camera.isphal@1.1.so
+vendor/lib64/vendor.mediatek.hardware.camera.lomoeffect@1.0.so
+vendor/lib64/vendor.mediatek.hardware.camera.postproc@1.0.so
+vendor/lib64/vendor.mediatek.hardware.camera.security@1.0.so
 
 # Connectivity
 vendor/bin/wmt_launcher
 vendor/bin/wmt_loader
-vendor/etc/init/init.wlan_drv.rc
-vendor/etc/init/init.wmt_drv.rc
 vendor/etc/init/init.connfem.rc
 
 # Display
 vendor/bin/hw/mt6835/android.hardware.graphics.allocator@4.0-service-mediatek.mt6835;SYMLINK=vendor/bin/hw/android.hardware.graphics.allocator@4.0-service-mediatek
 vendor/bin/hw/vendor.mediatek.hardware.pq_aidl-service
 vendor/etc/cust_pq.xml
-vendor/etc/init/vendor.mediatek.hardware.pq_aidl-service.rc
+vendor/etc/gralloc/cam.xml
+vendor/etc/gralloc/dpu_aeu.xml
+vendor/etc/gralloc/dpu.xml
+vendor/etc/gralloc/gpu.xml
+vendor/etc/gralloc/vpu.xml
 vendor/etc/init/android.hardware.graphics.allocator@4.0-service-mediatek.rc
-vendor/lib/mt6835/arm.graphics-V3-ndk.so;SYMLINK=vendor/lib/arm.graphics-V3-ndk.so
+vendor/etc/init/vendor.mediatek.hardware.pq_aidl-service.rc
 vendor/lib/egl/egl.cfg
-vendor/lib64/mt6835/arm.graphics-V3-ndk.so;SYMLINK=vendor/lib64/arm.graphics-V3-ndk.so
+vendor/lib/mt6835/arm.graphics-V3-ndk.so;SYMLINK=vendor/lib/arm.graphics-V3-ndk.so
 vendor/lib64/egl/libGLES_mali.so;SYMLINK=vendor/lib64/hw/vulkan.mt6835.so
 vendor/lib64/egl/libGLES_meow.so
 vendor/lib64/egl/libMEOW_data.so
 vendor/lib64/egl/libMEOW_gift.so
 vendor/lib64/egl/libMEOW_qt.so
 vendor/lib64/egl/libMEOW_trace.so
+vendor/lib64/hw/hwcomposer.mtk_common.so
 vendor/lib64/hw/mt6835/android.hardware.graphics.allocator@4.0-impl-mediatek.so;SYMLINK=vendor/lib64/hw/android.hardware.graphics.allocator@4.0-impl-mediatek.so
 vendor/lib64/hw/mt6835/android.hardware.graphics.mapper@4.0-impl-mediatek.so;SYMLINK=vendor/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so
 vendor/lib64/hw/mt6835/vendor.mediatek.hardware.pq_aidl-impl.so;SYMLINK=vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so
-vendor/lib64/hw/hwcomposer.mtk_common.so
-vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so
-vendor/lib64/libDefaultFpsActor.so
-vendor/lib64/libFrameRecord.so
-vendor/lib64/libNoFpsActor.so
 vendor/lib64/libaal_cust.so
 vendor/lib64/libaal_key.so
 vendor/lib64/libaal_mtk.so
 vendor/lib64/libaalservice.so
 vendor/lib64/libcomposer_ext.so
+vendor/lib64/libDefaultFpsActor.so
+vendor/lib64/libFrameRecord.so
 vendor/lib64/libged.so
 vendor/lib64/libgpu_aux.so
 vendor/lib64/libgpud.so
@@ -571,20 +590,29 @@ vendor/lib64/libgralloctypes_mtk.so
 vendor/lib64/libion_mtk.so
 vendor/lib64/libion_ulit.so
 vendor/lib64/libmml.so
+vendor/lib64/libNoFpsActor.so
 vendor/lib64/libpq_cust_base.so
 vendor/lib64/libpqframework.so
+vendor/lib64/libpqhdrmetaparser.so
 vendor/lib64/libpqparamparser.so
+vendor/lib64/libpqsharememory.so
+vendor/lib64/libpqtuning.so
+vendor/lib64/libpqxmlparser.so
 vendor/lib64/libudf.so
+vendor/lib64/mt6835/arm.graphics-V3-ndk.so;SYMLINK=vendor/lib64/arm.graphics-V3-ndk.so
+vendor/lib64/mt6835/libaiselector.so;SYMLINK=vendor/lib64/libaiselector.so
 vendor/lib64/mt6835/libdpframework.so;SYMLINK=vendor/lib64/libdpframework.so
+vendor/lib64/mt6835/libpq_prot.so;SYMLINK=vendor/lib64/libpq_prot.so
 vendor/lib64/vendor.mediatek.hardware.composer_ext@1.0.so
 vendor/lib64/vendor.mediatek.hardware.mmagent@1.0.so
 vendor/lib64/vendor.mediatek.hardware.mmagent@1.1.so
+vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.0.so
+vendor/lib64/vendor.mediatek.hardware.pq@2.1.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.10.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.11.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.12.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.13.so
-vendor/lib64/vendor.mediatek.hardware.pq@2.1.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.2.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.3.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.4.so
@@ -593,17 +621,6 @@ vendor/lib64/vendor.mediatek.hardware.pq@2.6.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.7.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.8.so
 vendor/lib64/vendor.mediatek.hardware.pq@2.9.so
-vendor/lib64/libpqhdrmetaparser.so
-vendor/lib64/mt6835/libaiselector.so;SYMLINK=vendor/lib64/libaiselector.so
-vendor/lib64/libpqsharememory.so
-vendor/lib64/libpqtuning.so
-vendor/lib64/mt6835/libpq_prot.so;SYMLINK=vendor/lib64/libpq_prot.so
-vendor/lib64/libpqxmlparser.so
-vendor/etc/gralloc/gpu.xml
-vendor/etc/gralloc/cam.xml
-vendor/etc/gralloc/dpu.xml
-vendor/etc/gralloc/dpu_aeu.xml
-vendor/etc/gralloc/vpu.xml
 
 # DRM
 vendor/bin/hw/android.hardware.drm-service.widevine
@@ -616,11 +633,11 @@ vendor/lib/mt6835/libmtk_drvb.so;SYMLINK=vendor/lib/libmtk_drvb.so
 vendor/lib64/mt6835/libmtk_drvb.so;SYMLINK=vendor/lib64/libmtk_drvb.so
 
 # Fingerprint
-vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service
-vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.rc
-vendor/etc/permissions/android.hardware.fingerprint.xml
-vendor/etc/vintf/manifest/android.hardware.biometrics.fingerprint@2.1-service.xml
-vendor/lib64/hw/fingerprint.default.so
+# vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service
+# vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.rc
+# vendor/etc/permissions/android.hardware.fingerprint.xml
+# vendor/etc/vintf/manifest/android.hardware.biometrics.fingerprint@2.1-service.xml
+vendor/lib64/hw/fingerprint.default.so;FIX_SONAME
 
 # Firmware
 vendor/firmware/aw87xxx_acf.bin
@@ -630,10 +647,10 @@ vendor/firmware/mt6627_fm_v1_coeff.bin
 vendor/firmware/mt6627_fm_v1_patch.bin
 vendor/firmware/mt6630_fm_v1_coeff.bin
 vendor/firmware/mt6630_fm_v1_patch.bin
-vendor/firmware/mt6630_fm_v2_coeff.bin
 vendor/firmware/mt6630_fm_v2_coeff_tx.bin
-vendor/firmware/mt6630_fm_v2_patch.bin
+vendor/firmware/mt6630_fm_v2_coeff.bin
 vendor/firmware/mt6630_fm_v2_patch_tx.bin
+vendor/firmware/mt6630_fm_v2_patch.bin
 vendor/firmware/mt6631_fm_v1_coeff.bin
 vendor/firmware/mt6631_fm_v1_patch.bin
 vendor/firmware/mt6632_fm_v1_coeff.bin
@@ -658,25 +675,25 @@ vendor/lib64/libfgauge_gm30.so
 
 # Gatekeeper
 vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl.so
-vendor/lib64/hw/libSoftGatekeeper.so;SYMLINK=vendor/lib64/hw/gatekeeper.default.so
 vendor/lib64/hw/libMcGatekeeper.so;SYMLINK=vendor/lib64/hw/gatekeeper.trustonic.so
+vendor/lib64/hw/libSoftGatekeeper.so;SYMLINK=vendor/lib64/hw/gatekeeper.default.so
 
 # GNSS
+vendor/bin/gps_dump
 vendor/bin/hw/android.hardware.gnss-service.mediatek
 vendor/bin/hw/vendor.mediatek.hardware.gnss.batching-service
-vendor/etc/init/android.hardware.gnss-service.mediatek.rc
-vendor/etc/init/mtkgnss-batching.rc
-vendor/etc/vintf/manifest/gnss@2.1-service-mediatek.xml
-vendor/lib64/hw/android.hardware.gnss@2.1-impl-mediatek.so
-vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so
-vendor/lib64/vendor.mediatek.hardware.gnss.batching-V1-ndk.so
 vendor/bin/mnld
-vendor/lib64/hw/gps.default.so
-vendor/bin/gps_dump
+vendor/etc/init/android.hardware.gnss-service.mediatek.rc
 vendor/etc/init/init.gps_drv.rc
 vendor/etc/init/init.gps_pwr.rc
+vendor/etc/init/mtkgnss-batching.rc
+vendor/etc/vintf/manifest/gnss@2.1-service-mediatek.xml
+vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so
+vendor/lib64/hw/android.hardware.gnss@2.1-impl-mediatek.so
+vendor/lib64/hw/gps.default.so
 vendor/lib64/mt6835/libDR.so;SYMLINK=vendor/lib64/libDR.so
 vendor/lib64/mt6835/libmnl.so;SYMLINK=vendor/lib64/libmnl.so
+vendor/lib64/vendor.mediatek.hardware.gnss.batching-V1-ndk.so
 
 # IMS
 # system_ext/bin/vtservice
@@ -690,10 +707,10 @@ vendor/lib64/mt6835/libmnl.so;SYMLINK=vendor/lib64/libmnl.so
 # system_ext/framework/mediatek-telephony-base.jar:system/framework/mediatek-telephony-base.jar
 # system_ext/framework/mediatek-telephony-common.jar:system/framework/mediatek-telephony-common.jar
 # system_ext/lib64/libcomutils.so
-# system_ext/lib64/libimsma.so;DISABLE_CHECKELF
 # system_ext/lib64/libimsma_adapt.so
 # system_ext/lib64/libimsma_rtp.so
 # system_ext/lib64/libimsma_socketwrapper.so
+# system_ext/lib64/libimsma.so;DISABLE_CHECKELF
 # system_ext/lib64/libmtk_vt_service.so
 # system_ext/lib64/libmtk_vt_wrapper.so
 # system_ext/lib64/libsignal.so
@@ -711,65 +728,75 @@ vendor/lib64/mt6835/libmnl.so;SYMLINK=vendor/lib64/libmnl.so
 # system_ext/lib64/libged_sys.so
 # system_ext/lib64/libsf_cpupolicy.so
 
+# Init
+vendor/bin/init.insmod.sh
+vendor/etc/init.insmod.mt6835.cfg
+
 # Ladder
 vendor/lib/libladder.so
 vendor/lib64/libladder.so
 
-# Lights
-vendor/bin/hw/android.hardware.lights-service.mediatek
-vendor/etc/init/lights-mtk-default.rc
-vendor/etc/vintf/manifest/lights-mtk-default.xml
+# # Lights
+# vendor/bin/hw/android.hardware.lights-service.mediatek
+# vendor/etc/init/lights-mtk-default.rc
+# vendor/etc/vintf/manifest/lights-mtk-default.xml
 
 # Media
 vendor/bin/vpud
 vendor/etc/mtk_platform_codecs_config.xml
-vendor/lib/libHEVCdec_sa.ca7.android.so;DISABLE_CHECKELF
-vendor/lib/libJpgEncPipe.so
+vendor/etc/seccomp_policy/android.hardware.media.c2@1.2-extended-seccomp-policy
+vendor/etc/seccomp_policy/android.hardware.media.c2@1.2-mediatek-seccomp-policy
+vendor/etc/seccomp_policy/mediacodec.policy
+vendor/etc/seccomp_policy/mediaextractor.policy
+vendor/etc/seccomp_policy/mediaswcodec.policy
+vendor/lib/libapu_mdw_batch.so
+vendor/lib/libapu_mdw.so
 vendor/lib/libcapctrl.so
 vendor/lib/libh264dec_customize.so
 vendor/lib/libh264dec_sa.ca7.so;DISABLE_CHECKELF
 vendor/lib/libh264dec_sd.ca7.so;DISABLE_CHECKELF
 vendor/lib/libh264dec_se.ca7.so;DISABLE_CHECKELF
 vendor/lib/libh264enc_sa.ca7.so;DISABLE_CHECKELF
+vendor/lib/libHEVCdec_sa.ca7.android.so;DISABLE_CHECKELF
 vendor/lib/libhevce_sb.ca7.android.so;DISABLE_CHECKELF
 vendor/lib/libion_mtk.so
 vendor/lib/libion_ulit.so
-vendor/lib/libjpeg-alpha-oal_vendor.so
 vendor/lib/libjpeg-alpha_vendor.so
+vendor/lib/libjpeg-alpha-oal_vendor.so
+vendor/lib/libJpgEncPipe.so
 vendor/lib/libmp4enc_sa.ca7.so;DISABLE_CHECKELF
 vendor/lib/libmp4enc_xa.ca7.so;DISABLE_CHECKELF
 vendor/lib/libvcodec_oal.so;DISABLE_DEPS
+vendor/lib/libvcodec_utility_plat.mt6835.so
 vendor/lib/libvcodec_utility.so
-vendor/lib/libvcodecdrv.so
 vendor/lib/libvcodecdrv_header_stub.so
+vendor/lib/libvcodecdrv.so
 vendor/lib/libvp8dec_sa.ca7.so;DISABLE_CHECKELF
 vendor/lib/libvp8enc_sa.ca7.so;DISABLE_CHECKELF
 vendor/lib/libvp9dec_sa.ca7.so;DISABLE_CHECKELF
 vendor/lib/libvpu5.so
 vendor/lib/libvpud_vcodec.so
-vendor/lib64/libJpgEncPipe.so
+vendor/lib64/libapu_mdw_batch.so
+vendor/lib64/libapu_mdw.so
 vendor/lib64/libcapctrl.so
 vendor/lib64/libhevce_sb.ca7.android.so
 vendor/lib64/libicd_decoder.so
-vendor/lib64/libimageio.so
 vendor/lib64/libimageio_plat_drv.so
 vendor/lib64/libimageio_plat_pipe.so
-vendor/lib64/libjpeg-alpha-oal_vendor.so
+vendor/lib64/libimageio.so
 vendor/lib64/libjpeg-alpha_vendor.so
+vendor/lib64/libjpeg-alpha-oal_vendor.so
+vendor/lib64/libJpgEncPipe.so
 vendor/lib64/libvcodec_oal.so
 vendor/lib64/libvcodecdrv_header_stub.so
 vendor/lib64/libvpu5.so
-vendor/lib64/libapu_mdw_batch.so
-vendor/lib64/libapu_mdw.so
-vendor/lib/libapu_mdw_batch.so
-vendor/lib/libapu_mdw.so
-vendor/lib/libvcodec_utility_plat.mt6835.so
 
 # Media (Codec2)
 vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b;SYMLINK=vendor/bin/hw/android.hardware.media.c2@1.2-mediatek
 vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc
 vendor/etc/vintf/manifest/manifest_media_c2_V1_1_default.xml
 vendor/lib64/libadpcmdec_mtk.so
+vendor/lib64/libalacdec_mtk.so
 vendor/lib64/libcodec2_mtk_c2store.so
 vendor/lib64/libcodec2_mtk_vdec.so
 vendor/lib64/libcodec2_mtk_venc.so
@@ -777,21 +804,28 @@ vendor/lib64/libcodec2_soft_mtk_alacdec.so
 vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so
 vendor/lib64/libcodec2_soft_mtk_mp3dec.so
 vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so
+vendor/lib64/libcodec2_vpp_mi_plugin.so
 vendor/lib64/libcodec2_vpp_qt_plugin.so
 vendor/lib64/libcodec2_vpp_rs_plugin.so
 vendor/lib64/libformatter.so
 vendor/lib64/libmp3dec_mtk.so
-vendor/lib64/libalacdec_mtk.so
-vendor/lib64/libcodec2_vpp_mi_plugin.so
 
 # Memtrack
+vendor/bin/hw/android.hardware.memtrack-service.mediatek
 vendor/etc/init/memtrack-mediatek.rc
 vendor/etc/vintf/manifest/memtrack-mediatek.xml
-vendor/bin/hw/android.hardware.memtrack-service.mediatek
 
 # MMS
 vendor/bin/hw/vendor.mediatek.hardware.mms@1.7-service
 vendor/etc/init/vendor.mediatek.hardware.mms@1.7-service.rc
+vendor/lib/vendor.mediatek.hardware.mms@1.0.so
+vendor/lib/vendor.mediatek.hardware.mms@1.1.so
+vendor/lib/vendor.mediatek.hardware.mms@1.2.so
+vendor/lib/vendor.mediatek.hardware.mms@1.3.so
+vendor/lib/vendor.mediatek.hardware.mms@1.4.so
+vendor/lib/vendor.mediatek.hardware.mms@1.5.so
+vendor/lib/vendor.mediatek.hardware.mms@1.6.so
+vendor/lib/vendor.mediatek.hardware.mms@1.7.so
 vendor/lib64/hw/vendor.mediatek.hardware.mms@1.7-impl.so
 vendor/lib64/vendor.mediatek.hardware.mms@1.0.so
 vendor/lib64/vendor.mediatek.hardware.mms@1.1.so
@@ -801,14 +835,6 @@ vendor/lib64/vendor.mediatek.hardware.mms@1.4.so
 vendor/lib64/vendor.mediatek.hardware.mms@1.5.so
 vendor/lib64/vendor.mediatek.hardware.mms@1.6.so
 vendor/lib64/vendor.mediatek.hardware.mms@1.7.so
-vendor/lib/vendor.mediatek.hardware.mms@1.0.so
-vendor/lib/vendor.mediatek.hardware.mms@1.1.so
-vendor/lib/vendor.mediatek.hardware.mms@1.2.so
-vendor/lib/vendor.mediatek.hardware.mms@1.3.so
-vendor/lib/vendor.mediatek.hardware.mms@1.4.so
-vendor/lib/vendor.mediatek.hardware.mms@1.5.so
-vendor/lib/vendor.mediatek.hardware.mms@1.6.so
-vendor/lib/vendor.mediatek.hardware.mms@1.7.so
 
 # NVRAM
 vendor/bin/hw/vendor.mediatek.hardware.nvram@1.1-service
@@ -817,16 +843,16 @@ vendor/etc/init/nvram_daemon.rc
 vendor/etc/init/vendor.mediatek.hardware.nvram@1.1-sevice.rc
 vendor/lib/libcustom_nvram.so
 vendor/lib/libfile_op.so
-vendor/lib/libnvram.so
 vendor/lib/libnvram_sec.so
+vendor/lib/libnvram.so
 vendor/lib/vendor.mediatek.hardware.nvram@1.0.so
 vendor/lib/vendor.mediatek.hardware.nvram@1.1.so
 vendor/lib64/hw/vendor.mediatek.hardware.nvram@1.1-impl.so
 vendor/lib64/libconnfem.so
 vendor/lib64/libcustom_nvram.so
 vendor/lib64/libfile_op.so
-vendor/lib64/libnvram.so
 vendor/lib64/libnvram_sec.so
+vendor/lib64/libnvram.so
 vendor/lib64/vendor.mediatek.hardware.nvram@1.0.so
 vendor/lib64/vendor.mediatek.hardware.nvram@1.1.so
 
@@ -834,9 +860,9 @@ vendor/lib64/vendor.mediatek.hardware.nvram@1.1.so
 vendor/bin/hw/power_native_test_v_1_0
 vendor/bin/hw/power_native_test_v_1_1
 vendor/bin/hw/vendor.mediatek.hardware.mtkpower@1.0-service
+vendor/etc/init/bootperf.rc
 vendor/etc/init/vendor.mediatek.hardware.mtkpower@1.0-init.rc
 vendor/etc/init/vendor.mediatek.hardware.mtkpower@1.0-service.rc
-vendor/etc/init/bootperf.rc
 vendor/etc/nnapi_powerhal.json
 vendor/etc/power_app_cfg.xml
 vendor/etc/powercontable.xml
@@ -846,9 +872,9 @@ vendor/lib64/hw/power.default.so
 vendor/lib64/hw/vendor.mediatek.hardware.mtkpower@1.2-impl.so
 vendor/lib64/libmtkperf_client_vendor.so
 vendor/lib64/libperfctl_vendor.so
+vendor/lib64/libpower_timer.so
 vendor/lib64/libpowerhal.so
 vendor/lib64/libpowerhalwrap_vendor.so
-vendor/lib64/libpower_timer.so
 vendor/lib64/vendor.mediatek.hardware.mtkpower_applist-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.power@2.0.so
 
@@ -857,7 +883,6 @@ vendor/bin/ccci_mdinit
 vendor/bin/ccci_rpcd
 vendor/bin/gsm0710muxd
 vendor/bin/hw/mtkfusionrild
-vendor/etc/ecc_list.xml
 vendor/etc/ecc_list_OP01.xml
 vendor/etc/ecc_list_OP02.xml
 vendor/etc/ecc_list_OP09.xml
@@ -867,6 +892,7 @@ vendor/etc/ecc_list_OP18.xml
 vendor/etc/ecc_list_OP20.xml
 vendor/etc/ecc_list_OP236.xml
 vendor/etc/ecc_list_preference.xml
+vendor/etc/ecc_list.xml
 vendor/etc/init/gsm0710muxd.rc
 vendor/etc/init/init.cccifsd.rc
 vendor/etc/init/init.cccimdinit.rc
@@ -927,44 +953,41 @@ vendor/lib64/vendor.mediatek.hardware.mtkradioex.smartratswitch-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkradioex.voice-V1-ndk.so
 
 # Radio (IMS)
+#vendor/bin/volte_clientapi_ua
+#vendor/etc/init/volte_clientapi_ua.rc
 vendor/bin/hw/vtservice_hidl
 vendor/bin/ipsec_mon
 vendor/bin/rcs_volte_stack
 vendor/bin/rcs_volte_stack64
-#vendor/bin/volte_clientapi_ua
 vendor/bin/volte_rcs_ua
 vendor/bin/volte_rcs_ua64
 vendor/etc/init/init.vtservice_hidl.rc
 vendor/etc/init/ipsec_mon.rc
-#vendor/etc/init/volte_clientapi_ua.rc
-vendor/lib64/hw/vendor.mediatek.hardware.videotelephony@1.0-impl.so
-vendor/lib64/libipsec_ims_shr.so
-vendor/lib64/librcs_interface.so
-vendor/lib64/librcs_volte_core.so
-vendor/lib64/vendor.mediatek.hardware.rcs@2.0.so
-vendor/lib64/vendor.mediatek.hardware.videotelephony@1.0.so
 vendor/lib/hw/vendor.mediatek.hardware.videotelephony@1.0-impl.so
 vendor/lib/libipsec_ims_shr.so
 vendor/lib/librcs_interface.so
 vendor/lib/librcs_volte_core.so
 vendor/lib/vendor.mediatek.hardware.rcs@2.0.so
 vendor/lib/vendor.mediatek.hardware.videotelephony@1.0.so;MODULE_SUFFIX=_vendor
+vendor/lib64/hw/vendor.mediatek.hardware.videotelephony@1.0-impl.so
+vendor/lib64/libipsec_ims_shr.so
+vendor/lib64/librcs_interface.so
+vendor/lib64/librcs_volte_core.so
+vendor/lib64/vendor.mediatek.hardware.rcs@2.0.so
+vendor/lib64/vendor.mediatek.hardware.videotelephony@1.0.so
 
 # Secure Element
 vendor/bin/hw/android.hardware.secure_element@1.2-service-mediatek
 vendor/etc/init/android.hardware.secure_element@1.2-service-mediatek.rc
 
 # Sensors
-vendor/bin/hw/android.hardware.sensors-service.multihal
-vendor/etc/init/android.hardware.sensors-service-multihal.rc
 vendor/etc/sensors/hals.conf
-vendor/etc/vintf/manifest/android.hardware.sensors-multihal.xml
 vendor/lib64/hw/android.hardware.sensors@2.X-subhal-mediatek.so
 vendor/lib64/hw/sensors.dynamic_sensor_hal.so
 vendor/lib64/hw/sensors.mediatek.V2.0.so;SYMLINK=vendor/lib64/hw/sensors.mt6835.so
+vendor/lib64/libhfmanager.so
 vendor/lib64/libhwm.so
 vendor/lib64/libksensor.so
-vendor/lib64/libhfmanager.so
 
 # Tether Offload
 vendor/bin/hw/tetheroffloadservice
@@ -978,47 +1001,22 @@ vendor/lib64/vendor.mediatek.hardware.netdagent@1.0.so
 # Thermal
 vendor/bin/hw/android.hardware.thermal@2.0-service.mtk
 vendor/bin/thermal_core
-vendor/bin/thermal_intf
 vendor/etc/init/android.hardware.thermal@2.0-service.mtk.rc
 vendor/etc/init/init.thermal_core.rc
-vendor/etc/task_profiles.json
 vendor/etc/thermal/disable_skin_control.conf
-vendor/etc/thermal/disable_thermal.conf
 vendor/etc/thermal/disable_thermal_temp.conf
+vendor/etc/thermal/disable_thermal.conf
 vendor/etc/thermal/disable_throttling.conf
-vendor/etc/thermal/thermal.conf
 vendor/etc/thermal/thermal_mtbf.conf
 vendor/etc/thermal/thermal_policy_00.conf
 vendor/etc/thermal/thermal_policy_02.conf
 vendor/etc/thermal/thermal_policy_08.conf
-vendor/lib64/hw/android.hardware.thermal@1.0-impl.so
+vendor/etc/thermal/thermal.conf
+#vendor/lib64/hw/android.hardware.thermal@1.0-impl.so
 vendor/lib64/hw/android.hardware.thermal@2.0-impl.so
 vendor/lib64/hw/thermal_hal.so
-vendor/etc/thermal/disable_skin_control.conf
-vendor/etc/thermal/disable_thermal.conf
-vendor/etc/thermal/disable_thermal_temp.conf
-vendor/etc/thermal/disable_throttling.conf
-vendor/etc/thermal/thermal.conf
-vendor/etc/thermal/thermal_mtbf.conf
-vendor/etc/thermal/thermal_policy_00.conf
-vendor/etc/thermal/thermal_policy_02.conf
-vendor/etc/thermal/thermal_policy_08.conf
 
 # Trusted Execution Environment (TEE)
-vendor/bin/mcDriverDaemon
-vendor/bin/hw/android.hardware.security.keymint@2.0-service.trustonic;DISABLE_CHECKELF
-vendor/etc/init/android.hardware.security.keymint@2.0-service.trustonic.rc
-vendor/lib64/android.hardware.security.keymint-V1-ndk.so;MODULE_SUFFIX=_vendor
-vendor/etc/init/tee.rc
-vendor/etc/init/trustonic.rc
-vendor/etc/permissions/android.hardware.hardware_keystore.xml
-vendor/lib64/libthha.so
-vendor/lib/libthha.so;DISABLE_CHECKELF
-vendor/lib64/libMcClient.so
-vendor/lib64/libTEECommon.so
-vendor/etc/vintf/manifest/android.hardware.security.keymint-service.trustonic.xml
-vendor/etc/vintf/manifest/android.hardware.security.secureclock-service.trustonic.xml
-vendor/etc/vintf/manifest/android.hardware.security.sharedsecret-service.trustonic.xml
 vendor/app/mcRegistry/020f0000000000000000000000000000.drbin
 vendor/app/mcRegistry/020f0000000000000000000000000000.tlbin
 vendor/app/mcRegistry/031c0000000000000000000000000000.drbin
@@ -1045,21 +1043,28 @@ vendor/app/mcRegistry/5020170115e016302017012521300000.drbin
 vendor/app/mcRegistry/5020170115e016302017012521300000.tlbin
 vendor/app/mcRegistry/abcd270ea5c44c58bcd3384a2fa2539e.tabin
 vendor/app/mcRegistry/e97c270ea5c44c58bcd3384a2fa2539e.tabin
+vendor/bin/hw/android.hardware.security.keymint@2.0-service.trustonic
+vendor/bin/mcDriverDaemon
+vendor/etc/init/android.hardware.security.keymint@2.0-service.trustonic.rc
+vendor/etc/init/tee.rc
+vendor/etc/init/trustonic.rc
+vendor/etc/vintf/manifest/android.hardware.security.keymint-service.trustonic.xml
+vendor/etc/vintf/manifest/android.hardware.security.secureclock-service.trustonic.xml
+vendor/etc/vintf/manifest/android.hardware.security.sharedsecret-service.trustonic.xml
+vendor/lib/libthha.so;DISABLE_CHECKELF
+#vendor/lib64/android.hardware.security.keymint-V1-ndk.so;MODULE_SUFFIX=_vendor
 vendor/lib64/libkeystore-engine-wifi-hidl.so
+vendor/lib64/libMcClient.so
+vendor/lib64/libTEECommon.so
+vendor/lib64/libthha.so
 
 # USB
 vendor/bin/hw/android.hardware.usb-aidl-service.mediatekv1.0
-vendor/etc/init/android.hardware.usb-aidl-service.mediatek.rc
-vendor/etc/vintf/manifest/android.hardware.usb-aidl-service.mediatek.xml
 vendor/bin/hw/android.hardware.usb.gadget-service.mediatekv1.1
+vendor/etc/init/android.hardware.usb-aidl-service.mediatek.rc
 vendor/etc/init/android.hardware.usb.gadget-service.mediatek.rc
+vendor/etc/vintf/manifest/android.hardware.usb-aidl-service.mediatek.xml
 vendor/etc/vintf/manifest/android.hardware.usb.gadget-service.mediatek.xml
-
-# Vibrator
-vendor/bin/hw/android.hardware.vibrator-service.mediatek
-vendor/etc/init/vibrator-mtk-default.rc
-vendor/etc/vintf/manifest/vibrator-mtk-default.xml
-vendor/lib64/hw/vibrator.default.so
 
 # VoLTE
 vendor/etc/init/init.vtservice_hidl.rc
@@ -1067,54 +1072,10 @@ vendor/etc/init/volte_clientapi_ua.rc
 
 # Wi-Fi
 vendor/bin/wlan_assistant
+vendor/etc/init/init.wlan_drv.rc
+vendor/etc/init/init.wmt_drv.rc
 vendor/etc/init/wlan_assistant.rc
-vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
-vendor/etc/wifi/wpa_supplicant.conf
-vendor/etc/wifi/wpa_supplicant_overlay.conf
 vendor/etc/wifi/p2p_supplicant_overlay.conf
-
-
-vendor/etc/audio_device.xml
-#vendor/etc/audio_effects.xml
-# vendor/etc/a2dp_audio_policy_configuration.xml
-# vendor/etc/a2dp_in_audio_policy_configuration.xml
-# vendor/etc/r_submix_audio_policy_configuration.xml
-# vendor/etc/bluetooth_audio_policy_configuration.xml
-# vendor/etc/bluetooth_offload_audio_policy_configuration.xml
-vendor/etc/audio_em.xml
-# vendor/etc/audio_policy.conf
-vendor/etc/audio_policy_configuration_bluetooth_legacy_hal.xml
-# vendor/etc/audio_policy_configuration.xml
-vendor/etc/audio_policy_volumes.xml
-vendor/etc/aurisys_config_rv.xml
-vendor/etc/aurisys_config.xml
-vendor/etc/default_volume_tables.xml
-vendor/etc/usb_audio_accessory_only_policy_configuration.xml
-vendor/etc/media_codecs_google_audio.xml
-vendor/etc/media_codecs_performance.xml
-vendor/etc/media_codecs.xml
-vendor/etc/media_profiles_V1_0.xml
-vendor/etc/mtk_platform_codecs_config.xml
-vendor/etc/seccomp_policy/android.hardware.media.c2@1.2-extended-seccomp-policy
-vendor/etc/seccomp_policy/android.hardware.media.c2@1.2-mediatek-seccomp-policy
-vendor/etc/seccomp_policy/mediacodec.policy
-vendor/etc/seccomp_policy/mediaextractor.policy
-vendor/etc/seccomp_policy/mediaswcodec.policy
-
-
-
-vendor/etc/init/hw/init.cgroup.rc
-vendor/etc/init/hw/init.connectivity.common.rc
-vendor/etc/init/hw/init.connectivity.rc
-vendor/etc/init/hw/init_connectivity.rc
-vendor/etc/init/hw/init.modem.rc
-vendor/etc/init/hw/init.mt6835.usb.rc
-vendor/etc/init/hw/init.mtkgki.rc
-vendor/etc/init/hw/init.sensor_2_0.rc
-vendor/etc/init.insmod.mt6835.cfg
-vendor/etc/ueventd.rc
-vendor/bin/init.insmod.sh
-
-# cannot be compiled without kernel headers
-vendor/lib64/libtinycompress.so 
-vendor/lib/libtinycompress.so 
+vendor/etc/wifi/wpa_supplicant_overlay.conf
+vendor/etc/wifi/wpa_supplicant.conf
+vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
