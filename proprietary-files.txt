@@ -633,10 +633,6 @@ vendor/lib/mt6835/libmtk_drvb.so;SYMLINK=vendor/lib/libmtk_drvb.so
 vendor/lib64/mt6835/libmtk_drvb.so;SYMLINK=vendor/lib64/libmtk_drvb.so
 
 # Fingerprint
-# vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service
-# vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.rc
-# vendor/etc/permissions/android.hardware.fingerprint.xml
-# vendor/etc/vintf/manifest/android.hardware.biometrics.fingerprint@2.1-service.xml
 vendor/lib64/hw/fingerprint.default.so;FIX_SONAME
 
 # Firmware
@@ -736,11 +732,6 @@ vendor/etc/init.insmod.mt6835.cfg
 vendor/lib/libladder.so
 vendor/lib64/libladder.so
 
-# # Lights
-# vendor/bin/hw/android.hardware.lights-service.mediatek
-# vendor/etc/init/lights-mtk-default.rc
-# vendor/etc/vintf/manifest/lights-mtk-default.xml
-
 # Media
 vendor/bin/vpud
 vendor/etc/mtk_platform_codecs_config.xml
@@ -792,23 +783,23 @@ vendor/lib64/libvcodecdrv_header_stub.so
 vendor/lib64/libvpu5.so
 
 # Media (Codec2)
-vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b;SYMLINK=vendor/bin/hw/android.hardware.media.c2@1.2-mediatek
-vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc
-vendor/etc/vintf/manifest/manifest_media_c2_V1_1_default.xml
-vendor/lib64/libadpcmdec_mtk.so
-vendor/lib64/libalacdec_mtk.so
-vendor/lib64/libcodec2_mtk_c2store.so
-vendor/lib64/libcodec2_mtk_vdec.so
-vendor/lib64/libcodec2_mtk_venc.so
-vendor/lib64/libcodec2_soft_mtk_alacdec.so
-vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so
-vendor/lib64/libcodec2_soft_mtk_mp3dec.so
-vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so
-vendor/lib64/libcodec2_vpp_mi_plugin.so
-vendor/lib64/libcodec2_vpp_qt_plugin.so
-vendor/lib64/libcodec2_vpp_rs_plugin.so
-vendor/lib64/libformatter.so
-vendor/lib64/libmp3dec_mtk.so
+# vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b
+# vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc
+# vendor/etc/vintf/manifest/manifest_media_c2_V1_1_default.xml
+# vendor/lib64/libadpcmdec_mtk.so
+# vendor/lib64/libalacdec_mtk.so
+# vendor/lib64/libcodec2_mtk_c2store.so
+# vendor/lib64/libcodec2_mtk_vdec.so
+# vendor/lib64/libcodec2_mtk_venc.so
+# vendor/lib64/libcodec2_soft_mtk_alacdec.so
+# vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so
+# vendor/lib64/libcodec2_soft_mtk_mp3dec.so
+# vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so
+# vendor/lib64/libcodec2_vpp_mi_plugin.so
+# vendor/lib64/libcodec2_vpp_qt_plugin.so
+# vendor/lib64/libcodec2_vpp_rs_plugin.so
+# vendor/lib64/libformatter.so
+# vendor/lib64/libmp3dec_mtk.so
 
 # Memtrack
 vendor/bin/hw/android.hardware.memtrack-service.mediatek
@@ -857,8 +848,6 @@ vendor/lib64/vendor.mediatek.hardware.nvram@1.0.so
 vendor/lib64/vendor.mediatek.hardware.nvram@1.1.so
 
 # Perf
-vendor/bin/hw/power_native_test_v_1_0
-vendor/bin/hw/power_native_test_v_1_1
 vendor/bin/hw/vendor.mediatek.hardware.mtkpower@1.0-service
 vendor/etc/init/bootperf.rc
 vendor/etc/init/vendor.mediatek.hardware.mtkpower@1.0-init.rc
@@ -1012,7 +1001,6 @@ vendor/etc/thermal/thermal_policy_00.conf
 vendor/etc/thermal/thermal_policy_02.conf
 vendor/etc/thermal/thermal_policy_08.conf
 vendor/etc/thermal/thermal.conf
-#vendor/lib64/hw/android.hardware.thermal@1.0-impl.so
 vendor/lib64/hw/android.hardware.thermal@2.0-impl.so
 vendor/lib64/hw/thermal_hal.so
 
