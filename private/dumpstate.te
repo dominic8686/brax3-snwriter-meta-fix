@@ -402,6 +402,7 @@ allow dumpstate {
   proc_bootconfig
   proc_buddyinfo
   proc_cmdline
+  proc_cgroups
   proc_meminfo
   proc_modules
   proc_net_type
