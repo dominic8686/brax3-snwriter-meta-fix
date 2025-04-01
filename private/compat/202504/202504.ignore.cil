@@ -6,4 +6,5 @@
 (typeattributeset new_objects
   ( new_objects
     pbtombstone_exec
+    prefetch
   ))
