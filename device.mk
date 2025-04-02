@@ -1,14 +1,14 @@
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
-RODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=true
+#PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=true
 
 SELINUX_IGNORE_NEVERALLOWS := true
 PRODUCT_AAPT_CONFIG := normal
@@ -37,14 +37,15 @@ PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
 AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=erofs \
+    FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_vendor=true \
     POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=erofs \
+    FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 
 PRODUCT_PACKAGES += \
@@ -108,14 +109,14 @@ PRODUCT_PACKAGES += \
     android.hardware.health-service.mediatek-recovery
 
 # IMS
-# PRODUCT_BOOT_JARS += \
-#     mediatek-common \
-#     mediatek-framework \
-#     mediatek-ims-base \
-#     mediatek-ims-common \
-#     mediatek-telecom-common \
-#     mediatek-telephony-base \
-#     mediatek-telephony-common
+PRODUCT_BOOT_JARS_EXTRA += \
+    system_ext:mediatek-common \
+    system_ext:mediatek-framework \
+    system_ext:mediatek-ims-base \
+    system_ext:mediatek-ims-common \
+    system_ext:mediatek-telecom-common \
+    system_ext:mediatek-telephony-base \
+    system_ext:mediatek-telephony-common
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-com.mediatek.ims.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-com.mediatek.ims.xml
@@ -146,14 +147,15 @@ PRODUCT_PACKAGES += \
 #     vendor.lineage.health-service.default
 
 # NFC
-# PRODUCT_PACKAGES += \
-#     android.hardware.nfc@1.2-service \
-#     com.android.nfc_extras \
-#     NfcNci \
-#     Tag
+#    android.hardware.nfc@1.2-service \
 
-# PRODUCT_COPY_FILES += \
-#     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc,$(TARGET_COPY_OUT_VENDOR)/etc)
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
+    NfcNci \
+    Tag
+
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/sku_aether/android.hardware.nfc.xml \
@@ -164,9 +166,12 @@ PRODUCT_COPY_FILES += \
 
 # Overlays
 PRODUCT_PACKAGES += \
-    SettingsProviderRes \
-    FrameworksResTarget \
-    FrameworkResOverlay \
+    CarrierConfigResOverlay \
+    DialerResOverlay \
+    SettingsProviderResOverlay \
+    SystemUIResOverlay \
+    FrameworksResOverlay \
+    TelephonyResOverlay \
     TetheringResOverlay \
     WifiResMainlineOverlay
 
@@ -231,9 +236,9 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/mediatek
 
-# # Symlinks
-# PRODUCT_PACKAGES += \
-#     nvcfg_mdota.ini_symlink
+# Symlinks
+PRODUCT_PACKAGES += \
+    nvcfg_mdota.ini_symlink
 
 # PRODUCT_PACKAGES += \
 #     android.hardware.usb@1.3.vendor \

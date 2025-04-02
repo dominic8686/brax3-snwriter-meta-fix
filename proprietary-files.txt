@@ -31,12 +31,12 @@ vendor/lib/libnxp_extamp_intf.so
 vendor/lib/librt_extamp_intf.so
 vendor/lib/libspeech_enh_lib.so;FIX_SONAME
 vendor/lib/libspeechparser_vendor.so
-vendor/lib/libtinycompress.so 
+vendor/lib/libtinycompress.so
 vendor/lib/vendor.mediatek.hardware.audio@6.1.so
 vendor/lib/vendor.mediatek.hardware.audio@7.1.so
 vendor/lib/vendor.mediatek.hardware.audio@8.1.so
 vendor/lib64/libbwc.so
-vendor/lib64/libtinycompress.so 
+vendor/lib64/libtinycompress.so
 vendor/lib64/vendor.mediatek.hardware.audio@6.1.so
 
 # Audio Configs
@@ -574,6 +574,7 @@ vendor/lib64/hw/hwcomposer.mtk_common.so
 vendor/lib64/hw/mt6835/android.hardware.graphics.allocator@4.0-impl-mediatek.so;SYMLINK=vendor/lib64/hw/android.hardware.graphics.allocator@4.0-impl-mediatek.so
 vendor/lib64/hw/mt6835/android.hardware.graphics.mapper@4.0-impl-mediatek.so;SYMLINK=vendor/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so
 vendor/lib64/hw/mt6835/vendor.mediatek.hardware.pq_aidl-impl.so;SYMLINK=vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so
+vendor/lib64/hw/mt6835/vulkan.mali.so;SYMLINK=vendor/lib64/hw/vulkan.mali.so
 vendor/lib64/libaal_cust.so
 vendor/lib64/libaal_key.so
 vendor/lib64/libaal_mtk.so
@@ -679,14 +680,33 @@ vendor/bin/gps_dump
 vendor/bin/hw/android.hardware.gnss-service.mediatek
 vendor/bin/hw/vendor.mediatek.hardware.gnss.batching-service
 vendor/bin/mnld
+vendor/bin/mtk_agpsd
+vendor/etc/gnss/agps_profiles_conf2.xml:vendor/etc/agps_profiles_conf2.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_ATnT_Mexico.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_ATnT_US.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Claro_Peru.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Entel_Peru.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_KDDI.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_SK_Telecom.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_SoftBank.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Sprint.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Test_SIM1.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Test_SIM2.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_T-Mobile_US.xml
+vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Verizon_Wireless.xml
 vendor/etc/init/android.hardware.gnss-service.mediatek.rc
 vendor/etc/init/init.gps_drv.rc
 vendor/etc/init/init.gps_pwr.rc
+vendor/etc/init/mtk_agpsd_p.rc
 vendor/etc/init/mtkgnss-batching.rc
+vendor/etc/slp_conf
 vendor/etc/vintf/manifest/gnss@2.1-service-mediatek.xml
-vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so
+vendor/etc/vintf/manifest/gnss-default.xml:vendor/etc/vintf/manifest/gnss-mtk.xml
 vendor/lib64/hw/android.hardware.gnss@2.1-impl-mediatek.so
+vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so
 vendor/lib64/hw/gps.default.so
+vendor/lib64/librpc.so
+vendor/lib64/libviagpsrpc.so
 vendor/lib64/mt6835/libDR.so;SYMLINK=vendor/lib64/libDR.so
 vendor/lib64/mt6835/libmnl.so;SYMLINK=vendor/lib64/libmnl.so
 vendor/lib64/vendor.mediatek.hardware.gnss.batching-V1-ndk.so
@@ -856,6 +876,7 @@ vendor/etc/nnapi_powerhal.json
 vendor/etc/power_app_cfg.xml
 vendor/etc/powercontable.xml
 vendor/etc/powerscntbl.xml
+vendor/etc/task_profiles.json
 vendor/lib64/android.hardware.power-service-mediatek.so
 vendor/lib64/hw/power.default.so
 vendor/lib64/hw/vendor.mediatek.hardware.mtkpower@1.2-impl.so
@@ -941,17 +962,45 @@ vendor/lib64/vendor.mediatek.hardware.mtkradioex.sim-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkradioex.smartratswitch-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkradioex.voice-V1-ndk.so
 
+# IMS
+system_ext/bin/vtservice
+system_ext/etc/init/init.vtservice.rc
+system_ext/framework/mediatek-common.jar
+system_ext/framework/mediatek-framework.jar
+system_ext/framework/mediatek-ims-base.jar
+system_ext/framework/mediatek-ims-common.jar
+system_ext/framework/mediatek-ims-extension-plugin.jar
+system_ext/framework/mediatek-telecom-common.jar
+system_ext/framework/mediatek-telephony-base.jar
+system_ext/framework/mediatek-telephony-common.jar
+system_ext/lib64/libcomutils.so
+system_ext/lib64/libimsma.so;DISABLE_CHECKELF
+system_ext/lib64/libimsma_adapt.so
+system_ext/lib64/libimsma_rtp.so
+system_ext/lib64/libimsma_socketwrapper.so
+system_ext/lib64/libmtk_vt_service.so
+system_ext/lib64/libmtk_vt_wrapper.so
+system_ext/lib64/libsignal.so
+system_ext/lib64/libsink.so
+system_ext/lib64/libsource.so
+system_ext/lib64/libvcodec_cap.so
+system_ext/lib64/libvcodec_capenc.so
+system_ext/lib64/libvt_avsync.so
+system_ext/lib64/vendor.mediatek.hardware.videotelephony-V1-ndk.so
+system_ext/lib64/vendor.mediatek.hardware.videotelephony@1.0.so
+system_ext/priv-app/ImsService/ImsService.apk
+
 # Radio (IMS)
-#vendor/bin/volte_clientapi_ua
-#vendor/etc/init/volte_clientapi_ua.rc
 vendor/bin/hw/vtservice_hidl
 vendor/bin/ipsec_mon
 vendor/bin/rcs_volte_stack
 vendor/bin/rcs_volte_stack64
+vendor/bin/volte_clientapi_ua
 vendor/bin/volte_rcs_ua
 vendor/bin/volte_rcs_ua64
 vendor/etc/init/init.vtservice_hidl.rc
 vendor/etc/init/ipsec_mon.rc
+vendor/etc/init/volte_clientapi_ua.rc
 vendor/lib/hw/vendor.mediatek.hardware.videotelephony@1.0-impl.so
 vendor/lib/libipsec_ims_shr.so
 vendor/lib/librcs_interface.so
@@ -962,6 +1011,7 @@ vendor/lib64/hw/vendor.mediatek.hardware.videotelephony@1.0-impl.so
 vendor/lib64/libipsec_ims_shr.so
 vendor/lib64/librcs_interface.so
 vendor/lib64/librcs_volte_core.so
+vendor/lib64/vendor.mediatek.hardware.clientapi@1.0.so
 vendor/lib64/vendor.mediatek.hardware.rcs@2.0.so
 vendor/lib64/vendor.mediatek.hardware.videotelephony@1.0.so
 

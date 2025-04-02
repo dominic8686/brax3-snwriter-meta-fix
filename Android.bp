@@ -5,7 +5,7 @@ install_symlink {
     name: "nvcfg_mdota.ini_symlink",
     vendor: true,
     installed_location: "etc/mdota",
-    symlink_target: "/mnt/vendor/nvcfg/mdota",
+    symlink_target: "/mnt/vendor/mdota",
 }
 
 prebuilt_hidl_interfaces {
