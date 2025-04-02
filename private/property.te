@@ -670,14 +670,6 @@ neverallow {
 neverallow {
   domain
   -init
-  -vendor_init
-} {
-  graphics_config_prop
-}:property_service set;
-
-neverallow {
-  domain
-  -init
   -surfaceflinger
 } {
   surfaceflinger_display_prop
