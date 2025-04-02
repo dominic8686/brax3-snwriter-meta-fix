@@ -223,6 +223,9 @@ allow system_server proc_uid_procstat_set:file { w_file_perms getattr };
 # Write to /proc/sysrq-trigger.
 allow system_server proc_sysrq:file rw_file_perms;
 
+# Read /proc/tty/drivers by the SerialService.
+allow system_server proc_tty_drivers:file r_file_perms;
+
 # Delete /data/misc/stats-service/ directories.
 allow system_server stats_config_data_file:dir { open read remove_name search write };
 allow system_server stats_config_data_file:file unlink;
@@ -1467,7 +1470,7 @@ neverallow system_server { dev_type -frp_block_device -vd_device }:blk_file r_fi
 # never shipped to users.
 ifelse(target_requires_insecure_execmem_for_swiftshader, `true',
   `allow system_server self:process execmem;',
-  `neverallow system_server self:process execmem;')
+  `neverallow { system_server userdebug_or_eng(`') } self:process execmem;')
 neverallow system_server { ashmem_device ashmem_libcutils_device }:chr_file execute;
 
 # TODO: deal with tmpfs_domain pub/priv split properly

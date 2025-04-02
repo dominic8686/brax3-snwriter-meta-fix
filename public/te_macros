@@ -1,3 +1,4 @@
+divert(-1)
 #####################################
 # domain_trans(olddomain, type, newdomain)
 # Allow a transition from olddomain to newdomain
@@ -1073,3 +1074,4 @@ neverallow { domain -$1 } $1_iouring:anon_inode *;
 # grant CAP_IPC_LOCK to silence avc denials, which is undesireable.
 dontaudit $1 self:global_capability_class_set ipc_lock;
 ')
+divert(0)
