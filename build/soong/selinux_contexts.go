@@ -69,7 +69,7 @@ type selinuxContextsModule struct {
 	seappProperties seappProperties
 	build           func(ctx android.ModuleContext, inputs android.Paths) android.Path
 	deps            func(ctx android.BottomUpMutatorContext)
-	outputPath      android.Path
+	outputPath      android.OutputPath
 	installPath     android.InstallPath
 }
 
@@ -156,7 +156,10 @@ func (m *selinuxContextsModule) GenerateAndroidBuildActions(ctx android.ModuleCo
 		}
 	}
 
-	m.outputPath = m.build(ctx, android.PathsForModuleSrc(ctx, m.properties.Srcs))
+	builtContext := m.build(ctx, android.PathsForModuleSrc(ctx, m.properties.Srcs))
+
+	m.outputPath = pathForModuleOut(ctx, m.stem())
+	android.CopyFileRule(ctx, builtContext, m.outputPath)
 	ctx.InstallFile(m.installPath, m.stem(), m.outputPath)
 
 	ctx.SetOutputFiles([]android.Path{m.outputPath}, "")
@@ -324,14 +327,10 @@ func (m *selinuxContextsModule) buildGeneralContexts(ctx android.ModuleContext, 
 		builtContext = sorted_output
 	}
 
-	ret := pathForModuleOut(ctx, m.stem())
-	rule.Temporary(builtContext)
-	rule.Command().Text("cp").Input(builtContext).Output(ret)
-
 	rule.DeleteTemporaryFiles()
 	rule.Build("selinux_contexts", "building contexts: "+m.Name())
 
-	return ret
+	return builtContext
 }
 
 func (m *selinuxContextsModule) buildFileContexts(ctx android.ModuleContext, inputs android.Paths) android.Path {
