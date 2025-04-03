@@ -1,0 +1,2 @@
+get_prop(system_server, vendor_mtk_gpu_prop)
+get_prop(system_server, system_mtk_powerhal_prop)

@@ -125,9 +125,9 @@ on fs
     write /proc/bootprof "INIT:fs"
     start vendor.boot-hal-1-2
 
-    wait /toto 5
-    rm /metadata/logcat
-    start earlylog
+    # wait /toto 5
+    # rm /metadata/logcat
+    # start earlylog
 
     # mount fstab
     write /proc/bootprof "INIT:Mount_START"

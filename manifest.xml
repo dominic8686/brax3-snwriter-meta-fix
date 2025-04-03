@@ -164,10 +164,6 @@
         <fqname>@1.2::IMtkPower/default</fqname>
     </hal>
     <hal format="aidl">
-        <name>vendor.mediatek.hardware.mtkpower_applist</name>
-        <fqname>IMtkpower_applist/default</fqname>
-    </hal>
-    <hal format="aidl">
         <name>vendor.mediatek.hardware.mtkradioex.data</name>
         <fqname>IMtkRadioExData/slot1</fqname>
         <fqname>IMtkRadioExData/slot2</fqname>

@@ -1,0 +1,2 @@
+dontaudit mediaswcodec vendor_file:dir read;
+get_prop(mediaserver, vendor_mtk_c2_vdec_fmt_prop)

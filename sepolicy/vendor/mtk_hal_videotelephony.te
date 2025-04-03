@@ -1,0 +1,1 @@
+hal_attribute_service(hal_videotelephony, mtk_hal_videotelephony_service)
