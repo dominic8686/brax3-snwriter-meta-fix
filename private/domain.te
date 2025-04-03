@@ -2211,6 +2211,7 @@ neverallow {
   -vendor_modprobe
   userdebug_or_eng(`-simpleperf_boot')
   -kernel
+  -bpfloader
   -uprobestats
 } self:capability2 perfmon;
 
