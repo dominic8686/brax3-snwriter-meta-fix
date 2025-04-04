@@ -719,37 +719,32 @@ vendor/lib64/mt6835/libmnl.so;SYMLINK=vendor/lib64/libmnl.so
 vendor/lib64/vendor.mediatek.hardware.gnss.batching-V1-ndk.so
 
 # IMS
-# system_ext/bin/vtservice
-# system_ext/etc/init/init.vtservice.rc
-# system_ext/framework/mediatek-common.jar:system/framework/mediatek-common.jar
-# system_ext/framework/mediatek-framework.jar:system/framework/mediatek-framework.jar
-# system_ext/framework/mediatek-ims-base.jar:system/framework/mediatek-ims-base.jar
-# system_ext/framework/mediatek-ims-common.jar:system/framework/mediatek-ims-common.jar
-# system_ext/framework/mediatek-ims-extension-plugin.jar:system/framework/mediatek-ims-extension-plugin.jar
-# system_ext/framework/mediatek-telecom-common.jar:system/framework/mediatek-telecom-common.jar
-# system_ext/framework/mediatek-telephony-base.jar:system/framework/mediatek-telephony-base.jar
-# system_ext/framework/mediatek-telephony-common.jar:system/framework/mediatek-telephony-common.jar
-# system_ext/lib64/libcomutils.so
-# system_ext/lib64/libimsma_adapt.so
-# system_ext/lib64/libimsma_rtp.so
-# system_ext/lib64/libimsma_socketwrapper.so
-# system_ext/lib64/libimsma.so;DISABLE_CHECKELF
-# system_ext/lib64/libmtk_vt_service.so
-# system_ext/lib64/libmtk_vt_wrapper.so
-# system_ext/lib64/libsignal.so
-# system_ext/lib64/libsink.so
-# system_ext/lib64/libsource.so
-# system_ext/lib64/libvcodec_cap.so
-# system_ext/lib64/libvcodec_capenc.so
-# system_ext/lib64/libvt_avsync.so
-# system_ext/lib64/vendor.mediatek.hardware.videotelephony-V1-ndk.so
-# system_ext/lib64/vendor.mediatek.hardware.videotelephony@1.0.so
-# system_ext/priv-app/ImsService/ImsService.apk
-
-# system_ext/lib64/libui_ext.so
-# system_ext/lib64/libgralloc_extra_sys.so
-# system_ext/lib64/libged_sys.so
-# system_ext/lib64/libsf_cpupolicy.so
+system_ext/bin/vtservice
+system_ext/etc/init/init.vtservice.rc
+system_ext/framework/mediatek-common.jar
+system_ext/framework/mediatek-framework.jar
+system_ext/framework/mediatek-ims-base.jar
+system_ext/framework/mediatek-ims-common.jar
+system_ext/framework/mediatek-ims-extension-plugin.jar
+system_ext/framework/mediatek-telecom-common.jar
+system_ext/framework/mediatek-telephony-base.jar
+system_ext/framework/mediatek-telephony-common.jar
+system_ext/lib64/libcomutils.so
+system_ext/lib64/libimsma.so;DISABLE_CHECKELF
+system_ext/lib64/libimsma_adapt.so
+system_ext/lib64/libimsma_rtp.so
+system_ext/lib64/libimsma_socketwrapper.so
+system_ext/lib64/libmtk_vt_service.so
+system_ext/lib64/libmtk_vt_wrapper.so
+system_ext/lib64/libsignal.so
+system_ext/lib64/libsink.so
+system_ext/lib64/libsource.so
+system_ext/lib64/libvcodec_cap.so
+system_ext/lib64/libvcodec_capenc.so
+system_ext/lib64/libvt_avsync.so
+system_ext/lib64/vendor.mediatek.hardware.videotelephony-V1-ndk.so
+system_ext/lib64/vendor.mediatek.hardware.videotelephony@1.0.so
+system_ext/priv-app/ImsService/ImsService.apk
 
 # Init
 vendor/bin/init.insmod.sh
@@ -810,23 +805,23 @@ vendor/lib64/libvcodecdrv_header_stub.so
 vendor/lib64/libvpu5.so
 
 # Media (Codec2)
-# vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b
-# vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc
-# vendor/etc/vintf/manifest/manifest_media_c2_V1_1_default.xml
-# vendor/lib64/libadpcmdec_mtk.so
-# vendor/lib64/libalacdec_mtk.so
-# vendor/lib64/libcodec2_mtk_c2store.so
-# vendor/lib64/libcodec2_mtk_vdec.so
-# vendor/lib64/libcodec2_mtk_venc.so
-# vendor/lib64/libcodec2_soft_mtk_alacdec.so
-# vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so
-# vendor/lib64/libcodec2_soft_mtk_mp3dec.so
-# vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so
-# vendor/lib64/libcodec2_vpp_mi_plugin.so
-# vendor/lib64/libcodec2_vpp_qt_plugin.so
-# vendor/lib64/libcodec2_vpp_rs_plugin.so
-# vendor/lib64/libformatter.so
-# vendor/lib64/libmp3dec_mtk.so
+vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b
+vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc
+vendor/etc/vintf/manifest/manifest_media_c2_V1_1_default.xml
+vendor/lib64/libadpcmdec_mtk.so
+vendor/lib64/libalacdec_mtk.so
+vendor/lib64/libcodec2_mtk_c2store.so
+vendor/lib64/libcodec2_mtk_vdec.so
+vendor/lib64/libcodec2_mtk_venc.so
+vendor/lib64/libcodec2_soft_mtk_alacdec.so
+vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so
+vendor/lib64/libcodec2_soft_mtk_mp3dec.so
+vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so
+vendor/lib64/libcodec2_vpp_mi_plugin.so
+vendor/lib64/libcodec2_vpp_qt_plugin.so
+vendor/lib64/libcodec2_vpp_rs_plugin.so
+vendor/lib64/libformatter.so
+vendor/lib64/libmp3dec_mtk.so
 
 # Memtrack
 vendor/bin/hw/android.hardware.memtrack-service.mediatek
@@ -969,35 +964,7 @@ vendor/lib64/vendor.mediatek.hardware.mtkradioex.sim-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkradioex.smartratswitch-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.mtkradioex.voice-V1-ndk.so
 
-# IMS
-system_ext/bin/vtservice
-system_ext/etc/init/init.vtservice.rc
-system_ext/framework/mediatek-common.jar
-system_ext/framework/mediatek-framework.jar
-system_ext/framework/mediatek-ims-base.jar
-system_ext/framework/mediatek-ims-common.jar
-system_ext/framework/mediatek-ims-extension-plugin.jar
-system_ext/framework/mediatek-telecom-common.jar
-system_ext/framework/mediatek-telephony-base.jar
-system_ext/framework/mediatek-telephony-common.jar
-system_ext/lib64/libcomutils.so
-system_ext/lib64/libimsma.so;DISABLE_CHECKELF
-system_ext/lib64/libimsma_adapt.so
-system_ext/lib64/libimsma_rtp.so
-system_ext/lib64/libimsma_socketwrapper.so
-system_ext/lib64/libmtk_vt_service.so
-system_ext/lib64/libmtk_vt_wrapper.so
-system_ext/lib64/libsignal.so
-system_ext/lib64/libsink.so
-system_ext/lib64/libsource.so
-system_ext/lib64/libvcodec_cap.so
-system_ext/lib64/libvcodec_capenc.so
-system_ext/lib64/libvt_avsync.so
-system_ext/lib64/vendor.mediatek.hardware.videotelephony-V1-ndk.so
-system_ext/lib64/vendor.mediatek.hardware.videotelephony@1.0.so
-system_ext/priv-app/ImsService/ImsService.apk
-
-# Radio (IMS)
+# Radio (volte)
 vendor/bin/hw/vtservice_hidl
 vendor/bin/ipsec_mon
 vendor/bin/rcs_volte_stack
@@ -1097,7 +1064,6 @@ vendor/etc/vintf/manifest/android.hardware.security.keymint-service.trustonic.xm
 vendor/etc/vintf/manifest/android.hardware.security.secureclock-service.trustonic.xml
 vendor/etc/vintf/manifest/android.hardware.security.sharedsecret-service.trustonic.xml
 vendor/lib/libthha.so;DISABLE_CHECKELF
-#vendor/lib64/android.hardware.security.keymint-V1-ndk.so;MODULE_SUFFIX=_vendor
 vendor/lib64/libkeystore-engine-wifi-hidl.so
 vendor/lib64/libMcClient.so
 vendor/lib64/libTEECommon.so
@@ -1110,10 +1076,6 @@ vendor/etc/init/android.hardware.usb-aidl-service.mediatek.rc
 vendor/etc/init/android.hardware.usb.gadget-service.mediatek.rc
 vendor/etc/vintf/manifest/android.hardware.usb-aidl-service.mediatek.xml
 vendor/etc/vintf/manifest/android.hardware.usb.gadget-service.mediatek.xml
-
-# VoLTE
-vendor/etc/init/init.vtservice_hidl.rc
-vendor/etc/init/volte_clientapi_ua.rc
 
 # Wi-Fi
 vendor/bin/wlan_assistant

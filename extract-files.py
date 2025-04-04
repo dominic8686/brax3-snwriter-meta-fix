@@ -42,8 +42,6 @@ lib_fixups: lib_fixups_user_type = {
 blob_fixups: blob_fixups_user_type = {
     'system_ext/lib64/libsource.so': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
-    'vendor/bin/hw/android.hardware.health-service.example': blob_fixup()
-        .replace_needed('android.hardware.health-V1-ndk.so', 'android.hardware.health-V3-ndk.so'),
     (
         'vendor/lib64/android.hardware.bluetooth.audio-impl.so',
         'vendor/lib64/libbluetooth_audio_session_aidl.so',
@@ -56,16 +54,12 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so'
     ): blob_fixup()
          .replace_needed('android.media.audio.common-V1-ndk.so', 'android.media.audio.common-V4-ndk.so'),
-    'vendor/lib/libvp8dec_sa.ca7.so': blob_fixup()
-         .replace_needed('libutils.so', 'libutils-v32.so'),
     'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
     ('vendor/bin/mnld', 'vendor/lib64/libaalservice.so', 'vendor/lib64/mt6835/libcam.utils.sensorprovider.so', 'vendor/lib64/mt6835/libcam.utils.sensorprovider.so'): blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
     'vendor/lib64/mt6835/libmtkcam_featurepolicy.so': blob_fixup()
         .binary_regex_replace(b'\x34\xE8\x87\x40\xB9', b'\x34\x28\x02\x80\x52'),
-    ('vendor/lib64/mt6835/libmtkcam_stdutils.so', 'vendor/lib64/hw/mt6835/android.hardware.camera.provider@2.6-impl-mediatek.so'): blob_fixup()
-        .replace_needed('libutils.so', 'libutils-v32.so'),
     'vendor/bin/hw/android.hardware.sensors-service.multihal': blob_fixup()
         .replace_needed('android.hardware.sensors-V1-ndk.so', 'android.hardware.sensors-V2-ndk.so'),
     (
@@ -75,7 +69,6 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so')
         .replace_needed('android.hardware.audio.common-V1.so', 'android.hardware.audio.common-V4.so'),
     'vendor/lib64/hw/vendor.mediatek.hardware.pq@2.15-impl.so': blob_fixup()
-        .replace_needed('libutils.so', 'libutils-v33.so')
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
     (
         'vendor/lib/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
