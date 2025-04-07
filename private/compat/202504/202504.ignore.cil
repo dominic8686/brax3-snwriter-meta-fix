@@ -7,4 +7,5 @@
   ( new_objects
     pbtombstone_exec
     prefetch
+    usb_apm_prop
   ))

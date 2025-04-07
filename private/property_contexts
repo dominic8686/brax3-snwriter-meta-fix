@@ -1843,3 +1843,8 @@ mmd. u:object_r:mmd_prop:s0
 mmd.zram.enabled u:object_r:mmd_shared_prop:s0 exact bool
 mmd.enabled_aconfig u:object_r:mmd_shared_status_prop:s0 exact bool
 mmd.status. u:object_r:mmd_status_prop:s0
+
+# Properties for USB data protection features
+ro.usb.data_protection.apm.disabled u:object_r:usb_apm_prop:s0 exact bool
+ro.usb.data_protection.apm.replug_required_upon_enable u:object_r:usb_apm_prop:s0 exact bool
+ro.usb.data_protection.apm.data_required_for_high_power_charge u:object_r:usb_apm_prop:s0 exact bool
