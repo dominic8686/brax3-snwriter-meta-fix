@@ -1848,3 +1848,6 @@ mmd.status. u:object_r:mmd_status_prop:s0
 ro.usb.data_protection.apm.disabled u:object_r:usb_apm_prop:s0 exact bool
 ro.usb.data_protection.apm.replug_required_upon_enable u:object_r:usb_apm_prop:s0 exact bool
 ro.usb.data_protection.apm.data_required_for_high_power_charge u:object_r:usb_apm_prop:s0 exact bool
+
+# Properties for userdata device aliasing file control
+userdata.alias.remove u:object_r:userdata_alias_remove_prop:s0 exact string

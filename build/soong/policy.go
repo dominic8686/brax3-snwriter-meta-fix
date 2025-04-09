@@ -289,6 +289,10 @@ func (c *policyConf) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 	ctx.InstallFile(c.installPath, c.stem(), c.installSource)
 
 	ctx.SetOutputFiles(android.Paths{c.installSource}, "")
+
+	moduleInfoJSON := ctx.ModuleInfoJSON()
+	moduleInfoJSON.Class = []string{"ETC"}
+	moduleInfoJSON.SystemSharedLibs = []string{"none"}
 }
 
 func (c *policyConf) AndroidMkEntries() []android.AndroidMkEntries {
@@ -431,6 +435,10 @@ func (c *policyCil) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 	ctx.InstallFile(c.installPath, c.stem(), c.installSource)
 
 	ctx.SetOutputFiles(android.Paths{c.installSource}, "")
+
+	moduleInfoJSON := ctx.ModuleInfoJSON()
+	moduleInfoJSON.Class = []string{"ETC"}
+	moduleInfoJSON.SystemSharedLibs = []string{"none"}
 }
 
 func (c *policyCil) AndroidMkEntries() []android.AndroidMkEntries {
@@ -571,6 +579,10 @@ func (c *policyBinary) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 	ctx.InstallFile(c.installPath, c.stem(), c.installSource)
 
 	ctx.SetOutputFiles(android.Paths{c.installSource}, "")
+
+	moduleInfoJSON := ctx.ModuleInfoJSON()
+	moduleInfoJSON.Class = []string{"ETC"}
+	moduleInfoJSON.SystemSharedLibs = []string{"none"}
 }
 
 func (c *policyBinary) AndroidMkEntries() []android.AndroidMkEntries {

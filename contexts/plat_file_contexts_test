@@ -317,6 +317,7 @@
 /system/bin/mke2fs                                                e2fs_exec
 /system/bin/e2fsck                                                fsck_exec
 /system/bin/extra_free_kbytes.sh                                  extra_free_kbytes_exec
+/system/bin/userdata_alias_remove                                 userdata_alias_remove_exec
 /system/bin/fsck.exfat                                            fsck_exec
 /system/bin/fsck.f2fs                                             fsck_exec
 /system/bin/init                                                  init_exec
@@ -944,6 +945,7 @@
 /data/user_de                                                     system_userdir_file
 /data/storage_area                                                system_userdir_file
 /data/misc_ce/0/storage_area_keys                                 storage_area_key_file
+/data/userdata_exp.test                                           exp_partition_data_file
 
 /data/misc/adb                                                    adb_keys_file
 /data/misc/adb/test                                               adb_keys_file

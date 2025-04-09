@@ -240,6 +240,8 @@ type prefetch_metadata_file, file_type;
 # /metadata/libprocessgroup files
 type libprocessgroup_metadata_file, file_type;
 
+type exp_partition_data_file, file_type, data_file_type, core_data_file_type;
+
 # Types added in 202504 in public/file.te
 until_board_api(202504, `
     type binderfs_logs_transactions, fs_type;
