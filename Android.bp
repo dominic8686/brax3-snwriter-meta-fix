@@ -746,6 +746,7 @@ se_policy_conf {
     build_variant: "user",
     cts: true,
     exclude_build_test: true,
+    only_neverallow_rules: true,
     dist: {
         targets: ["sepolicy_finalize"],
     },
