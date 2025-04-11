@@ -125,9 +125,11 @@ on fs
     write /proc/bootprof "INIT:fs"
     start vendor.boot-hal-1-2
 
+    # start earlylog0
     # wait /toto 5
     # rm /metadata/logcat
     # start earlylog
+    # wait /toto 5
 
     # mount fstab
     write /proc/bootprof "INIT:Mount_START"
@@ -1153,6 +1155,12 @@ service osi /system/bin/osi
     disabled
     oneshot
     #seclabel u:r:osi:s0
+
+service earlylog0 /system/bin/logcat -b all -f /metadata/logcat0
+    class core
+    user root
+    disabled
+    oneshot
 
 service earlylog /system/bin/logcat -b all -f /metadata/logcat
     class core

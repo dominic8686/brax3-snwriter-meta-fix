@@ -5,6 +5,22 @@
 -->
 <resources>
 
+    <!-- The default refresh rate for a given device. Change this value to set a higher default
+         refresh rate. If the hardware composer on the device supports display modes with a higher
+         refresh rate than the default value specified here, the framework may use those higher
+         refresh rate modes if an app chooses one by setting preferredDisplayModeId or calling
+         setFrameRate().
+         If a non-zero value is set for config_defaultPeakRefreshRate, then
+         config_defaultRefreshRate may be set to 0, in which case the value set for
+         config_defaultPeakRefreshRate will act as the default frame rate. -->
+    <integer name="config_defaultRefreshRate">0</integer>
+
+    <!-- The default peak refresh rate for a given device. Change this value if you want to prevent
+         the framework from using higher refresh rates, even if display modes with higher refresh
+         rates are available from hardware composer. Only has an effect if the value is
+         non-zero. -->
+    <integer name="config_defaultPeakRefreshRate">90</integer>
+    
     <!-- Flag indicating whether we should enable the automatic brightness.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
@@ -67,7 +83,13 @@
     Note that a physical cutout should be configured in pixels for the best results.
     -->
     <string translatable="false" name="config_mainBuiltInDisplayCutout">
-        m-48,0l96,0l0,46l-96,0l0,-46z
+        M 0,0
+        L -46, 0
+        L -10, 26
+        L 10, 26
+        L 46, 0
+        Z
+        @dp
     </string>
 
     <string translatable="false" name="config_mainBuiltInDisplayCutoutRectApproximation">@string/config_mainBuiltInDisplayCutout</string>
@@ -184,7 +206,7 @@
          For example, a multi-sim device can have 2 phones/logical modems, but 3 physical slots,
          or a single SIM device can have 1 phones/logical modems, but 2 physical slots (one eSIM
          and one pSIM) -->
-    <integer name="config_num_physical_slots">2</integer>
+    <integer name="config_num_physical_slots">1</integer>
 
     <!-- Set to true to add links to Cell Broadcast app from Settings and MMS app. -->
     <bool name="config_cellBroadcastAppLinks">true</bool>
@@ -206,4 +228,6 @@
     -->
     <bool name="config_enableWifiDisplay">true</bool>
 
+    <!-- Indicates whether device has a power button fingerprint sensor. -->
+    <bool name="config_is_powerbutton_fps">true</bool>
 </resources>
