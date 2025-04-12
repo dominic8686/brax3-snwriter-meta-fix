@@ -1704,6 +1704,9 @@ ro.gms.dck.se_capability u:object_r:dck_prop:s0 exact int
 # virtualization service properties
 virtualizationservice.state.last_cid u:object_r:virtualizationservice_prop:s0 exact uint
 
+# tunable parameters for Android Virtualization Framework (AVF)
+virtualization.balloon.adj. u:object_r:virtualization_balloon_adj_prop:s0 prefix string
+
 # composd properties
 composd.vm.art.memory_mib.config u:object_r:composd_vm_art_prop:s0 exact uint
 composd.vm.vendor.memory_mib.config u:object_r:composd_vm_vendor_prop:s0 exact int
@@ -1843,3 +1846,11 @@ mmd. u:object_r:mmd_prop:s0
 mmd.zram.enabled u:object_r:mmd_shared_prop:s0 exact bool
 mmd.enabled_aconfig u:object_r:mmd_shared_status_prop:s0 exact bool
 mmd.status. u:object_r:mmd_status_prop:s0
+
+# Properties for USB data protection features
+ro.usb.data_protection.apm.disabled u:object_r:usb_apm_prop:s0 exact bool
+ro.usb.data_protection.apm.replug_required_upon_enable u:object_r:usb_apm_prop:s0 exact bool
+ro.usb.data_protection.apm.data_required_for_high_power_charge u:object_r:usb_apm_prop:s0 exact bool
+
+# Properties for userdata device aliasing file control
+userdata.alias.remove u:object_r:userdata_alias_remove_prop:s0 exact string

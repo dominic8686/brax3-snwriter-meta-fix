@@ -936,6 +936,9 @@ get_prop(system_server, system_service_enable_prop)
 # Allow system server to read shared mmd properties
 get_prop(system_server, mmd_shared_prop)
 
+# Allow system server to read device-specific USB APM properties
+get_prop(system_server, usb_apm_prop)
+
 # Create a socket for connections from debuggerd.
 allow system_server system_ndebug_socket:sock_file create_file_perms;
 
@@ -1470,7 +1473,7 @@ neverallow system_server { dev_type -frp_block_device -vd_device }:blk_file r_fi
 # never shipped to users.
 ifelse(target_requires_insecure_execmem_for_swiftshader, `true',
   `allow system_server self:process execmem;',
-  `neverallow { system_server userdebug_or_eng(`') } self:process execmem;')
+  on_physical_device(`neverallow system_server self:process execmem;'))
 neverallow system_server { ashmem_device ashmem_libcutils_device }:chr_file execute;
 
 # TODO: deal with tmpfs_domain pub/priv split properly

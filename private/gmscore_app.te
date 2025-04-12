@@ -161,6 +161,9 @@ neverallow { domain -init -dumpstate -vendor_init -gmscore_app } quick_start_pro
 # Allow GmsCore to read Bluetotoh Power Off Finder property
 get_prop(gmscore_app, bluetooth_finder_prop)
 
+# Allow GmsCore to read device-specific USB APM properties
+get_prop(system_server, usb_apm_prop)
+
 # Do not allow getting permission-protected network information from sysfs.
 neverallow gmscore_app sysfs_net:file *;
 

@@ -623,6 +623,18 @@ define(`with_native_coverage', ifelse(target_with_native_coverage, `true', userd
 #
 define(`build_test_only', ifelse(target_exclude_build_test, `true', , $1))
 
+#####################################
+# On physical devices
+# SELinux neverallow assertions that are enforced only on physical devices. It
+# can be used to support special requirements for virtual devices. This is
+# equivalent to the @RequiresDevice annotation in CTS.
+#
+define(`on_physical_device',
+# BEGIN_PHYSICAL_DEVICE_ONLY -- this marker is used by CTS -- do not modify
+$1
+# END_PHYSICAL_DEVICE_ONLY -- this marker is used by CTS -- do not modify
+))
+
 ####################################
 # Fallback crash handling for processes that can't exec crash_dump (e.g. because of seccomp).
 #
