@@ -153,6 +153,9 @@ get_prop(gmscore_app, dck_prop)
 # Allow GMSCore to read RKP properties for the purpose of GTS testing.
 get_prop(gmscore_app, remote_prov_prop)
 
+# Allow GMSCore to check 16k pages developer option status
+get_prop(gmscore_app, enable_16k_pages_prop)
+
 # Allow GmsCore to read Quick Start properties and prevent access from other
 # policies.
 get_prop(gmscore_app, quick_start_prop)
