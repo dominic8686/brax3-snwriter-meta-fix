@@ -633,7 +633,7 @@ define(`on_physical_device',
 # BEGIN_PHYSICAL_DEVICE_ONLY -- this marker is used by CTS -- do not modify
 $1
 # END_PHYSICAL_DEVICE_ONLY -- this marker is used by CTS -- do not modify
-))
+)
 
 ####################################
 # Fallback crash handling for processes that can't exec crash_dump (e.g. because of seccomp).
