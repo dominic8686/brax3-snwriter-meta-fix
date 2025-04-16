@@ -74,6 +74,9 @@ init.svc.zipfuse            u:object_r:init_service_status_private_prop:s0 exact
 
 init.svc.adbd       u:object_r:init_service_status_prop:s0 exact string
 
+# The property to hold the number of mount namespaces created by init
+ro.init.mnt_ns.count   u:object_r:init_mnt_ns_prop:s0 exact string
+
 ro.boot.adb.enabled                u:object_r:bootloader_prop:s0 exact bool
 ro.boot.avb_version                u:object_r:bootloader_prop:s0 exact string
 ro.boot.boot_devices               u:object_r:bootloader_prop:s0 exact string
