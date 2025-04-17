@@ -268,3 +268,8 @@ type statsd_atoms_list_file, file_type, data_file_type, core_data_file_type;
 # control rules as the other ashmem types to smooth over the transition from
 # ashmem to memfd.
 type ashmem_compat_memfd, file_type, mlstrustedobject;
+
+# File type used for the text file containing the type that libcutils
+# uses when constructing contexts for memfd. This needs to be accessible
+# to all processes.
+type ashmem_compat_memfd_context_file, system_file_type, file_type;

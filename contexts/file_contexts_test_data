@@ -448,6 +448,7 @@
 /system/etc/seccomp_policy/crash_dump.x86.policy                  system_seccomp_policy_file
 /system/etc/security/cacerts                                      system_security_cacerts_file
 /system/etc/security/cacerts/123                                  system_security_cacerts_file
+/system/etc/selinux/ashmem_compat_memfd_context.txt               ashmem_compat_memfd_context_file
 /system/etc/selinux/mapping/30.0.cil                              sepolicy_file
 #/system/etc/selinux/mapping/30.compat.0.cil                      sepolicy_file
 /system/etc/selinux/plat_mac_permissions.xml                      mac_perms_file

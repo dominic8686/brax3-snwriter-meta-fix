@@ -93,6 +93,7 @@ phony {
     // TODO(b/329208946): migrate selinux_policy_system to Soong
     name: "selinux_policy_system_soong",
     required: [
+        "ashmem_compat_memfd_context.txt",
         "plat_bug_map",
         "plat_file_contexts",
         "plat_hwservice_contexts",
@@ -565,6 +566,14 @@ sepolicy_vers {
     name: "plat_sepolicy_vers.txt",
     version: "vendor",
     vendor: true,
+}
+
+// We output the ashmem compat memfd context here, so that libcutils can read
+// it when assigning contexts to memfds.
+prebuilt_etc {
+    name: "ashmem_compat_memfd_context.txt",
+    src: "ashmem_compat_memfd_context.txt",
+    relative_install_path: "selinux",
 }
 
 genrule {
@@ -1197,6 +1206,7 @@ phony {
         "33.0.compat.cil",
         "34.0.compat.cil",
         "202404.compat.cil",
+        "ashmem_compat_memfd_context.txt",
         "build_sepolicy",
         "fuzzer_bindings_test",
         "plat_29.0.cil",

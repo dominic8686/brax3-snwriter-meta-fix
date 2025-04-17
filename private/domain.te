@@ -93,6 +93,11 @@ allow domain tmpfs:file { getattr relabelfrom };
 allow domain ashmem_compat_memfd:file { read write getattr ioctl map relabelto };
 allowxperm domain ashmem_compat_memfd:file ioctl ashmem_ioctls;
 
+# Everyone can allocate memory via libcutils, and therefore will all need
+# access to the file containing the type that libcutils must use for
+# relabeling memfds.
+allow domain ashmem_compat_memfd_context_file:file r_file_perms;
+
 # /dev/binder can be accessed by ... everyone! :)
 allow { domain -hwservicemanager -vndservicemanager } binder_device:chr_file rw_file_perms;
 get_prop({domain -hwservicemanager -vndservicemanager }, servicemanager_prop)
@@ -1288,6 +1293,7 @@ full_treble_only(`
     -vendor_init
   } {
     system_file_type
+    -ashmem_compat_memfd_context_file
     -cgroup_desc_file
     -crash_dump_exec
     -file_contexts_file
