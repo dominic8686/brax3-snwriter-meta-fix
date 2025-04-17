@@ -1619,6 +1619,9 @@ remote_provisioning.tee.rkp_only u:object_r:remote_prov_prop:s0 exact bool
 # Hostname for the remote provisioning server a device should communicate with
 remote_provisioning.hostname u:object_r:remote_prov_prop:s0 exact string
 
+# Allows a device to skip consent check for connecting to network
+remote_provisioning.skip_network_consent_check u:object_r:remote_prov_prop:s0 exact bool
+
 # Support for post-processing RKP certificates
 remote_provisioning.use_cert_processor u:object_r:remote_prov_cert_prop:s0 exact bool
 
