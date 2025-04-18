@@ -807,6 +807,9 @@ allow init userdata_sysdev:file create_file_perms;
 # allow disk tuning
 allow init rootdisk_sysdev:file create_file_perms;
 
+# Allow updating the trade-in mode wipe indicator.
+allow init tradeinmode_metadata_file:file rw_file_perms;
+
 ###
 ### neverallow rules
 ###
