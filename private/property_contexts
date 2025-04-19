@@ -1460,6 +1460,9 @@ ro.apex.updatable u:object_r:exported_default_prop:s0 exact bool
 # Property to enable incremental feature
 ro.incremental.enable      u:object_r:incremental_prop:s0
 
+# The property to hold the number of mount namespaces created by init
+ro.init.mnt_ns.count       u:object_r:init_mnt_ns_prop:s0 exact int
+
 # Properties to configure userspace reboot.
 init.userspace_reboot.is_supported u:object_r:userspace_reboot_config_prop:s0 exact bool
 init.userspace_reboot.sigkill.timeoutmillis u:object_r:userspace_reboot_config_prop:s0 exact int
@@ -1615,6 +1618,9 @@ remote_provisioning.tee.rkp_only u:object_r:remote_prov_prop:s0 exact bool
 
 # Hostname for the remote provisioning server a device should communicate with
 remote_provisioning.hostname u:object_r:remote_prov_prop:s0 exact string
+
+# Allows a device to skip consent check for connecting to network
+remote_provisioning.skip_network_consent_check u:object_r:remote_prov_prop:s0 exact bool
 
 # Support for post-processing RKP certificates
 remote_provisioning.use_cert_processor u:object_r:remote_prov_cert_prop:s0 exact bool
@@ -1822,6 +1828,9 @@ sys.snapshotctl.unmap u:object_r:snapshotctl_prop:s0 exact string
 # Properties for enabling/disabling system services
 ro.system_settings.service.odp_enabled   u:object_r:system_service_enable_prop:s0 exact bool
 ro.system_settings.service.backgound_install_control_enabled   u:object_r:system_service_enable_prop:s0 exact bool
+
+# Properties for AppSearch VM
+appsearch_vm.idle                u:object_r:appsearch_vm_prop:s0 exact bool
 
 # Properties related to Trusty VMs
 trusty.security_vm.nonsecure_vm_ready u:object_r:trusty_security_vm_sys_prop:s0 exact bool

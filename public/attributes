@@ -164,7 +164,7 @@ attribute ephemeral_app_api_service;
 # services which export only system_api
 attribute system_api_service;
 
-# services which are explicitly disallowed for untrusted apps to access
+# services that untrusted apps are neverallowed to access
 attribute protected_service;
 
 # All types used for services managed by servicemanager.
@@ -183,7 +183,7 @@ attribute same_process_hwservice;
 # All HwBinder services guaranteed to be offered only by core domain components
 attribute coredomain_hwservice;
 
-# All HwBinder services that untrusted apps can't directly access
+# All HwBinder services that untrusted apps are neverallowed to access
 attribute protected_hwservice;
 
 # All types used for services managed by vndservicemanager

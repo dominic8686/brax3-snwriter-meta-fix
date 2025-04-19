@@ -657,23 +657,36 @@ soong_config_module_type {
 }
 
 filegroup {
-    name: "precompiled_sepolicy_srcs",
+    name: "precompiled_sepolicy_without_vendor_srcs",
     device_common_srcs: [
         ":plat_sepolicy.cil",
-        ":plat_pub_versioned.cil",
         ":system_ext_sepolicy.cil",
         ":product_sepolicy.cil",
-        ":vendor_sepolicy.cil",
-        ":odm_sepolicy.cil",
-        ":plat_mapping_file",
-        ":system_ext_mapping_file",
-        ":product_mapping_file",
     ],
     device_first_srcs: select(soong_config_variable("ANDROID", "BOARD_GENFS_LABELS_VERSION"), {
         "202404": [],
         any @ ver: [":plat_sepolicy_genfs_" + ver + ".cil"],
         default: [],
     }),
+}
+
+se_policy_binary {
+    name: "precompiled_sepolicy_without_vendor",
+    srcs: [":precompiled_sepolicy_without_vendor_srcs"],
+    installable: false, // used only for Treble labeling tests
+}
+
+filegroup {
+    name: "precompiled_sepolicy_srcs",
+    srcs: [":precompiled_sepolicy_without_vendor_srcs"],
+    device_common_srcs: [
+        ":plat_pub_versioned.cil",
+        ":vendor_sepolicy.cil",
+        ":odm_sepolicy.cil",
+        ":plat_mapping_file",
+        ":system_ext_mapping_file",
+        ":product_mapping_file",
+    ],
     // Make precompiled_sepolicy_srcs as public so that OEMs have access to them.
     // Useful when some partitions need to be bind mounted across VM boundaries.
     visibility: ["//visibility:public"],

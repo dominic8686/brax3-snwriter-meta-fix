@@ -1460,10 +1460,10 @@ neverallow system_server data_file_type:file no_x_file_perms;
 # The only block device system_server should be writing to is
 # the frp_block_device. This helps avoid a system_server to root
 # escalation by writing to raw block devices.
-# The system_server may need to read from vd_device if it uses
-# block apexes.
+# The system_server may need to read from vd_device and dm_device if it uses
+# apexes mapped as block devices.
 neverallow system_server { dev_type -frp_block_device }:blk_file no_w_file_perms;
-neverallow system_server { dev_type -frp_block_device -vd_device }:blk_file r_file_perms;
+neverallow system_server { dev_type -frp_block_device -vd_device -dm_device }:blk_file r_file_perms;
 
 # system_server should never use JIT functionality
 # See https://googleprojectzero.blogspot.com/2016/12/bitunmap-attacking-android-ashmem.html
@@ -1493,6 +1493,9 @@ allow system_server apex_mnt_dir:dir r_dir_perms;
 
 # Allow system server to read /apex/apex-info-list.xml
 allow system_server apex_info_file:file r_file_perms;
+
+# Allow system_server read APEX file mapped as device-mapper device
+allow system_server dm_device:blk_file r_file_perms;
 
 # Allow system_server to communicate with tradeinmode.
 binder_call(system_server, tradeinmode)
@@ -1541,6 +1544,9 @@ allow system_server {
   apex_scheduling_data_file
   apex_wifi_data_file
 }:file create_file_perms;
+
+# Broadcast AppSearch memory
+set_prop(system_server, appsearch_vm_prop)
 
 # Allow PasswordSlotManager rw access to /metadata/password_slots, so GSIs and the host image can
 # communicate which slots are available for use.
