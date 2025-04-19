@@ -44,6 +44,10 @@ allow virtualizationmanager {
   privapp_data_file
 }:file { getattr read write };
 
+# TODO(b/407079334): standardize
+# allow to read appsearch VM state
+get_prop(virtualizationmanager, appsearch_vm_prop)
+
 # shell_data_file is used for automated tests and manual debugging.
 allow virtualizationmanager shell_data_file:file { getattr read write };
 
