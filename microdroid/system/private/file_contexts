@@ -64,7 +64,6 @@
 /dev/socket/statsdw	u:object_r:statsdw_socket:s0
 /dev/socket/authfs_service u:object_r:authfs_service_socket:s0
 /dev/socket/vm_payload_service u:object_r:vm_payload_service_socket:s0
-/dev/socket/rpc_servicemanager u:object_r:rpc_servicemanager_socket:s0
 /dev/socket/traced_consumer	u:object_r:traced_consumer_socket:s0
 /dev/socket/traced_producer	u:object_r:traced_producer_socket:s0
 /dev/tty		u:object_r:owntty_device:s0

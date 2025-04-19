@@ -1545,6 +1545,9 @@ allow system_server {
   apex_wifi_data_file
 }:file create_file_perms;
 
+# Broadcast AppSearch memory
+set_prop(system_server, appsearch_vm_prop)
+
 # Allow PasswordSlotManager rw access to /metadata/password_slots, so GSIs and the host image can
 # communicate which slots are available for use.
 allow system_server metadata_file:dir search;

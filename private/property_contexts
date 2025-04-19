@@ -1829,6 +1829,9 @@ sys.snapshotctl.unmap u:object_r:snapshotctl_prop:s0 exact string
 ro.system_settings.service.odp_enabled   u:object_r:system_service_enable_prop:s0 exact bool
 ro.system_settings.service.backgound_install_control_enabled   u:object_r:system_service_enable_prop:s0 exact bool
 
+# Properties for AppSearch VM
+appsearch_vm.idle                u:object_r:appsearch_vm_prop:s0 exact bool
+
 # Properties related to Trusty VMs
 trusty.security_vm.nonsecure_vm_ready u:object_r:trusty_security_vm_sys_prop:s0 exact bool
 trusty.security_vm.vm_cid u:object_r:trusty_security_vm_sys_prop:s0 exact int
