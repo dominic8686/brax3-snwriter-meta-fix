@@ -45,6 +45,23 @@ PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
 
+#apdb
+# include $(wildcard vendor/mediatek/proprietary/buildinfo_vnd/label.ini)
+# PRODUCT_PACKAGES += apdb
+
+# MTK_PLATFORM = MT6835
+# MTK_INTERNAL_WEEK_NO := W2421
+# MTK_REL_PLATFORM := k6835v1_64
+# MTK_PATH_CUSTOM := vendor/mediatek/proprietary/custom/common
+# MTK_PATH_CUSTOM_PLATFORM := vendor/mediatek/proprietary/custom/k6835v1_64
+
+# MTK_GLOBAL_C_INCLUDES += $(MTK_PATH_CUSTOM)/cgen/cfgdefault $(MTK_PATH_CUSTOM)/cgen/cfgfileinc $(MTK_PATH_CUSTOM)/cgen/inc $(MTK_PATH_CUSTOM)/cgen
+# ifneq ($(strip $(MTK_REL_PLATFORM)),)
+# MTK_GLOBAL_C_INCLUDES += $(MTK_PATH_CUSTOM_PLATFORM)/cgen/cfgdefault $(MTK_PATH_CUSTOM_PLATFORM)/cgen/cfgfileinc $(MTK_PATH_CUSTOM_PLATFORM)/cgen/inc $(MTK_PATH_CUSTOM_PLATFORM)/cgen
+# endif
+# MTK_GLOBAL_C_INCLUDES += $(MTK_PATH_COMMON)/cgen/cfgdefault $(MTK_PATH_COMMON)/cgen/cfgfileinc $(MTK_PATH_COMMON)/cgen/inc $(MTK_PATH_COMMON)/cgen
+# LOCAL_C_INCLUDES += $(MTK_GLOBAL_C_INCLUDES)
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.1-impl:32 \
@@ -59,9 +76,8 @@ PRODUCT_PACKAGES += \
     MtkInCallService
 
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
-
-#$(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/media,$(TARGET_COPY_OUT_VENDOR)/etc)
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio,$(TARGET_COPY_OUT_VENDOR)/etc) \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/media,$(TARGET_COPY_OUT_VENDOR)/etc)
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml \
@@ -76,9 +92,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml
 
-
 # Boot animation
-TARGET_SCREEN_HEIGHT := 1600
+TARGET_SCREEN_HEIGHT := 1612
 TARGET_SCREEN_WIDTH := 720
 
 # Camera
@@ -92,11 +107,8 @@ PRODUCT_COPY_FILES += \
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
-
-# Display
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer@2.1-service \
-    android.hardware.memtrack-service.mediatek
+    android.hardware.memtrack-service.mediatek-mali
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
@@ -291,20 +303,22 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
 
 # Wi-Fi
-# PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
+    android.hardware.wifi.supplicant.xml \
+    android.hardware.wifi.hostapd.xml
+
+#PRODUCT_PACKAGES += \
     wpa_supplicant \
     hostapd \
     libwifi-hal-wrapper \
     android.hardware.wifi-service-lazy
 
-PRODUCT_PACKAGES += \
-    hostapd
-
-LOCAL_OVERRIDES_MODULES += wpa_supplicant wpa_cli hs20-osu-client
-
-PRODUCT_PACKAGES += \
-    android.hardware.wifi.supplicant-V4-ndk \
-    android.hardware.wifi.supplicant-V4-ndk.vendor \
+# LOCAL_OVERRIDES_MODULES += \
+#     wpa_supplicant \
+#     wpa_cli \
+#     hs20-osu-client \
+#     hostapd \
+#     hostapd_cli
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/wifi/,$(TARGET_COPY_OUT_VENDOR)/etc/wifi)

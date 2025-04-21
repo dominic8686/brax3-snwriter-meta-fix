@@ -8,10 +8,10 @@
            Note that if this flag is set to true, then 11ax is assumed to be supported.
            However, if it is left to the default value of false, the 11ax support will
            be checked via NL80211 interface -->
-    <bool name="config_wifi11axSupportOverride">true</bool>
+    <!-- <bool name="config_wifi11axSupportOverride">true</bool> -->
     
     <!-- Wifi driver supports IEEE80211AX for softap -->
-    <bool translatable="false" name="config_wifiSoftapIeee80211axSupported">true</bool>
+    <!-- <bool translatable="false" name="config_wifiSoftapIeee80211axSupported">true</bool> -->
 
     <!-- boolean indicating whether the WiFi chipset has 5GHz band support.
          Note: This config is replacing the config_wifi_dual_band_support
@@ -34,8 +34,6 @@
          capability can provide power savings when wifi needs to be always kept on. -->
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
-    <string translatable="false" name="config_wifi_random_mac_oui">00-0C-E7</string>
-
     <!-- Indicates that connected MAC randomization is supported on this device -->
     <bool translatable="false" name="config_wifi_connected_mac_randomization_supported">true</bool>
 
@@ -44,6 +42,9 @@
 
     <!-- Indicates that p2p MAC randomization is supported on this device -->
     <bool translatable="false" name="config_wifi_p2p_mac_randomization_supported">true</bool>
+
+    <!-- Indicates that AP mode MAC randomization is supported on this device -->
+    <bool translatable="false" name="config_wifi_ap_mac_randomization_supported">true</bool>
 
     <!-- Wifi driver supports Automatic channel selection (ACS) for softap -->
     <bool translatable="false" name="config_wifi_softap_acs_supported">true</bool>
@@ -57,14 +58,12 @@
     <!-- List of allowed channels in 2GHz band for softap. If the device doesn't want to restrict
      channels this should be empty. Values is a comma separated channel string and/or channel
      range string like '1-6,11'. -->
-    <!-- <string translatable="false" name="config_wifiSoftap2gChannelList">1-13</string> -->
-    <string translatable="false" name="config_wifiSoftap2gChannelList"></string>
+    <string translatable="false" name="config_wifiSoftap2gChannelList">1-13</string>
 
     <!-- List of allowed channels in 5GHz band for softap. If the device doesn't want to restrict
          channels this should be empty. Values is a comma separated channel string and/or channel
          range string like '36-48,149'. -->
-    <!-- <string translatable="false" name="config_wifiSoftap5gChannelList">36,38,40,42,44,46,48,149,153,157,161,165</string> -->
-    <string translatable="false" name="config_wifiSoftap5gChannelList"></string>
+    <string translatable="false" name="config_wifiSoftap5gChannelList">36,38,40,42,44,46,48,149,153,157,161,165</string>
 
     <!-- Configure wifi tcp buffersizes in the form:
          rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max -->
@@ -86,13 +85,9 @@
     <!--                      <!-\- [-67, +infinity)             4 -\-> -->
     <!-- </integer-array> -->
 
-    <!-- Wifi driver supports Opportunistic Wireless Encryption (OWE)
-         aka Enhanced Open for Soft-AP -->
-    <bool translatable="false" name="config_wifiSoftapOweSupported">false</bool>
-
     <!-- boolean indicating whether the Easy Connect (DPP) AKM is supported -->
     <bool translatable="false" name ="config_wifiDppAkmSupported">true</bool>
 
     <!-- Enable WPA2 to WPA3 auto-upgrade -->
-    <bool translatable="false" name="config_wifiSaeUpgradeEnabled">false</bool>
+    <bool translatable="false" name="config_wifiSaeUpgradeEnabled">true</bool>
 </resources>
