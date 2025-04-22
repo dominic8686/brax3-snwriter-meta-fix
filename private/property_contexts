@@ -1857,9 +1857,10 @@ mmd.enabled_aconfig u:object_r:mmd_shared_status_prop:s0 exact bool
 mmd.status. u:object_r:mmd_status_prop:s0
 
 # Properties for USB data protection features
-ro.usb.data_protection.apm.disabled u:object_r:usb_apm_prop:s0 exact bool
-ro.usb.data_protection.apm.replug_required_upon_enable u:object_r:usb_apm_prop:s0 exact bool
-ro.usb.data_protection.apm.data_required_for_high_power_charge u:object_r:usb_apm_prop:s0 exact bool
+ro.usb.data_protection.disable_when_locked.disabled u:object_r:usb_disable_when_locked_prop:s0 exact bool
+ro.usb.data_protection.disable_when_locked.replug_required_upon_enable u:object_r:usb_disable_when_locked_prop:s0 exact bool
+ro.usb.data_protection.disable_when_locked.data_required_for_high_power_charge u:object_r:usb_disable_when_locked_prop:s0 exact bool
+ro.usb.data_protection.disable_when_locked.no_usb_event_notification u:object_r:usb_disable_when_locked_prop:s0 exact bool
 
 # Properties for userdata device aliasing file control
 userdata.alias.remove u:object_r:userdata_alias_remove_prop:s0 exact string
