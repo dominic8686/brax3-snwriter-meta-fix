@@ -126,7 +126,7 @@ system_vendor_config_prop(mmd_prop)
 system_vendor_config_prop(mmd_shared_prop)
 system_vendor_config_prop(prefetch_boot_prop)
 system_vendor_config_prop(sensors_hal_prop)
-system_vendor_config_prop(usb_apm_prop)
+system_vendor_config_prop(usb_disable_when_locked_prop)
 system_vendor_config_prop(userdata_alias_remove_prop)
 
 typeattribute log_prop log_property_type;

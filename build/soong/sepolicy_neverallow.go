@@ -176,6 +176,10 @@ func (n *neverallowTestModule) GenerateAndroidBuildActions(ctx android.ModuleCon
 
 	rule.Command().Text("touch").Output(n.testTimestamp)
 	rule.Build("neverallow_sepolicy-analyze", "Neverallow check: "+ctx.ModuleName())
+
+	moduleInfoJSON := ctx.ModuleInfoJSON()
+	moduleInfoJSON.Class = []string{"FAKE"}
+	moduleInfoJSON.SystemSharedLibs = []string{"none"}
 }
 
 func (n *neverallowTestModule) AndroidMkEntries() []android.AndroidMkEntries {
