@@ -95,6 +95,9 @@ set_prop(microdroid_manager, ctl_authfs_prop)
 set_prop(microdroid_manager, ctl_seriallogging_prop)
 set_prop(microdroid_manager, ctl_zipfuse_prop)
 
+# Allow microdroid_manager to set servicemanager.ready once it starts the IServiceManager service
+set_prop(microdroid_manager, servicemanager_prop)
+
 # Allow microdroid_manager to wait for linkerconfig to be ready
 get_prop(microdroid_manager, apex_config_prop)
 
