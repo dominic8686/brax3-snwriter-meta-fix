@@ -1,3 +1,0 @@
-# 32-bit zygote
-hbt_translated(zygote, zygote_tmpfs)
-dontaudit zygote proc_security:file read;

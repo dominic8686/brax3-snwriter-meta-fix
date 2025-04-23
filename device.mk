@@ -1,9 +1,5 @@
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
-
-#PRODUCT_VENDOR_PROPERTIES += ro.virtual_ab.compression.threads=true
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
@@ -11,11 +7,6 @@ SELINUX_IGNORE_NEVERALLOWS := true
 PRODUCT_PACKAGES += \
     com.android.hardware.boot \
     android.hardware.boot-service.default_recovery
-
-# PRODUCT_PACKAGES += \
-#         android.hardware.boot@1.2-mtkimpl \
-#         android.hardware.boot@1.2-mtkimpl.recovery \
-#         android.hardware.boot@1.2-service
 
 PRODUCT_PACKAGES += \
     create_pl_dev \
@@ -45,23 +36,6 @@ PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
 
-#apdb
-# include $(wildcard vendor/mediatek/proprietary/buildinfo_vnd/label.ini)
-# PRODUCT_PACKAGES += apdb
-
-# MTK_PLATFORM = MT6835
-# MTK_INTERNAL_WEEK_NO := W2421
-# MTK_REL_PLATFORM := k6835v1_64
-# MTK_PATH_CUSTOM := vendor/mediatek/proprietary/custom/common
-# MTK_PATH_CUSTOM_PLATFORM := vendor/mediatek/proprietary/custom/k6835v1_64
-
-# MTK_GLOBAL_C_INCLUDES += $(MTK_PATH_CUSTOM)/cgen/cfgdefault $(MTK_PATH_CUSTOM)/cgen/cfgfileinc $(MTK_PATH_CUSTOM)/cgen/inc $(MTK_PATH_CUSTOM)/cgen
-# ifneq ($(strip $(MTK_REL_PLATFORM)),)
-# MTK_GLOBAL_C_INCLUDES += $(MTK_PATH_CUSTOM_PLATFORM)/cgen/cfgdefault $(MTK_PATH_CUSTOM_PLATFORM)/cgen/cfgfileinc $(MTK_PATH_CUSTOM_PLATFORM)/cgen/inc $(MTK_PATH_CUSTOM_PLATFORM)/cgen
-# endif
-# MTK_GLOBAL_C_INCLUDES += $(MTK_PATH_COMMON)/cgen/cfgdefault $(MTK_PATH_COMMON)/cgen/cfgfileinc $(MTK_PATH_COMMON)/cgen/inc $(MTK_PATH_COMMON)/cgen
-# LOCAL_C_INCLUDES += $(MTK_GLOBAL_C_INCLUDES)
-
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.1-impl:32 \
@@ -71,9 +45,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audio.bluetooth.default:32 \
     android.hardware.bluetooth.audio-impl:32
-
-PRODUCT_PACKAGES += \
-    MtkInCallService
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio,$(TARGET_COPY_OUT_VENDOR)/etc) \
@@ -107,6 +78,7 @@ PRODUCT_COPY_FILES += \
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
+# Display
 PRODUCT_PACKAGES += \
     android.hardware.memtrack-service.mediatek-mali
 
@@ -192,10 +164,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.light-service.lineage
 
-# Lineage Health
-# PRODUCT_PACKAGES += \
-#     vendor.lineage.health-service.default
-
 # NFC
 #    android.hardware.nfc@1.2-service \
 
@@ -225,7 +193,7 @@ PRODUCT_PACKAGES += \
     SystemUIResOverlay \
     TelephonyResOverlay \
     TetheringResOverlay \
-    WifiResOverlay2
+    WifiResOverlay
 
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
@@ -283,18 +251,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
 
-# PRODUCT_PACKAGES += \
-#     android.hardware.usb@1.3.vendor \
-#     android.hardware.usb.gadget@1.1.vendor
-
-# PRODUCT_PACKAGES += \
-#     android.hardware.usb-service.mediatek \
-#     android.hardware.usb.gadget-service.mediatek
-
 # Vendor service manager
 PRODUCT_PACKAGES += \
     vndservicemanager
 
+# Vibrator
 PRODUCT_PACKAGES += \
     android.hardware.vibrator-service.mediatek
 
@@ -306,19 +267,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.wifi.supplicant.xml \
     android.hardware.wifi.hostapd.xml
-
-#PRODUCT_PACKAGES += \
-    wpa_supplicant \
-    hostapd \
-    libwifi-hal-wrapper \
-    android.hardware.wifi-service-lazy
-
-# LOCAL_OVERRIDES_MODULES += \
-#     wpa_supplicant \
-#     wpa_cli \
-#     hs20-osu-client \
-#     hostapd \
-#     hostapd_cli
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/wifi/,$(TARGET_COPY_OUT_VENDOR)/etc/wifi)

@@ -1,5 +1,0 @@
-# MICROTRUST Policy Rule
-# Allow widevine hidl process access TEEI
-hal_client_domain(hal_drm_widevine, hal_teei_capi)
-hal_client_domain(hal_drm_widevine, hal_allocator)
-allow hal_drm_widevine teei_client_device:chr_file rw_file_perms;

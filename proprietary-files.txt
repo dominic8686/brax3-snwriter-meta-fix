@@ -1267,3 +1267,4 @@ vendor/lib64/libaudio_param_parser-vnd.so
 vendor/lib64/libaudiocustparam_vendor.so
 vendor/lib64/libaudioprimarydevicehalifclient.so
 system_ext/etc/init/hw/vendor_init_as_system.rc
+vendor/bin/uart_launcher

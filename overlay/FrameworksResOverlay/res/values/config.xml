@@ -5,22 +5,22 @@
 -->
 <resources>
 
-    <array name="config_availableColorModes">
-        <!-- ColorDisplayManager.COLOR_MODE_NATURAL -->
-        <item>0</item>
-        <!-- ColorDisplayManager.COLOR_MODE_BOOSTED -->
-        <item>1</item>
-        <!-- ColorDisplayManager.COLOR_MODE_SATURATED -->
-        <item>2</item>
-        <!-- ColorDisplayManager.COLOR_MODE_AUTOMATIC -->
-        <item>3</item>
-    </array>
+    <!-- <array name="config_availableColorModes"> -->
+    <!--     <!-\- ColorDisplayManager.COLOR_MODE_NATURAL -\-> -->
+    <!--     <item>0</item> -->
+    <!--     <!-\- ColorDisplayManager.COLOR_MODE_BOOSTED -\-> -->
+    <!--     <item>1</item> -->
+    <!--     <!-\- ColorDisplayManager.COLOR_MODE_SATURATED -\-> -->
+    <!--     <item>2</item> -->
+    <!--     <!-\- ColorDisplayManager.COLOR_MODE_AUTOMATIC -\-> -->
+    <!--     <item>3</item> -->
+    <!-- </array> -->
 
-    <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
-         in hardware. -->
-    <bool name="config_setColorTransformAccelerated">true</bool>
+    <!-- <!-\- Boolean indicating whether the HWC setColorTransform function can be performed efficiently -->
+    <!--      in hardware. -\-> -->
+    <!-- <bool name="config_setColorTransformAccelerated">true</bool> -->
 
-    <string name="config_displayLightSensorType">"android.sensor.light"</string>
+    <string name="config_displayLightSensorType">android.sensor.light</string>
 
     <!-- Flag indicating whether we should enable the automatic brightness.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
@@ -185,7 +185,7 @@
     <bool name="config_showNavigationBar">true</bool>
 
     <!-- Whether device supports double tap to wake -->
-    <bool name="config_supportDoubleTapWake">true</bool>
+    <bool name="config_supportDoubleTapWake">false</bool>
 
     <!-- Whether this device is supporting the camera toggle -->
     <bool name="config_supportsCamToggle">false</bool>

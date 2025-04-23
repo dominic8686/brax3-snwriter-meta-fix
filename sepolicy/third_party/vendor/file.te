@@ -1,6 +1,0 @@
-# MICROTRUST Policy Rule
-# TEEI data file
-type teei_control_file, fs_type, sysfs_type;
-
-# TEEI data file
-type teei_data_file, file_type, data_file_type;

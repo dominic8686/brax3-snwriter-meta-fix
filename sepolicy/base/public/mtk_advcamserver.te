@@ -1,6 +1,0 @@
-# ==============================================
-# MTK Policy Rule
-# ==============================================
-# Policy File of /system/bin/mtk_advcamserver Executable File
-
-type mtk_advcamserver, domain;

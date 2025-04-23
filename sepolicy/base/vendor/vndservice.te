@@ -1,9 +1,0 @@
-# ==============================================
-# MTK Policy Rule
-# ==============================================
-
-type remosaic_daemon_service, vndservice_manager_type;
-
-# ------------------- drv modify goodix fingerprint begin -------------------
-type goodix_fingerprint_service, service_manager_type;
-# ------------------- drv modify goodix fingerprint end -------------------

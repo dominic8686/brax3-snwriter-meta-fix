@@ -32,3 +32,6 @@ bluetooth.profile.sap.server.enabled?=true
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
 persist.dbg.wfc_avail_ovr=1
+
+# Updater URI
+lineage.updater.uri=https://ota.iode.tech/beta/brax3.json

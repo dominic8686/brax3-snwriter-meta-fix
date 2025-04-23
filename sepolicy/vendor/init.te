@@ -1,0 +1,1 @@
+allow init init_boot_block_device:lnk_file  { relabelto };

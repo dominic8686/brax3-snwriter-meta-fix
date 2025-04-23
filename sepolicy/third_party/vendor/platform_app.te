@@ -1,3 +1,0 @@
-# MICROTRUST Policy Rule
-allow platform_app teei_data_file:dir create_dir_perms;
-allow platform_app teei_data_file:file create_file_perms;

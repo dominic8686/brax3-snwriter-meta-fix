@@ -1,6 +1,0 @@
-# ==============================================
-# MTK Policy Rule
-# ==============================================
-# Policy File of /system/bin/GoogleOtaBinder Executable File
-
-type GoogleOtaBinder, domain;

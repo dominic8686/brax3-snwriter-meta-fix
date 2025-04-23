@@ -1,2 +1,0 @@
-allow app_zygote hbt_device:chr_file ioctl;
-allowxperm app_zygote hbt_device:chr_file ioctl hbt_ioctls;

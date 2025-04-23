@@ -1,7 +1,0 @@
-# MICROTRUST Policy Rule
-allow hal_keymaster_attestation ut_keymaster_device:chr_file rw_file_perms;
-allow hal_keymaster_attestation teei_client_device:chr_file rw_file_perms;
-hal_client_domain(hal_keymaster_attestation, hal_teei_capi)
-hal_client_domain(hal_keymaster_attestation, hal_allocator)
-hal_client_domain(hal_keymaster_attestation, hal_keymaster)
-set_prop(hal_keymaster_attestation, vendor_mtk_soter_teei_prop)

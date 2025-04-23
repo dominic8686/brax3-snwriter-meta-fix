@@ -1,7 +1,0 @@
-# ==============================================
-# MTK Policy Rule
-# ==============================================
-# Policy File of /system/bin/mtkbootanimation Executable File
-
-# bootanimation oneshot service
-type mtkbootanimation, domain;
