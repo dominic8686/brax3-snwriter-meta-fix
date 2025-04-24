@@ -116,10 +116,13 @@ def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol):
     coredomain_types = pol.QueryTypeAttribute("coredomain", True)
 
     if platform_coredomain_types != coredomain_types:
-        return ("ERROR: The attribute 'coredomain' is only for platform"
+        return ("ERROR: The attribute 'coredomain' is only for platform "
                 "SEPolicy, and must not be added by vendor SEPolicy.\n"
-                "Please fix these by moving them to system, system_ext, or "
-                "product's SEPolicy:\n"
+                "Please fix these by doing one of these.\n"
+                "1) Move these type definitions to system, system_ext, or "
+                "product's SEPolicy.\n"
+                "2) Remove 'coredomain' from these types.\n"
+                "Violations:\n"
                 f"{'\n'.join(coredomain_types - platform_coredomain_types)}"
                 "\n\n")
 
@@ -143,8 +146,13 @@ def TestNoPlatformFilesInVendorFileContexts(vendor_file_contexts):
 
     if violations:
         return ("ERROR: Vendor's file_contexts must not label files in "
-                "platform partitions.\nPlease fix these by moving them to "
-                "system, system_ext, or product's file_contexts:\n"
+                "platform partitions.\nPlease fix these by doing one of "
+                "these.\n"
+                "1) Move corresponding file_contexts entries to correct "
+                "partition's file_contexts.\n"
+                "2) Move corresponding files to vendor or odm partition, and "
+                "then update file_contexts entries.\n"
+                "Violations:\n"
                 f"{violations}\n\n")
 
     return ""
@@ -274,7 +282,8 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
     if no_name_violations:
         result += ("ERROR: Entries without 'name=' condition are not allowed "
                    "in vendor seapp_contexts.\nPlease fix the following "
-                   "violations by adding 'name=<package_name>':\n")
+                   "violations by adding 'name=<package_name>' condition.\n"
+                   "Violations:\n")
         for partition, raw_line in no_name_violations:
             result += f"  seapp_contexts partition: {partition}\n"
             result += f"  line: '{raw_line}'\n"
@@ -284,9 +293,13 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
     if partition_violations:
         result += ("ERROR: Platform apps cannot be labeled within vendor's "
                    "seapp_contexts.\nPlease fix the following violations by "
-                   "either moving the app to vendor, or by moving "
-                   "seapp_contexts entries to system, system_ext, or product's "
-                   "seapp_contexts:\n")
+                   "doing one of these.\n"
+                   "1) Move these apps to vendor or odm partition, and then "
+                   "label the app with types without 'coredomain'.\n"
+                   "2) Move these seapp_contexts entries to system, system_ext,"
+                   " or product partition's seapp_contexts, and then label the "
+                   "apps with 'coredomain' types.\n"
+                   "Violations:\n")
         for apk_name, package_name, partition, raw_line in partition_violations:
             result += f"  APK name: {apk_name}\n"
             result += f"  package name: {package_name}\n"
@@ -320,8 +333,11 @@ def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
     if violations:
         error_message = ("ERROR: All platform apps must be labeled with a "
                          "coredomain type.\nPlease fix the following "
-                         "violations by adding the 'coredomain' attribute to "
-                         "labels:\n")
+                         "violations by doing one of these.\n"
+                         "1) Add 'coredomain' attribute to labels.\n"
+                         "2) Move apps and corresponding seapp_contexts entries"
+                         " to vendor or odm partition.\n"
+                         "Violations:\n")
         for apk_name, package_name, domain in violations:
             error_message += f"  APK name: {apk_name}\n"
             error_message += f"  package name: {package_name}\n"
@@ -352,8 +368,10 @@ def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol):
     if violations:
         error_message = ("ERROR: All vendor apps must not be labeled with a "
                          "coredomain type.\nPlease fix the following "
-                         "violations by removing the 'coredomain' attribute "
-                         "from labels:\n")
+                         "violations by doing one of these.\n"
+                         "1) Remove the 'coredomain' attribute from labels.\n"
+                         "2) Use other labels which are not 'coredomain'.\n"
+                         "Violations:\n")
         for apk_name, package_name, domain in violations:
             error_message += f"  APK name: {apk_name}\n"
             error_message += f"  package name: {package_name}\n"
