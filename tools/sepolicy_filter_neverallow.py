@@ -73,7 +73,7 @@ def do_main():
             if line.endswith(';'):
                 in_neverallow_rule = False
 
-    with open(sys.argv[1], "w") as f:
+    with open(sys.argv[2], "w") as f:
         f.write("\n".join(outputs) + "\n")
 
 if __name__ == "__main__":

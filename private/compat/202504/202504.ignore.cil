@@ -7,5 +7,5 @@
   ( new_objects
     pbtombstone_exec
     prefetch
-    usb_apm_prop
+    usb_disable_when_locked_prop
   ))

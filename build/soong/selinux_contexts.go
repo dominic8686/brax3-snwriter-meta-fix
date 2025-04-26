@@ -703,6 +703,10 @@ func (m *contextsTestModule) GenerateAndroidBuildActions(ctx android.ModuleConte
 	m.testTimestamp = pathForModuleOut(ctx, "timestamp")
 	rule.Command().Text("touch").Output(m.testTimestamp)
 	rule.Build("contexts_test", "running contexts test: "+ctx.ModuleName())
+
+	moduleInfoJSON := ctx.ModuleInfoJSON()
+	moduleInfoJSON.Class = []string{"FAKE"}
+	moduleInfoJSON.SystemSharedLibs = []string{"none"}
 }
 
 func (m *contextsTestModule) AndroidMkEntries() []android.AndroidMkEntries {

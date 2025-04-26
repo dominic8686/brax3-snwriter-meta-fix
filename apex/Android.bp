@@ -302,13 +302,6 @@ filegroup {
 }
 
 filegroup {
-    name: "com.android.telephonymodules-file_contexts",
-    srcs: [
-        "com.android.telephonymodules-file_contexts",
-    ],
-}
-
-filegroup {
     name: "com.android.configinfrastructure-file_contexts",
     srcs: [
         "com.android.configinfrastructure-file_contexts",
@@ -347,5 +340,12 @@ filegroup {
     name: "com.android.profiling-file_contexts",
     srcs: [
         "com.android.profiling-file_contexts",
+    ],
+}
+
+filegroup {
+    name: "com.android.telephony-file_contexts",
+    srcs: [
+        "com.android.telephony-file_contexts",
     ],
 }
