@@ -12,3 +12,9 @@ allowxperm mtk_hal_power proc_core_ctl:file ioctl {
     CORE_CTL_SET_LIMIT_CPUS
 };
 allow mtk_hal_power sysfs_thermal_efuse:file r_file_perms;
+
+allow mtk_hal_power touch_boost:dir r_dir_perms;
+allow mtk_hal_power touch_boost:file r_file_perms;
+allow mtk_hal_power sysfs_change_rate:file rw_file_perms;
+allow mtk_hal_power proc_touch_boost:dir r_dir_perms;
+allow mtk_hal_power proc_touch_boost:file rw_file_perms;

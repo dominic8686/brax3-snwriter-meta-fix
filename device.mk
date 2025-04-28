@@ -195,6 +195,10 @@ PRODUCT_PACKAGES += \
     TetheringResOverlay \
     WifiResOverlay
 
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power.stats-service.example
+
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
 

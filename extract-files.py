@@ -107,9 +107,13 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.hardware.audio.common-V1.so', 'android.hardware.audio.common-V4.so'),
     (
         'vendor/lib/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
-        'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so'
+        'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
     ): blob_fixup()
         .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V5-ndk.so'),
+    (
+        'vendor/lib64/libui.so'
+    ): blob_fixup()
+        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V5-ndk.so'),
     'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
         .add_needed('liblog.so'),
     'vendor/bin/hw/android.hardware.security.keymint@2.0-service.trustonic': blob_fixup()
