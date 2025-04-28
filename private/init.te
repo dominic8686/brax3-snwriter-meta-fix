@@ -160,6 +160,10 @@ allow init tmpfs:blk_file getattr;
 allow init block_device:{ dir blk_file lnk_file } relabelto;
 allow init dm_device:{ chr_file blk_file } relabelto;
 allow init dm_user_device:chr_file relabelto;
+# /dev/loop-control
+allow init tmpfs:chr_file relabelfrom;
+allow init loop_control_device:chr_file relabelto;
+
 allow init kernel:fd use;
 # restorecon for early mount device symlinks
 allow init tmpfs:lnk_file { getattr read relabelfrom };
