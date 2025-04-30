@@ -80,6 +80,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
 # Display
 PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.1-service \
     android.hardware.memtrack-service.mediatek-mali
 
 PRODUCT_COPY_FILES += \
@@ -199,6 +200,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.power.stats-service.example
 
+# Power
+# PRODUCT_PACKAGES += \
+#     android.hardware.power-service.lineage-libperfmgr \
+#     vendor.mediatek.hardware.mtkpower@1.2-service.stub \
+#     libmtkperf_client_vendor \
+#     libmtkperf_client
+
+# PRODUCT_COPY_FILES += \
+#     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
 
@@ -249,6 +260,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.telephony.ims.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.ims.xml
+
+# Thermal
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/thermal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal/thermal.conf
+
 
 # USB
 PRODUCT_COPY_FILES += \
