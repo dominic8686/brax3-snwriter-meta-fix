@@ -12,7 +12,10 @@ neverallow logd {
   -runtime_event_log_tags_file
   # shell_data_file access is needed to dump bugreports
   -shell_data_file
-  userdebug_or_eng(`-coredump_file -misc_logd_file')
+  userdebug_or_eng(`-coredump_file')
+  ifelse(target_enable_logcat_persistence, `true',
+    `-misc_logd_file',
+  )
   with_native_coverage(`-method_trace_data_file')
 }:file { create write append };
 
@@ -24,7 +27,9 @@ neverallow {
   -dumpstate
   -init
   -logd
-  userdebug_or_eng(`-logpersist')
+  ifelse(target_enable_logcat_persistence, `true',
+    `-logpersist',
+  )
   -servicemanager
   -system_server
   -surfaceflinger
@@ -65,11 +70,11 @@ allow logd system_data_file:{ file lnk_file } r_file_perms;
 allow logd packages_list_file:file r_file_perms;
 allow logd pstorefs:dir search;
 allow logd pstorefs:file r_file_perms;
-userdebug_or_eng(`
+ifelse(target_enable_logcat_persistence, `true', `
   # Access to /data/misc/logd/event-log-tags
   allow logd misc_logd_file:dir r_dir_perms;
   allow logd misc_logd_file:file rw_file_perms;
-')
+',)
 allow logd runtime_event_log_tags_file:file rw_file_perms;
 
 r_dir_file(logd, domain)
