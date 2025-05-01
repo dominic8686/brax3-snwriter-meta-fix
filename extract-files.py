@@ -45,7 +45,7 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/bin/hw/hostapd',
         'vendor/bin/hw/wpa_supplicant',
     ):blob_fixup()
-        .replace_needed('libcrypto.so', 'libcrypto_vendor.so'),
+        .replace_needed('libcrypto.so', 'libcrypto-v33.so'),
     (
         'system_ext/lib64/libcomutils.so',
         'system_ext/lib64/libimsma_rtp.so',

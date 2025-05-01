@@ -30,6 +30,7 @@ genfscon sysfs /devices/platform/soc/1c804000.spmi/spmi-0/0-04/mt6377-gauge/powe
 genfscon sysfs /devices/platform/soc/1c804000.spmi/spmi-0/0-04/mt6377-gauge/power_supply/battery/power/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/1c804000.spmi/spmi-0/0-04/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/1c804000.spmi/spmi-0/0-04/power/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b20000.i2c/i2c-3/3-0027/wakeup/wakeup37 u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-006b/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-006b/power/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-006b/power_supply/primary_chg/power/wakeup u:object_r:sysfs_wakeup:s0
@@ -38,6 +39,7 @@ genfscon sysfs /devices/platform/soc/11001000.serial/tty/ttyS0/power/wakeup u:ob
 genfscon sysfs /devices/platform/soc/11db1000.i2c/i2c-6/6-0058/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/11db1000.i2c/i2c-6/6-0058/power/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/18002000.consys/power/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/1f000000.mdp/wakeup/wakeup40 u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/focaltech_fp/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/charger/power_supply/mtk-mst-hvdiv-chg/wakeup20 u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/charger/power_supply/mtk-slv-hvdiv-chg/wakeup21 u:object_r:sysfs_wakeup:s0
