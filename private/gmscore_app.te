@@ -63,6 +63,7 @@ dontaudit gmscore_app sysfs_net:dir r_dir_perms;
 dontaudit gmscore_app { wifi_prop wifi_hal_prop }:file r_file_perms;
 dontaudit gmscore_app mirror_data_file:dir search;
 dontaudit gmscore_app mnt_vendor_file:dir search;
+dontaudit gmscore_app system_adbd_prop:file r_file_perms;
 
 # Access the network
 net_domain(gmscore_app)
