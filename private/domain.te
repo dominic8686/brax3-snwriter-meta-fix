@@ -2140,6 +2140,23 @@ full_treble_only(`
 # intsersection of domain & mlsvendorcompat is not empty.)
 neverallow domain mlsvendorcompat:process fork;
 
+# Detect certain nonsensical binder allow rules. Binder communication
+# only occurs between processes, so having binder allow rules
+# associated with non-processes does not make any sense.
+# Examples of rules which do not make sense include:
+#
+#  # files do not host binder services
+#  allow domain file_type:binder call;
+#
+#  # service names are not processes and do not host binder services
+#  allow domain service_manager_type:binder call;
+#
+#  # Files are not processes and cannot initiate binder calls
+#  allow file_type dumpstate:binder call;
+#
+neverallow { -domain } *:binder *;
+neverallow * { -domain }:binder *;
+
 # Only init and otapreopt_chroot should be mounting filesystems on locations
 # labeled system or vendor (/product and /vendor respectively).
 neverallow {
