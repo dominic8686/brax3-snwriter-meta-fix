@@ -125,6 +125,7 @@ microdroid_manager.export_tombstones.enabled u:object_r:microdroid_config_prop:s
 microdroid_manager.config_done u:object_r:microdroid_lifecycle_prop:s0 exact bool
 microdroid_manager.init_done u:object_r:microdroid_lifecycle_prop:s0 exact bool
 
+microdroid_manager.encrypted_store.setup u:object_r:microdroid_encrypted_store_setup_prop:s0 exact bool
 microdroid_manager.encrypted_store.status u:object_r:microdroid_encrypted_store_status_prop:s0 exact enum mounted ready
 
 servicemanager.ready u:object_r:servicemanager_prop:s0 exact bool
