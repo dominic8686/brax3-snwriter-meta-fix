@@ -136,6 +136,10 @@ allow microdroid_manager sysfs_zram:dir { search };
 allow microdroid_manager sysfs_zram:file rw_file_perms;
 allow microdroid_manager ram_device:blk_file rw_file_perms;
 
+# Allow microdroid_manager to configure virtio-balloon driver properties.
+allow microdroid_manager sysfs_balloon:dir { search open read };
+allow microdroid_manager sysfs_balloon:file { rw_file_perms getattr };
+
 # Allow microdroid_manager to read/write failure serial device
 # tcdrain requires ioctl.
 allow microdroid_manager serial_device:chr_file { w_file_perms ioctl };
