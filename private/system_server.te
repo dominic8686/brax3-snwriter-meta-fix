@@ -247,9 +247,7 @@ allow system_server sysfs_ion:file r_file_perms;
 allow system_server sysfs_dma_heap:file r_file_perms;
 
 # Read /sys/kernel/mm/cma/*.
-starting_at_board_api(202504, `
 allow system_server sysfs_cma:file r_file_perms;
-')
 
 # Allow reading DMA-BUF sysfs stats from /sys/kernel/dmabuf.
 allow system_server sysfs_dmabuf_stats:dir r_dir_perms;
@@ -1316,10 +1314,8 @@ get_prop(system_server,system_jvmti_agent_prop)
 allow system_server functionfs:dir search;
 allow system_server functionfs:file rw_file_perms;
 # To resolve arbitrary sysfs paths from /sys/class/udc/* symlinks.
-starting_at_board_api(202504, `
 allow system_server sysfs_type:dir search;
 r_dir_file(system_server, sysfs_udc)
-')
 
 # system_server contains time / time zone detection logic so reads the associated properties.
 get_prop(system_server, time_prop)
