@@ -2316,7 +2316,6 @@ neverallow { domain -init -vendor_init -ueventd } sysfs_pgsize_migration:file no
 # virtmanager enforces access policy for which components can connect
 # to which VMs. If you have permissions to make direct connections, you
 # can talk to anything.
-starting_at_board_api(202504, `
 neverallow {
     domain
 
@@ -2336,4 +2335,3 @@ neverallow {
     -hal_widevine_system # TODO: get connections from virtmanager
     -vmlauncher_app     # TODO: get connections from virtmanager
 } *:vsock_socket { connect create accept bind };
-')
