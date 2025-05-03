@@ -1,7 +1,3 @@
-until_board_api(202504, `
-    type crosvm, domain, coredomain;
-')
-
 type crosvm_exec, system_file_type, exec_type, file_type;
 type crosvm_tmpfs, file_type;
 

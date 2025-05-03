@@ -26,14 +26,16 @@ domain_trans(init, init_exec, ueventd)
 domain_trans(init, init_exec, vendor_init)
 domain_trans(init, { rootfs toolbox_exec }, modprobe)
 userdebug_or_eng(`
-  # case where logpersistd is actually logcat -f in logd context (nee: logcatd)
-  domain_auto_trans(init, logcat_exec, logpersist)
-
   # allow init to execute services marked with seclabel u:r:su:s0 in userdebug/eng
   allow init su:process transition;
   dontaudit init su:process noatsecure;
   allow init su:process { siginh rlimitinh };
 ')
+
+ifelse(target_enable_logcat_persistence, `true', `
+  domain_auto_trans(init, logcat_exec, logpersist)
+',)
+
 
 # Allow init to figure out name of dm-device from it's /dev/block/dm-XX path.
 # This is useful in case of remounting ext4 userdata into checkpointing mode,
@@ -160,6 +162,10 @@ allow init tmpfs:blk_file getattr;
 allow init block_device:{ dir blk_file lnk_file } relabelto;
 allow init dm_device:{ chr_file blk_file } relabelto;
 allow init dm_user_device:chr_file relabelto;
+# /dev/loop-control
+allow init tmpfs:chr_file relabelfrom;
+allow init loop_control_device:chr_file relabelto;
+
 allow init kernel:fd use;
 # restorecon for early mount device symlinks
 allow init tmpfs:lnk_file { getattr read relabelfrom };
