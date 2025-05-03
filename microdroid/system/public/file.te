@@ -153,6 +153,7 @@ type selinuxfs, fs_type;
 type shm, fs_type;
 type sockfs, fs_type;
 type sysfs, fs_type, sysfs_type;
+type sysfs_balloon, fs_type, sysfs_type;
 type sysfs_android_usb, fs_type, sysfs_type;
 type sysfs_bluetooth_writable, fs_type, sysfs_type;
 type sysfs_devices_block, fs_type, sysfs_type;
