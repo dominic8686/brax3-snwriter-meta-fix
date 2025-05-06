@@ -33,6 +33,7 @@ var (
 		"shared",
 		"testkey",
 		"bluetooth",
+		"nfc",
 	}
 )
 
