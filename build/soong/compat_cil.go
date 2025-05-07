@@ -202,6 +202,9 @@ func (f *compatTestModule) GenerateAndroidBuildActions(ctx android.ModuleContext
 	rule := android.NewRuleBuilder(pctx, ctx)
 	rule.Command().Text("touch").Output(f.compatTestTimestamp).Implicits(inputs)
 	rule.Build("compat", "compat test timestamp for: "+f.Name())
+
+	ctx.CheckbuildFile(f.compatTestTimestamp)
+
 	moduleInfoJSON := ctx.ModuleInfoJSON()
 	moduleInfoJSON.Class = []string{"FAKE"}
 	moduleInfoJSON.SystemSharedLibs = []string{"none"}
