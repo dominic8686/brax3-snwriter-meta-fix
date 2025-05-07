@@ -195,6 +195,8 @@ allow init {
 
 allow init tracefs_type:file { create_file_perms relabelfrom };
 
+allow init apex_info_file:file { getattr };
+
 allow init {
   file_type
   -exec_type
