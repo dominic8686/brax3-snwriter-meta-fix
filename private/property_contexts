@@ -399,6 +399,7 @@ ro.virtual_ab.cow_op_merge_size u:object_r:virtual_ab_prop:s0 exact int
 ro.virtual_ab.verify_threshold_size u:object_r:virtual_ab_prop:s0 exact int
 ro.virtual_ab.verify_block_size u:object_r:virtual_ab_prop:s0 exact int
 ro.virtual_ab.skip_verification u:object_r:virtual_ab_prop:s0 exact bool
+ro.virtual_ab.set_task_profiles u:object_r:virtual_ab_prop:s0 exact bool
 
 # OEMs can set this prop at build time to configure how many seconds to delay
 # merge after installing a Virtual AB OTA. The default behavior is to start
