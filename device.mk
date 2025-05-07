@@ -142,7 +142,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fstab.mt6835 \
     fstab.mt6835.vendor_ramdisk \
-    init.cgroup.rc \
+    init.mt6835.power.rc \
     init.connectivity.common.rc \
     init.connectivity.rc \
     init_connectivity.rc \
@@ -154,6 +154,12 @@ PRODUCT_PACKAGES += \
     init.project.rc \
     init.sensor_2_0.rc \
     ueventd.mt6835.rc
+
+PRODUCT_PACKAGES += \
+    init.cgroup.rc \
+
+#PRODUCT_PACKAGES += \
+    init.mt6835.power.rc \
 
 # Keymint
 PRODUCT_COPY_FILES += \
@@ -198,14 +204,14 @@ PRODUCT_PACKAGES += \
     android.hardware.power.stats-service.example
 
 # Power
-# PRODUCT_PACKAGES += \
-#     android.hardware.power-service.lineage-libperfmgr \
-#     vendor.mediatek.hardware.mtkpower@1.2-service.stub \
-#     libmtkperf_client_vendor \
-#     libmtkperf_client
+#PRODUCT_PACKAGES += \
+    android.hardware.power-service.lineage-libperfmgr \
+    vendor.mediatek.hardware.mtkpower@1.2-service.stub \
+    libmtkperf_client_vendor \
+    libmtkperf_client
 
-# PRODUCT_COPY_FILES += \
-#     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
@@ -239,6 +245,10 @@ PRODUCT_SHIPPING_API_LEVEL := 33
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
+    hardware/google/interfaces \
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr \
+    hardware/mediatek/libmtkperf_client \
     hardware/mediatek
 
 # Storage

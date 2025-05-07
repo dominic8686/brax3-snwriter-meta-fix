@@ -48,7 +48,7 @@
         "467000000",
         "441000000",
         "415000000",
-        "390000000",
+        "390000000"
       ],
       "ResetOnInit": true
     },
@@ -79,7 +79,7 @@
         "800000",
         "750000",
         "700000",
-        "650000",
+        "650000"
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
@@ -137,7 +137,7 @@
         "1000000",
         "900000",
         "800000",
-        "700000",
+        "700000"
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
@@ -238,14 +238,14 @@
     //   ],
     //   "ResetOnInit": true
     // },
-    {
-      "Name": "DoubleTapToWakeEnable",
-      "Path": "/sys/touchpanel/double_tap",
-      "Values": [
-        "1",
-        "0"
-      ]
-    },
+    // {
+    //   "Name": "DoubleTapToWakeEnable",
+    //   "Path": "/sys/touchpanel/double_tap",
+    //   "Values": [
+    //     "1",
+    //     "0"
+    //   ]
+    // },
     {
       "Name": "PowerHALAudioState",
       "Path": "vendor.powerhal.audio",
@@ -344,23 +344,29 @@
       "Duration": 3000,
       "Value": "100"
     },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "DRAMOppMin",
-      "Duration": 3000,
-      "Value": "1"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "SchedBoost",
-      "Duration": 3000,
-      "Value": "1"
-    },
+    // {
+    //   "PowerHint": "LAUNCH",
+    //   "Node": "DRAMOppMin",
+    //   "Duration": 3000,
+    //   "Value": "1"
+    // },
+    // {
+    //   "PowerHint": "LAUNCH",
+    //   "Node": "SchedBoost",
+    //   "Duration": 3000,
+    //   "Value": "1"
+    // },
     {
       "PowerHint": "CAMERA_LAUNCH",
       "Node": "CDUclampMin",
       "Duration": 1000,
       "Value": "100"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "GPUMinFreq",
+      "Duration": 0,
+      "Value": "801000000"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -385,12 +391,12 @@
       "Node": "GPUSchedMode",
       "Duration": 0,
       "Value": "1"
-    },
-    {
-      "PowerHint": "DOUBLE_TAP_TO_WAKE",
-      "Node": "DoubleTapToWakeEnable",
-      "Duration": 0,
-      "Value": "1"
     }
+    // {
+    //   "PowerHint": "DOUBLE_TAP_TO_WAKE",
+    //   "Node": "DoubleTapToWakeEnable",
+    //   "Duration": 0,
+    //   "Value": "1"
+    // }
   ]
 }
