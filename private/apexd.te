@@ -182,6 +182,9 @@ get_prop(apexd, apexd_payload_metadata_prop)
 
 set_prop(apexd, apexd_prop)
 
+# Allow apexd to set "gsid.mapped_image.*" props
+set_prop(apexd, gsid_prop)
+
 # Allow for use in postinstall
 allow apexd otapreopt_chroot:fd use;
 allow apexd postinstall_apex_mnt_dir:dir { create_dir_perms mounton };
