@@ -157,7 +157,10 @@ python_test_host {
 python_binary_host {
     name: "treble_labeling_tests",
     srcs: ["treble_labeling_tests.py"],
-    libs: ["pysepolwrap"],
+    libs: [
+        "pysepolwrap",
+        "pyyaml",
+    ],
     data: [":libsepolwrap"],
 }
 
