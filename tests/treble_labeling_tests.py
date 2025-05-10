@@ -37,6 +37,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import fc_sort
 import policy
+import yaml
 
 SHARED_LIB_EXTENSION = '.dylib' if sys.platform == 'darwin' else '.so'
 
@@ -105,9 +106,16 @@ def build_argument_parser():
         help="Path to the aapt2 executable.",
         required=True,
     )
+    parser.add_argument(
+        "--tracking_list_file",
+        dest="tracking_list_file",
+        metavar="FILE",
+        help="Path to the yaml file containing a tracking_list_file.",
+        required=False,
+    )
     return parser
 
-def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol):
+def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol, allowlist):
     """Tests if vendor SEPolicy adds more coredomain types.
     coredomain is only for platform types, so vendor SEPolicy must not add one.
     """
@@ -115,7 +123,10 @@ def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol):
         "coredomain", True)
     coredomain_types = pol.QueryTypeAttribute("coredomain", True)
 
-    if platform_coredomain_types != coredomain_types:
+    allowed_types = {entry["domain"] for entry in allowlist}
+    violations = coredomain_types - platform_coredomain_types - allowed_types
+
+    if violations:
         return ("ERROR: The attribute 'coredomain' is only for platform "
                 "SEPolicy, and must not be added by vendor SEPolicy.\n"
                 "Please fix these by doing one of these.\n"
@@ -123,12 +134,11 @@ def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol):
                 "product's SEPolicy.\n"
                 "2) Remove 'coredomain' from these types.\n"
                 "Violations:\n"
-                f"{'\n'.join(coredomain_types - platform_coredomain_types)}"
-                "\n\n")
+                f"{'\n'.join(violations)}\n\n")
 
     return ""
 
-def TestNoPlatformFilesInVendorFileContexts(vendor_file_contexts):
+def TestNoPlatformFilesInVendorFileContexts(vendor_file_contexts, allowlist):
     """Tests if vendor SEPolicy labels any of platform files.
     """
     platform_prefixes = ["/system/", "/system_ext/", "/product/"]
@@ -136,9 +146,12 @@ def TestNoPlatformFilesInVendorFileContexts(vendor_file_contexts):
 
     fc_sorted = fc_sort.sort(vendor_file_contexts)
 
+    allowed_paths = {entry["path"] for entry in allowlist}
     violations = ""
 
     for entry in fc_sorted:
+        if entry.path in allowed_paths:
+            continue
         if policy.MatchPathPrefixes(entry.path, allowed_platform_prefixes):
             continue
         if policy.MatchPathPrefixes(entry.path, platform_prefixes):
@@ -255,7 +268,8 @@ def package_name_match(package_name, pattern):
         return package_name == pattern
 
 def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
-                                            vendor_seapp_entries):
+                                            vendor_seapp_entries,
+                                            allowlist):
     """Tests if vendor SEPolicy labels any of preinstalled platform apps.
     Platform apps can't be labeled with vendor SEPolicy. Also vendor's
     seapp_contexts must use 'name=' condition, because vendor's seapp_contexts
@@ -263,6 +277,8 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
     """
     no_name_violations = []
     partition_violations = []
+
+    allowed_apks = {entry["apk"] for entry in allowlist}
 
     for entry in vendor_seapp_entries:
         values = entry.values
@@ -273,6 +289,8 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
 
         # Such name patterns must not match with platform_apps
         for app in platform_apps:
+            if app.apk_name in allowed_apks:
+                continue
             if package_name_match(app.package_name, values["name"]):
                 partition_violations.append((app.apk_name, app.package_name,
                                              entry.partition, values["_raw"]))
@@ -311,7 +329,7 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
     return result
 
 def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
-                                     pol):
+                                     pol, allowlist):
     """Tests if platform SEPolicy labels any of preinstalled platform apps with
     a non-coredomain label. All preinstalled platform apps are expected to be
     labeled with a coredomain type.
@@ -319,12 +337,16 @@ def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
     coredomains = pol.QueryTypeAttribute("coredomain", True)
     violations = []
 
+    allowed_apks = {entry["apk"] for entry in allowlist}
+
     for entry in platform_seapp_entries:
         values = entry.values
         if not values["name"] or values["domain"] in coredomains:
             continue
 
         for app in platform_apps:
+            if app.apk_name in allowed_apks:
+                continue
             if package_name_match(app.package_name, values["name"]):
                 violations.append((app.apk_name, app.package_name,
                                    values["domain"]))
@@ -347,12 +369,15 @@ def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
 
     return ""
 
-def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol):
+def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol,
+                                     allowlist):
     """Tests if any of preinstalled vendor apps are labeled with coredomain
     labels. All preinstalled vendor apps are expected to be non-coredomain.
     """
     coredomains = pol.QueryTypeAttribute("coredomain", True)
     violations = []
+
+    allowed_apks = {entry["apk"] for entry in allowlist}
 
     for entry in seapp_entries:
         values = entry.values
@@ -360,6 +385,8 @@ def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol):
             continue
 
         for app in vendor_apps:
+            if app.apk_name in allowed_apks:
+                continue
             if package_name_match(app.package_name, values["name"]):
                 violations.append((app.apk_name, app.package_name,
                                    values["domain"]))
@@ -386,6 +413,11 @@ def do_main(libpath):
     parser = build_argument_parser()
     args = parser.parse_args()
 
+    tracking_list = {}
+    if args.tracking_list_file:
+        with open(args.tracking_list_file, "r", encoding="utf-8") as f:
+            tracking_list = yaml.safe_load(f) or {}
+
     pol_without_vendor = policy.Policy(args.precompiled_sepolicy_without_vendor,
                                        None, libpath)
     pol = policy.Policy(args.precompiled_sepolicy, None, libpath)
@@ -401,13 +433,32 @@ def do_main(libpath):
     seapp_entries = platform_seapp_entries + vendor_seapp_entries
 
     result = ""
-    result += TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol)
-    result += TestNoPlatformFilesInVendorFileContexts(args.vendor_file_contexts)
-    result += TestNoPlatformAppsInVendorSeappContexts(platform_apps,
-                                                      vendor_seapp_entries)
-    result += TestCoredomainForAllPlatformApps(platform_apps,
-                                               platform_seapp_entries, pol)
-    result += TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol)
+    result += TestNoCoredomainInVendorSepolicy(
+        pol_without_vendor,
+        pol,
+        tracking_list.get('coredomain_in_vendor', [])
+    )
+    result += TestNoPlatformFilesInVendorFileContexts(
+        args.vendor_file_contexts,
+        tracking_list.get('platform_file_in_vendor_file_contexts', [])
+    )
+    result += TestNoPlatformAppsInVendorSeappContexts(
+        platform_apps,
+        vendor_seapp_entries,
+        tracking_list.get('platform_apps_in_vendor_seapp_contexts', [])
+    )
+    result += TestCoredomainForAllPlatformApps(
+        platform_apps,
+        platform_seapp_entries,
+        pol,
+        tracking_list.get('non_coredomain_for_platform_apps', [])
+    )
+    result += TestNoCoredomainForAllVendorApps(
+        vendor_apps,
+        seapp_entries,
+        pol,
+        tracking_list.get('coredomain_for_vendor_apps', [])
+    )
 
     if result != "":
         sys.exit(result)
