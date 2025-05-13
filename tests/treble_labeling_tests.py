@@ -460,8 +460,17 @@ def do_main(libpath):
         tracking_list.get('coredomain_for_vendor_apps', [])
     )
 
-    if result != "":
-        sys.exit(result)
+    if not result:
+        return
+
+    result += ("******************************\n"
+               "ERROR: SELinux Treble Labeling violations found.\n"
+               "Treble Labeling will be enforced for devices with "
+               "BOARD_API_LEVEL >= 202604.\n"
+               "Please fix all violations. For more details, please refer to:\n"
+               "system/sepolicy/tests/treble_labeling_tests.md\n"
+               "******************************\n")
+    sys.exit(result)
 
 if __name__ == '__main__':
     with tempfile.TemporaryDirectory() as temp_dir:
