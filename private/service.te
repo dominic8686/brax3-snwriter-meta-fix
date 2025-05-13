@@ -34,6 +34,8 @@ type tracingproxy_service,          system_server_service, service_manager_type;
 type tradeinmode_service,           system_server_service, service_manager_type;
 type transparency_service,          system_server_service, service_manager_type;
 
+type accessor_trusty_keymint_comm_service, service_manager_type;
+type trusty_keymint_comm_service, service_manager_type;
 is_flag_enabled(RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT, `
     type vfio_handler_service,          service_manager_type;
 ')
