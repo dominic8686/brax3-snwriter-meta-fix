@@ -349,10 +349,3 @@ filegroup {
         "com.android.profiling-file_contexts",
     ],
 }
-
-filegroup {
-    name: "com.android.telephony-file_contexts",
-    srcs: [
-        "com.android.telephony-file_contexts",
-    ],
-}
