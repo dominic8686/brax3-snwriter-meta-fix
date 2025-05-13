@@ -269,7 +269,6 @@ func (c *policyConf) transformPolicyToConf(ctx android.ModuleContext) android.Ou
 		FlagWithArg("-D target_requires_insecure_execmem_for_swiftshader=", strconv.FormatBool(ctx.DeviceConfig().RequiresInsecureExecmemForSwiftshader())).
 		FlagWithArg("-D target_enforce_debugfs_restriction=", c.enforceDebugfsRestrictions(ctx)).
 		FlagWithArg("-D target_recovery=", strconv.FormatBool(c.isTargetRecovery())).
-		FlagWithArg("-D target_enable_logcat_persistence=", strconv.FormatBool(ctx.DeviceConfig().ProductEnableLogcatPersistence())).
 		Flag(boardApiLevelToM4Macro(ctx, c.properties.Board_api_level)).
 		Flags(flagsToM4Macros(flags)).
 		Flag("-s").

@@ -1,7 +1,7 @@
 typeattribute logpersist coredomain;
 
 # android debug log storage in logpersist domains (eng and userdebug only)
-ifelse(target_enable_logcat_persistence, `true', `
+userdebug_or_eng(`
 
   r_dir_file(logpersist, cgroup)
   r_dir_file(logpersist, cgroup_v2)
@@ -18,7 +18,7 @@ ifelse(target_enable_logcat_persistence, `true', `
   get_prop(logpersist, logd_prop)
   read_runtime_log_tags(logpersist)
 
-',)
+')
 
 # logcatd is a shell script that execs logcat with various parameters.
 allow logpersist shell_exec:file rx_file_perms;
@@ -56,32 +56,9 @@ neverallow * logpersist:process dyntransition;
 # logpersist is allowed to write to /data/misc/log for userdebug and eng builds
 neverallow logpersist {
   file_type
-  userdebug_or_eng(`-coredump_file')
-  ifelse(target_enable_logcat_persistence, `true', `
-    -misc_logd_file
-  ',)
+  userdebug_or_eng(`-misc_logd_file -coredump_file')
   with_native_coverage(`-method_trace_data_file')
 }:file { create write append };
-neverallow {
-  domain
-  -init
-  -dumpstate
-  -incidentd
-  ifelse(target_enable_logcat_persistence, `true',
-    `-logpersist -logd'
-  ,)
-} misc_logd_file:file no_rw_file_perms;
-neverallow {
-  domain
-  -init
-  ifelse(target_enable_logcat_persistence, `true',
-    `-logpersist -logd'
-  ,)
-} misc_logd_file:file no_w_file_perms;
-neverallow {
-  domain
-  -init
-  ifelse(target_enable_logcat_persistence, `true',
-    `-logpersist -logd'
-  ,)
-} misc_logd_file:dir { add_name link relabelfrom remove_name rename reparent rmdir write };
+neverallow { domain -init -dumpstate -incidentd userdebug_or_eng(`-logpersist -logd') } misc_logd_file:file no_rw_file_perms;
+neverallow { domain -init userdebug_or_eng(`-logpersist -logd') } misc_logd_file:file no_w_file_perms;
+neverallow { domain -init userdebug_or_eng(`-logpersist -logd') } misc_logd_file:dir { add_name link relabelfrom remove_name rename reparent rmdir write };
