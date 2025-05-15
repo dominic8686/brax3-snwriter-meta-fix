@@ -1744,3 +1744,9 @@ neverallow {
   -system_server
   -shell
 } power_debug_prop:property_service set;
+
+# b/228030183 and b/7118228
+# system_server should not be able to load kernel modules. system_server
+# is too exposed to untrusted code. The DAC permission for CAP_SYS_MODULE
+# was removed in frameworks/base commit 915b8c2ebd2871ccbd8c81458d844c9ebcb32a67
+neverallow system_server self:global_capability_class_set sys_module;
