@@ -167,6 +167,4 @@
 # The code uses the /sys/bus paths because they are easier to search, but they
 # ultimately symlink to the /sys/devices path, so we give permissions on both.
 /sys/bus/virtio/drivers/virtio_balloon u:object_r:sysfs_balloon:s0
-/sys/bus/virtio/drivers/virtio_balloon/virtio* u:object_r:sysfs_balloon:s0
-/sys/bus/virtio/drivers/virtio_balloon/virtio*/bail_on_out_of_puff u:object_r:sysfs_balloon:s0
 /sys/devices/(platform/[^/]+\.pci/)?pci[^/]+/[^/]+/virtio[0-9]+/bail_on_out_of_puff u:object_r:sysfs_balloon:s0
