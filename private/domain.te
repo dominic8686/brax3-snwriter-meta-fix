@@ -2352,3 +2352,6 @@ neverallow {
     -hal_widevine_system # TODO: get connections from virtmanager
     -vmlauncher_app     # TODO: get connections from virtmanager
 } *:vsock_socket { connect create accept bind };
+
+# kexec is not available on Android.
+neverallow domain *:system { kexec_image_load kexec_initramfs_load };
