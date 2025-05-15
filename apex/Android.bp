@@ -198,6 +198,13 @@ filegroup {
 }
 
 filegroup {
+    name: "com.android.telephony2-file_contexts",
+    srcs: [
+        "com.android.telephony2-file_contexts",
+    ],
+}
+
+filegroup {
     name: "com.android.tzdata-file_contexts",
     srcs: [
         "com.android.tzdata-file_contexts",
@@ -340,12 +347,5 @@ filegroup {
     name: "com.android.profiling-file_contexts",
     srcs: [
         "com.android.profiling-file_contexts",
-    ],
-}
-
-filegroup {
-    name: "com.android.telephony-file_contexts",
-    srcs: [
-        "com.android.telephony-file_contexts",
     ],
 }
