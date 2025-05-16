@@ -36,7 +36,9 @@ lib_fixups: lib_fixups_user_type = {
         'android.hardware.security.keymint-V1-ndk',
         'vendor.mediatek.hardware.videotelephony@1.0',
      ): lib_fixup_vendor_suffix,
-    ('libsink',): lib_fixup_remove,
+    (
+        'libsink',
+    ): lib_fixup_remove,
 }
 
 blob_fixups: blob_fixups_user_type = {
@@ -79,8 +81,6 @@ blob_fixups: blob_fixups_user_type = {
     (
         'vendor/lib64/android.hardware.bluetooth.audio-impl.so',
         'vendor/lib64/libbluetooth_audio_session_aidl.so',
-        'vendor/lib/android.hardware.bluetooth.audio-impl.so',
-        'vendor/lib/libbluetooth_audio_session_aidl.so',
     ): blob_fixup()
         .replace_needed('android.hardware.bluetooth.audio-V2-ndk', 'android.hardware.bluetooth.audio-V5-ndk'),
     (
@@ -106,14 +106,9 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so')
         .replace_needed('android.hardware.audio.common-V1.so', 'android.hardware.audio.common-V4.so'),
     (
-        'vendor/lib/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
         'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
     ): blob_fixup()
         .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V5-ndk.so'),
-    (
-        'vendor/lib64/libui.so'
-    ): blob_fixup()
-        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V5-ndk.so'),
     'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
         .add_needed('liblog.so'),
     'vendor/bin/hw/android.hardware.security.keymint@2.0-service.trustonic': blob_fixup()
@@ -122,6 +117,13 @@ blob_fixups: blob_fixups_user_type = {
     'system_ext/lib64/libsource.so': blob_fixup()
         .add_needed('libui_shim.so')
         .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
+    (
+        'vendor/lib/libnvram.so',
+        'vendor/lib64/libnvram.so',
+        'vendor/lib64/libsysenv.so',
+        'vendor/bin/hw/android.hardware.usb-aidl-service.mediatekv1.0',
+    ): blob_fixup()
+        .add_needed('libbase_shim.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(

@@ -599,8 +599,8 @@ vendor/lib/arm.graphics-V3-ndk.so
 vendor/lib/egl/egl.cfg
 vendor/lib/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so
 vendor/lib64/arm.graphics-V3-ndk.so
-vendor/lib64/android.hardware.graphics.composer@2.1-resources.so;MODULE_SUFFIX=_vendor
-vendor/lib64/android.hardware.graphics.composer@2.2-resources.so;MODULE_SUFFIX=_vendor
+vendor/lib64/android.hardware.graphics.composer@2.1-resources.so;MAKE_COPY_RULE_ONLY
+vendor/lib64/android.hardware.graphics.composer@2.2-resources.so;MAKE_COPY_RULE_ONLY
 vendor/lib64/egl/libGLES_mali.so;SYMLINK=vendor/lib64/hw/vulkan.mt6835.so
 vendor/lib64/egl/libGLES_meow.so
 vendor/lib64/egl/libMEOW_data.so
