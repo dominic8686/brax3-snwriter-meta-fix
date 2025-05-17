@@ -53,17 +53,15 @@ set_prop(system_app, usb_control_prop)
 set_prop(system_app, usb_prop)
 set_prop(system_app, log_tag_prop)
 set_prop(system_app, drm_forcel3_prop)
-ifelse(target_enable_logcat_persistence, `true',
-  `set_prop(system_app, logpersistd_logging_prop)'
-,)
+userdebug_or_eng(`set_prop(system_app, logpersistd_logging_prop)')
 auditallow system_app net_radio_prop:property_service set;
 auditallow system_app usb_control_prop:property_service set;
 auditallow system_app usb_prop:property_service set;
 # Allow Settings to enable Dynamic System Update
 set_prop(system_app, dynamic_system_prop)
 
-# Allow Settings to access le audio mode property
-set_prop(system_app, bluetooth_lea_mode_prop)
+# Allow Settings to access le audio property
+set_prop(system_app, bluetooth_lea_prop)
 
 # ctl interface
 set_prop(system_app, ctl_default_prop)

@@ -30,6 +30,7 @@ import argparse
 import collections
 import os
 import pkgutil
+import re
 import subprocess
 import sys
 import tempfile
@@ -111,6 +112,13 @@ def build_argument_parser():
         dest="tracking_list_file",
         metavar="FILE",
         help="Path to the yaml file containing a tracking_list_file.",
+        required=False,
+    )
+    parser.add_argument(
+        "--treat_as_warnings",
+        dest="treat_as_warnings",
+        action="store_true",
+        help="Treat test failures as warnings instead of errors.",
         required=False,
     )
     return parser
@@ -460,8 +468,24 @@ def do_main(libpath):
         tracking_list.get('coredomain_for_vendor_apps', [])
     )
 
-    if result != "":
-        sys.exit(result)
+    if not result:
+        return
+
+    result += ("******************************\n"
+               "ERROR: SELinux Treble Labeling violations found.\n"
+               "Treble Labeling will be enforced for devices with "
+               "BOARD_API_LEVEL >= 202604.\n"
+               "Please fix all violations. For more details, please refer to:\n"
+               "system/sepolicy/tests/treble_labeling_tests.md\n"
+               "******************************\n")
+
+    if args.treat_as_warnings:
+        result = re.sub(r'(^|\n)ERROR:', r'\1WARNING:', result)
+
+    print(result, file=sys.stderr)
+
+    if not args.treat_as_warnings:
+        sys.exit(1)
 
 if __name__ == '__main__':
     with tempfile.TemporaryDirectory() as temp_dir:

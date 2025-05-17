@@ -333,6 +333,26 @@ allow { domain -domain } hwservice_manager_type:hwservice_manager { add find };
 # when it's not explicitly used in allow rules
 allow { domain -domain } vndservice_manager_type:service_manager { add find };
 
+# Allow processes to find statsbootstrap service via service_manager
+allow {
+  domain
+  -init
+  -webview_zygote
+  -vendor_init
+  -app_zygote
+  -isolated_app_all
+  -hal_configstore_server
+} statsbootstrap_service:service_manager find;
+allow {
+  domain
+  -init
+  -webview_zygote
+  -vendor_init
+  -app_zygote
+  -isolated_app_all
+  -hal_configstore_server
+} system_server:binder call;
+
 # Under ASAN, processes will try to read /data, as the sanitized libraries are there.
 with_asan(`allow domain system_data_file:dir getattr;')
 # Under ASAN, /system/asan.options needs to be globally accessible.
@@ -915,6 +935,7 @@ full_treble_only(`
     -mediaserver_service
     -nfc_service
     -radio_service
+    -statsbootstrap_service
     -virtual_touchpad_service
     -vr_manager_service
     userdebug_or_eng(`-hal_face_service')

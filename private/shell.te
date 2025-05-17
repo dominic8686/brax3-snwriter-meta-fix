@@ -179,9 +179,7 @@ set_prop(shell, logd_auditrate_prop)
 # adjust is_loggable properties
 userdebug_or_eng(`set_prop(shell, log_prop)')
 # logpersist script
-ifelse(target_enable_logcat_persistence, `true',
-  `set_prop(shell, logpersistd_logging_prop)'
-,)
+userdebug_or_eng(`set_prop(shell, logpersistd_logging_prop)')
 # Allow shell to start/stop heapprofd via the persist.heapprofd.enable
 # property.
 set_prop(shell, heapprofd_enabled_prop)

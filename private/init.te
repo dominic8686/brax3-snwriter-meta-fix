@@ -26,16 +26,14 @@ domain_trans(init, init_exec, ueventd)
 domain_trans(init, init_exec, vendor_init)
 domain_trans(init, { rootfs toolbox_exec }, modprobe)
 userdebug_or_eng(`
+  # case where logpersistd is actually logcat -f in logd context (nee: logcatd)
+  domain_auto_trans(init, logcat_exec, logpersist)
+
   # allow init to execute services marked with seclabel u:r:su:s0 in userdebug/eng
   allow init su:process transition;
   dontaudit init su:process noatsecure;
   allow init su:process { siginh rlimitinh };
 ')
-
-ifelse(target_enable_logcat_persistence, `true', `
-  domain_auto_trans(init, logcat_exec, logpersist)
-',)
-
 
 # Allow init to figure out name of dm-device from it's /dev/block/dm-XX path.
 # This is useful in case of remounting ext4 userdata into checkpointing mode,
