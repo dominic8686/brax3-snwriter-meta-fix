@@ -456,3 +456,6 @@ allow init vendor_kernel_modules:system module_load;
 allow init tmpfs:chr_file relabelfrom;
 allow init kmsg_device:chr_file { getattr write relabelto };
 allow init kmsg_debug_device:chr_file { open write relabelto };
+
+# For pageout_bomb.rc.
+allow init proc_drop_caches:file w_file_perms;

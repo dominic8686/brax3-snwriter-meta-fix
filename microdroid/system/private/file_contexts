@@ -110,6 +110,7 @@
 /system/bin/mke2fs               u:object_r:e2fs_exec:s0
 /system/bin/resize2fs            u:object_r:fsck_exec:s0
 /system/bin/kexec_load           u:object_r:kexec_exec:s0
+/system/bin/pageout_bomb         u:object_r:pageout_bomb_exec:s0
 /system/bin/prng_seeder          u:object_r:prng_seeder_exec:s0
 /system/bin/atrace               u:object_r:atrace_exec:s0
 /system/bin/perfetto             u:object_r:perfetto_exec:s0
