@@ -151,6 +151,7 @@ android.system.vold.IVold/default                                    u:object_r:
 accessibility                             u:object_r:accessibility_service:s0
 account                                   u:object_r:account_service:s0
 activity                                  u:object_r:activity_service:s0
+activity_structured                       u:object_r:activity_structured_service:s0
 activity_task                             u:object_r:activity_task_service:s0
 adb                                       u:object_r:adb_service:s0
 adservices_manager                        u:object_r:adservices_manager_service:s0

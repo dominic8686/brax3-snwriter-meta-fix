@@ -5,6 +5,7 @@
 (typeattribute new_objects)
 (typeattributeset new_objects
   ( new_objects
+    activity_structured_service
     gatekeeper_vendor_data_file
     init_dev_config
     init_dev_config_exec

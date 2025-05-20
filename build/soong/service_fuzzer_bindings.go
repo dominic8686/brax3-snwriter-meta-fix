@@ -169,6 +169,7 @@ var (
 		"accessibility":       EXCEPTION_NO_FUZZER,
 		"account":             EXCEPTION_NO_FUZZER,
 		"activity":            EXCEPTION_NO_FUZZER,
+		"activity_structured": EXCEPTION_NO_FUZZER,
 		"activity_task":       EXCEPTION_NO_FUZZER,
 		"adb":                 EXCEPTION_NO_FUZZER,
 		"adservices_manager":  EXCEPTION_NO_FUZZER,
