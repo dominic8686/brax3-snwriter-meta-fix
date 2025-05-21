@@ -2376,3 +2376,6 @@ neverallow {
 
 # kexec is not available on Android.
 neverallow domain *:system { kexec_image_load kexec_initramfs_load };
+
+# READING_X509_CERTIFICATE is not used.
+neverallow domain *:system x509_certificate_load;
