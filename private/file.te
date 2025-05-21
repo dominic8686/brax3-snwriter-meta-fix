@@ -4,9 +4,6 @@ type proc_allocinfo, fs_type, proc_type;
 # /proc/config.gz
 type config_gz, fs_type, proc_type;
 
-# /proc/sys/kernel/firmware_config/*
-type proc_firmware_config, fs_type, proc_type;
-
 # /sys/fs/bpf/<dir> for mainline tethering use
 # TODO: move S+ fs_bpf_tethering here from public/file.te
 type fs_bpf_net_private, fs_type, bpffs_type;
