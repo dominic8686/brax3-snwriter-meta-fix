@@ -207,6 +207,10 @@ allow $1 virtualizationservice_data_file:file { getattr read };
 allow virtualizationmanager $1:dir search;
 allow virtualizationmanager $1:file read;
 allow virtualizationmanager $1:lnk_file read;
+
+# Allow owner of a VM to kill the VM forcibly, by sending sigkill to the process group
+# where virtmgr is the leader
+allow $1 crosvm:process sigkill;
 ')
 
 ####################################

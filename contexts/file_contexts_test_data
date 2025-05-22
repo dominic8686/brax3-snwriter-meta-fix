@@ -1227,6 +1227,8 @@
 /data/system_ce/0/shortcut_service/bitmaps                        shortcut_manager_icons
 /data/system_ce/9/shortcut_service/bitmaps/test                   shortcut_manager_icons
 
+/data/system_ce/0/appsearch/appsearch_storage                     appsearch_data_file
+
 /data/system/users/10/photo.png                                   icon_file
 
 /data/system/shutdown-checkpoints                                 shutdown_checkpoints_system_data_file

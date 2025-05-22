@@ -858,6 +858,9 @@
 # Backup service temporary per-user data for inter-change with apps
 /data/system_ce/[0-9]+/backup_stage(/.*)?	u:object_r:backup_data_file:s0
 
+# AppSearch files (https://developer.android.com/develop/ui/views/search/appsearch)
+/data/system_ce/[0-9]+/appsearch(/.*)?          u:object_r:appsearch_data_file:s0
+
 #############################
 # efs files
 #

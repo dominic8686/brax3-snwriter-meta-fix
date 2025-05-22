@@ -625,6 +625,10 @@ allow system_server perfetto:process signal;
 allow system_server backup_data_file:dir create_dir_perms;
 allow system_server backup_data_file:file create_file_perms;
 
+# Manage /data/system_ce/ID/appsearch.
+allow system_server appsearch_data_file:dir create_dir_perms;
+allow system_server appsearch_data_file:file create_file_perms;
+
 # Write to /data/system/dropbox
 allow system_server dropbox_data_file:dir create_dir_perms;
 allow system_server dropbox_data_file:file create_file_perms;
@@ -1750,3 +1754,11 @@ neverallow {
 # is too exposed to untrusted code. The DAC permission for CAP_SYS_MODULE
 # was removed in frameworks/base commit 915b8c2ebd2871ccbd8c81458d844c9ebcb32a67
 neverallow system_server self:global_capability_class_set sys_module;
+
+# Raw access to files within /data/system_ce/#/appsearch should never be
+# allowed, whether via direct open or system_server attempting to pass
+# such file descriptors to other processes. Having said that, some AppSearch
+# files are exposed via the blob API indirectly, using proxy revocable file
+# descriptors (based off the fuse filesystem). Transfer of those proxy FDs
+# are unaffected by this neverallow assertion.
+neverallow { domain -system_server -init } appsearch_data_file:file { open read write };
