@@ -18,6 +18,9 @@ set_prop(microdroid_payload, debug_prop)
 # process because it's not installed in microdroid
 get_prop(microdroid_payload, servicemanager_prop)
 
+# Allow to handle shutdown request by monitoring sys.shutdown.requested
+get_prop(microdroid_payload, powerctl_prop)
+
 # Allow microdroid_payload to use vsock inherited from microdroid_manager
 allow microdroid_payload microdroid_manager:vsock_socket { read write };
 
