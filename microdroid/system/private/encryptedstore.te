@@ -41,8 +41,8 @@ allow encryptedstore tmpfs:dir  { add_name create mounton write };
 allow encryptedstore labeledfs:filesystem { relabelfrom };
 allow encryptedstore encryptedstore_fs:filesystem { mount unmount relabelto relabelfrom };
 
-# chmod the root directory
-allow encryptedstore encryptedstore_file:dir setattr;
+# chmod the root directory (and check it)
+allow encryptedstore encryptedstore_file:dir { getattr setattr };
 
 # allow encryptedstore to log to the kernel
 allow encryptedstore kmsg_device:chr_file w_file_perms;
