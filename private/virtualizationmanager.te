@@ -110,8 +110,10 @@ userdebug_or_eng(`
   allow virtualizationmanager shell_data_file:file open;
 ')
 
-# Allow virtualizationmanager to read microdroid related files in vendor partition
+# Allow virtualizationmanager to read/write microdroid/vm related files in vendor partition
 r_dir_file(virtualizationmanager, vendor_microdroid_file)
+allow virtualizationmanager vendor_vm_file:file { read getattr };
+allow virtualizationmanager vendor_vm_data_file:file { read write getattr };
 
 # Allow virtualizationmanager to read /data/nativetest for VTS
 r_dir_file(virtualizationmanager, nativetest_data_file)

@@ -131,7 +131,6 @@ compatible_property_only(`
 
 # Properties which can be written only by vendor_init
 system_vendor_config_prop(apexd_config_prop)
-system_vendor_config_prop(apexd_select_prop)
 system_vendor_config_prop(aaudio_config_prop)
 until_board_api(202604, `system_vendor_config_prop(apk_verity_prop)')
 system_vendor_config_prop(audio_config_prop)
@@ -281,6 +280,9 @@ vendor_internal_prop(virtual_fingerprint_hal_prop)
 system_public_prop(virtual_fingerprint_prop)
 
 vendor_public_prop(persist_vendor_debug_wifi_prop)
+
+# Properties to select vendor/odm APEXes
+vendor_public_prop(apexd_select_prop)
 
 # Properties which are public for devices launching with Android O or earlier
 # This should not be used for any new properties.

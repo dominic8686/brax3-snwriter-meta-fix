@@ -57,6 +57,10 @@ is_flag_enabled(RELEASE_AVF_ENABLE_EARLY_VM, `
     # early_virtmgr may print messages to kmsg_debug_device.
     allow early_virtmgr kmsg_debug_device:chr_file w_file_perms;
 
+    # Allow early_virtmgr to read vm related files in vendor partition
+    allow early_virtmgr vendor_vm_file:file { read getattr };
+    allow early_virtmgr vendor_vm_data_file:file { read write getattr };
+
     ###
     ### Neverallow rules
     ###

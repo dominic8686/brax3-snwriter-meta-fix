@@ -1054,10 +1054,17 @@ full_treble_only(`
     -data_between_core_and_vendor_violators
     -init
     -vold_prepare_subdirs
+    -crosvm
   } {
     data_file_type
     -core_data_file_type
     -app_data_file_type
+  }:file_class_set ~{ append getattr ioctl read write map };
+  neverallow crosvm {
+    data_file_type
+    -core_data_file_type
+    -app_data_file_type
+    -vendor_vm_data_file
   }:file_class_set ~{ append getattr ioctl read write map };
 ')
 full_treble_only(`
@@ -2119,6 +2126,8 @@ full_treble_only(`
     # TODO(b/37168747): clean up fwk access to /vendor
     -crash_dump
     -crosvm # loads vendor-specific disk images
+    -virtualizationmanager # loads vendor-specific disk images
+    -early_virtmgr # loads vendor-specific disk images
     -init # starts vendor executables
     -kernel # loads /vendor/firmware
     -heapprofd

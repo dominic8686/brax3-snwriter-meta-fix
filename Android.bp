@@ -107,18 +107,18 @@ phony {
         "plat_service_contexts",
         "secilc",
         "plat_29.0.cil",
-        "29.0.compat.cil",
         "plat_30.0.cil",
-        "30.0.compat.cil",
         "plat_31.0.cil",
-        "31.0.compat.cil",
         "plat_32.0.cil",
-        "32.0.compat.cil",
         "plat_33.0.cil",
-        "33.0.compat.cil",
         "plat_34.0.cil",
-        "34.0.compat.cil",
         "plat_202404.cil",
+        "29.0.compat.cil",
+        "30.0.compat.cil",
+        "31.0.compat.cil",
+        "32.0.compat.cil",
+        "33.0.compat.cil",
+        "34.0.compat.cil",
         "202404.compat.cil",
     ] + select(soong_config_variable("ANDROID", "PLATFORM_SEPOLICY_VERSION"), {
         "202504": [],
@@ -365,6 +365,9 @@ se_versioned_policy {
     mapping: true,
     version: "current",
     relative_install_path: "mapping", // install to /system/etc/selinux/mapping
+    dist: {
+        targets: ["sepolicy_finalize"],
+    },
 }
 
 se_versioned_policy {
@@ -701,9 +704,6 @@ precompiled_se_policy_binary {
     required: [
         "sepolicy_neverallows",
     ],
-    dist: {
-        targets: ["base-sepolicy-files-for-mapping"],
-    },
 }
 
 // policy for recovery
@@ -790,7 +790,7 @@ se_policy_binary {
     srcs: [":base_plat_sepolicy.cil"],
     installable: false,
     dist: {
-        targets: ["base-sepolicy-files-for-mapping"],
+        targets: ["sepolicy_finalize"],
     },
 }
 
@@ -840,13 +840,14 @@ se_policy_cil {
     secilc_check: false,
     installable: false,
     dist: {
-        targets: ["base-sepolicy-files-for-mapping"],
+        targets: ["sepolicy_finalize"],
     },
 }
 
 se_versioned_policy {
     name: "base_plat_mapping_file",
     base: ":base_plat_pub_policy.cil",
+    stem: "base_plat_mapping_file.cil",
     mapping: true,
     version: "current",
     relative_install_path: "mapping", // install to /system/etc/selinux/mapping
