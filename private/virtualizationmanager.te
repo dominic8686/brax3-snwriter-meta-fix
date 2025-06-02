@@ -158,3 +158,6 @@ selinux_check_access(virtualizationmanager)
 # virtualizationmanager needs to talk to IVmCapabilitiesService HAL to allow specific VMs to
 # issue vendor-private smcs.
 hal_client_domain(virtualizationmanager, hal_vm_capabilities);
+
+# don't let virtmgr give root privileges to itself
+neverallow virtualizationmanager self:global_capability_class_set *;
