@@ -282,7 +282,7 @@ system_public_prop(virtual_fingerprint_prop)
 vendor_public_prop(persist_vendor_debug_wifi_prop)
 
 # Properties to select vendor/odm APEXes
-vendor_public_prop(apexd_select_prop)
+system_public_prop(apexd_select_prop)
 
 # Properties which are public for devices launching with Android O or earlier
 # This should not be used for any new properties.
