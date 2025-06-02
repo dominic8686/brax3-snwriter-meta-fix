@@ -167,3 +167,24 @@ The path to your `tracking_list.yaml` file is specified using the
 PRODUCT_SELINUX_TREBLE_LABELING_TRACKING_LIST_FILE := \
     device/google/your-device/sepolicy/tracking_list.yaml
 ```
+
+## `treble_labeling_violators`: Exemption for debuggable-only apps
+
+Some debuggable-only (`PRODUCT_PACKAGES_DEBUG`) apps require more permissions
+than the Treble enforcement. For example, an app installed to `system_ext` may
+need to dump vendor-specific resources. It doesn't make sense to enforce such
+debuggable-only apps, because the apps are never meant to be released.
+
+`treble_labeling_violators` is an attribute to exempt debuggable-only apps.
+Adding `treble_labeling_violators` to domain types will make the tests skip apps
+labeled with such types. The attribute is only for debuggable builds, and using
+the attribute on user builds will cause a build error.
+
+```
+type ramdump_app, domain;
+
+userdebug_or_eng(`
+    # Apps labeled as ramdump_app will be exempted from the labeling tests.
+    typeattributeset ramdump_app treble_labeling_violators;
+')
+```

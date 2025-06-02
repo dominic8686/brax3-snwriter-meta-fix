@@ -121,9 +121,16 @@ def build_argument_parser():
         help="Treat test failures as warnings instead of errors.",
         required=False,
     )
+    parser.add_argument(
+        "--debuggable",
+        action="store_true",
+        help="Exempt treble_labeling_violators from tests.",
+        required=False,
+    )
     return parser
 
-def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol, allowlist):
+def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol, allowlist,
+                                     exempted_types):
     """Tests if vendor SEPolicy adds more coredomain types.
     coredomain is only for platform types, so vendor SEPolicy must not add one.
     """
@@ -133,6 +140,7 @@ def TestNoCoredomainInVendorSepolicy(pol_without_vendor, pol, allowlist):
 
     allowed_types = {entry["domain"] for entry in allowlist}
     violations = coredomain_types - platform_coredomain_types - allowed_types
+    violations -= exempted_types
 
     if violations:
         return ("ERROR: The attribute 'coredomain' is only for platform "
@@ -277,7 +285,8 @@ def package_name_match(package_name, pattern):
 
 def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
                                             vendor_seapp_entries,
-                                            allowlist):
+                                            allowlist,
+                                            exempted_types):
     """Tests if vendor SEPolicy labels any of preinstalled platform apps.
     Platform apps can't be labeled with vendor SEPolicy. Also vendor's
     seapp_contexts must use 'name=' condition, because vendor's seapp_contexts
@@ -293,6 +302,8 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
         # Entries in vendor seapp contexts must have "name={name}" condition
         if "name" not in values or not values["name"]:
             no_name_violations.append((entry.partition, values["_raw"]))
+            continue
+        if values["domain"] in exempted_types:
             continue
 
         # Such name patterns must not match with platform_apps
@@ -337,7 +348,7 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
     return result
 
 def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
-                                     pol, allowlist):
+                                     pol, allowlist, exempted_types):
     """Tests if platform SEPolicy labels any of preinstalled platform apps with
     a non-coredomain label. All preinstalled platform apps are expected to be
     labeled with a coredomain type.
@@ -350,6 +361,8 @@ def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
     for entry in platform_seapp_entries:
         values = entry.values
         if not values["name"] or values["domain"] in coredomains:
+            continue
+        if values["domain"] in exempted_types:
             continue
 
         for app in platform_apps:
@@ -378,7 +391,7 @@ def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
     return ""
 
 def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol,
-                                     allowlist):
+                                     allowlist, exempted_types):
     """Tests if any of preinstalled vendor apps are labeled with coredomain
     labels. All preinstalled vendor apps are expected to be non-coredomain.
     """
@@ -390,6 +403,8 @@ def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol,
     for entry in seapp_entries:
         values = entry.values
         if not values["name"] or values["domain"] not in coredomains:
+            continue
+        if values["domain"] in exempted_types:
             continue
 
         for app in vendor_apps:
@@ -440,32 +455,45 @@ def do_main(libpath):
 
     seapp_entries = platform_seapp_entries + vendor_seapp_entries
 
+    exempted_types = pol.QueryTypeAttribute("treble_labeling_violators", True)
+
     result = ""
+
+    if not args.debuggable:
+        if exempted_types:
+            sys.exit("treble_labeling_violators can't be used on user builds.\n"
+                     "Please guard it with userdebug_or_eng macro.\n"
+                    f"violators:\n{exempted_types}\n")
+
     result += TestNoCoredomainInVendorSepolicy(
         pol_without_vendor,
         pol,
-        tracking_list.get('coredomain_in_vendor', [])
+        tracking_list.get('coredomain_in_vendor', []),
+        exempted_types
     )
     result += TestNoPlatformFilesInVendorFileContexts(
         args.vendor_file_contexts,
-        tracking_list.get('platform_file_in_vendor_file_contexts', [])
+        tracking_list.get('platform_file_in_vendor_file_contexts', []),
     )
     result += TestNoPlatformAppsInVendorSeappContexts(
         platform_apps,
         vendor_seapp_entries,
-        tracking_list.get('platform_apps_in_vendor_seapp_contexts', [])
+        tracking_list.get('platform_apps_in_vendor_seapp_contexts', []),
+        exempted_types
     )
     result += TestCoredomainForAllPlatformApps(
         platform_apps,
         platform_seapp_entries,
         pol,
-        tracking_list.get('non_coredomain_for_platform_apps', [])
+        tracking_list.get('non_coredomain_for_platform_apps', []),
+        exempted_types
     )
     result += TestNoCoredomainForAllVendorApps(
         vendor_apps,
         seapp_entries,
         pol,
-        tracking_list.get('coredomain_for_vendor_apps', [])
+        tracking_list.get('coredomain_for_vendor_apps', []),
+        exempted_types
     )
 
     if not result:
