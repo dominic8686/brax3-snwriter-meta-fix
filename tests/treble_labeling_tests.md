@@ -146,12 +146,18 @@ platform_file_in_vendor_file_contexts:
 platform_apps_in_vendor_seapp_contexts:
   - apk: SomePlatformApp.apk # name of APK
     bug: 112233445
+  - name: com.android.platform.app # or name of the package
+    bug: 554433221
 non_coredomain_for_platform_apps:
   - apk: SomeNonCoredomainApp.apk # name of APK
     bug: 112233445
+  - name: com.android.noncoredomain # or name of the package
+    bug: 554433221
 coredomain_for_vendor_apps:
   - apk: VendorServiceA.apk # name of APK
     bug: 314159265
+  - name: vendor.companya.servicea # or name of the package
+    bug: 358979323
 ```
 
 If no such violations are currently allowed, lists can be empty like:

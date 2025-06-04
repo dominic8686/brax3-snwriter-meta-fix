@@ -295,7 +295,8 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
     no_name_violations = []
     partition_violations = []
 
-    allowed_apks = {entry["apk"] for entry in allowlist}
+    allowed_apks = {entry["apk"] for entry in allowlist if "apk" in entry}
+    allowed_names = {entry["name"] for entry in allowlist if "name" in entry}
 
     for entry in vendor_seapp_entries:
         values = entry.values
@@ -309,6 +310,8 @@ def TestNoPlatformAppsInVendorSeappContexts(platform_apps,
         # Such name patterns must not match with platform_apps
         for app in platform_apps:
             if app.apk_name in allowed_apks:
+                continue
+            if app.package_name in allowed_names:
                 continue
             if package_name_match(app.package_name, values["name"]):
                 partition_violations.append((app.apk_name, app.package_name,
@@ -356,7 +359,8 @@ def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
     coredomains = pol.QueryTypeAttribute("coredomain", True)
     violations = []
 
-    allowed_apks = {entry["apk"] for entry in allowlist}
+    allowed_apks = {entry["apk"] for entry in allowlist if "apk" in entry}
+    allowed_names = {entry["name"] for entry in allowlist if "name" in entry}
 
     for entry in platform_seapp_entries:
         values = entry.values
@@ -367,6 +371,8 @@ def TestCoredomainForAllPlatformApps(platform_apps, platform_seapp_entries,
 
         for app in platform_apps:
             if app.apk_name in allowed_apks:
+                continue
+            if app.package_name in allowed_names:
                 continue
             if package_name_match(app.package_name, values["name"]):
                 violations.append((app.apk_name, app.package_name,
@@ -398,7 +404,8 @@ def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol,
     coredomains = pol.QueryTypeAttribute("coredomain", True)
     violations = []
 
-    allowed_apks = {entry["apk"] for entry in allowlist}
+    allowed_apks = {entry["apk"] for entry in allowlist if "apk" in entry}
+    allowed_names = {entry["name"] for entry in allowlist if "name" in entry}
 
     for entry in seapp_entries:
         values = entry.values
@@ -409,6 +416,8 @@ def TestNoCoredomainForAllVendorApps(vendor_apps, seapp_entries, pol,
 
         for app in vendor_apps:
             if app.apk_name in allowed_apks:
+                continue
+            if app.package_name in allowed_names:
                 continue
             if package_name_match(app.package_name, values["name"]):
                 violations.append((app.apk_name, app.package_name,
