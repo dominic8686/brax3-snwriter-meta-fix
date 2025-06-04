@@ -122,6 +122,8 @@ func (f *freezeTestModule) GenerateAndroidBuildActions(ctx android.ModuleContext
 
 	rule.Build("sepolicy_freeze_test", "sepolicy_freeze_test")
 
+	ctx.CheckbuildFile(f.freezeTestTimestamp)
+
 	moduleInfoJSON := ctx.ModuleInfoJSON()
 	moduleInfoJSON.Class = []string{"FAKE"}
 	moduleInfoJSON.SystemSharedLibs = []string{"none"}
