@@ -465,3 +465,10 @@ attribute tee_service_type;
 
 # HAL service used for custom smc filtering project
 hal_attribute(vm_capabilities);
+
+# Domains violating Treble Labeling
+# debuggable builds ONLY. NOT ALLOWED on user builds.
+starting_at_board_api(202604, `
+attribute treble_labeling_violators;
+expandattribute treble_labeling_violators false;
+')
