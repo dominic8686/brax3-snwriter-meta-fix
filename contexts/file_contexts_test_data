@@ -474,7 +474,6 @@
 /system/bin/stats                                                 stats_exec
 /system/bin/statsd                                                statsd_exec
 /system/bin/bpfloader                                             bpfloader_exec
-/system/bin/netbpfload                                            bpfloader_exec
 /system/bin/watchdogd                                             watchdogd_exec
 /system/bin/apexd                                                 apexd_exec
 /system/bin/gsid                                                  gsid_exec
