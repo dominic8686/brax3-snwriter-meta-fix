@@ -476,6 +476,7 @@ var (
 		"telecom":                                EXCEPTION_NO_FUZZER,
 		"telephony.registry":                     EXCEPTION_NO_FUZZER,
 		"telephony_ims":                          EXCEPTION_NO_FUZZER,
+		"telephony_phone_number":                 EXCEPTION_NO_FUZZER,
 		"testharness":                            EXCEPTION_NO_FUZZER,
 		"tethering":                              EXCEPTION_NO_FUZZER,
 		"textclassification":                     EXCEPTION_NO_FUZZER,
