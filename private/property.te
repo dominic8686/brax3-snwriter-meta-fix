@@ -86,6 +86,7 @@ system_internal_prop(trusty_widevine_vm_sys_prop)
 system_internal_prop(hint_manager_config_prop)
 
 # Properties which can't be written outside system
+system_restricted_prop(binder_cache_adservices_server_prop)
 system_restricted_prop(bionic_linker_16kb_app_compat_prop)
 system_restricted_prop(device_config_virtualization_framework_native_prop)
 system_restricted_prop(fstype_prop)
