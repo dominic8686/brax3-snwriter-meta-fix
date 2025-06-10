@@ -91,6 +91,7 @@ func buildVariant(ctx android.ModuleContext) string {
 func (m *macPermissionsModule) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 	platformKeys := getAllKeyPaths(ctx, ctx.Config().DefaultAppCertificateDir(ctx))
 	mainlineKeys := getAllKeyPaths(ctx, ctx.Config().MainlineSepolicyDevCertificatesDir(ctx))
+	bluetoothKeys := getAllKeyPaths(ctx, ctx.Config().MainlineBluetoothSepolicyDevCertificatesDir(ctx))
 	keys := android.PathsForModuleSrc(ctx, m.properties.Keys)
 	srcs := android.PathsForModuleSrc(ctx, m.properties.Srcs)
 
@@ -103,11 +104,13 @@ func (m *macPermissionsModule) GenerateAndroidBuildActions(ctx android.ModuleCon
 		Inputs(keys).
 		FlagWithOutput("> ", m4Keys).
 		Implicits(platformKeys).
-		Implicits(mainlineKeys)
+		Implicits(mainlineKeys).
+		Implicits(bluetoothKeys)
 
 	m.outputPath = android.PathForModuleOut(ctx, m.stem())
 	rule.Command().Text("DEFAULT_SYSTEM_DEV_CERTIFICATE="+ctx.Config().DefaultAppCertificateDir(ctx).String()).
 		Text("MAINLINE_SEPOLICY_DEV_CERTIFICATES="+ctx.Config().MainlineSepolicyDevCertificatesDir(ctx).String()).
+		Text("MAINLINE_BLUETOOTH_SEPOLICY_DEV_CERTIFICATES="+ctx.Config().MainlineBluetoothSepolicyDevCertificatesDir(ctx).String()).
 		BuiltTool("insertkeys").
 		FlagWithArg("-t ", buildVariant(ctx)).
 		Input(m4Keys).
@@ -138,6 +141,7 @@ func (m *macPermissionsModule) AndroidMk() android.AndroidMkData {
 //
 //	DEFAULT_SYSTEM_DEV_CERTIFICATE
 //	MAINLINE_SEPOLICY_DEV_CERTIFICATES
+//	MAINLINE_BLUETOOTH_SEPOLICY_DEV_CERTIFICATES
 func macPermissionsFactory() android.Module {
 	m := &macPermissionsModule{}
 	m.AddProperties(&m.properties)
