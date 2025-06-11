@@ -95,9 +95,6 @@ with_asan(`allow system_server dalvikcache_data_file:lnk_file r_file_perms;')
 allow system_server resourcecache_data_file:file r_file_perms;
 allow system_server resourcecache_data_file:dir r_dir_perms;
 
-# ptrace to processes in the same domain for debugging crashes.
-allow system_server self:process ptrace;
-
 # Child of the zygote.
 allow system_server zygote:fd use;
 allow system_server zygote:process sigchld;
@@ -1612,9 +1609,6 @@ allow system_server proc_pressure_mem:file rw_file_perms;
 # Read /proc/pressure/cpu and /proc/pressure/io
 allow system_server { proc_pressure_cpu proc_pressure_io }:file r_file_perms;
 
-# No ptracing others
-neverallow system_server { domain -system_server }:process ptrace;
-
 # CAP_SYS_RESOURCE was traditionally needed for sensitive /proc/PID
 # file read access. However, that is now unnecessary (b/34951864)
 neverallow system_server system_server:global_capability_class_set sys_resource;
@@ -1765,3 +1759,5 @@ neverallow system_server self:global_capability_class_set sys_module;
 # descriptors (based off the fuse filesystem). Transfer of those proxy FDs
 # are unaffected by this neverallow assertion.
 neverallow { domain -system_server -init } appsearch_data_file:file { open read write };
+
+neverallow system_server *:process ptrace;
