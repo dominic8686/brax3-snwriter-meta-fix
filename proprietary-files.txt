@@ -1135,11 +1135,6 @@ vendor/lib64/libhfmanagerwrapper.so
 vendor/lib64/libwifinvram.so
 vendor/lib64/libkmsetkey.so
 vendor/lib64/libwifical.so
-vendor/etc/init/lbs_hidl_service.rc
-vendor/etc/vintf/manifest/lbs_hidl_service@1.0.xml
-vendor/bin/lbs_hidl_service
-vendor/lib64/vendor.mediatek.hardware.lbs@1.0.so
-vendor/lib64/lbs_hidl_service-impl.so
 vendor/etc/init/hw/meta_init.rc
 vendor/etc/init/hw/factory_init.connectivity.rc
 vendor/etc/init/hw/factory_init.rc
@@ -1163,4 +1158,55 @@ vendor/lib64/libaudio_param_parser-vnd.so
 vendor/lib64/libaudiocustparam_vendor.so
 vendor/lib64/libaudioprimarydevicehalifclient.so
 system_ext/etc/init/hw/vendor_init_as_system.rc
+system_ext/etc/init/hw/meta_init.system.rc
 vendor/bin/uart_launcher
+
+vendor/etc/init/lbs_hidl_service.rc
+vendor/etc/vintf/manifest/lbs_hidl_service@1.0.xml
+vendor/bin/lbs_hidl_service
+vendor/lib64/vendor.mediatek.hardware.lbs@1.0.so
+vendor/lib64/lbs_hidl_service-impl.so
+
+# system_ext/app/DebugLoggerUI/DebugLoggerUI.apk
+# system_ext/bin/connsyslogger
+# system_ext/bin/emdlogger
+# system_ext/bin/mdlogger
+# system_ext/bin/mobile_log_d
+# system_ext/bin/netdiag
+# system_ext/bin/trace
+# system_ext/etc/init/consyslogger.rc
+# system_ext/etc/init/emdlogger.rc
+# system_ext/etc/init/mdlogger.rc
+# system_ext/etc/init/mobile_log_d.rc
+# system_ext/etc/init/netdiag.rc
+# system_ext/etc/mtklog-config.prop
+# system_ext/framework/log-handler.jar
+# system_ext/lib64/libaed.so
+# system_ext/lib64/libccci_util_sys.so
+# system_ext/lib64/libcompress.so
+# system_ext/lib64/libmdloggerrecycle.so
+# system_ext/lib64/libmediatek_exceptionlog.so
+# system_ext/lib64/libmemoryDumpEncoder.so
+# system_ext/lib64/libpcap_bak.so
+# system_ext/lib64/vendor.mediatek.hardware.log@1.0.so
+# system_ext/lib64/vendor.mediatek.hardware.log-V1-ndk.so
+# system_ext/bin/loghidlsysservice
+# system_ext/etc/init/loghidlsysservice.rc
+
+# system_ext/app/EngineerMode/EngineerMode.apk
+# system_ext/lib/libem_support_jni.so
+# system_ext/lib64/libem_support_jni.so
+# system_ext/lib/libaudiotoolkit.so
+# system_ext/lib/libem_aoltest_jni.so
+# system_ext/lib/libem_audio_jni.so
+# system_ext/lib/libem_wifi_jni.so
+# system_ext/lib64/libaudiotoolkit.so
+# system_ext/lib64/libem_aoltest_jni.so
+# system_ext/lib64/libem_audio_jni.so
+# system_ext/lib64/libem_wifi_jni.so
+# system_ext/etc/init/em_svr_user.rc
+# system_ext/bin/em_svr
+# system_ext/lib/libsysenv_system.so
+# system_ext/lib64/libsysenv_system.so
+
+# system/priv-app/PriFactoryTest/PriFactoryTest.apk:system_ext/priv-app/PriFactoryTest/PriFactoryTest.apk

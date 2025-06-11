@@ -35,6 +35,8 @@ lib_fixups: lib_fixups_user_type = {
     (
         'android.hardware.security.keymint-V1-ndk',
         'vendor.mediatek.hardware.videotelephony@1.0',
+        'vendor.mediatek.hardware.aee@1.0',
+        'vendor.mediatek.hardware.aee@1.1',
      ): lib_fixup_vendor_suffix,
     (
         'libsink',
@@ -108,7 +110,7 @@ blob_fixups: blob_fixups_user_type = {
     (
         'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
     ): blob_fixup()
-        .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V5-ndk.so'),
+        .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V6-ndk.so'),
     'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
         .add_needed('liblog.so'),
     'vendor/bin/hw/android.hardware.security.keymint@2.0-service.trustonic': blob_fixup()
@@ -122,8 +124,10 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libnvram.so',
         'vendor/lib64/libsysenv.so',
         'vendor/bin/hw/android.hardware.usb-aidl-service.mediatekv1.0',
-    ): blob_fixup()
+            ): blob_fixup()
         .add_needed('libbase_shim.so'),
+    'vendor/lib64/hw/hwcomposer.mtk_common.so' : blob_fixup()
+            .add_needed('libprocessgroup_shim.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
