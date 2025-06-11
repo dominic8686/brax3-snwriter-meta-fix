@@ -545,8 +545,8 @@ dontaudit dumpstate {
   vm_data_file
 }:dir getattr;
 
-#suppress denials for dumpstate to call vitualizationservice.
-dontaudit dumpstate virtualizationservice:binder { call };
+# Allow dumpstate to dump VMs
+binder_call(dumpstate, virtualizationservice)
 
 # Allow dumpstate to talk to bufferhubd over binder
 binder_call(dumpstate, bufferhubd);
