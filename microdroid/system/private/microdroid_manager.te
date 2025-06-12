@@ -168,6 +168,18 @@ get_prop(microdroid_manager, microdroid_encrypted_store_status_prop);
 # that it can setup encrypted store per payload request.
 get_prop(microdroid_manager, microdroid_encrypted_store_setup_prop);
 
+# Allow microdroid_manager to read /proc/*/maps for dump
+r_dir_file(microdroid_manager, domain)
+allow microdroid_manager self:global_capability_class_set sys_ptrace;
+
+# Allow microdroid_manager to read various /proc nodes for dump
+allow microdroid_manager {
+    proc
+    proc_pressure_cpu
+    proc_pressure_io
+    proc_pressure_mem
+}:file r_file_perms;
+
 # Domains other than microdroid can't write extra_apks
 neverallow { domain -microdroid_manager -init -vendor_init } extra_apk_file:file no_w_file_perms;
 neverallow { domain -microdroid_manager -init -vendor_init } extra_apk_file:dir no_w_dir_perms;
