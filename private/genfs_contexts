@@ -84,6 +84,7 @@ genfscon proc /sys/net u:object_r:proc_net:s0
 genfscon proc /sys/net/core/bpf_ u:object_r:proc_bpf:s0
 genfscon proc /sys/vm/dirty_background_ratio u:object_r:proc_dirty:s0
 genfscon proc /sys/vm/dirty_expire_centisecs u:object_r:proc_dirty:s0
+genfscon proc /sys/vm/dirty_writeback_centisecs u:object_r:proc_dirty:s0
 genfscon proc /sys/vm/extra_free_kbytes u:object_r:proc_extra_free_kbytes:s0
 genfscon proc /sys/vm/max_map_count u:object_r:proc_max_map_count:s0
 genfscon proc /sys/vm/mmap_min_addr u:object_r:proc_security:s0
