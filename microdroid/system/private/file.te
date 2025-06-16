@@ -35,3 +35,11 @@ type perfetto_configs_data_file, file_type, data_file_type, core_data_file_type;
 
 # Type for /sys/kernel/mm/pgsize_migration/enabled
 type sysfs_pgsize_migration, fs_type, sysfs_type;
+
+# /data/tombstones - core dumps
+# This is not required, but added to make tombstoned happy.
+type tombstone_data_file, file_type, data_file_type, core_data_file_type;
+
+# tombstone sockets
+type tombstoned_crash_socket, file_type, coredomain_socket;
+type tombstoned_intercept_socket, file_type, coredomain_socket;
