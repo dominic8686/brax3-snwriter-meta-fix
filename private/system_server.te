@@ -107,7 +107,7 @@ allow system_server {
   virtualizationmanager
   webview_zygote
   zygote
-}:process { getpgid sigkill signull };
+}:process { getpgid sigkill signull setsched };
 
 # Read /system/bin/app_process.
 allow system_server zygote_exec:file r_file_perms;
