@@ -204,6 +204,9 @@ type apk_metadata_file, file_type, data_file_type, core_data_file_type;
 # Type for /sys/kernel/mm/pgsize_migration/enabled
 type sysfs_pgsize_migration, fs_type, sysfs_type;
 
+# Type for /sys/kernel/btf/*
+type sysfs_btf, fs_type, sysfs_type;
+
 # /sys/firmware/acpi/tables
 type sysfs_firmware_acpi_tables, fs_type, sysfs_type;
 
