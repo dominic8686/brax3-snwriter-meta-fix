@@ -1,4 +1,5 @@
 type bpfloader_exec, system_file_type, exec_type, file_type;
+type bpfloader_platform_exec, system_file_type, exec_type, file_type;
 
 typeattribute bpfloader bpfdomain;
 
@@ -24,6 +25,7 @@ allow bpfloader proc_bpf:file rw_file_perms;
 set_prop(bpfloader, bpf_progs_loaded_prop)
 
 allow bpfloader bpfloader_exec:file execute_no_trans;
+allow bpfloader bpfloader_platform_exec:file { execute execute_no_trans getattr map open read };
 
 ###
 ### Neverallow rules
@@ -56,6 +58,7 @@ neverallow { domain -bpfloader } fs_bpf_loader:bpf *;
 neverallow { domain -bpfloader } fs_bpf_loader:file *;
 
 neverallow { domain -bpfloader -init userdebug_or_eng(`-overlay_remounter') } bpfloader_exec:file { execute execute_no_trans };
+neverallow { domain -bpfloader userdebug_or_eng(`-overlay_remounter') } bpfloader_platform_exec:file { execute execute_no_trans };
 
 neverallow { coredomain -bpfloader -netd -netutils_wrapper } fs_bpf_vendor:file *;
 
