@@ -548,3 +548,94 @@ neverallow shell self:perf_event ~{ open read write kernel };
 # Never allow others to set or get the perf.drop_caches property.
 neverallow { domain -shell -init } perf_drop_caches_prop:property_service set;
 neverallow { domain -shell -init -dumpstate } perf_drop_caches_prop:file read;
+
+# /data/local/tmp symlink following vulnerabilities were common
+# in the early days of Android, but have largely gone away with the
+# introduction of SELinux. Prevent domains from following /data/local/tmp
+# symlinks to avoid this class of problems in the future.
+neverallow {
+  domain
+  -shell
+  userdebug_or_eng(`-uncrypt')
+  -installd
+} shell_data_file:lnk_file read;
+
+# Restrict direct access to shell owned files. The /data/local/tmp directory is
+# untrustworthy, and non-allowed domains should not be trusting any content in
+# those directories. We allow shell files to be passed around by file
+# descriptor, but not directly opened.
+# artd doesn't need to access /data/local/tmp, but it needs to access
+# /data/{user,user_de}/<user-id>/com.android.shell/... for compiling secondary
+# dex files.
+neverallow {
+  domain
+  -adbd
+  -appdomain
+  -artd
+  -dumpstate
+  -installd
+  userdebug_or_eng(`-uncrypt')
+  userdebug_or_eng(`-virtualizationmanager')
+  userdebug_or_eng(`-virtualizationservice')
+  userdebug_or_eng(`-crosvm')
+} shell_data_file:file open;
+
+# In addition to the symlink reading restrictions above, restrict
+# write access to shell owned directories. The /data/local/tmp
+# directory is untrustworthy, and non-allowed domains should
+# not be trusting any content in those directories.
+# artd doesn't need to access /data/local/tmp, but it needs to access
+# /data/{user,user_de}/<user-id>/com.android.shell/... for compiling secondary
+# dex files.
+neverallow {
+  domain
+  -adbd
+  -artd
+  -dumpstate
+  -installd
+  -init
+  -shell
+  -vold
+} shell_data_file:dir no_w_dir_perms;
+
+# Restrict direct open access to shell owned directories. This ensures that
+# only allow-listed domains can list out the contents of the /data/local/tmp
+# directories. The /data/local/tmp directory contains untrusted content and
+# we do not want privileged components depending on this directory.
+neverallow {
+  domain
+  -adbd
+  -appdomain
+  -artd
+  -dumpstate
+  -init
+  -installd
+  -simpleperf_app_runner
+  -system_server # why?
+  userdebug_or_eng(`-uncrypt')
+} shell_data_file:dir open;
+
+# Restrict search access to /data/local/tmp directories. This ensures that
+# only allow-listed domains can pass through the /data/local/tmp directory
+# to access files. The /data/local/tmp diectory contains untrusted content
+# and we do not want privileged components depending on this directory.
+neverallow {
+  domain
+  -adbd
+  -appdomain
+  -artd
+  -dumpstate
+  -init
+  -installd
+  -simpleperf_app_runner
+  -system_server # why?
+  userdebug_or_eng(`-uncrypt')
+  userdebug_or_eng(`-virtualizationmanager')
+  userdebug_or_eng(`-crosvm')
+} shell_data_file:dir search;
+
+# Restrict execute from /data/local/tmp directories. This directory contains
+# untrusted content from the adb shell user, and only the shell user should
+# be able to execute such content. Allowing other domains to execute this
+# content would be a privilege escalation vulnerability.
+neverallow { domain -shell } shell_data_file:file no_x_file_perms;
