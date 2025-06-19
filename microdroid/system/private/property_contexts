@@ -184,6 +184,8 @@ dalvik.vm.restore-dex2oat-threads             u:object_r:dalvik_dynamic_config_p
 
 apexd.payload_metadata.path u:object_r:apexd_payload_metadata_prop:s0 exact string
 
+tombstoned.max_tombstone_count u:object_r:tombstone_config_prop:s0 exact int
+
 # These non_existing_prop properties are unused in microdroid, but added here to suppress libc's
 # access denial logs.
 libc.debug.gwp_asan.              u:object_r:non_existing_prop:s0 prefix string

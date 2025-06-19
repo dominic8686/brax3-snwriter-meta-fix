@@ -62,6 +62,7 @@ set_prop(surfaceflinger, exported_system_prop)
 set_prop(surfaceflinger, exported3_system_prop)
 set_prop(surfaceflinger, ctl_bootanim_prop)
 set_prop(surfaceflinger, locale_prop)
+set_prop(surfaceflinger, service_sf_present_timestamp_prop)
 set_prop(surfaceflinger, surfaceflinger_display_prop)
 set_prop(surfaceflinger, timezone_prop)
 
