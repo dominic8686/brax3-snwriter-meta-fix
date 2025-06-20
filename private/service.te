@@ -68,6 +68,10 @@ is_flag_enabled(RELEASE_RANGING_STACK, `
 
 type theme_service,                     system_server_service, service_manager_type;
 
+until_board_api(202604, `
+type hal_bluetooth_lpp_service, protected_service, hal_service_type, service_manager_type;
+')
+
 ###
 ### Neverallow rules
 ###

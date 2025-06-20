@@ -35,4 +35,6 @@ expandattribute opengl_sphal_domain false;
 
 attribute vulkan_sphal_domain;
 expandattribute vulkan_sphal_domain false;
+
+hal_attribute(bluetooth_lpp);
 ') # until_board_api(202604)
