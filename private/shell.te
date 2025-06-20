@@ -32,11 +32,6 @@ binder_call(shell, storaged)
 selinux_check_access(shell)
 selinux_check_context(shell)
 
-userdebug_or_eng(`
-    # Allow shell to use io_uring for testing
-    io_uring_use(shell)
-')
-
 # Control Perfetto traced and obtain traces from it.
 # Needed for Studio and debugging.
 unix_socket_connect(shell, traced_consumer, traced)
