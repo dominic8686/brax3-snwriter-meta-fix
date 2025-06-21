@@ -157,7 +157,7 @@ allow microdroid_manager extra_apk_file:dir create_dir_perms;
 allow microdroid_manager kmsg_debug_device:chr_file w_file_perms;
 
 allow microdroid_manager sysfs:dir { search r_dir_perms };
-allow microdroid_manager cgroup_v2:dir { search r_dir_perms };
+allow microdroid_manager cgroup_v2:dir { search r_dir_perms create_dir_perms };
 allow microdroid_manager cgroup_v2:file rw_file_perms;
 
 # Allow microdroid_manager to listen for changes to the microdroid_manager.encrypted_store.status
