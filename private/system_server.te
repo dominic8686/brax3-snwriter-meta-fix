@@ -1277,8 +1277,20 @@ with_asan(`
 # allow system_server to read the eBPF maps that stores the traffic stats information and update
 # the map after snapshot is recorded, and to read, update and run the maps and programs used for
 # time in state accounting
-allow system_server { fs_bpf fs_bpf_net_shared fs_bpf_netd_readonly fs_bpf_netd_shared }:dir search;
-allow system_server { fs_bpf fs_bpf_net_shared fs_bpf_netd_readonly fs_bpf_netd_shared }:file { getattr read write };
+allow system_server {
+  fs_bpf
+  fs_bpf_cputimeinstate
+  fs_bpf_net_shared
+  fs_bpf_netd_readonly
+  fs_bpf_netd_shared
+}:dir search;
+allow system_server {
+  fs_bpf
+  fs_bpf_cputimeinstate
+  fs_bpf_net_shared
+  fs_bpf_netd_readonly
+  fs_bpf_netd_shared
+}:file { getattr read write };
 allow system_server bpfloader:bpf prog_run;
 allow system_server self:bpf map_create;
 allow system_server { bpfloader netd network_stack system_server }:bpf { map_read map_write };

@@ -335,6 +335,7 @@ genfscon usbfs / u:object_r:usbfs:s0
 genfscon binfmt_misc / u:object_r:binfmt_miscfs:s0
 
 genfscon bpf / u:object_r:fs_bpf:s0
+genfscon bpf /cputimeinstate u:object_r:fs_bpf_cputimeinstate:s0
 genfscon bpf /loader u:object_r:fs_bpf_loader:s0
 genfscon bpf /memevents u:object_r:fs_bpf_memevents:s0
 genfscon bpf /net_private u:object_r:fs_bpf_net_private:s0
