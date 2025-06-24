@@ -56,3 +56,5 @@ set_prop(encryptedstore, microdroid_encrypted_store_status_prop);
 
 # Only microdroid_manager can run encryptedstore
 neverallow { domain -microdroid_manager } encryptedstore:process { transition dyntransition };
+
+unix_socket_connect(encryptedstore, vm_internal_service, microdroid_manager)

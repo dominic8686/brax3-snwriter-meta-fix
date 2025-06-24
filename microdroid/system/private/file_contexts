@@ -63,6 +63,7 @@
 /dev/socket/property_service_for_system  u:object_r:property_socket:s0
 /dev/socket/statsdw	u:object_r:statsdw_socket:s0
 /dev/socket/authfs_service u:object_r:authfs_service_socket:s0
+/dev/socket/vm_internal_service u:object_r:vm_internal_service_socket:s0
 /dev/socket/vm_payload_service u:object_r:vm_payload_service_socket:s0
 /dev/socket/rpc_servicemanager u:object_r:rpc_servicemanager_socket:s0
 /dev/socket/traced_consumer	u:object_r:traced_consumer_socket:s0
