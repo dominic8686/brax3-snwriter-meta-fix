@@ -1499,6 +1499,8 @@ allow system_server apex_info_file:file r_file_perms;
 
 # Allow system_server read APEX file mapped as device-mapper device
 allow system_server dm_device:blk_file r_file_perms;
+# and read the device mapper name from sysfs
+allow system_server sysfs_dm:file r_file_perms;
 
 # Allow system_server to communicate with tradeinmode.
 binder_call(system_server, tradeinmode)
