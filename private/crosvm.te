@@ -63,7 +63,10 @@ userdebug_or_eng(`
 ')
 
 # Allow crosvm to tune for performance.
-allow crosvm self:global_capability_class_set sys_nice;
+# Allow crosvm to use ipc_owner capability to enable guest-ffa for pVMs.
+# Note: the crosvm itself doesn't have the ipc_owner capability, but will only inherit it iff
+# the "pVM owner" process (the process that is using AVF APIs to start a pVM has the capability.
+allow crosvm self:global_capability_class_set { ipc_owner sys_nice };
 
 # Let crosvm access its control socket as created by VS.
 #   read, write, getattr: listener socket polling
