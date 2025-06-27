@@ -390,6 +390,7 @@ allow system_server {
   artd
   audioserver
   cameraserver
+  composd
   drmserver
   gpuservice
   inputflinger
