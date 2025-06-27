@@ -1571,6 +1571,7 @@ ro.telephony.call_ring.multiple   u:object_r:telephony_config_prop:s0 exact bool
 ro.telephony.default_cdma_sub     u:object_r:telephony_config_prop:s0 exact int
 ro.telephony.default_network      u:object_r:telephony_config_prop:s0 exact string
 ro.telephony.iwlan_operation_mode u:object_r:telephony_config_prop:s0 exact enum default legacy AP-assisted
+ro.telephony.sim_slots.count      u:object_r:telephony_config_prop:s0 exact int
 telephony.active_modems.max_count u:object_r:telephony_config_prop:s0 exact int
 telephony.lteOnCdmaDevice         u:object_r:telephony_config_prop:s0 exact int
 persist.dbg.volte_avail_ovr       u:object_r:telephony_config_prop:s0 exact int
