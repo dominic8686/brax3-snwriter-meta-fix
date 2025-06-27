@@ -104,6 +104,7 @@ allow vold {
   sysfs_devices_block
   sysfs_dm
   sysfs_loop # writing to /sys/block/loop*/uevent during coldboot.
+  sysfs_ublk # writing to /sys/block/ublk*/uevent
   sysfs_usb
   sysfs_zram_uevent
   sysfs_fs_f2fs
