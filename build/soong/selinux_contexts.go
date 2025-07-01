@@ -239,6 +239,8 @@ func (m *selinuxContextsModule) ImageMutatorBegin(ctx android.ImageInterfaceCont
 	}
 }
 
+func (m *selinuxContextsModule) ImageMutatorSupported() bool { return true }
+
 func (m *selinuxContextsModule) VendorVariantNeeded(ctx android.ImageInterfaceContext) bool {
 	return false
 }
@@ -730,6 +732,8 @@ func (m *contextsTestModule) AndroidMkEntries() []android.AndroidMkEntries {
 // modules as its sources.
 func (m *contextsTestModule) ImageMutatorBegin(ctx android.ImageInterfaceContext) {
 }
+
+func (m *contextsTestModule) ImageMutatorSupported() bool { return true }
 
 func (m *contextsTestModule) VendorVariantNeeded(ctx android.ImageInterfaceContext) bool {
 	return false
