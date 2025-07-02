@@ -217,6 +217,7 @@ genfscon tracefs /printk_formats                      u:object_r:debugfs_tracing
 genfscon tracefs /events/header_page                         u:object_r:debugfs_tracing:s0
 genfscon tracefs /events/f2fs/f2fs_get_data_block/           u:object_r:debugfs_tracing:s0
 genfscon tracefs /events/f2fs/f2fs_iget/                     u:object_r:debugfs_tracing:s0
+genfscon tracefs /events/f2fs/f2fs_set_page_dirty/           u:object_r:debugfs_tracing:s0
 genfscon tracefs /events/f2fs/f2fs_sync_file_enter/          u:object_r:debugfs_tracing:s0
 genfscon tracefs /events/f2fs/f2fs_sync_file_exit/           u:object_r:debugfs_tracing:s0
 genfscon tracefs /events/f2fs/f2fs_write_begin/              u:object_r:debugfs_tracing:s0
