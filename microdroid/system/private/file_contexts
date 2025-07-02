@@ -156,6 +156,7 @@
 /data/local/tmp/ltp(/.*)?   u:object_r:nativetest_data_file:s0
 /data/local/traces(/.*)?	u:object_r:trace_data_file:s0
 /data/misc/authfs(/.*)?         u:object_r:authfs_data_file:s0
+/data/misc/perfetto-traces(/.*)?    u:object_r:perfetto_traces_data_file:s0
 /data/vendor(/.*)?              u:object_r:vendor_data_file:s0
 
 # These two are not required, but added to make tombstoned happy.
