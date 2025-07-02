@@ -150,6 +150,9 @@ allow surfaceflinger hal_evs:fd use;
 # Allow to use release fence fds supplied by hal_camera
 allow surfaceflinger hal_camera:fd use;
 
+# Allow access to /data/misc/surfaceflinger
+allow surfaceflinger surfaceflinger_data_file:dir create_dir_perms;
+allow surfaceflinger surfaceflinger_data_file:file create_file_perms;
 
 # Surfaceflinger should not be reading default vendor-defined properties.
 dontaudit surfaceflinger vendor_default_prop:file read;
