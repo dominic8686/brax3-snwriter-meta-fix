@@ -143,6 +143,9 @@ type environ_system_data_file, file_type, data_file_type, core_data_file_type;
 # /data/misc/bootanim
 type bootanim_data_file, file_type, data_file_type, core_data_file_type;
 
+# /data/misc/surfaceflinger
+type surfaceflinger_data_file, file_type, data_file_type, core_data_file_type;
+
 # /dev/kvm
 # The type needs to be mlstrustedobject to allow for being accessed from
 # crosvm, which runs at a more constrained MLS level.

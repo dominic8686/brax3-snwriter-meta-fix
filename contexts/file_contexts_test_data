@@ -1071,6 +1071,8 @@
 /data/misc/stats-service/test                                     stats_config_data_file
 /data/misc/stats-metadata                                         stats_data_file
 /data/misc/stats-metadata/test                                    stats_data_file
+/data/misc/surfaceflinger                                         surfaceflinger_data_file
+/data/misc/surfaceflinger/test                                    surfaceflinger_data_file
 /data/misc/systemkeys                                             systemkeys_data_file
 /data/misc/systemkeys/test                                        systemkeys_data_file
 /data/misc/textclassifier                                         textclassifier_data_file
