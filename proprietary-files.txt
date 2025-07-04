@@ -40,11 +40,6 @@ vendor/lib/vendor.mediatek.hardware.audio@8.1.so
 vendor/lib64/libbwc.so
 vendor/lib64/libtinycompress.so
 vendor/lib64/vendor.mediatek.hardware.audio@6.1.so
-vendor/lib/hw/android.hardware.soundtrigger@2.3-impl.so
-vendor/lib/hw/sound_trigger.primary.default.so
-vendor/lib/libvow_comp_test.so
-vendor/etc/permissions/com.mediatek.hardware.vow.xml
-vendor/etc/permissions/com.mediatek.hardware.vow_dsp.xml
 
 # Audio Configs
 vendor/etc/audio_device.xml
@@ -1125,47 +1120,44 @@ vendor/lib64/libwifi-hal.so
 vendor/lib64/libwpa_client.so;MODULE_SUFFIX=_vendor
 
 
+# vendor/bin/meta_tst
+# vendor/etc/apdb/APDB_MT6835___W2421_ENUM
+# vendor/etc/apdb/APDB_MT6835___W2421
+# vendor/lib64/libhfmanagerwrapper.so
+# vendor/lib64/libwifinvram.so
+# vendor/lib64/libkmsetkey.so
+# vendor/lib64/libwifical.so
+# vendor/etc/init/hw/meta_init.rc
+# vendor/etc/init/hw/factory_init.connectivity.rc
+# vendor/etc/init/hw/factory_init.rc
+# vendor/etc/init/hw/meta_init.connectivity.rc
+# vendor/etc/init/hw/factory_init.project.rc
+# vendor/etc/init/hw/meta_init.project.rc
+# vendor/etc/init/hw/meta_init.vendor.rc
+# vendor/etc/init/hw/multi_init.rc
+# vendor/etc/init/hw/meta_init.modem.rc
+# vendor/etc/init/hw/meta_init.connectivity.common.rc
+# vendor/etc/init/hw/factory_init.connectivity.common.rc
 
 
+# vendor/bin/factory
+# vendor/lib64/libacdk.so
+# vendor/lib64/libminiui.so
+# vendor/lib64/libpixelflinger.so
+# vendor/lib64/libfft_vendor.so
+# vendor/lib64/libaudiotoolkit_vendor.so
+# vendor/lib64/libaudio_param_parser-vnd.so
+# vendor/lib64/libaudiocustparam_vendor.so
+# vendor/lib64/libaudioprimarydevicehalifclient.so
+# system_ext/etc/init/hw/vendor_init_as_system.rc
+# system_ext/etc/init/hw/meta_init.system.rc
+# vendor/bin/uart_launcher
 
-vendor/bin/meta_tst
-vendor/etc/apdb/APDB_MT6835___W2421_ENUM
-vendor/etc/apdb/APDB_MT6835___W2421
-vendor/lib64/libhfmanagerwrapper.so
-vendor/lib64/libwifinvram.so
-vendor/lib64/libkmsetkey.so
-vendor/lib64/libwifical.so
-vendor/etc/init/hw/meta_init.rc
-vendor/etc/init/hw/factory_init.connectivity.rc
-vendor/etc/init/hw/factory_init.rc
-vendor/etc/init/hw/meta_init.connectivity.rc
-vendor/etc/init/hw/factory_init.project.rc
-vendor/etc/init/hw/meta_init.project.rc
-vendor/etc/init/hw/meta_init.vendor.rc
-vendor/etc/init/hw/multi_init.rc
-vendor/etc/init/hw/meta_init.modem.rc
-vendor/etc/init/hw/meta_init.connectivity.common.rc
-vendor/etc/init/hw/factory_init.connectivity.common.rc
-
-
-vendor/bin/factory
-vendor/lib64/libacdk.so
-vendor/lib64/libminiui.so
-vendor/lib64/libpixelflinger.so
-vendor/lib64/libfft_vendor.so
-vendor/lib64/libaudiotoolkit_vendor.so
-vendor/lib64/libaudio_param_parser-vnd.so
-vendor/lib64/libaudiocustparam_vendor.so
-vendor/lib64/libaudioprimarydevicehalifclient.so
-system_ext/etc/init/hw/vendor_init_as_system.rc
-system_ext/etc/init/hw/meta_init.system.rc
-vendor/bin/uart_launcher
-
-vendor/etc/init/lbs_hidl_service.rc
-vendor/etc/vintf/manifest/lbs_hidl_service@1.0.xml
-vendor/bin/lbs_hidl_service
-vendor/lib64/vendor.mediatek.hardware.lbs@1.0.so
-vendor/lib64/lbs_hidl_service-impl.so
+# vendor/etc/init/lbs_hidl_service.rc
+# vendor/etc/vintf/manifest/lbs_hidl_service@1.0.xml
+# vendor/bin/lbs_hidl_service
+# vendor/lib64/vendor.mediatek.hardware.lbs@1.0.so
+# vendor/lib64/lbs_hidl_service-impl.so
 
 # system_ext/app/DebugLoggerUI/DebugLoggerUI.apk
 # system_ext/bin/connsyslogger
@@ -1208,5 +1200,3 @@ vendor/lib64/lbs_hidl_service-impl.so
 # system_ext/bin/em_svr
 # system_ext/lib/libsysenv_system.so
 # system_ext/lib64/libsysenv_system.so
-
-# system/priv-app/PriFactoryTest/PriFactoryTest.apk:system_ext/priv-app/PriFactoryTest/PriFactoryTest.apk

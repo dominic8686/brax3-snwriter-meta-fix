@@ -9,7 +9,7 @@ install_symlink {
 }
 
 prebuilt_hidl_interfaces {
-    name: "hidl_hardware_mms",
+    name: "hidl_hardware_mms_interfaces",
     interfaces: [
         "vendor.mediatek.hardware.mms@1.0::IMms",
         "vendor.mediatek.hardware.mms@1.1::IMms",
