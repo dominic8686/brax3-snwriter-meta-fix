@@ -5,4 +5,5 @@
 -->
 <resources>
     <dimen name="status_bar_padding_start">12dp</dimen>
+    <dimen name="lock_icon_padding">30px</dimen>
 </resources>

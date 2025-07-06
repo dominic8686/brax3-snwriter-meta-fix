@@ -204,3 +204,6 @@
 
 #dynamic sensor
 /dev/hidraw*   0660 system system
+
+#charging control
+/sys/devices/platform/charger cmd_charge_disable 0660 system system

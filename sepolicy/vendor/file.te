@@ -2,3 +2,4 @@ type proc_powerhal_cpu_ctrl, fs_type, proc_type;
 type proc_touch_boost, fs_type, proc_type;
 type proc_core_ctl, fs_type, proc_type;
 type sysfs_thermal_efuse, fs_type, sysfs_type;
+type sysfs_charging_control, fs_type, sysfs_type;
