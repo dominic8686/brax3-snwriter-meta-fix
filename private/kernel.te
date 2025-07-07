@@ -6,11 +6,6 @@ userdebug_or_eng(`
   domain_auto_trans(kernel, overlay_remounter_exec, overlay_remounter)
 ')
 
-# Allow the kernel to read otapreopt_chroot's file descriptors and files under
-# /postinstall, as it uses apexd logic to mount APEX packages in /postinstall/apex.
-allow kernel otapreopt_chroot:fd use;
-allow kernel postinstall_file:file read;
-
 # The following sections are for the transition period during a Virtual A/B
 # OTA. Once sepolicy is loaded, snapuserd must be re-launched in the correct
 # context, and with properly labelled devices. This must be done before

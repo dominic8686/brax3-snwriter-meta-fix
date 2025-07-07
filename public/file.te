@@ -360,7 +360,9 @@ type apk_private_tmp_file, file_type, data_file_type, core_data_file_type, mlstr
 # /data/dalvik-cache
 type dalvikcache_data_file, file_type, data_file_type, core_data_file_type;
 # /data/ota
-type ota_data_file, file_type, data_file_type, core_data_file_type;
+until_board_api(202604, `
+    type ota_data_file, file_type, data_file_type, core_data_file_type;
+');
 # /data/ota_package
 type ota_package_file, file_type, data_file_type, core_data_file_type, mlstrustedobject;
 # /data/misc/profiles
@@ -434,7 +436,9 @@ type postinstall_mnt_dir, file_type;
 # Files inside the /postinstall mountpoint are all labeled as postinstall_file.
 type postinstall_file, file_type;
 # /postinstall/apex: Mount point used for APEX images within /postinstall.
-type postinstall_apex_mnt_dir, file_type;
+until_board_api(202604, `
+    type postinstall_apex_mnt_dir, file_type;
+');
 
 # /data_mirror: Contains mirror directory for storing all apps data.
 type mirror_data_file, file_type, core_data_file_type;

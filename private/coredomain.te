@@ -60,7 +60,6 @@ full_treble_only(`
         -init
         -installd
         -heapprofd
-        -postinstall_dexopt
         -rs # spawned by appdomain, so carryover the exception above
         -system_server
         -traced_perf
@@ -79,7 +78,6 @@ full_treble_only(`
         -installd
         -heapprofd
         userdebug_or_eng(`-profcollectd')
-        -postinstall_dexopt
         -profman
         -rs # spawned by appdomain, so carryover the exception above
         userdebug_or_eng(`-simpleperf_boot')
@@ -100,7 +98,6 @@ full_treble_only(`
         -idmap
         -init
         -installd
-        -postinstall_dexopt
         -rs # spawned by appdomain, so carryover the exception above
         -system_server
         -traced_perf
@@ -121,7 +118,6 @@ full_treble_only(`
         -idmap
         -init
         -installd
-        -postinstall_dexopt
         -rs # spawned by appdomain, so carryover the exception above
         -system_server
         -traced_perf
