@@ -1903,8 +1903,10 @@ neverallow {
   -init # TODO: limit init to relabelfrom for files
   -zygote
   -installd
+  -postinstall_dexopt
   -cppreopts
   -dex2oat
+  -otapreopt_slot
   -artd
 } dalvikcache_data_file:file no_w_file_perms;
 
@@ -1912,9 +1914,11 @@ neverallow {
   domain
   -init
   -installd
+  -postinstall_dexopt
   -cppreopts
   -dex2oat
   -zygote
+  -otapreopt_slot
   -artd
 } dalvikcache_data_file:dir no_w_dir_perms;
 
@@ -1973,6 +1977,7 @@ define(`dac_override_allowed', `{
   lmkd
   migrate_legacy_obb_data
   netd
+  postinstall_dexopt
   recovery
   rss_hwm_reset
   sdcardd
@@ -2007,6 +2012,7 @@ neverallow {
     recovery_only(`-fastbootd')
     -init
     -kernel
+    -otapreopt_chroot
     -recovery
     -update_engine
     -vold
@@ -2175,12 +2181,13 @@ neverallow domain mlsvendorcompat:process fork;
 neverallow { -domain } *:binder *;
 neverallow * { -domain }:binder *;
 
-# Only init and dexopt_chroot_setup should be mounting filesystems on locations
+# Only init and otapreopt_chroot should be mounting filesystems on locations
 # labeled system or vendor (/product and /vendor respectively).
 neverallow {
   domain
   -dexopt_chroot_setup
   -init
+  -otapreopt_chroot
   userdebug_or_eng(`-overlay_remounter')
   userdebug_or_eng(`-zygote')
 } {
