@@ -1,5 +1,7 @@
 ;; types removed from current policy
 (type apk_verity_prop)
+(type ota_data_file)
+(type postinstall_apex_mnt_dir)
 
 ;; mapping information from ToT policy's types to 202504 policy's types.
 (expandtypeattribute (DockObserver_service_202504) true)

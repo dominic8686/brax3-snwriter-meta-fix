@@ -40,7 +40,6 @@
 /mnt/vm                                                           vm_data_file
 
 /postinstall                                                      postinstall_mnt_dir
-/postinstall/apex                                                 postinstall_apex_mnt_dir
 
 /apex/.bootstrap-apex-info-list.xml                               apex_info_file
 /apex/.default-apex-info-list.xml                                 apex_info_file
@@ -370,8 +369,6 @@
 /system/bin/mdnsd                                                 mdnsd_exec
 /system/bin/ot-ctl                                                ot_ctl_exec
 /system/bin/installd                                              installd_exec
-/system/bin/otapreopt_chroot                                      otapreopt_chroot_exec
-/system/bin/otapreopt_slot                                        otapreopt_slot_exec
 /system/bin/credstore                                             credstore_exec
 /system/bin/keystore                                              keystore_exec
 /system/bin/keystore2                                             keystore_exec
@@ -863,8 +860,6 @@
 /data/resource-cache/test                                         resourcecache_data_file
 /data/dalvik-cache                                                dalvikcache_data_file
 /data/dalvik-cache/test                                           dalvikcache_data_file
-/data/ota                                                         ota_data_file
-/data/ota/test                                                    ota_data_file
 /data/ota_package                                                 ota_package_file
 /data/ota_package/test                                            ota_package_file
 /data/adb                                                         adb_data_file
@@ -1347,8 +1342,6 @@
 /product/bin/check_dynamic_partitions                             postinstall_exec
 /system/bin/otapreopt_script                                      postinstall_exec
 /product/bin/otapreopt_script                                     postinstall_exec
-/system/bin/otapreopt                                             postinstall_dexopt_exec
-/product/bin/otapreopt                                            postinstall_dexopt_exec
 /data/misc/uprobestats-configs                                    uprobestats_configs_data_file
 /data/misc/uprobestats-configs/test                               uprobestats_configs_data_file
 
