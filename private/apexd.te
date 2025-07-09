@@ -183,6 +183,9 @@ get_prop(apexd, apexd_payload_metadata_prop)
 
 set_prop(apexd, apexd_prop)
 
+# Allow apexd to set its private props
+set_prop(apexd, apexd_private_prop)
+
 # Allow apexd to set "gsid.mapped_image.*" props
 set_prop(apexd, gsid_prop)
 

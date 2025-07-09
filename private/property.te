@@ -2,6 +2,7 @@
 system_internal_prop(adbd_prop)
 system_internal_prop(adbd_tradeinmode_prop)
 system_internal_prop(apexd_payload_metadata_prop)
+system_internal_prop(apexd_private_prop)
 system_internal_prop(appsearch_vm_prop)
 system_internal_prop(bluetooth_lea_prop)
 system_internal_prop(ctl_snapuserd_prop)
@@ -543,6 +544,14 @@ neverallow {
   apexd_payload_metadata_prop
 }:property_service set;
 
+neverallow {
+  # Only allow apexd to set its private props
+  domain
+  -init
+  -apexd
+} {
+  apexd_private_prop
+}:property_service set;
 
 neverallow {
   # Only allow init and shell to set userspace_reboot_test_prop

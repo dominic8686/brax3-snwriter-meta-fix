@@ -937,6 +937,7 @@ vold.post_fs_data_done u:object_r:vold_post_fs_data_prop:s0 exact int
 
 apexd.payload_metadata.path u:object_r:apexd_payload_metadata_prop:s0 exact string
 apexd.status u:object_r:apexd_prop:s0 exact enum starting activated ready
+ro.apexd.changed_active_apexes u:object_r:apexd_private_prop:s0 exact string
 
 dmesgd.start u:object_r:dmesgd_start_prop:s0 exact bool
 
