@@ -1867,6 +1867,8 @@ ro.usb.data_protection.disable_when_locked.supported u:object_r:usb_disable_when
 ro.usb.data_protection.disable_when_locked.replug_required_upon_enable u:object_r:usb_disable_when_locked_prop:s0 exact bool
 ro.usb.data_protection.disable_when_locked.data_required_for_high_power_charge u:object_r:usb_disable_when_locked_prop:s0 exact bool
 ro.usb.data_protection.disable_when_locked.no_usb_event_notification u:object_r:usb_disable_when_locked_prop:s0 exact bool
+ro.usb.data_protection.disable_when_locked.power_brick_connection_check_timeout u:object_r:usb_disable_when_locked_prop:s0 exact int
+ro.usb.data_protection.disable_when_locked.pd_compliance_check_timeout u:object_r:usb_disable_when_locked_prop:s0 exact int
 
 # Properties for userdata device aliasing file control
 userdata.alias.remove u:object_r:userdata_alias_remove_prop:s0 exact string
