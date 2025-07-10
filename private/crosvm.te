@@ -199,6 +199,7 @@ full_treble_only(`
   neverallow crosvm {
     vendor_file_type
     -vendor_vm_file
+    -vendor_vm_data_file
     # These types are not required for crosvm, but the access is granted to globally in domain.te
     # thus should be exempted here.
     -vendor_cgroup_desc_file
