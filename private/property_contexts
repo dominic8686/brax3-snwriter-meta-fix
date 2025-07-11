@@ -1873,3 +1873,6 @@ ro.usb.data_protection.disable_when_locked.pd_compliance_check_timeout u:object_
 
 # Properties for userdata device aliasing file control
 userdata.alias.remove u:object_r:userdata_alias_remove_prop:s0 exact string
+
+# Globally-readable statsd service props
+statsd.config.atoms_in_use_list.version u:object_r:statsd_atoms_list_version_prop:s0 exact int

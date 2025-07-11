@@ -1060,6 +1060,8 @@
 /data/misc/snapshotctl_log/test                                   snapshotctl_log_data_file
 /data/misc/stats-active-metric                                    stats_data_file
 /data/misc/stats-active-metric/test                               stats_data_file
+/data/misc/stats-atoms                                            statsd_atoms_list_file
+/data/misc/stats-atoms/test                                       statsd_atoms_list_file
 /data/misc/stats-data                                             stats_data_file
 /data/misc/stats-data/test                                        stats_data_file
 /data/misc/stats-service                                          stats_config_data_file
