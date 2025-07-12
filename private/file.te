@@ -260,3 +260,6 @@ type prefetch_metadata_file, file_type;
 type libprocessgroup_metadata_file, file_type;
 
 type exp_partition_data_file, file_type, data_file_type, core_data_file_type;
+
+# statsd service stores list of atoms in use
+type statsd_atoms_list_file, file_type, data_file_type, core_data_file_type;
