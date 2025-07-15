@@ -6,6 +6,10 @@ typeattribute bpfloader bpfdomain;
 # allow bpfloader to write to the kernel log (starts early)
 allow bpfloader kmsg_device:chr_file w_file_perms;
 
+# needed for bpfloader to have access to kernel btf information
+allow bpfloader sysfs_btf:dir search;
+allow bpfloader sysfs_btf:file { getattr read open };
+
 # These permissions are required to pin ebpf maps & programs.
 allow bpfloader bpffs_type:dir { add_name create open read remove_name search setattr write };
 allow bpfloader bpffs_type:file { create getattr read rename setattr };
