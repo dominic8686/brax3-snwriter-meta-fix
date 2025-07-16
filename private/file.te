@@ -281,3 +281,5 @@ type sysfs_ublk, fs_type, sysfs_type;
 until_board_api(202604, `type sysfs_thunderbolt, fs_type, sysfs_type;')
 until_board_api(202604, `type sysfs_typec, fs_type, sysfs_type;')
 until_board_api(202604, `type sysfs_usb_pd, fs_type, sysfs_type;')
+
+type zygote_next_socket, file_type, coredomain_socket;

@@ -235,6 +235,7 @@
 /dev/socket/wpa_wlan9                                             wpa_socket
 /dev/socket/zygote                                                zygote_socket
 /dev/socket/zygote_secondary                                      zygote_socket
+/dev/socket/zygote_next                                           zygote_next_socket
 /dev/socket/usap_pool_primary                                     zygote_socket
 /dev/socket/usap_pool_secondary                                   zygote_socket
 /dev/spdif_out                                                    audio_device
@@ -341,6 +342,7 @@
 /system/bin/bootstat                                              bootstat_exec
 /system/bin/app_process32                                         zygote_exec
 /system/bin/app_process64                                         zygote_exec
+/system/bin/zygote_next                                           zygote_next_exec
 /system/bin/pbtombstone                                           pbtombstone_exec
 /system/bin/servicemanager                                        servicemanager_exec
 /system/bin/surfaceflinger                                        surfaceflinger_exec
