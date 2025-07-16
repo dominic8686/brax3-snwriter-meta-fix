@@ -262,6 +262,7 @@
 /dev/ttyACM0                                                      usb_serial_device
 /dev/ttyACM99                                                     usb_serial_device
 /dev/tun                                                          tun_device
+/dev/udmabuf                                                      udmabuf_device
 /dev/uhid                                                         uhid_device
 /dev/uinput                                                       uhid_device
 /dev/uio                                                          uio_device
