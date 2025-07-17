@@ -145,6 +145,13 @@ recovery_only(`
   allow kernel rootfs:file execute;
 ')
 
+# On kernel 6.15+, when relying on the sysfs fallback method to load firmware,
+# the kernel will attempt to read the data provided by ueventd. This data is
+# not associated with a file security context (see firmware_fallback_sysfs and
+# security_kernel_load_data). This permission can be removed/restricted to
+# prevent the usage of the sysfs fallback method.
+allow kernel self:system firmware_load;
+
 # required by VTS lidbm unit test
 allow kernel appdomain_tmpfs:file { read write };
 
