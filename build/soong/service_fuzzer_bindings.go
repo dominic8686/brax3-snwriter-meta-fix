@@ -488,6 +488,7 @@ var (
 		"thread_network":                         EXCEPTION_NO_FUZZER,
 		"time_detector":                          EXCEPTION_NO_FUZZER,
 		"time_zone_detector":                     EXCEPTION_NO_FUZZER,
+		"theme":                                  EXCEPTION_NO_FUZZER,
 		"thermalservice":                         EXCEPTION_NO_FUZZER,
 		"tracing.proxy":                          EXCEPTION_NO_FUZZER,
 		"tradeinmode":                            EXCEPTION_NO_FUZZER,
