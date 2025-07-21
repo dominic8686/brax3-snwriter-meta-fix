@@ -195,8 +195,7 @@ allow adbd shell:fd use;
 allow adbd shell_data_file:dir create_dir_perms;
 allow adbd shell_data_file:file create_file_perms;
 
-# Allow pull /{system, vendor, ...}/apex files for CTS tests
-r_dir_file(adbd, system_apex_file)
+# Allow pull /vendor/apex files for CTS tests
 r_dir_file(adbd, vendor_apex_file)
 
 # Allow adb pull of updated apex files in /data/apex/active.

@@ -1534,16 +1534,11 @@ wakelock_use(system_server)
 allow system_server apex_data_file:dir { getattr search };
 allow system_server apex_data_file:file r_file_perms;
 
-# Allow the system server to read files in /{system, vendor, ..}/apex. This is
-# where APEX packages are installed and system_server needs to parse
+# Allow the system server to read files under /vendor/apex. This is where
+# vendor APEX packages might be installed and system_server needs to parse
 # these packages to inspect the signatures and other metadata.
-allow system_server {system_apex_file vendor_apex_file}:dir { getattr search };
-allow system_server {system_apex_file vendor_apex_file}:file r_file_perms;
-
-# Allow the system server to read apex files under /system/apex and
-# /system_ext/apex.
-allow system_server system_apex_file:dir { getattr search };
-allow system_server system_apex_file:file r_file_perms;
+allow system_server vendor_apex_file:dir { getattr search };
+allow system_server vendor_apex_file:file r_file_perms;
 
 # Allow the system server to manage relevant apex module data files.
 allow system_server apex_module_data_file:dir { getattr search };

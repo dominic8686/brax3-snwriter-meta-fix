@@ -188,9 +188,6 @@ r_dir_file(zygote, rootfs)
 # System file accesses.
 r_dir_file(zygote, system_file)
 
-# APEX files under /system/apex and /system_ext/apex.
-r_dir_file(zygote, system_apex_file)
-
 # /oem accesses.
 allow zygote oemfs:dir search;
 
@@ -266,10 +263,10 @@ get_prop(zygote, persist_sysui_ranking_update_prop)
 # Allow zygote to read /apex/apex-info-list.xml
 allow zygote apex_info_file:file r_file_perms;
 
-# Allow zygote to canonicalize APEX paths. This is used when zygote is checking the
+# Allow zygote to canonicalize vendor APEX paths. This is used when zygote is checking the
 # preinstalled path of APEXes that contain runtime resource overlays for the 'android' package.
-allow zygote {system_apex_file vendor_apex_file}:dir { getattr search };
-allow zygote {system_apex_file vendor_apex_file}:file { getattr };
+allow zygote vendor_apex_file:dir { getattr search };
+allow zygote vendor_apex_file:file { getattr };
 allow zygote vendor_apex_metadata_file:dir { search };
 
 # Allow zygote to query for compression/features.

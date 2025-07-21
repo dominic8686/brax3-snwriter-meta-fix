@@ -123,7 +123,6 @@ allow kernel {
   apex_data_file
   staging_data_file
   vendor_apex_file
-  system_apex_file
 }:file read;
 # Also allow the kernel to read/write /data/local/tmp files via loop device
 # for ApexTestCases and fiemap_image_test.

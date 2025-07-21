@@ -259,9 +259,6 @@ type prefetch_metadata_file, file_type;
 # /metadata/libprocessgroup files
 type libprocessgroup_metadata_file, file_type;
 
-# /(system|system_ext)/apex/*.apex files
-type system_apex_file, system_file_type, file_type;
-
 type exp_partition_data_file, file_type, data_file_type, core_data_file_type;
 
 # statsd service stores list of atoms in use

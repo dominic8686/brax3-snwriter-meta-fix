@@ -192,9 +192,6 @@ set_prop(apexd, gsid_prop)
 # Allow for use in postinstall
 allow apexd proc_filesystems:file r_file_perms;
 
-# Allow for use in /system/apex and /system_ext/apex
-r_dir_file(apexd, system_apex_file)
-
 # Allow for use in Pre-reboot Dexopt.
 allow apexd dexopt_chroot_setup:fd use;
 

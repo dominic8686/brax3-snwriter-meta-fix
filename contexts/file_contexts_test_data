@@ -1353,8 +1353,3 @@
 /mnt/pre_reboot_dexopt                                            pre_reboot_dexopt_file
 
 /second_stage_resources/overlay_remounter                         overlay_remounter_exec
-
-/system/apex                                                      system_apex_file
-/system/apex/test.apex                                            system_apex_file
-/system_ext/apex                                                  system_apex_file
-/system_ext/apex/test.apex                                        system_apex_file

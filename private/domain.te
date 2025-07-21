@@ -1292,7 +1292,6 @@ full_treble_only(`
     -system_seccomp_policy_file
     -system_security_cacerts_file
     -system_zoneinfo_file
-    -system_apex_file
     -task_profiles_file
     userdebug_or_eng(`-tcpdump_exec')
     # Vendor components still can invoke shell commands via /system/bin/sh

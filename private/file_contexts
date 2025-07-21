@@ -411,7 +411,6 @@
 /system/bin/linux_vm_setup        u:object_r:linux_vm_setup_exec:s0
 /system/bin/tradeinmode           u:object_r:tradeinmode_exec:s0
 /system/bin/prefetch              u:object_r:prefetch_exec:s0
-/system/apex(/.*(\.apex|\.capex))?    u:object_r:system_apex_file:s0
 
 #############################
 # Vendor files
@@ -527,7 +526,6 @@
 /(system_ext|system/system_ext)/etc/group           u:object_r:system_group_file:s0
 /(system_ext|system/system_ext)/etc/passwd          u:object_r:system_passwd_file:s0
 /(system_ext|system/system_ext)/overlay(/.*)?       u:object_r:vendor_overlay_file:s0
-/(system_ext|system/system_ext)/apex(/.*(\.apex|\.capex))?    u:object_r:system_apex_file:s0
 
 /(system_ext|system/system_ext)/etc/selinux/system_ext_file_contexts        u:object_r:file_contexts_file:s0
 /(system_ext|system/system_ext)/etc/selinux/system_ext_hwservice_contexts   u:object_r:hwservice_contexts_file:s0
