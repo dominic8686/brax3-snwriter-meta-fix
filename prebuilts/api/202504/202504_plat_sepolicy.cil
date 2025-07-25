@@ -422,7 +422,7 @@
 (mlsconstrain (process (sigkill sigstop signal ptrace setsched setpgid setcap share setrlimit)) (or (eq l1 l2) (eq t1 mlstrustedsubject)))
 (mlsconstrain (process (ptrace getsched getsession getpgid getcap share getattr)) (or (dom l1 l2) (eq t1 mlstrustedsubject)))
 (mlsconstrain (process (transition dyntransition)) (or (and (eq h1 h2) (eq l1 l2)) (eq t1 mlstrustedsubject)))
-(class system (ipc_info syslog_read syslog_mod syslog_console module_request module_load ))
+(class system (ipc_info syslog_read syslog_mod syslog_console module_request module_load firmware_load kexec_image_load kexec_initramfs_load policy_load x509_certificate_load))
 (class capability ())
 (classcommon capability cap)
 (class filesystem (mount remount unmount getattr relabelfrom relabelto associate quotamod quotaget watch ))
