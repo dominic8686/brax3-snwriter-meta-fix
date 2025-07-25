@@ -134,6 +134,10 @@ is_flag_enabled(RELEASE_AVF_SUPPORT_CUSTOM_VM_WITH_PARAVIRTUALIZED_DEVICES, `
 
   # for gfxstream with udmabuf
   allow crosvm udmabuf_device:chr_file { open read write ioctl };
+
+  # ASurfaceTransaction_setBuffer for gfxstream
+  binder_call(crosvm, surfaceflinger)
+  allow crosvm surfaceflinger_service:service_manager find;
 ')
 
 # crosvm tries to use netlink sockets as part its APCI implementation, but we don't need it for AVF (b/228077254)
