@@ -221,6 +221,9 @@ allow init {
   -exec_type
 }:dir_file_class_set relabelto;
 
+allow init proc:file write;
+allow init sysfs:file { open write };
+
 allow init { sysfs debugfs_tracing debugfs_tracing_debug }:{ dir file lnk_file } { getattr relabelfrom };
 allow init { sysfs_type tracefs_type }:{ dir file lnk_file } { relabelto getattr };
 allow init dev_type:dir create_dir_perms;
