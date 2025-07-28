@@ -59,6 +59,9 @@ set_prop(init, powerctl_prop)
 
 set_prop(init, userspace_reboot_exported_prop)
 
+# Allow the media variant properties to be set in init.
+set_prop(init, media_variant_prop)
+
 # Second-stage init performs a test for whether the kernel has SELinux hooks
 # for the perf_event_open() syscall. This is done by testing for the syscall
 # outcomes corresponding to this policy.
