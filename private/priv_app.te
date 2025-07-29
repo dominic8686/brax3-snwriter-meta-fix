@@ -140,6 +140,7 @@ get_prop(priv_app, adbd_tradeinmode_prop)
 dontaudit priv_app exec_type:file getattr;
 dontaudit priv_app device:dir read;
 dontaudit priv_app fs_bpf:dir search;
+dontaudit priv_app metadata_file:dir read;
 dontaudit priv_app net_dns_prop:file read;
 dontaudit priv_app proc:file read;
 dontaudit priv_app proc_interrupts:file read;
