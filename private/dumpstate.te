@@ -90,6 +90,9 @@ userdebug_or_eng(`
 ')
 dontaudit dumpstate keystore:process { signal };
 
+# Allow dumpstate to talk to rkp_cert_processor process
+binder_call(dumpstate, rkp_cert_processor)
+
 # For collecting bugreports.
 no_debugfs_restriction(`
   allow dumpstate debugfs_wakeup_sources:file r_file_perms;
