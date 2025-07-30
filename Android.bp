@@ -7,17 +7,3 @@ install_symlink {
     installed_location: "etc/mdota",
     symlink_target: "/mnt/vendor/mdota",
 }
-
-prebuilt_hidl_interfaces {
-    name: "hidl_hardware_mms_interfaces",
-    interfaces: [
-        "vendor.mediatek.hardware.mms@1.0::IMms",
-        "vendor.mediatek.hardware.mms@1.1::IMms",
-        "vendor.mediatek.hardware.mms@1.2::IMms",
-        "vendor.mediatek.hardware.mms@1.3::IMms",
-        "vendor.mediatek.hardware.mms@1.4::IMms",
-        "vendor.mediatek.hardware.mms@1.5::IMms",
-        "vendor.mediatek.hardware.mms@1.6::IMms",
-        "vendor.mediatek.hardware.mms@1.7::IMms",
-    ],
-}
