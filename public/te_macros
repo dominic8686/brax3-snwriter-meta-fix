@@ -1112,13 +1112,14 @@ define(`vulkan_sphal_use', `
 typeattribute $1 vulkan_sphal_domain;
 ')
 
-# set_xperm_filter(gpu_target, allowedTarget, unpriv_ioctls, restricted_ioctls, instrumentation_ioctls)
+#####################################
+# set_xperm_filter(target_context, allowed_target, unpriv_ioctls, restricted_ioctls, instrumentation_ioctls)
 # Allow targets to harden their IOCTL interfaces by specifying
 # unprivileged, blocked, and instrumentation-specific IOCTLs for appdomain.
 #
 # Parameters:
-#   gpu_target: The target device to apply the filter to.
-#   allowedTarget: Additional `appdomain` target to exempt from hardened policy.
+#   target_context: The target context to apply the filter to.
+#   allowed_target: Additional `appdomain` target to exempt from hardened policy.
 #     Allows for an allowlist of services, or gating by a target SDK.
 #   unpriv_ioctls: IOCTLs to allow across appdomain.
 #   restricted_ioctls: IOCTLs to deny across appdomain.
@@ -1141,4 +1142,5 @@ define(`set_xperm_filter', `
     -shell
   } $1:chr_file ioctl { $5 };
 ')
+
 divert(0)
