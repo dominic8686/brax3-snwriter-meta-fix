@@ -178,6 +178,9 @@ android.system.composd                    u:object_r:compos_service:s0
 android.system.virtualizationservice      u:object_r:virtualization_service:s0
 android.os.IAccessor/ICommService/security_vm_keymint u:object_r:accessor_trusty_keymint_comm_service:s0
 android.trusty.commservice.ICommService/security_vm_keymint u:object_r:trusty_keymint_comm_service:s0
+android.os.IAccessor/ICommService/widevine_vm_widevine u:object_r:accessor_trusty_widevine_comm_service:s0
+android.widevine.trusty.commservice.ICommService/widevine_vm u:object_r:trusty_widevine_comm_service:s0
+
 is_flag_enabled(RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT, `
     android.system.virtualizationservice_internal.IVfioHandler u:object_r:vfio_handler_service:s0
 ')
