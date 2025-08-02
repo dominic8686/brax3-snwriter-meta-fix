@@ -210,6 +210,7 @@
 /dev/ttyACM[0-9]*	u:object_r:usb_serial_device:s0
 /dev/tun		u:object_r:tun_device:s0
 /dev/udmabuf		u:object_r:udmabuf_device:s0
+/dev/ublkc[0-9]+	u:object_r:ublk_control_device:s0
 /dev/uhid		u:object_r:uhid_device:s0
 /dev/uinput		u:object_r:uhid_device:s0
 /dev/uio[0-9]*		u:object_r:uio_device:s0

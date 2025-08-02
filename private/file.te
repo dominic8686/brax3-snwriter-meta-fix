@@ -273,3 +273,6 @@ type ashmem_compat_memfd, file_type, mlstrustedobject;
 # uses when constructing contexts for memfd. This needs to be accessible
 # to all processes.
 type ashmem_compat_memfd_context_file, system_file_type, file_type;
+
+# /sys/device/virtual/misc/ublk-control/
+type sysfs_ublk, fs_type, sysfs_type;
