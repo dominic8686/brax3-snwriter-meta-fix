@@ -43,3 +43,6 @@ type tombstone_data_file, file_type, data_file_type, core_data_file_type;
 # tombstone sockets
 type tombstoned_crash_socket, file_type, coredomain_socket;
 type tombstoned_intercept_socket, file_type, coredomain_socket;
+
+type heapprofd_socket, file_type, coredomain_socket;
+type traced_perf_socket, file_type, coredomain_socket;
