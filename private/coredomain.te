@@ -64,7 +64,6 @@ full_treble_only(`
         -rs # spawned by appdomain, so carryover the exception above
         -system_server
         -traced_perf
-        -prefetch
         userdebug_or_eng(`-overlay_remounter')
     } vendor_app_file:dir { open read getattr search };
 ')
@@ -86,7 +85,6 @@ full_treble_only(`
         -system_server
         -traced_perf
         -mediaserver
-        -prefetch
         userdebug_or_eng(`-overlay_remounter')
     } vendor_app_file:file r_file_perms;
 ')
@@ -108,7 +106,6 @@ full_treble_only(`
         -webview_zygote
         -zygote
         -heapprofd
-        -prefetch
         userdebug_or_eng(`-overlay_remounter')
     } vendor_overlay_file:dir { getattr open read search };
 ')
@@ -129,7 +126,6 @@ full_treble_only(`
         -webview_zygote
         -zygote
         -heapprofd
-        -prefetch
         userdebug_or_eng(`-profcollectd')
         userdebug_or_eng(`-simpleperf_boot')
         userdebug_or_eng(`-overlay_remounter')
