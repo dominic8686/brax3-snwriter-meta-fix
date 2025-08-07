@@ -147,6 +147,9 @@ allow adbd config_gz:file r_file_perms;
 # For CTS listening ports test.
 allow adbd proc_net_tcp_udp:file r_file_perms;
 
+# For CTS access to /proc/cmdline.
+allow adbd proc_cmdline:file r_file_perms;
+
 allow adbd gpu_service:service_manager find;
 allow adbd surfaceflinger_service:service_manager find;
 allow adbd bootchart_data_file:dir search;
