@@ -12,6 +12,12 @@ system_restricted_prop(non_existing_prop)
 typeattribute dalvik_config_prop         dalvik_config_prop_type;
 typeattribute dalvik_dynamic_config_prop dalvik_config_prop_type;
 
+system_restricted_prop(heapprofd_prop)
+system_internal_prop(heapprofd_enabled_prop)
+system_internal_prop(traced_conf_prop)
+system_internal_prop(traced_perf_enabled_prop)
+system_internal_prop(traced_lazy_prop)
+
 # Don't audit legacy ctl. property handling.  We only want the newer permission check to appear
 # in the audit log
 dontaudit domain {
