@@ -2315,6 +2315,7 @@ neverallow {
     -virtualizationmanager
     -virtualizationservice
     -adbd_common # maybe should move to emulator/virtual device specific policy
+    -traced # traced listens to connections from guest VMs
 
     # not expected, and defined outside of system/sepolicy.
     # Note: this attribute is strongly recommended to be empty if not required.
