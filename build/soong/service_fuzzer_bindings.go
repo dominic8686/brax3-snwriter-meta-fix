@@ -206,6 +206,7 @@ var (
 		"android.system.virtualizationmaintenance":                            EXCEPTION_NO_FUZZER,
 		"android.system.vmtethering.IVmTethering":                             EXCEPTION_NO_FUZZER,
 		"android.system.vold.IVold/default":                                   []string{"vold_native_service_fuzzer"},
+		"anomaly_detector":                                                    EXCEPTION_NO_FUZZER,
 		"ambient_context":                                                     EXCEPTION_NO_FUZZER,
 		"app_binding":                                                         EXCEPTION_NO_FUZZER,
 		"app_function":                                                        EXCEPTION_NO_FUZZER,

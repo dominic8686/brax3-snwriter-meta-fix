@@ -16,4 +16,5 @@
     usb_disable_when_locked_prop
     virtualizationservice_data_file
     wallet_prop
+    anomaly_detector_service
   ))

@@ -192,6 +192,9 @@ is_flag_enabled(RELEASE_AVF_ENABLE_MICROFUCHSIA, `
     android.system.microfuchsiad              u:object_r:microfuchsia_service:s0
 ')
 ambient_context                           u:object_r:ambient_context_service:s0
+starting_at_board_api(202604, `
+  anomaly_detector                        u:object_r:anomaly_detector_service:s0
+')
 app_binding                               u:object_r:app_binding_service:s0
 app_function                              u:object_r:app_function_service:s0
 app_hibernation                           u:object_r:app_hibernation_service:s0

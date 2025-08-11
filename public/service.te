@@ -1,4 +1,7 @@
 type aidl_lazy_test_service,    service_manager_type;
+starting_at_board_api(202604, `
+  type anomaly_detector_service,  app_api_service, system_server_service, service_manager_type;
+')
 type apc_service,               service_manager_type;
 type apex_service,              service_manager_type;
 type artd_service,              service_manager_type;
