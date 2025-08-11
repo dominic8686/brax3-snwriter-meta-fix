@@ -64,7 +64,10 @@ func getAllKeyPaths(ctx android.ModuleContext, dir android.SourcePath) android.P
 	var keys android.Paths
 
 	for _, key := range AllPlatformKeys {
-		keys = append(keys, dir.Join(ctx, key+".x509.pem"))
+		optKey := android.ExistentPathForSource(ctx, dir.Join(ctx, key+".x509.pem").String())
+		if optKey.Valid() {
+			keys = append(keys, optKey.Path())
+		}
 	}
 
 	return keys
