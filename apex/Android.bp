@@ -349,3 +349,10 @@ filegroup {
         "com.android.profiling-file_contexts",
     ],
 }
+
+filegroup {
+    name: "com.google.android.gmssystem-file_contexts",
+    srcs: [
+        "com.google.android.gmssystem-file_contexts",
+    ],
+}
