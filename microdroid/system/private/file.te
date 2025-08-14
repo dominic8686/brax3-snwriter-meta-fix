@@ -5,6 +5,7 @@ allow debugfs_type { debugfs debugfs_tracing debugfs_tracing_debug }:filesystem 
 allow dev_type tmpfs:filesystem associate;
 allow encryptedstore_file encryptedstore_fs:filesystem associate;
 allow extra_apk_file zipfusefs:filesystem associate;
+allow tenant_apk_file zipfusefs:filesystem associate;
 allow file_type labeledfs:filesystem associate;
 allow file_type tmpfs:filesystem associate;
 allow file_type rootfs:filesystem associate;

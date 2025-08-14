@@ -153,6 +153,9 @@ allow microdroid_manager serial_device:chr_file { w_file_perms ioctl };
 # Allow microdroid_manager to handle extra_apks
 allow microdroid_manager extra_apk_file:dir create_dir_perms;
 
+# Allow microdroid_manager to handle tenant_apks
+allow microdroid_manager tenant_apk_file:dir create_dir_perms;
+
 # Allow microdroid_manager to write kmsg_debug (stdio_to_kmsg).
 allow microdroid_manager kmsg_debug_device:chr_file w_file_perms;
 
@@ -195,6 +198,10 @@ allow microdroid_manager {
 # Domains other than microdroid can't write extra_apks
 neverallow { domain -microdroid_manager -init -vendor_init } extra_apk_file:file no_w_file_perms;
 neverallow { domain -microdroid_manager -init -vendor_init } extra_apk_file:dir no_w_dir_perms;
+
+# Domains other than microdroid can't write tenant_apks
+neverallow { domain -microdroid_manager -init -vendor_init } tenant_apk_file:file no_w_file_perms;
+neverallow { domain -microdroid_manager -init -vendor_init } tenant_apk_file:dir no_w_dir_perms;
 
 # Only microdroid_payload and a few other critical binaries can be run by microdroid_manager,
 # in their own domains.
