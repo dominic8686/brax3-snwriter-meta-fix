@@ -408,6 +408,7 @@ allow system_server {
   servicemanager
   statsd
   surfaceflinger
+  virtualizationservice
   vold
 
   # This list comes from HAL_INTERFACES_OF_INTEREST in
