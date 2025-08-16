@@ -198,9 +198,9 @@ filegroup {
 }
 
 filegroup {
-    name: "com.android.telephony2-file_contexts",
+    name: "com.android.telephonycore-file_contexts",
     srcs: [
-        "com.android.telephony2-file_contexts",
+        "com.android.telephonycore-file_contexts",
     ],
 }
 
