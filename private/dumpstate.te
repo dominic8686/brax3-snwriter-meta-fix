@@ -377,6 +377,7 @@ allow dumpstate zygote_exec:file rx_file_perms;
 allow dumpstate bluetooth_data_file:dir search;
 allow dumpstate bluetooth_logs_data_file:dir r_dir_perms;
 allow dumpstate bluetooth_logs_data_file:file r_file_perms;
+allow dumpstate bluetooth_logs_data_file:lnk_file r_file_perms;
 
 # For Nfc
 allow dumpstate nfc_logs_data_file:dir r_dir_perms;

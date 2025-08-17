@@ -18,6 +18,7 @@ allow bluetooth bluetooth_data_file:dir create_dir_perms;
 allow bluetooth bluetooth_data_file:notdevfile_class_set { create_file_perms link };
 allow bluetooth bluetooth_logs_data_file:dir rw_dir_perms;
 allow bluetooth bluetooth_logs_data_file:file create_file_perms;
+allow bluetooth bluetooth_logs_data_file:lnk_file {create getattr setattr read unlink};
 
 # Socket creation under /data/misc/bluedroid.
 allow bluetooth bluetooth_socket:sock_file create_file_perms;
