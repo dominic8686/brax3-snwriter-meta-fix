@@ -184,6 +184,7 @@ ro.vndk.version  u:object_r:build_prop:s0 exact string
 heapprofd. u:object_r:heapprofd_prop:s0
 persist.heapprofd.enable u:object_r:heapprofd_enabled_prop:s0
 
+persist.traced.enable   u:object_r:traced_enabled_prop:s0
 persist.traced_perf.enable u:object_r:traced_perf_enabled_prop:s0
 traced.lazy.               u:object_r:traced_lazy_prop:s0
 traced_relay.relay_port           u:object_r:traced_relay_relay_port_prop:s0 exact string

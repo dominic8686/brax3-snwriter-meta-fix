@@ -19,6 +19,7 @@ system_internal_prop(heapprofd_enabled_prop)
 system_internal_prop(traced_conf_prop)
 system_internal_prop(traced_perf_enabled_prop)
 system_internal_prop(traced_lazy_prop)
+system_internal_prop(traced_enabled_prop)
 
 # Don't audit legacy ctl. property handling.  We only want the newer permission check to appear
 # in the audit log
