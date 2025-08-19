@@ -1341,7 +1341,10 @@ get_prop(system_server,system_jvmti_agent_prop)
 
 # UsbDeviceManager uses /dev/usb-ffs
 allow system_server functionfs:dir search;
-allow system_server functionfs:file rw_file_perms;
+# UsbDeviceManager needs relabelfrom to change from functionfs to usbaccessory
+allow system_server functionfs:file { rw_file_perms relabelfrom };
+allow system_server usbaccessory_device:file relabelto;
+allow usbaccessory_device functionfs:filesystem associate;
 # To resolve arbitrary sysfs paths from /sys/class/udc/* symlinks.
 allow system_server sysfs_type:dir search;
 r_dir_file(system_server, sysfs_udc)

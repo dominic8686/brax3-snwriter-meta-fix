@@ -273,6 +273,8 @@
 /dev/uio9                                                         uio_device
 /dev/urandom                                                      random_device
 /dev/usb_accessory                                                usbaccessory_device
+/dev/usb-ffs/aoa/ep1                                              usbaccessory_device
+/dev/usb-ffs/aoa/ep2                                              usbaccessory_device
 /dev/v4l-touch                                                    input_device
 /dev/v4l-touch0                                                   input_device
 /dev/v4l-touch10                                                  input_device
