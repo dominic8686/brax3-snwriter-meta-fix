@@ -16,6 +16,14 @@ allow virtualizationmanager dropbox_service:service_manager find;
 # Let virtualizationmanager to read /proc/version.
 allow virtualizationmanager proc_version:file r_file_perms;
 
+# Let virtualizationmanager find host services to proxy for payload clients
+# All calls between the host and payload clients are forwarded through
+# virtualizationmanager.
+# If this list becomes too large, we may want to split virtualizationmanager
+# into multiple domains.
+allow virtualizationmanager fwk_stats_service:service_manager find;
+binder_call(virtualizationmanager, stats_service_server);
+
 # Allow calling into the system server to find native services. "permission_service" to check
 # permissions, and "package_native" for staged apex info.
 binder_call(virtualizationmanager, system_server)
