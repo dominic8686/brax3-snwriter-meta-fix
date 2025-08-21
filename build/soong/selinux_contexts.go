@@ -69,7 +69,7 @@ type selinuxContextsModule struct {
 	seappProperties seappProperties
 	build           func(ctx android.ModuleContext, inputs android.Paths) android.Path
 	deps            func(ctx android.BottomUpMutatorContext)
-	outputPath      android.OutputPath
+	outputPath      android.Path
 	installPath     android.InstallPath
 }
 
@@ -147,20 +147,18 @@ func (m *selinuxContextsModule) GenerateAndroidBuildActions(ctx android.ModuleCo
 	}
 
 	if m.InRecovery() && !m.onlyInRecovery() {
-		dep := ctx.GetDirectDepWithTag(m.Name(), reuseContextsDepTag)
-
-		if reuseDeps, ok := dep.(*selinuxContextsModule); ok {
-			m.outputPath = reuseDeps.outputPath
-			ctx.InstallFile(m.installPath, m.stem(), m.outputPath)
-			return
-		}
+		dep := ctx.GetDirectDepProxyWithTag(m.Name(), reuseContextsDepTag)
+		m.outputPath = android.OutputFileForModule(ctx, dep, "")
+		ctx.InstallFile(m.installPath, m.stem(), m.outputPath)
+		return
 	}
 
 	builtContext := m.build(ctx, android.PathsForModuleSrc(ctx, m.properties.Srcs))
 
-	m.outputPath = pathForModuleOut(ctx, m.stem())
-	android.CopyFileRule(ctx, builtContext, m.outputPath)
-	ctx.InstallFile(m.installPath, m.stem(), m.outputPath)
+	outputPath := pathForModuleOut(ctx, m.stem())
+	android.CopyFileRule(ctx, builtContext, outputPath)
+	ctx.InstallFile(m.installPath, m.stem(), outputPath)
+	m.outputPath = outputPath
 
 	ctx.SetOutputFiles([]android.Path{m.outputPath}, "")
 }
@@ -425,12 +423,12 @@ func (m *selinuxContextsModule) buildPropertyContexts(ctx android.ModuleContext,
 	}
 
 	var apiFiles android.Paths
-	ctx.VisitDirectDepsWithTag(syspropLibraryDepTag, func(c android.Module) {
-		i, ok := c.(interface{ CurrentSyspropApiFile() android.OptionalPath })
+	ctx.VisitDirectDepsProxyWithTag(syspropLibraryDepTag, func(c android.ModuleProxy) {
+		info, ok := android.OtherModuleProvider(ctx, c, sysprop.SyspropLibraryInfoProvider)
 		if !ok {
 			panic(fmt.Errorf("unknown dependency %q for %q", ctx.OtherModuleName(c), ctx.ModuleName()))
 		}
-		if api := i.CurrentSyspropApiFile(); api.Valid() {
+		if api := info.CurrentApiFile; api.Valid() {
 			apiFiles = append(apiFiles, api.Path())
 		}
 	})
