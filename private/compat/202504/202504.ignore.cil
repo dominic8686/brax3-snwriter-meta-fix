@@ -13,6 +13,7 @@
     native_serial_service
     pbtombstone_exec
     prefetch
+    task_continuity_service
     trusty_coverage_prop
     serialservice
     serialservice_exec

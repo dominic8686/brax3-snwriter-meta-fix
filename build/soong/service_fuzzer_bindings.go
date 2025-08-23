@@ -477,6 +477,7 @@ var (
 		"system_update":                          EXCEPTION_NO_FUZZER,
 		"tare":                                   EXCEPTION_NO_FUZZER,
 		"task":                                   EXCEPTION_NO_FUZZER,
+		"task_continuity":                        EXCEPTION_NO_FUZZER,
 		"telecom":                                EXCEPTION_NO_FUZZER,
 		"telephony.registry":                     EXCEPTION_NO_FUZZER,
 		"telephony_ims":                          EXCEPTION_NO_FUZZER,

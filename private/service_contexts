@@ -472,6 +472,7 @@ system_server_dumper                      u:object_r:system_server_dumper_servic
 system_update                             u:object_r:system_update_service:s0
 tare                                      u:object_r:tare_service:s0
 task                                      u:object_r:task_service:s0
+task_continuity                           u:object_r:task_continuity_service:s0
 telecom                                   u:object_r:telecom_service:s0
 telephony.registry                        u:object_r:registry_service:s0
 telephony_ims                             u:object_r:radio_service:s0
