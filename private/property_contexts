@@ -891,9 +891,10 @@ ro.media.xml_variant.codecs             u:object_r:media_variant_prop:s0 exact s
 ro.media.xml_variant.codecs_performance u:object_r:media_variant_prop:s0 exact string
 ro.media.xml_variant.profiles           u:object_r:media_variant_prop:s0 exact string
 
-ro.minui.default_rotation u:object_r:recovery_config_prop:s0 exact string
-ro.minui.overscan_percent u:object_r:recovery_config_prop:s0 exact int
-ro.minui.pixel_format     u:object_r:recovery_config_prop:s0 exact string
+ro.minui.default_rotation        u:object_r:recovery_config_prop:s0 exact string
+ro.minui.overscan_percent        u:object_r:recovery_config_prop:s0 exact int
+ro.minui.pixel_format            u:object_r:recovery_config_prop:s0 exact string
+ro.minui.no_initial_modset_flush u:object_r:recovery_config_prop:s0 exact bool
 
 ro.oem_unlock_supported u:object_r:oem_unlock_prop:s0 exact int
 
