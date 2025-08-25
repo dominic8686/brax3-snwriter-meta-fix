@@ -152,6 +152,7 @@ allowxperm vold data_file_type:dir ioctl {
 allowxperm vold {
   vold_data_file
   vold_metadata_file
+  unencrypted_data_file
   is_flag_enabled(RELEASE_UNLOCKED_STORAGE_API, `storage_area_key_file')
 }:file ioctl {
   F2FS_IOC_SEC_TRIM_FILE
