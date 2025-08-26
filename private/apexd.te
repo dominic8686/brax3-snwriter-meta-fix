@@ -136,6 +136,10 @@ set_prop(apexd, ctl_apex_load_prop)
 allow apexd vold_service:service_manager find;
 binder_call(apexd, vold)
 
+# Allow apexd to abortChanges directly with vold_metadata_file
+allow apexd vold_metadata_file:dir { search };
+allow apexd vold_metadata_file:file { getattr open read write };
+
 # apexd is using bootstrap bionic
 use_bootstrap_libs(apexd)
 

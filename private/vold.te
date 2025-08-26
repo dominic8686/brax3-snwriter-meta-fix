@@ -436,6 +436,7 @@ neverallow {
 
 neverallow {
     domain
+    -apexd
     -init
     -vold
 } vold_metadata_file:dir *;
@@ -449,6 +450,7 @@ neverallow {
 
 neverallow {
     domain
+    -apexd
     -init
     -vold
     -vold_prepare_subdirs
@@ -456,6 +458,7 @@ neverallow {
 
 neverallow {
     domain
+    -apexd
     -init
     -kernel
     -vold
