@@ -2233,6 +2233,7 @@ neverallow {
 neverallow {
   domain
   -init
+  -bpfloader
   -traced_probes
   -traced_perf
   userdebug_or_eng(`-profcollectd')
