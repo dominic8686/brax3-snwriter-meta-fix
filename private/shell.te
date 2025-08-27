@@ -120,6 +120,9 @@ set_prop(shell, bionic_linker_16kb_app_compat_prop)
 # Allow shell to disable compat in package manager
 set_prop(shell, pm_16kb_app_compat_prop)
 
+# Allow shell to set the system property for HSUM boot strategy.
+set_prop(shell, hsum_boot_strategy_prop)
+
 # Allow shell to get encryption policy of /data/local/tmp/, for CTS
 allowxperm shell shell_data_file:dir ioctl {
   FS_IOC_GET_ENCRYPTION_POLICY
