@@ -472,6 +472,22 @@ allow system_server sysfs_type:dir r_dir_perms;
 r_dir_file(system_server, sysfs_android_usb)
 allow system_server sysfs_android_usb:file w_file_perms;
 
+# Read/write to thunderbolt devices for authorization
+r_dir_file(system_server, sysfs_thunderbolt)
+allow system_server sysfs_thunderbolt:file rw_file_perms;
+
+# Read/write to typec for usb4 mode policies
+r_dir_file(system_server, sysfs_typec)
+allow system_server sysfs_typec:file rw_file_perms;
+
+# Read from usb_pd for typec PD information
+r_dir_file(system_server, sysfs_usb_pd)
+allow system_server sysfs_usb_pd:file r_file_perms;
+
+# Read/write to usb for port mapping and authorization
+r_dir_file(system_server, sysfs_usb)
+allow system_server sysfs_usb:file rw_file_perms;
+
 r_dir_file(system_server, sysfs_extcon)
 
 r_dir_file(system_server, sysfs_ipv4)

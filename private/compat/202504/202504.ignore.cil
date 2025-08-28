@@ -17,6 +17,9 @@
     trusty_coverage_prop
     serialservice
     serialservice_exec
+    sysfs_thunderbolt
+    sysfs_typec
+    sysfs_usb_pd
     usb_disable_when_locked_prop
     virtualizationservice_data_file
     wallet_prop

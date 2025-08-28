@@ -645,6 +645,13 @@ starting_at_board_api(202604, `
     type virtualizationservice_data_file, file_type, data_file_type, core_data_file_type, mlstrustedobject;
 ')
 
+# /sys/bus/thunderbolt
+starting_at_board_api(202604, `type sysfs_thunderbolt, fs_type, sysfs_type;')
+# /sys/class/typec
+starting_at_board_api(202604, `type sysfs_typec, fs_type, sysfs_type;')
+# /sys/class/usb_power_delivery
+starting_at_board_api(202604, `type sysfs_usb_pd, fs_type, sysfs_type;')
+
 # system/sepolicy/public is for vendor-facing type and attribute definitions.
 # DO NOT ADD allow, neverallow, or dontaudit statements here.
 # Instead, add such policy rules to system/sepolicy/private/*.te.

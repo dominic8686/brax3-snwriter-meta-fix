@@ -276,3 +276,8 @@ type ashmem_compat_memfd_context_file, system_file_type, file_type;
 
 # /sys/device/virtual/misc/ublk-control/
 type sysfs_ublk, fs_type, sysfs_type;
+
+# /sys/bus/thunderbolt and /sys/class/typec
+until_board_api(202604, `type sysfs_thunderbolt, fs_type, sysfs_type;')
+until_board_api(202604, `type sysfs_typec, fs_type, sysfs_type;')
+until_board_api(202604, `type sysfs_usb_pd, fs_type, sysfs_type;')
