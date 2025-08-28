@@ -951,6 +951,8 @@ get_prop(system_server, usb_disable_when_locked_prop)
 # Allow system server to read build properties for bootimage partition.
 get_prop(system_server, build_bootimage_prop)
 
+get_prop(system_server, hsum_boot_strategy_prop)
+
 # Create a socket for connections from debuggerd.
 allow system_server system_ndebug_socket:sock_file create_file_perms;
 
