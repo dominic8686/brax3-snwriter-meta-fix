@@ -720,15 +720,6 @@ define(`use_credstore', `
   binder_call(credstore, $1)
 ')
 
-#####################################
-# use_secure_element(domain)
-# Ability to use secure_element.
-define(`use_secure_element', `
-  allow $1 secure_element_service:service_manager find;
-  binder_call($1, secure_element)
-  binder_call(secure_element, $1)
-')
-
 ###########################################
 # add_service(domain, service)
 # Ability for domain to add a service to service_manager
