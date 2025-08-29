@@ -1,14 +1,6 @@
 # secure element subsystem
 typeattribute secure_element coredomain;
-
-# When the secure_element service is provided by the APK from
-# packages/apps/SecureElement, we need it to be able to run as an app.
-# When the APK version is removed, this line should be removed.
 app_domain(secure_element)
-
-# When the secure_element service is provided by the native service
-# from system/secure_element/omapi, we need init to start it.
-init_daemon_domain(secure_element)
 
 binder_service(secure_element)
 add_service(secure_element, secure_element_service)

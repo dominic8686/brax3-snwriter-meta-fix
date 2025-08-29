@@ -959,7 +959,6 @@ full_treble_only(`
     -statsbootstrap_service
     -virtual_touchpad_service
     -vr_manager_service
-    -secure_element_service
     userdebug_or_eng(`-hal_face_service')
   }:service_manager find;
 ')
@@ -1455,7 +1454,7 @@ neverallow {
 # around "am" to avoid exposing the shell context when adbd is in trade-in
 # mode.
 neverallow { domain -simpleperf_app_runner -runas -app_zygote -webview_zygote -zygote } {
-  appdomain -shell -simpleperf userdebug_or_eng(`-su') -tradeinmode -secure_element
+  appdomain -shell -simpleperf userdebug_or_eng(`-su') -tradeinmode
 }:process { transition dyntransition };
 
 # Minimize read access to shell- or app-writable symlinks.
