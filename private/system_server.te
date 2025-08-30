@@ -400,6 +400,7 @@ allow system_server {
   composd
   drmserver
   gpuservice
+  idmap
   inputflinger
   keystore
   mediadrmserver
