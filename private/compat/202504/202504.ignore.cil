@@ -21,4 +21,5 @@
     virtualizationservice_data_file
     wallet_prop
     anomaly_detector_service
+    uprobestats_service
   ))
