@@ -133,6 +133,12 @@ allow virtualizationmanager vendor_vm_data_file:file { read write getattr };
 # Allow virtualizationmanager to read /data/nativetest for VTS
 r_dir_file(virtualizationmanager, nativetest_data_file)
 
+# The virtualizationmanager needs to listen to changes to
+# persist.avf_vm.traced_relay.enable.{vm_name} sysprop to start/stop traced_relay service
+# inside the VM. Additionally it needs to set this sysprop when VM is killed to stop the
+# monitoring thread.
+set_prop(virtualizationmanager, avf_vm_traced_relay_enabled_prop)
+
 # Do not allow writing vendor_microdroid_file from any process.
 neverallow {
   domain

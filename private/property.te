@@ -86,6 +86,7 @@ system_internal_prop(ctl_artd_pre_reboot_prop)
 system_internal_prop(trusty_security_vm_sys_prop)
 system_internal_prop(trusty_widevine_vm_sys_prop)
 system_internal_prop(hint_manager_config_prop)
+system_internal_prop(avf_vm_traced_relay_enabled_prop)
 
 # Properties which can't be written outside system
 system_restricted_prop(binder_cache_adservices_server_prop)
