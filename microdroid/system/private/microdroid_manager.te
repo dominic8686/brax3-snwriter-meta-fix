@@ -155,6 +155,7 @@ allow microdroid_manager extra_apk_file:dir create_dir_perms;
 
 # Allow microdroid_manager to handle tenant_apks
 allow microdroid_manager tenant_apk_file:dir create_dir_perms;
+allow microdroid_manager tenant_apk_file:file getattr;
 
 # Allow microdroid_manager to write kmsg_debug (stdio_to_kmsg).
 allow microdroid_manager kmsg_debug_device:chr_file w_file_perms;

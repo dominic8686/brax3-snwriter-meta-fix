@@ -16,6 +16,7 @@ type logd_service,                   service_manager_type;
 type mediatuner_service,             app_api_service, service_manager_type;
 type mmd_service,                    service_manager_type;
 type on_device_intelligence_service, app_api_service, system_server_service, service_manager_type, isolated_compute_allowed_service;
+type pcc_sandbox_service,            app_api_service, system_server_service, service_manager_type;
 type profcollectd_service,           service_manager_type;
 type protolog_configuration_service, app_api_service, system_api_service, system_server_service, service_manager_type, ephemeral_app_api_service;
 type resolver_service,               system_server_service, service_manager_type;
