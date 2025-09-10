@@ -136,6 +136,11 @@ neverallow traced_probes self:perf_event ~{ open write cpu kernel };
 # set the initial value for the counter in traces.
 get_prop(traced_probes, debug_tracing_desktop_mode_visible_tasks_prop)
 
+# Allow traced_probes to set AVF VM tracing related properties. The virtmngr processes are watching
+# for changes to the persist.avf_vm.traced_relay.enable.{vm_name} sysprops and start/stop
+# traced_relay service in the VMs based on the value.
+set_prop(traced_probes, avf_vm_traced_relay_enabled_prop)
+
 ###
 ### Neverallow rules
 ###

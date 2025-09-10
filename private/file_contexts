@@ -197,6 +197,7 @@
 /dev/socket/wpa_wlan[0-9] u:object_r:wpa_socket:s0
 /dev/socket/zygote	u:object_r:zygote_socket:s0
 /dev/socket/zygote_secondary	u:object_r:zygote_socket:s0
+/dev/socket/zygote_next	u:object_r:zygote_next_socket:s0
 /dev/socket/usap_pool_primary	u:object_r:zygote_socket:s0
 /dev/socket/usap_pool_secondary	u:object_r:zygote_socket:s0
 /dev/spdif_out.*	u:object_r:audio_device:s0
@@ -272,6 +273,7 @@
 /system/bin/bootstat		u:object_r:bootstat_exec:s0
 /system/bin/app_process32	u:object_r:zygote_exec:s0
 /system/bin/app_process64	u:object_r:zygote_exec:s0
+/system/bin/zygote_next	u:object_r:zygote_next_exec:s0
 /system/bin/servicemanager	u:object_r:servicemanager_exec:s0
 /system/bin/surfaceflinger	u:object_r:surfaceflinger_exec:s0
 /system/bin/gpuservice	u:object_r:gpuservice_exec:s0

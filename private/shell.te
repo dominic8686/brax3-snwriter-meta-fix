@@ -372,6 +372,9 @@ allow shell {
   -apex_service
   -dnsresolver_service
   -gatekeeper_service
+starting_at_board_api(202604, `
+  -hal_frp_service
+')
   -hal_keymint_service
   -hal_secureclock_service
   -hal_sharedsecret_service
@@ -518,6 +521,9 @@ recovery_only(`
 # Do not allow shell to talk directly to security HAL services other than
 # hal_remotelyprovisionedcomponent_service
 neverallow shell {
+starting_at_board_api(202604, `
+  hal_frp_service
+')
   hal_keymint_service
   hal_secureclock_service
   hal_sharedsecret_service

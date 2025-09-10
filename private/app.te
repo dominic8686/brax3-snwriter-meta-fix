@@ -205,6 +205,7 @@ allow appdomain { ashmem_device ashmem_libcutils_device }:chr_file execute;
 
 # Receive and use open file descriptors inherited from zygote.
 allow appdomain zygote:fd use;
+allow appdomain zygote_next:fd use;
 
 # Receive and use open file descriptors inherited from app zygote.
 allow appdomain app_zygote:fd use;
@@ -466,6 +467,7 @@ allow appdomain resourcecache_data_file:dir r_dir_perms;
 read_logd(appdomain)
 
 allow appdomain zygote:unix_dgram_socket write;
+allow appdomain zygote_next:unix_dgram_socket write;
 
 allow appdomain console_device:chr_file { read write };
 

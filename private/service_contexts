@@ -40,6 +40,7 @@ is_flag_enabled(RELEASE_HARDWARE_BLUETOOTH_RANGING_SERVICE, `
 android.hardware.bluetooth.lmp_event.IBluetoothLmpEvent/default      u:object_r:hal_bluetooth_service:s0
 android.hardware.bluetooth.audio.IBluetoothAudioProviderFactory/default u:object_r:hal_audio_service:s0
 android.hardware.bluetooth.socket.IBluetoothSocket/default           u:object_r:hal_bluetooth_service:s0
+android.hardware.bluetooth.gatt.IBluetoothGatt/default               u:object_r:hal_bluetooth_lpp_service:s0
 android.hardware.broadcastradio.IBroadcastRadio/amfm                 u:object_r:hal_broadcastradio_service:s0
 android.hardware.broadcastradio.IBroadcastRadio/dab                  u:object_r:hal_broadcastradio_service:s0
 # The instance here is internal/0 following naming convention for ICameraProvider.
@@ -105,6 +106,9 @@ android.hardware.radio.voice.IRadioVoice/slot2                       u:object_r:
 android.hardware.radio.voice.IRadioVoice/slot3                       u:object_r:hal_radio_service:s0
 android.hardware.rebootescrow.IRebootEscrow/default                  u:object_r:hal_rebootescrow_service:s0
 android.hardware.security.authgraph.IAuthGraphKeyExchange/nonsecure  u:object_r:hal_authgraph_service:s0
+starting_at_board_api(202604, `
+  android.hardware.security.factory_reset_protection.IFactoryResetProtection/default u:object_r:hal_frp_service:s0
+')
 android.hardware.security.keymint.IKeyMintDevice/default             u:object_r:hal_keymint_service:s0
 android.hardware.security.keymint.IRemotelyProvisionedComponent/default u:object_r:hal_remotelyprovisionedcomponent_service:s0
 android.hardware.security.keymint.IRemotelyProvisionedComponent/avf     u:object_r:hal_remotelyprovisionedcomponent_avf_service:s0
