@@ -8,6 +8,7 @@
     activity_structured_service
     gatekeeper_vendor_data_file
     hal_bluetooth_lpp_service
+    hal_frp_service
     init_dev_config
     init_dev_config_exec
     native_binder_stats_prop

@@ -320,6 +320,9 @@ type hal_dumpstate_service, protected_service, hal_service_type, service_manager
 type hal_evs_service, protected_service, hal_service_type, service_manager_type;
 type hal_face_service, protected_service, hal_service_type, service_manager_type;
 type hal_fastboot_service, protected_service, hal_service_type, service_manager_type;
+starting_at_board_api(202604, `
+  type hal_frp_service, protected_service, hal_service_type, service_manager_type;
+')
 type hal_fingerprint_service, protected_service, hal_service_type, service_manager_type;
 type hal_gnss_service, protected_service, hal_service_type, service_manager_type;
 type hal_graphics_allocator_service, hal_service_type, service_manager_type;
