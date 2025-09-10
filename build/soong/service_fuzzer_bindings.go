@@ -58,6 +58,7 @@ var (
 		"android.hardware.bluetooth.ranging.IBluetoothChannelSounding/default":        EXCEPTION_NO_FUZZER,
 		"android.hardware.bluetooth.lmp_event.IBluetoothLmpEvent/default":             EXCEPTION_NO_FUZZER,
 		"android.hardware.bluetooth.socket.IBluetoothSocket/default":                  []string{"android.hardware.bluetooth.socket-service_fuzzer"},
+		"android.hardware.bluetooth.gatt.IBluetoothGatt/default":                      []string{"android.hardware.bluetooth.gatt-service_fuzzer"},
 		"android.hardware.camera.provider.ICameraProvider/internal/0":                 EXCEPTION_NO_FUZZER,
 		"android.hardware.camera.provider.ICameraProvider/virtual/0":                  EXCEPTION_NO_FUZZER,
 		"android.hardware.cas.IMediaCasService/default":                               EXCEPTION_NO_FUZZER,

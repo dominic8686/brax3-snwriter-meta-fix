@@ -81,6 +81,7 @@ allow bluetooth shell_data_file:file read;
 allow bluetooth self:global_capability_class_set sys_nice;
 
 hal_client_domain(bluetooth, hal_bluetooth)
+hal_client_domain(bluetooth, hal_bluetooth_lpp)
 hal_client_domain(bluetooth, hal_telephony)
 
 # Bluetooth A2DP offload requires binding with audio HAL
