@@ -2265,7 +2265,7 @@
 (typeattributeset priv_app_202504 (priv_app))
 (typeattributeset privapp_data_file_202504 (privapp_data_file))
 (typeattributeset prng_seeder_202504 (prng_seeder))
-(typeattributeset proc_202504 (proc))
+(typeattributeset proc_202504 (proc proc_firmware_config))
 (typeattributeset proc_abi_202504 (proc_abi))
 (typeattributeset proc_asound_202504 (proc_asound))
 (typeattributeset proc_bluetooth_writable_202504 (proc_bluetooth_writable))
