@@ -38,6 +38,7 @@ type proc_dirty, fs_type, proc_type;
 type proc_diskstats, fs_type, proc_type;
 type proc_extra_free_kbytes, fs_type, proc_type;
 type proc_filesystems, fs_type, proc_type;
+starting_at_board_api(202604, `type proc_firmware_config, fs_type, proc_type;')
 type proc_fs_verity, fs_type, proc_type;
 type proc_hostname, fs_type, proc_type;
 type proc_hung_task, fs_type, proc_type;
