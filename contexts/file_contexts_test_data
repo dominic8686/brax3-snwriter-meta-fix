@@ -497,6 +497,7 @@
 /system/bin/uprobestats                                           uprobestats_exec
 /system/bin/trace_redactor                                        trace_redactor_exec
 /system/bin/bert_collector                                        bert_collector_exec
+/system/bin/omapi                                                 omapi_exec
 
 /vendor                                                           vendor_file
 /vendor/does_not_exist                                            vendor_file

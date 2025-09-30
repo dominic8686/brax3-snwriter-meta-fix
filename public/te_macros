@@ -720,6 +720,15 @@ define(`use_credstore', `
   binder_call(credstore, $1)
 ')
 
+#####################################
+# use_omapi(domain)
+# Ability to use omapi.
+define(`use_omapi', `
+  allow $1 omapi_service:service_manager find;
+  binder_call($1, omapi)
+  binder_call(omapi, $1)
+')
+
 ###########################################
 # add_service(domain, service)
 # Ability for domain to add a service to service_manager

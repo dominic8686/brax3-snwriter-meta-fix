@@ -239,6 +239,7 @@ var (
 		"batterystats":                                                        EXCEPTION_NO_FUZZER,
 		"battery":                                                             EXCEPTION_NO_FUZZER,
 		"binder_calls_stats":                                                  EXCEPTION_NO_FUZZER,
+		"binder_stats_consumer":                                               EXCEPTION_NO_FUZZER,
 		"biometric":                                                           EXCEPTION_NO_FUZZER,
 		"bluetooth_manager":                                                   EXCEPTION_NO_FUZZER,
 		"bluetooth":                                                           EXCEPTION_NO_FUZZER,

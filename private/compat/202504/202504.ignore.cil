@@ -17,6 +17,9 @@
     prefetch
     task_continuity_service
     trusty_coverage_prop
+    omapi
+    omapi_exec
+    omapi_service
     serialservice
     serialservice_exec
     sysfs_thunderbolt

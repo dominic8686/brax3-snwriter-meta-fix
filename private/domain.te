@@ -350,7 +350,7 @@ allow { domain -domain } hwservice_manager_type:hwservice_manager { add find };
 # when it's not explicitly used in allow rules
 allow { domain -domain } vndservice_manager_type:service_manager { add find };
 
-# Allow processes to find statsbootstrap service via service_manager
+# Allow processes to find binder_stats_consumer service via service_manager
 allow {
   domain
   -init
@@ -359,7 +359,7 @@ allow {
   -app_zygote
   -isolated_app_all
   -hal_configstore_server
-} statsbootstrap_service:service_manager find;
+} binder_stats_consumer_service:service_manager find;
 allow {
   domain
   -init
@@ -942,6 +942,7 @@ full_treble_only(`
 
     -apc_service
     -audioserver_service # TODO(b/36783122) remove exemptions below once app_api_service is fixed
+    -binder_stats_consumer_service
     -cameraserver_service
     -drmserver_service
     -credstore_service
@@ -953,8 +954,8 @@ full_treble_only(`
     -mediametrics_service
     -mediaserver_service
     -nfc_service
+    -omapi_service
     -radio_service
-    -statsbootstrap_service
     -virtual_touchpad_service
     -vr_manager_service
     userdebug_or_eng(`-hal_face_service')

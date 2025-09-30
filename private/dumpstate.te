@@ -477,9 +477,11 @@ allow dumpstate {
   -fwk_vold_service
   -default_android_service
 }:service_manager find;
-neverallow dumpstate {
-  vold
-}:binder call;
+starting_at_board_api(202604, `
+    neverallow dumpstate {
+      vold
+    }:binder call;
+')
 # suppress denials for services dumpstate should not be accessing.
 dontaudit dumpstate {
   apex_service
