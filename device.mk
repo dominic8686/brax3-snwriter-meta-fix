@@ -36,15 +36,24 @@ PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
 
+# APNs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+
 # Audio
-PRODUCT_PACKAGES += \
-    android.hardware.audio@7.1-impl:32 \
-    android.hardware.audio.effect@7.0-impl:32 \
-    android.hardware.audio.service
+# PRODUCT_PACKAGES += \
+    android.hardware.audio@7.1-impl \
+    android.hardware.audio.effect@7.0-impl \
+    android.hardware.audio.service \
+    android.hardware.soundtrigger@2.3-impl
 
 PRODUCT_PACKAGES += \
-    audio.bluetooth.default:32 \
-    android.hardware.bluetooth.audio-impl:32
+    android.hardware.audio.effect@7.0-impl \
+    android.hardware.soundtrigger@2.3-impl
+
+PRODUCT_PACKAGES += \
+    audio.bluetooth.default \
+    android.hardware.bluetooth.audio-impl
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio,$(TARGET_COPY_OUT_VENDOR)/etc) \
@@ -188,9 +197,6 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     Tag
 
-# PRODUCT_COPY_FILES += \
-#     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/nfc,$(TARGET_COPY_OUT_VENDOR)/etc)
-
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
@@ -243,6 +249,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-subhal-impl-1.0:64 \
     android.hardware.sensors@2.0-service.multihal
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -298,6 +307,8 @@ PRODUCT_PACKAGES += \
     vndservicemanager
 
 # Vibrator
+$(call soong_config_set,mediatek_vibrator,supports_effects,true)
+
 PRODUCT_PACKAGES += \
     android.hardware.vibrator-service.mediatek
 

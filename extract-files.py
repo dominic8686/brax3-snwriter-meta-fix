@@ -19,10 +19,9 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
-    'hardware/mediatek',
-    'hardware/mediatek/libmtkperf_client',
     'vendor/brax/brax3',
     'hardware/mediatek',
+    'hardware/mediatek/libmtkperf_client',
 ]
 
 
@@ -33,23 +32,11 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
-        'android.hardware.security.keymint-V1-ndk',
-        'vendor.mediatek.hardware.videotelephony@1.0',
-        'vendor.mediatek.hardware.aee@1.0',
-        'vendor.mediatek.hardware.aee@1.1',
-     ): lib_fixup_vendor_suffix,
-    (
         'libsink',
     ): lib_fixup_remove,
 }
 
 blob_fixups: blob_fixups_user_type = {
-    (
-        'vendor/bin/hs20-osu-client',
-        'vendor/bin/hw/hostapd',
-        'vendor/bin/hw/wpa_supplicant',
-    ):blob_fixup()
-        .replace_needed('libcrypto.so', 'libcrypto-v33.so'),
     (
         'system_ext/lib64/libcomutils.so',
         'system_ext/lib64/libimsma_rtp.so',
@@ -74,22 +61,10 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libcodec2_vpp_mi_plugin.so',
         'vendor/lib64/libcodec2_vpp_qt_plugin.so',
         'vendor/lib64/libcodec2_vpp_rs_plugin.so',
-        'vendor/lib/libstagefright_softomx.so',
-        'vendor/lib/libstagefright_softomx_plugin.so',
     ): blob_fixup()
         .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
     'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
-    (
-        'vendor/lib64/android.hardware.bluetooth.audio-impl.so',
-        'vendor/lib64/libbluetooth_audio_session_aidl.so',
-    ): blob_fixup()
-        .replace_needed('android.hardware.bluetooth.audio-V2-ndk', 'android.hardware.bluetooth.audio-V5-ndk'),
-    (
-        'vendor/lib/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so'
-        'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so'
-    ): blob_fixup()
-         .replace_needed('android.media.audio.common-V1-ndk.so', 'android.media.audio.common-V4-ndk.so'),
     (
         'vendor/bin/mnld',
         'vendor/lib64/hw/vendor.mediatek.hardware.pq@2.15-impl.so',
@@ -99,10 +74,7 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
     'vendor/lib64/libmtkcam_featurepolicy.so': blob_fixup()
         .binary_regex_replace(b'\x34\xE8\x87\x40\xB9', b'\x34\x28\x02\x80\x52'),
-    'vendor/bin/hw/android.hardware.sensors-service.multihal': blob_fixup()
-        .replace_needed('android.hardware.sensors-V1-ndk.so', 'android.hardware.sensors-V2-ndk.so'),
     (
-        'vendor/lib/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so',
         'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so',
     ): blob_fixup()
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so')
@@ -128,7 +100,12 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libbase_shim.so'),
     'vendor/lib64/hw/hwcomposer.mtk_common.so' : blob_fixup()
             .add_needed('libprocessgroup_shim.so'),
-}  # fmt: skip
+    # 'vendor/lib64/hw/audio.primary.mediatek.so': blob_fixup()
+    #     .add_needed('libstagefright_foundation-v33.so')
+    #     .replace_needed('libalsautils.so', 'libalsautils-v33.so')
+    #     .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
+    #     .binary_regex_replace(b'BTAudiosuspend', b'A2dpSuspended\x00'),
+ }  # fmt: skip
 
 module = ExtractUtilsModule(
     'brax3',

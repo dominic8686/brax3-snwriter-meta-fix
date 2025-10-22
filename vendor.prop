@@ -337,3 +337,8 @@ media.c2.dmabuf.padding=3072
 ro.vendor.pref_scale_enable_cfg=1
 ro.vendor.mtk_hdr_video_support=1
 ro.vendor.mtk_sec_video_path_support=1
+
+# IMS
+persist.dbg.volte_avail_ovr=1
+persist.dbg.vt_avail_ovr=1
+persist.dbg.wfc_avail_ovr=1

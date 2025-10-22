@@ -67,6 +67,7 @@ BOARD_MKBOOTIMG_ARGS := \
     --pagesize $(BOARD_KERNEL_PAGESIZE) \
     --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_RAMDISK_USE_LZ4 := true
+TARGET_PREBUILT_KERNEL_HEADERS := $(KERNEL_PATH)/kernel-uapi-headers.tar.gz
 
 # Kernel modules
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(TARGET_KERNEL_PATH)/vendor_dlkm/modules.load))
@@ -86,6 +87,7 @@ BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+    vendor/lineage/config/device_framework_matrix.xml \
     $(DEVICE_PATH)/framework_compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
@@ -146,7 +148,6 @@ VENDOR_SECURITY_PATCH := 2025-04-05
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
-#BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
 
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
@@ -190,9 +191,9 @@ BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 4
 # Wi-Fi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mt66xx
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mt66xx-mediatek
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mt66xx
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mt66xx-mediatek
 WIFI_DRIVER_FW_PATH_PARAM := "/dev/wmtWifi"
 WIFI_DRIVER_FW_PATH_STA:="STA"
 WIFI_DRIVER_FW_PATH_AP:="AP"
@@ -205,9 +206,6 @@ WIFI_HIDL_FEATURE_DUAL_INTERFACE:= true
 
 BOARD_SHIPPING_API_LEVEL := 33
 BOARD_VNDK_VERSION := current
-
-TARGET_BRM_PLATFORM := mt6835
-VEXT_BRM_PLATFORM := mt6835
 
 # Include the proprietary files BoardConfig.
 include vendor/brax/brax3/BoardConfigVendor.mk
