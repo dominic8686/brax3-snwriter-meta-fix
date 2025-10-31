@@ -41,9 +41,23 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
 
 # Audio
+# PRODUCT_PACKAGES += \
+#     android.hardware.audio@7.1-impl:32 \
+#     android.hardware.audio.effect@7.0-impl:32 \
+#     android.hardware.audio.service
+
+# PRODUCT_PACKAGES += \
+#     audio.bluetooth.default:32 \
+#     android.hardware.bluetooth.audio-impl:32
+
 PRODUCT_PACKAGES += \
+    android.hardware.audio@7.1-impl \
     android.hardware.audio.effect@7.0-impl \
-    android.hardware.soundtrigger@2.3-impl
+    android.hardware.audio.service
+
+PRODUCT_PACKAGES += \
+    audio.bluetooth.default \
+    android.hardware.bluetooth.audio-impl
 
 PRODUCT_PACKAGES += \
     audio.bluetooth.default

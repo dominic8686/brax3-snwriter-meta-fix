@@ -32,37 +32,40 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
+        'vendor.mediatek.hardware.videotelephony@1.0',
+     ): lib_fixup_vendor_suffix,
+    (
         'libsink',
     ): lib_fixup_remove,
 }
 
 blob_fixups: blob_fixups_user_type = {
-    (
-        'system_ext/lib64/libcomutils.so',
-        'system_ext/lib64/libimsma_rtp.so',
-        'system_ext/lib64/libvcodec_cap.so',
-        'system_ext/lib64/libimsma_socketwrapper.so',
-        'system_ext/lib64/libsink.so',
-        'system_ext/lib64/libmtk_vt_service.so',
-        'system_ext/lib64/libimsma.so',
-        'system_ext/lib64/libsignal.so',
-        'vendor/lib64/libcamera2ndk_vendor.so',
-        'vendor/lib64/hw/sensors.mediatek.V2.0.so',
-        'vendor/lib64/libcodec2_mtk_c2store.so',
-        'vendor/lib64/libcodec2_mtk_vdec.so',
-        'vendor/lib64/libcodec2_mtk_venc.so',
-        'vendor/lib64/libcodec2_soft_common.so',
-        'vendor/lib64/libcodec2_soft_mtk_alacdec.so',
-        'vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so',
-        'vendor/lib64/libcodec2_soft_mtk_mp3dec.so',
-        'vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so',
-        'vendor/lib64/libcodec2_vndk.so',
-        'vendor/lib64/libcodec2_vpp_AIMEMC_plugin.so',
-        'vendor/lib64/libcodec2_vpp_mi_plugin.so',
-        'vendor/lib64/libcodec2_vpp_qt_plugin.so',
-        'vendor/lib64/libcodec2_vpp_rs_plugin.so',
-    ): blob_fixup()
-        .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
+    # (
+    #     'system_ext/lib64/libcomutils.so',
+    #     'system_ext/lib64/libimsma_rtp.so',
+    #     'system_ext/lib64/libvcodec_cap.so',
+    #     'system_ext/lib64/libimsma_socketwrapper.so',
+    #     'system_ext/lib64/libsink.so',
+    #     'system_ext/lib64/libmtk_vt_service.so',
+    #     'system_ext/lib64/libimsma.so',
+    #     'system_ext/lib64/libsignal.so',
+    #     'vendor/lib64/libcamera2ndk_vendor.so',
+    #     'vendor/lib64/hw/sensors.mediatek.V2.0.so',
+    #     'vendor/lib64/libcodec2_mtk_c2store.so',
+    #     'vendor/lib64/libcodec2_mtk_vdec.so',
+    #     'vendor/lib64/libcodec2_mtk_venc.so',
+    #     'vendor/lib64/libcodec2_soft_common.so',
+    #     'vendor/lib64/libcodec2_soft_mtk_alacdec.so',
+    #     'vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so',
+    #     'vendor/lib64/libcodec2_soft_mtk_mp3dec.so',
+    #     'vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so',
+    #     'vendor/lib64/libcodec2_vndk.so',
+    #     'vendor/lib64/libcodec2_vpp_AIMEMC_plugin.so',
+    #     'vendor/lib64/libcodec2_vpp_mi_plugin.so',
+    #     'vendor/lib64/libcodec2_vpp_qt_plugin.so',
+    #     'vendor/lib64/libcodec2_vpp_rs_plugin.so',
+    # ): blob_fixup()
+    #     .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
     'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
     (
@@ -89,8 +92,8 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.hardware.security.keymint-V2-ndk.so', 'android.hardware.security.keymint-V3-ndk.so')
         .add_needed('android.hardware.security.rkp-V3-ndk.so'),
     'system_ext/lib64/libsource.so': blob_fixup()
-        .add_needed('libui_shim.so')
-        .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
+        .add_needed('libui_shim.so'),
+        # .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
     (
         'vendor/lib/libnvram.so',
         'vendor/lib64/libnvram.so',
@@ -100,7 +103,12 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libbase_shim.so'),
     'vendor/lib64/hw/hwcomposer.mtk_common.so' : blob_fixup()
             .add_needed('libprocessgroup_shim.so'),
+    # 'vendor/lib/hw/audio.primary.mediatek.so': blob_fixup()
+    #     .add_needed('libstagefright_foundation-v33.so'),
     # 'vendor/lib64/hw/audio.primary.mediatek.so': blob_fixup()
+    #     .add_needed('libstagefright_foundation-v33.so'),
+
+# 'vendor/lib64/hw/audio.primary.mediatek.so': blob_fixup()
     #     .add_needed('libstagefright_foundation-v33.so')
     #     .replace_needed('libalsautils.so', 'libalsautils-v33.so')
     #     .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
