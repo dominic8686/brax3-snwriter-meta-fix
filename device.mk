@@ -41,11 +41,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
 
 # Audio
-# PRODUCT_PACKAGES += \
-    android.hardware.audio.effect@7.0-impl \
-    android.hardware.audio.service \
-    audio.r_submix.default
-
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@7.0-impl \
     audio.r_submix.default
