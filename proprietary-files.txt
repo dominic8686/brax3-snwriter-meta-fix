@@ -3,46 +3,53 @@ vendor/lib/libaedv.so
 vendor/lib64/libaedv.so
 
 # Audio
-vendor/lib/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib/hw/audio.primary.mt6835.so
-vendor/lib/hw/audio.r_submix.mediatek.so;SYMLINK=vendor/lib/hw/audio.r_submix.mt6835.so
-vendor/lib/hw/audio.usb.default.so
-vendor/lib/soundfx/libaudiopreprocessing_mtk.so
-vendor/lib/libMtkSpeechEnh.so
-vendor/lib/lib_iir.so
-vendor/lib/libaudio_param_parser-vnd.so
-vendor/lib/libaudiocompensationfilter_vendor.so
-vendor/lib/libaudiocompensationfilterc.so
-vendor/lib/libaudiocomponentengine_vendor.so
-vendor/lib/libaudiocomponentenginec.so
-vendor/lib/libaudiocustparam_vendor.so
-vendor/lib/libaudiodcrflt_vendor.so
-vendor/lib/libaudiofmtconv.so
-vendor/lib/libaudioloudc.so
-vendor/lib/libaudioprimarydevicehalifclient.so
-vendor/lib/libaudiotoolkit_vendor.so
-vendor/lib/libaurisysdemo.so
-vendor/lib/libawinic_mtk_aurisys.so
-vendor/lib/libbessound_hd_mtk_vendor.so
-vendor/lib/libblisrc32_vendor.so
-vendor/lib/libbwc.so
-vendor/lib/libcvsd_mtk.so
-vendor/lib/libmsbc_mtk.so
-vendor/lib/libmtklimiter_vendor.so
-vendor/lib/libmtkshifter_vendor.so
-vendor/lib/libmtkspparser.so
-vendor/lib/libnxp_extamp_intf.so
-vendor/lib/librt_extamp_intf.so
-vendor/lib/libspeech_enh_lib.so;FIX_SONAME
-vendor/lib/libspeechparser_vendor.so
-vendor/lib/libtinycompress.so
-vendor/lib/vendor.mediatek.hardware.audio@6.1.so
-vendor/lib/vendor.mediatek.hardware.audio@7.1.so
-vendor/lib/vendor.mediatek.hardware.audio@8.1.so
+# vendor/lib/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib/hw/audio.primary.mt6835.so
+# vendor/lib/hw/audio.r_submix.mediatek.so;SYMLINK=vendor/lib/hw/audio.r_submix.mt6835.so
+# vendor/lib/hw/audio.usb.default.so
+# vendor/lib/soundfx/libaudiopreprocessing_mtk.so
+# vendor/lib/soundfx/libspatializer.so
+# vendor/lib/libMtkSpeechEnh.so
+# vendor/lib/lib_iir.so
+# vendor/lib/libaudio_param_parser-vnd.so
+# vendor/lib/libaudiocompensationfilter_vendor.so
+# vendor/lib/libaudiocompensationfilterc.so
+# vendor/lib/libaudiocomponentengine_vendor.so
+# vendor/lib/libaudiocomponentenginec.so
+# vendor/lib/libaudiocustparam_vendor.so
+# vendor/lib/libaudiodcrflt_vendor.so
+# vendor/lib/libaudiofmtconv.so
+# vendor/lib/libaudioloudc.so
+# vendor/lib/libaudioprimarydevicehalifclient.so
+# vendor/lib/libaudiotoolkit_vendor.so
+# vendor/lib/libaurisysdemo.so
+# vendor/lib/libawinic_mtk_aurisys.so
+# vendor/lib/libbessound_hd_mtk_vendor.so
+# vendor/lib/libblisrc32_vendor.so
+# vendor/lib/libbwc.so
+# vendor/lib/libcvsd_mtk.so
+# vendor/lib/libmsbc_mtk.so
+# vendor/lib/libmtklimiter_vendor.so
+# vendor/lib/libmtkshifter_vendor.so
+# vendor/lib/libmtkspparser.so
+# vendor/lib/libnxp_extamp_intf.so
+# vendor/lib/librt_extamp_intf.so
+# vendor/lib/libspeech_enh_lib.so;FIX_SONAME
+# vendor/lib/libspeechparser_vendor.so
+# vendor/lib/libtinycompress.so
+# vendor/lib/vendor.mediatek.hardware.audio@6.1.so
+# vendor/lib/vendor.mediatek.hardware.audio@7.1.so
+# vendor/lib/vendor.mediatek.hardware.audio@8.1.so
+# vendor/lib/hw/android.hardware.audio@7.1-impl-mediatek.so
 
+vendor/etc/init/android.hardware.audio.service.mediatek.rc
+vendor/bin/hw/android.hardware.audio.service.mediatek
+vendor/lib64/hw/android.hardware.audio@7.1-impl-mediatek.so
+vendor/lib64/libalsautils.so:vendor/lib64/libalsautils-v33.so;FIX_SONAME
 vendor/lib64/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib64/hw/audio.primary.mt6835.so
 vendor/lib64/hw/audio.r_submix.mediatek.so;SYMLINK=vendor/lib64/hw/audio.r_submix.mt6835.so
 vendor/lib64/hw/audio.usb.default.so
 vendor/lib64/soundfx/libaudiopreprocessing_mtk.so
+vendor/lib64/soundfx/libspatializer.so
 vendor/lib64/libMtkSpeechEnh.so
 vendor/lib64/lib_iir.so
 vendor/lib64/libaudio_param_parser-vnd.so
@@ -223,6 +230,9 @@ vendor/lib64/libbluetooth_audio_session_mediatek.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.1.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.2.so
+
+vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-impl.so
+vendor/lib64/libbluetooth_audio_session_aidl_mediatek.so
 
 # Camera
 vendor/bin/hw/camerahalserver
@@ -980,7 +990,8 @@ vendor/etc/seccomp_policy/mediacodec.policy
 vendor/etc/seccomp_policy/mediaextractor.policy
 vendor/etc/seccomp_policy/mediaswcodec.policy
 vendor/etc/vintf/manifest/manifest_media_c2_V1_1_default.xml
-vendor/etc/mtk_platform_codecs_config.xml
+# vendor/etc/mtk_platform_codecs_config.xml
+vendor/etc/media_profiles_V1_0.xml
 vendor/lib64/libadpcmdec_mtk.so
 vendor/lib64/libalacdec_mtk.so
 vendor/lib64/libcodec2_mtk_c2store.so
