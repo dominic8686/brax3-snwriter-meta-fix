@@ -75,8 +75,13 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libcam.utils.sensorprovider.so',
     ): blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
-    'vendor/lib64/libmtkcam_featurepolicy.so': blob_fixup()
-        .binary_regex_replace(b'\x34\xE8\x87\x40\xB9', b'\x34\x28\x02\x80\x52'),
+    # 'vendor/lib64/libmtkcam_featurepolicy.so': blob_fixup()
+    #     .binary_regex_replace(b'\x34\xE8\x87\x40\xB9', b'\x34\x28\x02\x80\x52'),
+    # (
+    #     'vendor/lib64/libmtkcam_stdutils.so',
+    #     'vendor/lib64/hw/android.hardware.camera.provider@2.6-impl-mediatek.so',
+    # ): blob_fixup()
+    #     .replace_needed('libutils.so', 'libutils-v33.so'),    
     (
         'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so',
     ): blob_fixup()
