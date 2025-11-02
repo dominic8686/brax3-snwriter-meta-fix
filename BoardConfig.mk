@@ -88,7 +88,7 @@ BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     vendor/lineage/config/device_framework_matrix.xml \
-    $(DEVICE_PATH)/framework_compatibility_matrix.xml
+    hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
 # Metadata

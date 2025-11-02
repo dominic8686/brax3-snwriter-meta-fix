@@ -38,7 +38,7 @@ PRODUCT_PACKAGES += \
 
 # APNs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+    $(LOCAL_PATH)/configs/apns/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -167,9 +167,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.cgroup.rc \
 
-#PRODUCT_PACKAGES += \
-    init.mt6835.power.rc \
-
 # Keymint
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \
@@ -216,16 +213,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power.stats-service.example
-
-# Power
-#PRODUCT_PACKAGES += \
-    android.hardware.power-service.lineage-libperfmgr \
-    vendor.mediatek.hardware.mtkpower@1.2-service.stub \
-    libmtkperf_client_vendor \
-    libmtkperf_client
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
@@ -287,7 +274,7 @@ PRODUCT_COPY_FILES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal/thermal.conf
+    $(LOCAL_PATH)/configs/thermal/thermal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal/thermal.conf
 
 # USB
 PRODUCT_PACKAGES += \
