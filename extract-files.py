@@ -44,14 +44,10 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libcam.utils.sensorprovider.so',
     ): blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
-    (
-        'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so',
-    ): blob_fixup()
+    'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so')
         .replace_needed('android.hardware.audio.common-V1.so', 'android.hardware.audio.common-V4.so'),
-    (
-        'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
-    ): blob_fixup()
+        'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V6-ndk.so'),
     'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
         .add_needed('liblog.so'),
@@ -68,7 +64,7 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libbase_shim.so'),
     'vendor/lib64/hw/hwcomposer.mtk_common.so' : blob_fixup()
             .add_needed('libprocessgroup_shim.so'),
- }  # fmt: skip
+}
 
 module = ExtractUtilsModule(
     'brax3',

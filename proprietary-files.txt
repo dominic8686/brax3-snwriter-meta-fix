@@ -7,7 +7,6 @@ vendor/etc/init/android.hardware.audio.service.mediatek.rc
 vendor/lib64/hw/android.hardware.audio@7.1-impl-mediatek.so
 vendor/lib64/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib64/hw/audio.primary.mt6835.so
 vendor/lib64/hw/audio.r_submix.mediatek.so;SYMLINK=vendor/lib64/hw/audio.r_submix.mt6835.so
-vendor/lib64/hw/audio.usb.default.so
 vendor/lib64/soundfx/libaudiopreprocessing_mtk.so
 vendor/lib64/soundfx/libspatializer.so
 vendor/lib64/libMtkSpeechEnh.so
@@ -735,6 +734,9 @@ vendor/etc/security/cacerts/fd08c599.0
 vendor/etc/security/cacerts/fde84897.0
 
 # Display
+system_ext/lib64/libged_sys.so
+system_ext/lib64/libsf_cpupolicy.so
+system_ext/lib64/libgralloc_extra_sys.so
 vendor/bin/hw/mt6835/android.hardware.graphics.allocator@4.0-service-mediatek.mt6835;SYMLINK=vendor/bin/hw/android.hardware.graphics.allocator@4.0-service-mediatek
 vendor/bin/hw/android.hardware.graphics.composer@2.1-service
 vendor/bin/hw/android.hardware.graphics.composer@3.1-service
