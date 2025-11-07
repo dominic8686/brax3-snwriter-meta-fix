@@ -282,4 +282,18 @@
 
     <!-- Indicates whether device has a power button fingerprint sensor. -->
     <bool name="config_is_powerbutton_fps">true</bool>
+
+    <!-- Boolean indicating if support HFP inband ringing -->
+    <bool name="config_bluetooth_hfp_inband_ringing_support">true</bool>
+
+    <!-- IWLAN data service package name to bind to by default. If none is specified in an overlay,
+         an empty string is passed in -->
+    <string name="config_wlan_data_service_package">com.google.android.iwlan</string>
+
+    <!-- IWLAN network service package name to bind to by default. If none is specified in an
+         overlay, an empty string is passed in -->
+    <string name="config_wlan_network_service_package">com.google.android.iwlan</string>
+
+    <!-- Telephony qualified networks service package name to bind to by default. -->
+    <string name="config_qualified_networks_service_package">com.android.telephony.qns</string>
 </resources>

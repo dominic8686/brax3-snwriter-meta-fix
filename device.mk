@@ -108,7 +108,6 @@ PRODUCT_COPY_FILES += \
 
 # FM Radio
 PRODUCT_PACKAGES += \
-    libfmjni-mediatek \
     FMRadio
 
 # Gatekeeper
@@ -294,6 +293,8 @@ PRODUCT_COPY_FILES += \
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
+    Iwlan \
+    QualifiedNetworksService \
     wpa_supplicant \
     hostapd \
     libwifi-hal-wrapper \
