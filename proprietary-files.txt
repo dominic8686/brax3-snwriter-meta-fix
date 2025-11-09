@@ -3,6 +3,8 @@ vendor/lib64/libaedv.so
 
 # Audio
 vendor/bin/hw/android.hardware.audio.service.mediatek
+vendor/bin/rt5512_calibration
+vendor/bin/mt6660_calibration
 vendor/etc/init/android.hardware.audio.service.mediatek.rc
 vendor/lib64/hw/android.hardware.audio@7.1-impl-mediatek.so
 vendor/lib64/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib64/hw/audio.primary.mt6835.so
@@ -11,7 +13,6 @@ vendor/lib64/soundfx/libaudiopreprocessing_mtk.so
 vendor/lib64/soundfx/libspatializer.so
 vendor/lib64/libMtkSpeechEnh.so
 vendor/lib64/lib_iir.so
-vendor/lib64/libalsautils.so:vendor/lib64/libalsautils-v33.so;FIX_SONAME
 vendor/lib64/libaudio_param_parser-vnd.so
 vendor/lib64/libaudiocompensationfilter_vendor.so
 vendor/lib64/libaudiocompensationfilterc.so
@@ -958,13 +959,11 @@ vendor/lib64/libcodec2_mtk_vdec.so
 vendor/lib64/libcodec2_mtk_venc.so
 vendor/lib64/libcodec2_soft_mtk_alacdec.so
 vendor/lib64/libcodec2_soft_mtk_imaadpcmdec.so
-vendor/lib64/libcodec2_soft_mtk_mp3dec.so
 vendor/lib64/libcodec2_soft_mtk_msadpcmdec.so
 vendor/lib64/libcodec2_vpp_mi_plugin.so
 vendor/lib64/libcodec2_vpp_qt_plugin.so
 vendor/lib64/libcodec2_vpp_rs_plugin.so
 vendor/lib64/libformatter.so
-vendor/lib64/libmp3dec_mtk.so
 
 # MMS
 vendor/bin/hw/vendor.mediatek.hardware.mms@1.7-service

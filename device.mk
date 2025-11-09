@@ -196,7 +196,6 @@ PRODUCT_COPY_FILES += \
 
 # Overlays
 PRODUCT_PACKAGES += \
-    CarrierConfigResOverlay \
     DialerResOverlay \
     FrameworksResOverlay \
     SettingsProviderResOverlay \
