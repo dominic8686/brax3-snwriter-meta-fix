@@ -3,8 +3,8 @@ vendor/lib64/libaedv.so
 
 # Audio
 vendor/bin/hw/android.hardware.audio.service.mediatek
-vendor/bin/rt5512_calibration
 vendor/bin/mt6660_calibration
+vendor/bin/rt5512_calibration
 vendor/etc/init/android.hardware.audio.service.mediatek.rc
 vendor/lib64/hw/android.hardware.audio@7.1-impl-mediatek.so
 vendor/lib64/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib64/hw/audio.primary.mt6835.so
@@ -734,10 +734,14 @@ vendor/etc/security/cacerts/fb5fa911.0
 vendor/etc/security/cacerts/fd08c599.0
 vendor/etc/security/cacerts/fde84897.0
 
+# Chipset info
+vendor/bin/chipinfo
+vendor/etc/init/chipinfo_init.rc
+
 # Display
 system_ext/lib64/libged_sys.so
-system_ext/lib64/libsf_cpupolicy.so
 system_ext/lib64/libgralloc_extra_sys.so
+system_ext/lib64/libsf_cpupolicy.so
 vendor/bin/hw/mt6835/android.hardware.graphics.allocator@4.0-service-mediatek.mt6835;SYMLINK=vendor/bin/hw/android.hardware.graphics.allocator@4.0-service-mediatek
 vendor/bin/hw/android.hardware.graphics.composer@2.1-service
 vendor/bin/hw/android.hardware.graphics.composer@3.1-service
@@ -754,6 +758,13 @@ vendor/etc/init/vendor.mediatek.hardware.pq_aidl-service.rc
 vendor/etc/vintf/manifest/manifest_hwcomposer.xml
 vendor/etc/cust_pq.xml
 vendor/etc/mali_platform.config
+vendor/lib/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so
+vendor/lib/arm.graphics-V3-ndk.so
+vendor/lib/libged.so
+vendor/lib/libgpud.so
+vendor/lib/libgralloc_extra.so
+vendor/lib/libgralloc_metadata.so
+vendor/lib/libgralloctypes_mtk.so
 vendor/lib64/egl/libGLES_mali.so;SYMLINK=vendor/lib64/hw/vulkan.mt6835.so
 vendor/lib64/egl/libGLES_meow.so
 vendor/lib64/egl/libMEOW_data.so
@@ -942,7 +953,7 @@ vendor/etc/init.insmod.mt6835.cfg
 # Ladder
 vendor/lib64/libladder.so
 
-# Media
+# Media (c2)
 vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b
 vendor/etc/init/android.hardware.media.c2@1.2-mediatek-64b.rc
 vendor/etc/seccomp_policy/android.hardware.media.c2@1.2-extended-seccomp-policy
@@ -952,6 +963,7 @@ vendor/etc/seccomp_policy/mediaextractor.policy
 vendor/etc/seccomp_policy/mediaswcodec.policy
 vendor/etc/vintf/manifest/manifest_media_c2_V1_1_default.xml
 vendor/etc/media_profiles_V1_0.xml
+vendor/etc/mtk_platform_codecs_config.xml
 vendor/lib64/libadpcmdec_mtk.so
 vendor/lib64/libalacdec_mtk.so
 vendor/lib64/libcodec2_mtk_c2store.so
@@ -1048,6 +1060,7 @@ vendor/etc/virtual-spn-conf-by-efgid1.xml
 vendor/etc/virtual-spn-conf-by-efpnn.xml
 vendor/etc/virtual-spn-conf-by-efspn.xml
 vendor/etc/virtual-spn-conf-by-imsi.xml
+vendor/lib64/libcapctrl.so
 vendor/lib64/libcares_naptr.so
 vendor/lib64/libcarrierconfig.so
 vendor/lib64/libccci_util.so
