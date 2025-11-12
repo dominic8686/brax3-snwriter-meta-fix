@@ -292,7 +292,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
 
 # Wi-Fi
-$(call soong_config_set,wpa_supplicant,has_broken_rsnxe,true)
+$(call soong_config_set,wpa_supplicant_8,board_wpa_supplicant_private_lib,lib_driver_cmd_mt66xx-mediatek)
+$(call soong_config_set,wpa_supplicant_8,board_hostapd_private_lib,lib_driver_cmd_mt66xx-mediatek)
+$(call soong_config_set,wpa_supplicant_8,wifi_hidl_unified_supplicant_service_rc_entry,true)
+$(call soong_config_set,wpa_supplicant_8,has_broken_rsnxe,true)
 
 PRODUCT_PACKAGES += \
     Iwlan \
