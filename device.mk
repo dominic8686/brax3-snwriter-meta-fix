@@ -81,13 +81,13 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
 # Display
+$(call soong_config_set,surfaceflinger,has_mtk_surfaceflinger,true)
+
 PRODUCT_PACKAGES += \
     android.hardware.memtrack-service.mediatek-mali
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
-$(call soong_config_set,surfaceflinger,has_mtk_surfaceflinger,true)
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -177,12 +177,12 @@ PRODUCT_PACKAGES += \
     android.hardware.light-service.lineage
 
 # Lineage Health
-PRODUCT_PACKAGES += \
-    vendor.lineage.health-service.default
-
 $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/devices/platform/charger/cmd_charge_disable)
 $(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
 $(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
+
+PRODUCT_PACKAGES += \
+    vendor.lineage.health-service.default
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -292,6 +292,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
 
 # Wi-Fi
+$(call soong_config_set,wpa_supplicant,has_broken_rsnxe,true)
+
 PRODUCT_PACKAGES += \
     Iwlan \
     QualifiedNetworksService \
