@@ -295,7 +295,7 @@ PRODUCT_COPY_FILES += \
 $(call soong_config_set,wpa_supplicant_8,board_wpa_supplicant_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,board_hostapd_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,wifi_hidl_unified_supplicant_service_rc_entry,true)
-$(call soong_config_set,wpa_supplicant_8,has_broken_rsnxe,true)
+$(call soong_config_set,wpa_supplicant_8,wifi_disable_multi_akm,true)
 
 PRODUCT_PACKAGES += \
     Iwlan \
