@@ -11,6 +11,12 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "fstab.enableswap",
+    src: "fstab.enableswap",
+    vendor: true,
+}
+
+prebuilt_etc {
     name: "init.cgroup.rc",
     src: "init.cgroup.rc",
     sub_dir: "init/hw",

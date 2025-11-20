@@ -4,5 +4,5 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <bool name="config_show_battery_info" translatable="false">false</bool>
+    <bool name="config_show_battery_info" translatable="false">true</bool>
 </resources>

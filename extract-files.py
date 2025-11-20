@@ -40,6 +40,7 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.hardware.security.keymint-V2-ndk.so', 'android.hardware.security.keymint-V3-ndk.so')
         .add_needed('android.hardware.security.rkp-V3-ndk.so'),
     (
+        'vendor/bin/mnld',
         'vendor/lib64/libaalservice.so',
         'vendor/lib64/libcam.utils.sensorprovider.so',
     ): blob_fixup()
