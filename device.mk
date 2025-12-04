@@ -36,10 +36,6 @@ PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
 
-# APNs
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/apns/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
-
 # Audio
 $(call soong_config_set,android_hardware_audio,run_64bit,true)
 $(call soong_config_set,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
@@ -85,7 +81,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
 # Display
-$(call soong_config_set,surfaceflinger,has_mtk_surfaceflinger,true)
+$(call soong_config_set_bool,surfaceflinger,has_mtk_surfaceflinger,true)
+$(call soong_config_set_bool,surfaceflinger,has_mtk_ged,true)
 
 PRODUCT_PACKAGES += \
     android.hardware.memtrack-service.mediatek-mali
@@ -220,6 +217,9 @@ PRODUCT_PACKAGES += \
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
 
+# Radio
+$(call soong_config_set_bool,apns_conf,mediatek,true)
+
 # Recovery
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init/init.recovery.mt6835.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.mt6835.rc
@@ -299,7 +299,7 @@ PRODUCT_COPY_FILES += \
 $(call soong_config_set,wpa_supplicant_8,board_wpa_supplicant_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,board_hostapd_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,wifi_hidl_unified_supplicant_service_rc_entry,true)
-$(call soong_config_set,wpa_supplicant_8,wifi_disable_multi_akm,true)
+$(call soong_config_set_bool,wpa_supplicant_8,wifi_disable_multi_akm,true)
 
 PRODUCT_PACKAGES += \
     Iwlan \

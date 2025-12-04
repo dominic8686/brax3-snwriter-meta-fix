@@ -756,7 +756,6 @@ vendor/etc/init/vendor.mediatek.hardware.pq_aidl-service.rc
 vendor/etc/vintf/manifest/manifest_hwcomposer.xml
 vendor/etc/cust_pq.xml
 vendor/etc/mali_platform.config
-vendor/lib/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so
 vendor/lib64/egl/libGLES_mali.so;SYMLINK=vendor/lib64/hw/vulkan.mt6835.so
 vendor/lib64/egl/libGLES_meow.so
 vendor/lib64/egl/libMEOW_data.so
@@ -933,6 +932,7 @@ system_ext/lib64/libsink.so:system_ext/lib64/libsink-mtk.so;FIX_SONAME
 system_ext/lib64/libsource.so
 system_ext/lib64/libvcodec_cap.so
 system_ext/lib64/libvcodec_capenc.so
+system_ext/lib64/libvsim-adaptor-client.so
 system_ext/lib64/libvt_avsync.so
 system_ext/lib64/vendor.mediatek.hardware.videotelephony-V1-ndk.so
 system_ext/lib64/vendor.mediatek.hardware.videotelephony@1.0.so

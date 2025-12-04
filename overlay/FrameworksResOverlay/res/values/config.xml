@@ -188,7 +188,7 @@
     <bool name="config_supportDoubleTapWake">false</bool>
 
     <!-- Whether this device is supporting the camera toggle -->
-    <bool name="config_supportsCamToggle">false</bool>
+    <bool name="config_supportsCamToggle">true</bool>
 
     <!-- Whether this device is supporting the software microphone toggle -->
     <bool name="config_supportsMicToggle">true</bool>
@@ -285,7 +285,7 @@
     <string name="config_qualified_networks_service_package">com.android.telephony.qns</string>
 
     <!-- MMS user agent string -->
-    <string name="config_mms_user_agent" translatable="false">Android-Mms/0.1</string>
+    <string name="config_mms_user_agent" translatable="false">Android-Mms/2.0</string>
 
     <!-- MMS user agent prolfile url -->
     <string name="config_mms_user_agent_profile_url" translatable="false">http://www.google.com/oha/rdf/ua-profile-kila.xml</string>
