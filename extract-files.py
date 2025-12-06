@@ -55,7 +55,6 @@ blob_fixups: blob_fixups_user_type = {
     (
         'vendor/lib64/libnvram.so',
         'vendor/lib64/libsysenv.so',
-        'vendor/bin/hw/android.hardware.usb-aidl-service.mediatekv1.0',
     ): blob_fixup()
         .add_needed('libbase_shim.so'),
     'vendor/lib64/hw/hwcomposer.mtk_common.so' : blob_fixup()
