@@ -1,0 +1,1 @@
+get_prop(hal_nfc_default, system_mtk_factory_prop)

@@ -5,6 +5,7 @@ vendor.service.wifi_nvram u:object_r:vendor_mtk_service_wifi_nvram_prop:s0
 vendor.debug.sf.dynamic_duration. u:object_r:vendor_mtk_debug_sf_duration_prop:s0
 vendor.debug.sf.kickidle. u:object_r:vendor_mtk_debug_sf_kickidle_prop:s0
 ro.vendor.mtk_hwc_dsi_switch u:object_r:vendor_mtk_hwc_dsi_switch_prop:s0
+vendor.display.vds_allow_hwc u:object_r:vendor_display_vds_allow_hwc_prop:s0
 
 # mediaswcodec
 ro.vendor.mtk.c2.vdec.fmt.support.level u:object_r:vendor_mtk_c2_vdec_fmt_prop:s0
@@ -20,11 +21,7 @@ persist.vendor.debug.gpud.  u:object_r:vendor_mtk_gpu_prop:s0
 ro.vendor.arm.              u:object_r:vendor_mtk_gpu_prop:s0
 vendor.mali.                u:object_r:vendor_mtk_gpu_prop:s0
 
-persist.system.powerhal. u:object_r:system_mtk_powerhal_prop:s0
-
 ro.vendor.vt.mtk_thin_md_support_mode  u:object_r:vendor_mtk_vendor_vt_prop:s0
-
-persist.vendor.log.tag.tel_dbg u:object_r:system_mtk_em_tel_log_prop:s0
 
 vendor.debug. u:object_r:vendor_mtk_camera_prop:s0
 

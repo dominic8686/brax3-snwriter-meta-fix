@@ -5,6 +5,7 @@ typeattribute vendor_mtk_service_wifi_nvram_prop      mtk_core_property_type;
 vendor_restricted_prop(vendor_mtk_debug_sf_duration_prop)
 vendor_restricted_prop(vendor_mtk_debug_sf_kickidle_prop)
 vendor_restricted_prop(vendor_mtk_hwc_dsi_switch_prop)
+vendor_restricted_prop(vendor_display_vds_allow_hwc_prop)
 
 # mediaswcodec
 vendor_restricted_prop(vendor_mtk_c2_vdec_fmt_prop)
@@ -13,3 +14,5 @@ vendor_restricted_prop(vendor_mtk_boostfwk_sbb_touch_duration_prop)
 typeattribute vendor_mtk_boostfwk_sbb_touch_duration_prop mtk_core_property_type;
 
 system_vendor_config_prop(system_mtk_powerhal_prop)
+
+system_vendor_config_prop(system_mtk_factory_prop)

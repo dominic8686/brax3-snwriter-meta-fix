@@ -2,4 +2,4 @@ dontaudit surfaceflinger vendor_file:dir read;
 get_prop(surfaceflinger, vendor_mtk_debug_sf_duration_prop)
 get_prop(surfaceflinger, vendor_mtk_debug_sf_kickidle_prop)
 get_prop(surfaceflinger, vendor_mtk_hwc_dsi_switch_prop)
-allow surfaceflinger vendor_file:file rx_file_perms;
+get_prop(surfaceflinger, vendor_display_vds_allow_hwc_prop)

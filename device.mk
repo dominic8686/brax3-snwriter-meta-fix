@@ -1,8 +1,6 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
-SELINUX_IGNORE_NEVERALLOWS := true
-
 # A/B
 PRODUCT_PACKAGES += \
     com.android.hardware.boot \
@@ -37,7 +35,6 @@ PRODUCT_PACKAGES += \
     otapreopt_script
 
 # Audio
-$(call soong_config_set,android_hardware_audio,run_64bit,true)
 $(call soong_config_set,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
 
 PRODUCT_PACKAGES += \
@@ -300,7 +297,6 @@ PRODUCT_COPY_FILES += \
 $(call soong_config_set,wpa_supplicant_8,board_wpa_supplicant_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,board_hostapd_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,wifi_hidl_unified_supplicant_service_rc_entry,true)
-$(call soong_config_set_bool,wpa_supplicant_8,wifi_disable_multi_akm,true)
 
 PRODUCT_PACKAGES += \
     Iwlan \

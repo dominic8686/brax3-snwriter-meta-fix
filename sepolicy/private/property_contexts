@@ -1,0 +1,6 @@
+persist.sys.factory. u:object_r:system_mtk_factory_prop:s0
+
+debuglog.drv u:object_r:vendor_mtk_camera_prop:s0
+debuglog.drv. u:object_r:vendor_mtk_camera_prop:s0
+ro.debug_level u:object_r:vendor_mtk_camera_prop:s0
+demo. u:object_r:vendor_mtk_camera_prop:s0

@@ -259,7 +259,6 @@ persist.vendor.volte_support=1
 ro.config.vc_call_vol_steps=10
 ro.telephony.default_network=26,26,26,26
 ro.telephony.iwlan_operation_mode=AP-assisted
-ro.telephony.sim.count=2
 ro.vendor.ap_info_monitor=0
 ro.vendor.md_auto_setup_ims=1
 ro.vendor.md_prop_ver=1
