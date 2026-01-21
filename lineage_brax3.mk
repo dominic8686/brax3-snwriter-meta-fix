@@ -21,8 +21,5 @@ PRODUCT_BRAND := BraX
 PRODUCT_MODEL := BraX3
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildFingerprint=brax/brax3/k6835v1_64:15/AP4A.250205.002/:user/release-keys \
-    DeviceName=BraX3 \
-    DeviceProduct=BraX3 \
-    SystemDevice=k6835v1_64 \
-    SystemName=BraX3
+    SystemName=BraX3 \
+    SystemDevice=k6835v1_64

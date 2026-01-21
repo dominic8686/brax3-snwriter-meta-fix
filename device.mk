@@ -275,7 +275,6 @@ PRODUCT_COPY_FILES += \
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb-service.mediatek \
-    android.hardware.usb.gadget-service.mediatek
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
@@ -297,6 +296,7 @@ PRODUCT_COPY_FILES += \
 $(call soong_config_set,wpa_supplicant_8,board_wpa_supplicant_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,board_hostapd_private_lib,lib_driver_cmd_mt66xx-mediatek)
 $(call soong_config_set,wpa_supplicant_8,wifi_hidl_unified_supplicant_service_rc_entry,true)
+$(call soong_config_set_bool,wpa_supplicant_8,wifi_disable_multi_akm,true)
 
 PRODUCT_PACKAGES += \
     Iwlan \
@@ -318,3 +318,5 @@ PRODUCT_COPY_FILES += \
 
 # Inherit from the proprietary files makefile.
 $(call inherit-product, vendor/brax/brax3/brax3-vendor.mk)
+
+#PRODUCT_EXTRA_OTA_KEYS += vendor/lineage-priv/keys/testkey
