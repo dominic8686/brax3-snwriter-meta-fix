@@ -23,7 +23,7 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "liblog",
-                "libbase",
+                "libbase-v33",
                 "libbinder_ndk",
                 "android.hardware.power-V3-ndk",
                 "libutils",
@@ -778,7 +778,7 @@ cc_prebuilt_library_shared {
                 "libhardware",
                 "libaudioutils",
                 "libtinyalsa",
-                "libtinyxml2",
+                "libtinyxml2-mtk",
                 "libaudiotoolkit_vendor",
                 "libmedia_helper",
                 "libladder",
@@ -1557,7 +1557,7 @@ cc_prebuilt_library_shared {
                 "libcutils",
                 "libpq_prot",
                 "libhidlmemory",
-                "libtinyxml2",
+                "libtinyxml2-mtk",
                 "vendor.mediatek.hardware.pq_aidl-V1-ndk",
                 "libbinder_ndk",
                 "libbinder",
@@ -1639,6 +1639,39 @@ cc_prebuilt_library_shared {
     },
     compile_multilib: "64",
     relative_install_path: "hw",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "lbs_hidl_service-impl",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/lbs_hidl_service-impl.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libcutils",
+                "libbase",
+                "libhardware",
+                "libbinder",
+                "libhidlbase",
+                "libhidltransport",
+                "libutils",
+                "vendor.mediatek.hardware.lbs@1.0",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
     prefer: true,
     soc_specific: true,
 }
@@ -14603,7 +14636,7 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "liblog",
                 "libexpat",
-                "libtinyxml2",
+                "libtinyxml2-mtk",
                 "libhidlbase",
                 "libhardware",
                 "vendor.mediatek.hardware.netdagent@1.0",
@@ -14841,7 +14874,7 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "liblog",
-                "libtinyxml2",
+                "libtinyxml2-mtk",
                 "libc++",
                 "libc",
                 "libm",
@@ -15068,12 +15101,66 @@ cc_prebuilt_library_shared {
                 "libcutils",
                 "libutils",
                 "libtinyalsa",
-                "libtinyxml2",
+                "libtinyxml2-mtk",
                 "liblog",
                 "libnvram",
                 "libcrypto",
                 "libssl",
                 "libfile_op",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libsimlock",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libsimlock.so",
+            ],
+            shared_libs: [
+                "libcutils",
+                "liblog",
+                "libutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libsimmelock",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libsimmelock.so",
+            ],
+            shared_libs: [
+                "libcutils",
+                "liblog",
+                "libutils",
                 "libc++",
                 "libc",
                 "libm",
@@ -15276,6 +15363,31 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libtinyxml2-mtk",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libtinyxml2-mtk.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libtrm",
     owner: "brax",
     strip: {
@@ -15328,6 +15440,36 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libvia-ril",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libvia-ril.so",
+            ],
+            shared_libs: [
+                "libmtkcutils",
+                "libmtkutils",
+                "libmtkproperty",
+                "libmtkrillog",
+                "libmtkrilutils",
+                "libmtk-ril",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libviagpsrpc",
     owner: "brax",
     strip: {
@@ -15343,6 +15485,36 @@ cc_prebuilt_library_shared {
                 "liblog",
                 "libcutils",
                 "libccci_util",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libviamipc-ril",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libviamipc-ril.so",
+            ],
+            shared_libs: [
+                "libmtkcutils",
+                "libmtkutils",
+                "libmtkproperty",
+                "libmtkrillog",
+                "libmtkrilutils",
+                "libmtkmipc-ril",
                 "libc++",
                 "libc",
                 "libm",
@@ -16443,6 +16615,34 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "libbinder_ndk",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "vendor.mediatek.hardware.lbs@1.0",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/vendor.mediatek.hardware.lbs@1.0.so",
+            ],
+            shared_libs: [
+                "libhidlbase",
+                "liblog",
+                "libutils",
+                "libcutils",
                 "libc++",
                 "libc",
                 "libm",
@@ -17808,7 +18008,7 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "libbinder_ndk",
                 "android.hardware.common-V2-ndk",
-                "android.hardware.graphics.common-V6-ndk",
+                "android.hardware.graphics.common-V7-ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -18008,7 +18208,6 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "64",
-    check_elf_files: false,
     prefer: true,
     system_ext_specific: true,
 }
@@ -18656,6 +18855,15 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
+    name: "lbs_hidl_service@1.0.xml",
+    owner: "brax",
+    src: "proprietary/vendor/etc/vintf/manifest/lbs_hidl_service@1.0.xml",
+    filename_from_src: true,
+    sub_dir: "vintf/manifest",
+    soc_specific: true,
+}
+
+prebuilt_etc_xml {
     name: "manifest_android.hardware.drm-service.widevine.xml",
     owner: "brax",
     src: "proprietary/vendor/etc/vintf/manifest/manifest_android.hardware.drm-service.widevine.xml",
@@ -18680,6 +18888,13 @@ prebuilt_etc_xml {
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
+}
+
+sh_binary {
+    name: "oem-iptables-init",
+    owner: "brax",
+    src: "proprietary/system/bin/oem-iptables-init.sh",
+    filename: "oem-iptables-init.sh",
 }
 
 cc_prebuilt_binary {
@@ -19581,6 +19796,40 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
+    name: "lbs_hidl_service",
+    owner: "brax",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/lbs_hidl_service",
+            ],
+            shared_libs: [
+                "liblog",
+                "libcutils",
+                "libbase",
+                "libhardware",
+                "libbinder",
+                "libhidlbase",
+                "libhidltransport",
+                "libutils",
+                "vendor.mediatek.hardware.lbs@1.0",
+                "lbs_hidl_service-impl",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
     name: "mcDriverDaemon",
     owner: "brax",
     target: {
@@ -19639,30 +19888,6 @@ cc_prebuilt_binary {
                 "libc",
                 "libm",
                 "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "mt6660_calibration",
-    owner: "brax",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/mt6660_calibration",
-            ],
-            shared_libs: [
-                "liblog",
-                "libc",
-                "libdl",
-                "libm",
             ],
         },
     },
@@ -19786,30 +20011,6 @@ cc_prebuilt_binary {
                 "libc",
                 "libm",
                 "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "rt5512_calibration",
-    owner: "brax",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/rt5512_calibration",
-            ],
-            shared_libs: [
-                "liblog",
-                "libc",
-                "libdl",
-                "libm",
             ],
         },
     },

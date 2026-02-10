@@ -222,6 +222,7 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/init/init.wlan_drv.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.wlan_drv.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/init.wmt_drv.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.wmt_drv.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/ipsec_mon.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/ipsec_mon.rc \
+    vendor/brax/brax3/proprietary/vendor/etc/init/lbs_hidl_service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/lbs_hidl_service.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/mtk_agpsd_p.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/mtk_agpsd_p.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/mtkgnss-batching.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/mtkgnss-batching.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/mtkrild.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/mtkrild.rc \
@@ -289,6 +290,7 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/power_app_cfg.xml:$(TARGET_COPY_OUT_VENDOR)/etc/power_app_cfg.xml \
     vendor/brax/brax3/proprietary/vendor/etc/powercontable.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powercontable.xml \
     vendor/brax/brax3/proprietary/vendor/etc/powerscntbl.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerscntbl.xml \
+    vendor/brax/brax3/proprietary/vendor/etc/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt \
     vendor/brax/brax3/proprietary/vendor/etc/sec_s3nrn4v_hwreg.bin:$(TARGET_COPY_OUT_VENDOR)/etc/sec_s3nrn4v_hwreg.bin \
     vendor/brax/brax3/proprietary/vendor/etc/sec_s3nrn4v_swreg.bin:$(TARGET_COPY_OUT_VENDOR)/etc/sec_s3nrn4v_swreg.bin \
     vendor/brax/brax3/proprietary/vendor/etc/seccomp_policy/android.hardware.media.c2@1.2-extended-seccomp-policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/android.hardware.media.c2@1.2-extended-seccomp-policy \
@@ -421,6 +423,25 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/security/cacerts/fb5fa911.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts/fb5fa911.0 \
     vendor/brax/brax3/proprietary/vendor/etc/security/cacerts/fd08c599.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts/fd08c599.0 \
     vendor/brax/brax3/proprietary/vendor/etc/security/cacerts/fde84897.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts/fde84897.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/111e6273.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/111e6273.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/3ad48a91.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/3ad48a91.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/7651b327.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/7651b327.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/c542733d.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/c542733d.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/f336e3d1.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/f336e3d1.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/18dc3a8d.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/18dc3a8d.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/1bc5ca0c.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/1bc5ca0c.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/1bc5ca0c.1:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/1bc5ca0c.1 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/2cbfcc3a.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/2cbfcc3a.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/35ef1c14.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/35ef1c14.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/399e7759.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/399e7759.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/586933d9.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/586933d9.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/6146415b.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/6146415b.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/66272d0d.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/66272d0d.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/6f1dbe5e.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/6f1dbe5e.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/b5805141.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/b5805141.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/b805b58a.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/b805b58a.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/ed7b215e.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/ed7b215e.0 \
+    vendor/brax/brax3/proprietary/vendor/etc/security/cacerts_supl/lab/ef4b31e6.0:$(TARGET_COPY_OUT_VENDOR)/etc/security/cacerts_supl/lab/ef4b31e6.0 \
     vendor/brax/brax3/proprietary/vendor/etc/slp_conf:$(TARGET_COPY_OUT_VENDOR)/etc/slp_conf \
     vendor/brax/brax3/proprietary/vendor/etc/smartpa_param/AW_DSP.bin:$(TARGET_COPY_OUT_VENDOR)/etc/smartpa_param/AW_DSP.bin \
     vendor/brax/brax3/proprietary/vendor/etc/smartpa_param/AW_SINWAVE_DSP.bin:$(TARGET_COPY_OUT_VENDOR)/etc/smartpa_param/AW_SINWAVE_DSP.bin \
@@ -509,6 +530,7 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.pq_aidl-impl \
     vendor.mediatek.hardware.videotelephony@1.0-impl \
     vulkan.mali \
+    lbs_hidl_service-impl \
     lib3a.ae.core \
     lib3a.ae \
     lib3a.ae.stat \
@@ -966,6 +988,8 @@ PRODUCT_PACKAGES += \
     librilfusion \
     librpc \
     librt_extamp_intf \
+    libsimlock \
+    libsimmelock \
     libspeech_enh_lib \
     libspeechparser_vendor \
     libstereoinfoaccessor_vsdof \
@@ -973,9 +997,12 @@ PRODUCT_PACKAGES += \
     libsysenv \
     libthha \
     libtinycompress \
+    libtinyxml2-mtk \
     libtrm \
     libudf \
+    libvia-ril \
     libviagpsrpc \
+    libviamipc-ril \
     libvow_comp_test \
     libwifi-hal-mtk \
     libwpfa \
@@ -1010,6 +1037,7 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.clientapi@1.0 \
     vendor.mediatek.hardware.composer_ext@1.0 \
     vendor.mediatek.hardware.gnss.batching-V1-ndk \
+    vendor.mediatek.hardware.lbs@1.0 \
     vendor.mediatek.hardware.mmagent@1.0 \
     vendor.mediatek.hardware.mmagent@1.1 \
     vendor.mediatek.hardware.mms@1.0 \
@@ -1093,9 +1121,11 @@ PRODUCT_PACKAGES += \
     android.hardware.usb.gadget-service.mediatek.xml \
     gnss-mtk.xml \
     gnss@2.1-service-mediatek.xml \
+    lbs_hidl_service@1.0.xml \
     manifest_android.hardware.drm-service.widevine.xml \
     manifest_hwcomposer.xml \
     manifest_media_c2_V1_1_default.xml \
+    oem-iptables-init \
     ccci_mdinit \
     ccci_rpcd \
     chipinfo \
@@ -1124,14 +1154,13 @@ PRODUCT_PACKAGES += \
     vtservice_hidl \
     init.insmod \
     ipsec_mon \
+    lbs_hidl_service \
     mcDriverDaemon \
     mnld \
-    mt6660_calibration \
     mtk_agpsd \
     netdagent \
     nvram_daemon \
     rcs_volte_stack64 \
-    rt5512_calibration \
     thermal_core \
     touch_boost \
     volte_clientapi_ua \
