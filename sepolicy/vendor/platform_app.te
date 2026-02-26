@@ -1,0 +1,2 @@
+allow platform_app secure_element_service:service_manager find;
+get_prop(platform_app, bluetooth_finder_prop)

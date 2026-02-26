@@ -21,7 +21,6 @@ from extract_utils.main import (
 namespace_imports = [
     'vendor/brax/brax3',
     'hardware/mediatek',
-    'hardware/mediatek/libmtkperf_client',
 ]
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
@@ -30,6 +29,15 @@ def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
 blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/mtkfusionrild' : blob_fixup()
         .add_needed('libutils-v33.so'),
+    (
+        'vendor/bin/hw/vendor.mediatek.hardware.pq_aidl-service',
+        'vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so',
+        'vendor/lib64/libpqxmlparser.so',
+        'vendor/lib64/libpowerhal.so',
+        'vendor/lib64/hw/audio.primary.mt6835.so',
+        'vendor/lib64/librt_extamp_intf.so',
+     ): blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
     'system_ext/lib64/libimsma.so': blob_fixup()
         .replace_needed('libsink.so', 'libsink-mtk.so'),
     'system_ext/lib64/libsource.so': blob_fixup()
@@ -48,8 +56,11 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so')
         .replace_needed('android.hardware.audio.common-V1.so', 'android.hardware.audio.common-V4.so'),
-    'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so': blob_fixup()
-        .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V6-ndk.so'),
+    (
+        'vendor/lib64/libgpu_aux.so',
+        'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
+    ): blob_fixup()
+        .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V7-ndk.so'),
     'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
         .add_needed('liblog.so'),
     (
@@ -61,6 +72,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libprocessgroup_shim.so'),
     'vendor/lib64/libpkm.so' : blob_fixup()
         .replace_needed('libpcap.so', 'libpcap-mtk.so'),
+    'vendor/lib64/android.hardware.power-service-mediatek.so' : blob_fixup()
+        .replace_needed('libbase.so', 'libbase-v33.so'),
 }
 
 module = ExtractUtilsModule(

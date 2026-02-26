@@ -1,3 +1,4 @@
 set_prop(vendor_init, vendor_mtk_debug_sf_duration_prop)
 set_prop(vendor_init, vendor_mtk_c2_vdec_fmt_prop)
 get_prop(vendor_init, vts_status_prop)
+rw_dir_file(vendor_init, sysfs_leds)
