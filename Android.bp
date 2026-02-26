@@ -6,7 +6,6 @@ soong_namespace {
     imports: [
         "vendor/brax/brax3",
         "hardware/mediatek",
-        "hardware/mediatek/libmtkperf_client",
     ],
 }
 
@@ -778,7 +777,7 @@ cc_prebuilt_library_shared {
                 "libhardware",
                 "libaudioutils",
                 "libtinyalsa",
-                "libtinyxml2-mtk",
+                "libtinyxml2-v34",
                 "libaudiotoolkit_vendor",
                 "libmedia_helper",
                 "libladder",
@@ -1557,7 +1556,7 @@ cc_prebuilt_library_shared {
                 "libcutils",
                 "libpq_prot",
                 "libhidlmemory",
-                "libtinyxml2-mtk",
+                "libtinyxml2-v34",
                 "vendor.mediatek.hardware.pq_aidl-V1-ndk",
                 "libbinder_ndk",
                 "libbinder",
@@ -14636,7 +14635,7 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "liblog",
                 "libexpat",
-                "libtinyxml2-mtk",
+                "libtinyxml2-v34",
                 "libhidlbase",
                 "libhardware",
                 "vendor.mediatek.hardware.netdagent@1.0",
@@ -14874,7 +14873,7 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "liblog",
-                "libtinyxml2-mtk",
+                "libtinyxml2-v34",
                 "libc++",
                 "libc",
                 "libm",
@@ -15101,7 +15100,7 @@ cc_prebuilt_library_shared {
                 "libcutils",
                 "libutils",
                 "libtinyalsa",
-                "libtinyxml2-mtk",
+                "libtinyxml2-v34",
                 "liblog",
                 "libnvram",
                 "libcrypto",
@@ -15350,31 +15349,6 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "libcutils",
                 "libutils",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_library_shared {
-    name: "libtinyxml2-mtk",
-    owner: "brax",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/libtinyxml2-mtk.so",
-            ],
-            shared_libs: [
-                "liblog",
                 "libc++",
                 "libc",
                 "libm",
