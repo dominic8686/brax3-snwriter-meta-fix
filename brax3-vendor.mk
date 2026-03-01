@@ -479,11 +479,11 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/firmware/sec_s3nrn4v_firmware.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/sec_s3nrn4v_firmware.bin \
     vendor/brax/brax3/proprietary/vendor/firmware/soc_fm_v1_coeff.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/soc_fm_v1_coeff.bin \
     vendor/brax/brax3/proprietary/vendor/firmware/soc_fm_v1_patch.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/soc_fm_v1_patch.bin \
-    vendor/brax/brax3/proprietary/vendor/firmware/wifi.cfg:$(TARGET_COPY_OUT_VENDOR)/firmware/wifi.cfg \
-    vendor/brax/brax3/proprietary/vendor/lib64/android.hardware.graphics.composer@2.1-resources.so:$(TARGET_COPY_OUT_VENDOR)/lib64/android.hardware.graphics.composer@2.1-resources.so \
-    vendor/brax/brax3/proprietary/vendor/lib64/android.hardware.graphics.composer@2.2-resources.so:$(TARGET_COPY_OUT_VENDOR)/lib64/android.hardware.graphics.composer@2.2-resources.so
+    vendor/brax/brax3/proprietary/vendor/firmware/wifi.cfg:$(TARGET_COPY_OUT_VENDOR)/firmware/wifi.cfg
 
 PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.1-resources-v33 \
+    android.hardware.graphics.composer@2.2-resources-v33 \
     android.hardware.power-service-mediatek \
     arm.graphics-V3-ndk \
     bf2257csmacro_mipi_raw_IdxMgr \
@@ -735,6 +735,7 @@ PRODUCT_PACKAGES += \
     libaiawb_sun_model \
     libaiselector \
     libalacdec_mtk \
+    libalsautils-v33 \
     libaudio_param_parser-vnd \
     libaudiocompensationfilter_vendor \
     libaudiocompensationfilterc \

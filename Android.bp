@@ -10,6 +10,65 @@ soong_namespace {
 }
 
 cc_prebuilt_library_shared {
+    name: "android.hardware.graphics.composer@2.1-resources-v33",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/android.hardware.graphics.composer@2.1-resources-v33.so",
+            ],
+            shared_libs: [
+                "android.hardware.graphics.composer@2.1",
+                "android.hardware.graphics.mapper@2.0",
+                "android.hardware.graphics.mapper@3.0",
+                "android.hardware.graphics.mapper@4.0",
+                "libcutils",
+                "libhardware",
+                "libhidlbase",
+                "liblog",
+                "libutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "android.hardware.graphics.composer@2.2-resources-v33",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/android.hardware.graphics.composer@2.2-resources-v33.so",
+            ],
+            shared_libs: [
+                "android.hardware.graphics.composer@2.1-resources",
+                "android.hardware.graphics.composer@2.2",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "android.hardware.power-service-mediatek",
     owner: "brax",
     strip: {
@@ -772,7 +831,7 @@ cc_prebuilt_library_shared {
                 "liblog",
                 "libcutils",
                 "libutils",
-                "libalsautils",
+                "libalsautils-v33",
                 "libhardware_legacy",
                 "libhardware",
                 "libaudioutils",
@@ -1057,6 +1116,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/hw/sensors.mt6835.so",
             ],
             shared_libs: [
+                "libstagefright_foundation-v33",
                 "liblog",
                 "libcutils",
                 "libutils",
@@ -1598,7 +1658,7 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "libhidlbase",
                 "libfmq",
-                "vendor.mediatek.hardware.videotelephony@1.0",
+                "vendor.mediatek.hardware.videotelephony@1.0_vendor",
                 "libc",
                 "libutils",
                 "libcutils",
@@ -6739,6 +6799,34 @@ cc_prebuilt_library_shared {
                 "libcutils",
                 "libc",
                 "libc++",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libalsautils-v33",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libalsautils-v33.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libcutils",
+                "libaudioutils",
+                "libtinyalsa",
+                "libc++",
+                "libc",
                 "libm",
                 "libdl",
             ],
@@ -19144,8 +19232,8 @@ cc_prebuilt_binary {
                 "libhidlbase",
                 "liblog",
                 "libutils",
-                "android.hardware.graphics.composer@2.2-resources",
-                "android.hardware.graphics.composer@2.1-resources",
+                "android.hardware.graphics.composer@2.2-resources-v33",
+                "android.hardware.graphics.composer@2.1-resources-v33",
                 "libc++",
                 "libc",
                 "libm",
@@ -19712,7 +19800,7 @@ cc_prebuilt_binary {
                 "liblog",
                 "libbase",
                 "libfmq",
-                "vendor.mediatek.hardware.videotelephony@1.0",
+                "vendor.mediatek.hardware.videotelephony@1.0_vendor",
                 "libhardware",
                 "libhwbinder",
                 "libhidlbase",
