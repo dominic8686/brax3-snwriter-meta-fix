@@ -10,6 +10,7 @@ vendor/lib64/soundfx/libaudiopreprocessing_mtk.so
 vendor/lib64/soundfx/libspatializer.so
 vendor/lib64/libMtkSpeechEnh.so
 vendor/lib64/lib_iir.so
+vendor/lib64/libalsautils.so:vendor/lib64/libalsautils-v33.so;FIX_SONAME
 vendor/lib64/libaudio_param_parser-vnd.so
 vendor/lib64/libaudiocompensationfilter_vendor.so
 vendor/lib64/libaudiocompensationfilterc.so
@@ -783,8 +784,8 @@ vendor/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so
 vendor/lib64/hw/hwcomposer.mtk_common.so
 vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so
 vendor/lib64/hw/vulkan.mali.so
-vendor/lib64/android.hardware.graphics.composer@2.1-resources.so;MAKE_COPY_RULE_ONLY
-vendor/lib64/android.hardware.graphics.composer@2.2-resources.so;MAKE_COPY_RULE_ONLY
+vendor/lib64/android.hardware.graphics.composer@2.1-resources.so:vendor/lib64/android.hardware.graphics.composer@2.1-resources-v33.so;FIX_SONAME
+vendor/lib64/android.hardware.graphics.composer@2.2-resources.so:vendor/lib64/android.hardware.graphics.composer@2.2-resources-v33.so;FIX_SONAME
 vendor/lib64/arm.graphics-V3-ndk.so
 vendor/lib64/libDefaultFpsActor.so
 vendor/lib64/libFrameRecord.so

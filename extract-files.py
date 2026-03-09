@@ -9,7 +9,6 @@ from extract_utils.fixups_blob import (
     blob_fixups_user_type,
 )
 from extract_utils.fixups_lib import (
-    lib_fixup_remove,
     lib_fixups,
     lib_fixups_user_type,
 )
@@ -26,8 +25,15 @@ namespace_imports = [
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
     return f'{lib}_{partition}' if partition == 'vendor' else None
 
+lib_fixups: lib_fixups_user_type = {
+    **lib_fixups,
+    (
+        'vendor.mediatek.hardware.videotelephony@1.0',
+    ): lib_fixup_vendor_suffix,
+}
+
 blob_fixups: blob_fixups_user_type = {
-    'vendor/bin/hw/mtkfusionrild' : blob_fixup()
+    'vendor/bin/hw/mtkfusionrild': blob_fixup()
         .add_needed('libutils-v33.so'),
     (
         'vendor/bin/hw/vendor.mediatek.hardware.pq_aidl-service',
@@ -38,11 +44,18 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/librt_extamp_intf.so',
      ): blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
+    'vendor/lib64/hw/audio.primary.mt6835.so': blob_fixup()
+        .replace_needed('libalsautils.so', 'libalsautils-v33.so')
+        .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
+        .binary_regex_replace(b'BTAudiosuspend', b'A2dpSuspended\x00'),
     'system_ext/lib64/libimsma.so': blob_fixup()
         .replace_needed('libsink.so', 'libsink-mtk.so'),
     'system_ext/lib64/libsource.so': blob_fixup()
         .add_needed('libui_shim.so'),
-    'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
+    (
+        'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b',
+        'vendor/lib64/hw/sensors.mt6835.so',
+    ): blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
     'vendor/bin/hw/android.hardware.security.keymint@2.0-service.trustonic': blob_fixup()
         .replace_needed('android.hardware.security.keymint-V2-ndk.so', 'android.hardware.security.keymint-V3-ndk.so')
@@ -68,11 +81,14 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libsysenv.so',
     ): blob_fixup()
         .add_needed('libbase_shim.so'),
-    'vendor/lib64/hw/hwcomposer.mtk_common.so' : blob_fixup()
+    'vendor/bin/hw/android.hardware.graphics.composer@3.1-service': blob_fixup()
+        .replace_needed('android.hardware.graphics.composer@2.1-resources.so', 'android.hardware.graphics.composer@2.1-resources-v33.so')
+        .replace_needed('android.hardware.graphics.composer@2.2-resources.so', 'android.hardware.graphics.composer@2.2-resources-v33.so'),
+    'vendor/lib64/hw/hwcomposer.mtk_common.so': blob_fixup()
         .add_needed('libprocessgroup_shim.so'),
-    'vendor/lib64/libpkm.so' : blob_fixup()
+    'vendor/lib64/libpkm.so': blob_fixup()
         .replace_needed('libpcap.so', 'libpcap-mtk.so'),
-    'vendor/lib64/android.hardware.power-service-mediatek.so' : blob_fixup()
+    'vendor/lib64/android.hardware.power-service-mediatek.so': blob_fixup()
         .replace_needed('libbase.so', 'libbase-v33.so'),
 }
 
