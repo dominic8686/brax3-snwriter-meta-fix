@@ -1,7 +1,6 @@
 DEVICE_PATH := device/brax/brax3
 KEYS_PATH := vendor/lineage-priv/keys
 TARGET_KERNEL_PATH := device/brax/brax3-kernel
-BUILD_BROKEN_DUP_RULES := true
 
 # A/B
 AB_OTA_UPDATER := true
