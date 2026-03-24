@@ -458,6 +458,7 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/virtual-spn-conf-by-imsi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/virtual-spn-conf-by-imsi.xml \
     vendor/brax/brax3/proprietary/vendor/etc/xgf.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/xgf.cfg \
     vendor/brax/brax3/proprietary/vendor/firmware/BT_FW.cfg:$(TARGET_COPY_OUT_VENDOR)/firmware/BT_FW.cfg \
+    vendor/brax/brax3/proprietary/vendor/firmware/PR2100132525-td4160c_TM6.56_lvb_spi_hdl.img:$(TARGET_COPY_OUT_VENDOR)/firmware/PR2100132525-td4160c_TM6.56_lvb_spi_hdl.img \
     vendor/brax/brax3/proprietary/vendor/firmware/WMT_SOC.cfg:$(TARGET_COPY_OUT_VENDOR)/firmware/WMT_SOC.cfg \
     vendor/brax/brax3/proprietary/vendor/firmware/aw87xxx_acf.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/aw87xxx_acf.bin \
     vendor/brax/brax3/proprietary/vendor/firmware/fm_cust.cfg:$(TARGET_COPY_OUT_VENDOR)/firmware/fm_cust.cfg \
