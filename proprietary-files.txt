@@ -177,7 +177,6 @@ vendor/etc/usb_audio_accessory_only_policy_configuration.xml
 vendor/bin/hw/android.hardware.bluetooth@1.1-service-mediatek
 vendor/etc/init/android.hardware.bluetooth@1.1-service-mediatek.rc
 vendor/etc/init/init.bt_drv.rc
-vendor/firmware/BT_FW.cfg
 vendor/lib64/hw/android.hardware.bluetooth@1.1-impl-mediatek.so
 vendor/lib64/libbluetooth_mtk.so
 vendor/lib64/libbluetooth_mtk_pure.so
@@ -866,6 +865,7 @@ vendor/firmware/mt6632_fm_v1_coeff.bin
 vendor/firmware/mt6632_fm_v1_patch.bin
 vendor/firmware/mt6635_fm_v1_coeff.bin
 vendor/firmware/mt6635_fm_v1_patch.bin
+vendor/firmware/PR2100132525-td4160c_TM6.56_lvb_spi_hdl.img
 vendor/firmware/remoteproc_scp
 vendor/firmware/sec_s3nrn4v_firmware.bin
 vendor/firmware/soc_fm_v1_coeff.bin
