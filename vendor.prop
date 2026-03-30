@@ -219,7 +219,7 @@ vendor.mtk.vdec.waitkeyframeforplay=9
 # Mediatek
 ro.vendor.mediatek.platform=MT6835
 ro.vendor.mediatek.version.branch=alps-mp-t0.mp1
-ro.vendor.mediatek.version.release=alps-mp-t0.mp1.rc-V11.291.t0mp1rc.k6985v1.64_P3
+ro.vendor.mediatek.version.release=alps-mp-t0.mp1.rc-V11.291.t0mp1rc.k6985v1.64_P27
 ro.vendor.mgk_name=mgk_64_entry_level_k515
 ro.vendor.mgvi_name=mgvi_64_ww_armv82
 
