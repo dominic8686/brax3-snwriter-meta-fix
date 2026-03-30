@@ -37,3 +37,10 @@ prebuilt_hidl_interfaces {
         "vendor.mediatek.hardware.mdmonitor@1.0::IMDMonitorService",
     ],
 }
+
+prebuilt_hidl_interfaces {
+    name: "hidl_hardware_log",
+    interfaces: [
+        "vendor.mediatek.hardware.log@1.0::ILog",
+    ],
+}

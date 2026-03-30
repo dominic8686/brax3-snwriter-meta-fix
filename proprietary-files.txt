@@ -1461,3 +1461,47 @@ vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
 # vendor/etc/wfd_source_capability.csv
 # vendor/lib64/libwapi.so
 # vendor/lib64/libwpa_client.so
+
+
+# Factory
+system_ext/bin/connsyslogger
+system_ext/bin/emdlogger
+system_ext/bin/loghidlsysservice
+system_ext/bin/mobile_log_d
+system_ext/etc/init/emdlogger.rc
+system_ext/etc/init/mobile_log_d.rc
+system_ext/lib64/libccci_util_sys.so
+system_ext/lib64/libmdloggerrecycle.so
+system_ext/lib64/vendor.mediatek.hardware.log-V1-ndk.so
+system_ext/lib64/vendor.mediatek.hardware.log@1.0.so
+vendor/app/HorCali/HorCali.apk
+vendor/app/SensorHub/SensorHub.apk
+vendor/bin/atcid
+vendor/bin/audiocmdservice_atci
+vendor/bin/factory
+vendor/bin/loghidlvendorservice
+vendor/bin/mt6660_calibration
+vendor/bin/meta_tst
+vendor/bin/rt5512_calibration
+vendor/etc/init/atcid.rc
+vendor/etc/init/audiocmdservice_atci.rc
+vendor/etc/init/loghidlvendorservice.rc
+vendor/etc/factory.ini
+vendor/etc/partition_permission.sh
+vendor/lib64/mt6835/libacdk.so;SYMLINK=vendor/lib64/libacdk.so
+vendor/lib64/libem_sensor_jni.so;SYMLINK=vendor/app/SensorHub/lib/arm64/libem_sensor_jni.so
+vendor/lib64/libfft_vendor.so
+vendor/lib64/libkmsetkey.so
+vendor/lib64/libminiui.so
+vendor/lib64/libprizeem_sensor_jni.so;SYMLINK=vendor/app/HorCali/lib/arm64/libprizeem_sensor_jni.so
+vendor/lib64/libwifical.so
+vendor/lib64/libwifitest.so
+vendor/lib64/libwifinvram.so
+vendor/lib64/vendor.mediatek.hardware.atci@1.0.so
+vendor/lib64/vendor.mediatek.hardware.log@1.0.so;MODULE_SUFFIX=_vendor
+vendor/res/images/lcd_test_00.png
+vendor/res/images/lcd_test_01.png
+vendor/res/images/lcd_test_02.png
+
+vendor/lib64/libpixelflinger.so
+vendor/lib64/libhfmanagerwrapper.so

@@ -164,6 +164,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.cgroup.rc \
 
+PRODUCT_PACKAGES += \
+    factory_init.connectivity.common.rc \
+    factory_init.connectivity.rc \
+    factory_init.project.rc \
+    factory_init.rc \
+    meta_init.connectivity.common.rc \
+    meta_init.connectivity.rc \
+    meta_init.modem.rc \
+    meta_init.project.rc \
+    meta_init.rc \
+    meta_init.system.rc \
+    meta_init.vendor.rc \
+    multi_init.rc \
+    vendor_init_as_system.rc
+
 # Keymint
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \
