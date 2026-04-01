@@ -1,1 +1,0 @@
-allow vtservice mtk_hal_videotelephony_service:service_manager find;

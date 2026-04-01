@@ -1,2 +1,0 @@
-vendor.mediatek.hardware.pq_aidl.IPictureQuality_AIDL/default u:object_r:mtk_hal_pq_service:s0
-android.hardware.drm.IDrmFactory/widevine u:object_r:hal_drm_service:s0

@@ -199,23 +199,9 @@
         <fqname>IMtkRadioExVoice/slot2</fqname>
     </hal>
     <hal format="hidl">
-        <name>vendor.mediatek.hardware.netdagent</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::INetdagent/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>vendor.mediatek.hardware.nvram</name>
         <transport>hwbinder</transport>
         <fqname>@1.1::INvram/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.mediatek.hardware.nwk_opt</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::INwkOpt/default</fqname>
-    </hal>
-    <hal format="aidl">
-        <name>vendor.mediatek.hardware.pq_aidl</name>
-        <fqname>IPictureQuality_AIDL/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.mediatek.hardware.videotelephony</name>

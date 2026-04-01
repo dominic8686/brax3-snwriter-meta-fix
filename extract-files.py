@@ -37,9 +37,6 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/mtkfusionrild': blob_fixup()
         .add_needed('libutils-v33.so'),
     (
-        'vendor/bin/hw/vendor.mediatek.hardware.pq_aidl-service',
-        'vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so',
-        'vendor/lib64/libpqxmlparser.so',
         'vendor/lib64/libpowerhal.so',
         'vendor/lib64/hw/audio.primary.mt6835.so',
         'vendor/lib64/librt_extamp_intf.so',
@@ -63,17 +60,13 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('android.hardware.security.rkp-V3-ndk.so'),
     (
         'vendor/bin/mnld',
-        'vendor/lib64/libaalservice.so',
         'vendor/lib64/libcam.utils.sensorprovider.so',
     ): blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
     'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so')
         .replace_needed('android.hardware.audio.common-V1.so', 'android.hardware.audio.common-V4.so'),
-    (
-        'vendor/lib64/libgpu_aux.so',
-        'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so',
-    ): blob_fixup()
+    'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V7-ndk.so'),
     'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
         .add_needed('liblog.so'),
