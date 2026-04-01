@@ -6,10 +6,10 @@ LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_DEVICE),brax3)
 
-$(call add-radio-file-sha1-checked,radio/connsys_bt.img,32997bfc9df8ef59a3632468739841f54cb5f52a)
+$(call add-radio-file-sha1-checked,radio/connsys_bt.img,45c0b6fe0e95e2ce52bbed8c92c253a60142bd25)
 $(call add-radio-file-sha1-checked,radio/dpm.img,84ed623b5ac7ba70f1e5ee6cb17be9391cfdf789)
 $(call add-radio-file-sha1-checked,radio/gz.img,f12da683c0960330a9b58156f97c6f0c04584377)
-$(call add-radio-file-sha1-checked,radio/lk.img,bbcb4e4c64eaa2653814977533f38a7e51bd2864)
+$(call add-radio-file-sha1-checked,radio/lk.img,beeeb52ac2ad16b3d6aafc131b216308522c88a0)
 $(call add-radio-file-sha1-checked,radio/logo.img,4e6299b26034c0c3e391e8b852957dd0ef69cf92)
 $(call add-radio-file-sha1-checked,radio/mcf_ota.img,a3c939150bfc10ee36b1b646dbe51cfacfe6cc45)
 $(call add-radio-file-sha1-checked,radio/mcupm.img,4c395b9ca9987d2cc5413dcef36d863aaa25ae11)

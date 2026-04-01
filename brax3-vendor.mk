@@ -160,7 +160,6 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     vendor/brax/brax3/proprietary/vendor/etc/aurisys_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/aurisys_config.xml \
     vendor/brax/brax3/proprietary/vendor/etc/aurisys_config_rv.xml:$(TARGET_COPY_OUT_VENDOR)/etc/aurisys_config_rv.xml \
-    vendor/brax/brax3/proprietary/vendor/etc/cust_pq.xml:$(TARGET_COPY_OUT_VENDOR)/etc/cust_pq.xml \
     vendor/brax/brax3/proprietary/vendor/etc/default_pd_calibration.bin:$(TARGET_COPY_OUT_VENDOR)/etc/default_pd_calibration.bin \
     vendor/brax/brax3/proprietary/vendor/etc/displayconfig/display_id_4627039422300187648.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4627039422300187648.xml \
     vendor/brax/brax3/proprietary/vendor/etc/ecc_list.xml:$(TARGET_COPY_OUT_VENDOR)/etc/ecc_list.xml \
@@ -193,7 +192,6 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/gralloc/gpu.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gralloc/gpu.xml \
     vendor/brax/brax3/proprietary/vendor/etc/gralloc/vpu.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gralloc/vpu.xml \
     vendor/brax/brax3/proprietary/vendor/etc/init.insmod.mt6835.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.mt6835.cfg \
-    vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.bluetooth@1.1-service-mediatek.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.bluetooth@1.1-service-mediatek.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.drm-service.widevine.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.drm-service.widevine.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.gnss-service.mediatek.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.gnss-service.mediatek.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.graphics.allocator@4.0-service-mediatek.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.graphics.allocator@4.0-service-mediatek.rc \
@@ -227,7 +225,6 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/init/mtkgnss-batching.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/mtkgnss-batching.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/mtkrild.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/mtkrild.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/muxreport.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/muxreport.rc \
-    vendor/brax/brax3/proprietary/vendor/etc/init/netdagent.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/netdagent.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/networksetting.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/networksetting.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/nvram_daemon.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/nvram_daemon.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/tee.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/tee.rc \
@@ -238,7 +235,6 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/init/vendor.mediatek.hardware.mtkpower@1.0-init.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.mediatek.hardware.mtkpower@1.0-init.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/vendor.mediatek.hardware.mtkpower@1.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.mediatek.hardware.mtkpower@1.0-service.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/vendor.mediatek.hardware.nvram@1.1-sevice.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.mediatek.hardware.nvram@1.1-sevice.rc \
-    vendor/brax/brax3/proprietary/vendor/etc/init/vendor.mediatek.hardware.pq_aidl-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.mediatek.hardware.pq_aidl-service.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/volte_clientapi_ua.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/volte_clientapi_ua.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/wlan_assistant.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/wlan_assistant.rc \
     vendor/brax/brax3/proprietary/vendor/etc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
@@ -515,9 +511,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.mtk_common \
     power.default \
     sensors.mt6835 \
-    sound_trigger.primary.default \
     thermal_hal \
-    vendor.mediatek.hardware.bluetooth.audio@2.2-impl \
     vendor.mediatek.hardware.camera.atms@1.0-impl \
     vendor.mediatek.hardware.camera.bgservice@1.1-impl \
     vendor.mediatek.hardware.camera.ccap@1.0-impl \
@@ -527,7 +521,6 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.mms@1.7-impl \
     vendor.mediatek.hardware.mtkpower@1.2-impl \
     vendor.mediatek.hardware.nvram@1.1-impl \
-    vendor.mediatek.hardware.pq_aidl-impl \
     vendor.mediatek.hardware.videotelephony@1.0-impl \
     vulkan.mali \
     lbs_hidl_service-impl \
@@ -722,11 +715,6 @@ PRODUCT_PACKAGES += \
     lib_iir \
     libaaa_ltm \
     libaaa_ltmx \
-    libaal_cust \
-    libaal_cust_func \
-    libaal_key \
-    libaal_mtk \
-    libaalservice \
     libadpcmdec_mtk \
     libaedv \
     libaiawb_moon \
@@ -752,8 +740,6 @@ PRODUCT_PACKAGES += \
     libawinic_mtk_aurisys \
     libbessound_hd_mtk_vendor \
     libblisrc32_vendor \
-    libbluetooth_audio_session_aidl_mediatek \
-    libbluetooth_audio_session_mediatek \
     libbluetooth_mtk \
     libbluetooth_mtk_pure \
     libbt-vendor \
@@ -974,14 +960,11 @@ PRODUCT_PACKAGES += \
     libperfctl_vendor \
     libpower_timer \
     libpowerhal \
-    libpq_cust_base \
     libpq_prot \
-    libpqframework \
     libpqhdrmetaparser \
     libpqparamparser \
     libpqsharememory \
     libpqtuning \
-    libpqxmlparser \
     libratconfig \
     librcs_interface \
     librcs_volte_core \
@@ -1021,7 +1004,6 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.audio@7.1 \
     vendor.mediatek.hardware.audio@8.1 \
     vendor.mediatek.hardware.bluetooth.audio-V1-ndk \
-    vendor.mediatek.hardware.bluetooth.audio-impl \
     vendor.mediatek.hardware.bluetooth.audio@2.1 \
     vendor.mediatek.hardware.bluetooth.audio@2.2 \
     vendor.mediatek.hardware.camera.atms@1.0 \
@@ -1106,8 +1088,6 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.videotelephony@1.0 \
     ImsService \
     MtkGbaService \
-    mediatek-common \
-    mediatek-framework \
     mediatek-ims-base \
     mediatek-ims-common \
     mediatek-ims-extension-plugin \
@@ -1132,7 +1112,6 @@ PRODUCT_PACKAGES += \
     fuelgauged \
     fuelgauged_nvram \
     gps_dump \
-    android.hardware.bluetooth@1.1-service-mediatek \
     android.hardware.drm-service.widevine \
     android.hardware.gnss-service.mediatek \
     android.hardware.graphics.composer@3.1-service \
@@ -1150,7 +1129,6 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.mms@1.7-service \
     vendor.mediatek.hardware.mtkpower@1.0-service \
     vendor.mediatek.hardware.nvram@1.1-service \
-    vendor.mediatek.hardware.pq_aidl-service \
     vtservice_hidl \
     init.insmod \
     ipsec_mon \
@@ -1158,7 +1136,6 @@ PRODUCT_PACKAGES += \
     mcDriverDaemon \
     mnld \
     mtk_agpsd \
-    netdagent \
     nvram_daemon \
     rcs_volte_stack64 \
     thermal_core \
