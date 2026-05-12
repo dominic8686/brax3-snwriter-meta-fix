@@ -268,7 +268,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # Symlinks
 PRODUCT_PACKAGES += \
-    nvcfg_mdota.ini_symlink
+    mdota_symlink
 
 # Telephony
 PRODUCT_PACKAGES += \
