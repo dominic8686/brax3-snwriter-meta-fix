@@ -560,7 +560,7 @@ neverallow {
     -init
     -vendor_init
     userdebug_or_eng(`-dumpstate')
-    userdebug_or_eng(`-system_server')
+    -system_server
 } binderfs_logs_transactions:file no_rw_file_perms;
 
 # Binderfs transaction history is less sensitive than transactions, but it
