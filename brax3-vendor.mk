@@ -201,7 +201,6 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.secure_element@1.2-service-mediatek.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.secure_element@1.2-service-mediatek.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.security.keymint@2.0-service.trustonic.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.security.keymint@2.0-service.trustonic.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.thermal@2.0-service.mtk.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.thermal@2.0-service.mtk.rc \
-    vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.usb.gadget-service.mediatek.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.usb.gadget-service.mediatek.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/bootperf.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/bootperf.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/camerahalserver.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/camerahalserver.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/chipinfo_init.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/chipinfo_init.rc \
@@ -1098,7 +1097,6 @@ PRODUCT_PACKAGES += \
     android.hardware.security.keymint-service.trustonic.xml \
     android.hardware.security.secureclock-service.trustonic.xml \
     android.hardware.security.sharedsecret-service.trustonic.xml \
-    android.hardware.usb.gadget-service.mediatek.xml \
     gnss-mtk.xml \
     gnss@2.1-service-mediatek.xml \
     lbs_hidl_service@1.0.xml \
@@ -1120,7 +1118,6 @@ PRODUCT_PACKAGES += \
     android.hardware.secure_element@1.2-service-mediatek \
     android.hardware.security.keymint@2.0-service.trustonic \
     android.hardware.thermal@2.0-service.mtk \
-    android.hardware.usb.gadget-service.mediatekv1.1 \
     camerahalserver \
     android.hardware.graphics.allocator@4.0-service-mediatek.mt6835 \
     mtkfusionrild \
@@ -1150,3 +1147,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor_bin_hw_android_hardware_graphics_allocator@4_0-service-mediatek \
     vendor_lib64_hw_vulkan_mt6835_so
+
+PRODUCT_BOOT_JARS += \
+    mediatek-ims-base \
+    mediatek-ims-common \
+    mediatek-ims-extension-plugin \
+    mediatek-telecom-common \
+    mediatek-telephony-base \
+    mediatek-telephony-common

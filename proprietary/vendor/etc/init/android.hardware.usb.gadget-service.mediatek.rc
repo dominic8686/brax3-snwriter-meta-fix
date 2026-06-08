@@ -1,5 +1,0 @@
-service vendor.usb-hal-gadget-1-1 /vendor/bin/hw/android.hardware.usb.gadget-service.mediatekv1.1
-    class hal
-    user root
-    group root system shell mtp
-    capabilities

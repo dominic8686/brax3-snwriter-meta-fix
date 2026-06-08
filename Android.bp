@@ -18429,15 +18429,6 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
-    name: "android.hardware.usb.gadget-service.mediatek.xml",
-    owner: "brax",
-    src: "proprietary/vendor/etc/vintf/manifest/android.hardware.usb.gadget-service.mediatek.xml",
-    filename_from_src: true,
-    sub_dir: "vintf/manifest",
-    soc_specific: true,
-}
-
-prebuilt_etc_xml {
     name: "gnss-mtk.xml",
     owner: "brax",
     src: "proprietary/vendor/etc/vintf/manifest/gnss-mtk.xml",
@@ -18928,39 +18919,6 @@ cc_prebuilt_binary {
                 "android.hardware.thermal@2.0",
                 "android.hardware.thermal@1.0",
                 "libc++",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "android.hardware.usb.gadget-service.mediatekv1.1",
-    owner: "brax",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.usb.gadget-service.mediatekv1.1",
-            ],
-            shared_libs: [
-                "android.hardware.usb.gadget@1.0",
-                "android.hardware.usb.gadget@1.1",
-                "libbase",
-                "libcutils",
-                "libhardware",
-                "libhidlbase",
-                "liblog",
-                "libutils",
-                "libc++",
-                "libc",
                 "libm",
                 "libdl",
             ],
