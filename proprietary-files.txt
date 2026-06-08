@@ -916,12 +916,12 @@ system/bin/oem-iptables-init.sh
 system_ext/bin/vtservice
 system_ext/etc/init/init.vtservice.rc
 system_ext/etc/sysconfig/com.mediatek.ims.config.xml
-system_ext/framework/mediatek-ims-base.jar:system/framework/mediatek-ims-base.jar
-system_ext/framework/mediatek-ims-common.jar:system/framework/mediatek-ims-common.jar
-system_ext/framework/mediatek-ims-extension-plugin.jar:system/framework/mediatek-ims-extension-plugin.jar
-system_ext/framework/mediatek-telecom-common.jar:system/framework/mediatek-telecom-common.jar
-system_ext/framework/mediatek-telephony-base.jar:system/framework/mediatek-telephony-base.jar
-system_ext/framework/mediatek-telephony-common.jar:system/framework/mediatek-telephony-common.jar
+system_ext/framework/mediatek-ims-base.jar:system/framework/mediatek-ims-base.jar;BOOT_JAR
+system_ext/framework/mediatek-ims-common.jar:system/framework/mediatek-ims-common.jar;BOOT_JAR
+system_ext/framework/mediatek-ims-extension-plugin.jar:system/framework/mediatek-ims-extension-plugin.jar;BOOT_JAR
+system_ext/framework/mediatek-telecom-common.jar:system/framework/mediatek-telecom-common.jar;BOOT_JAR
+system_ext/framework/mediatek-telephony-base.jar:system/framework/mediatek-telephony-base.jar;BOOT_JAR
+system_ext/framework/mediatek-telephony-common.jar:system/framework/mediatek-telephony-common.jar;BOOT_JAR
 system_ext/lib64/libcomutils.so
 system_ext/lib64/libimsma.so
 system_ext/lib64/libimsma_adapt.so
@@ -1191,9 +1191,9 @@ vendor/lib64/libTEECommon.so
 vendor/lib64/libthha.so
 
 # USB
-vendor/bin/hw/android.hardware.usb.gadget-service.mediatekv1.1
-vendor/etc/init/android.hardware.usb.gadget-service.mediatek.rc
-vendor/etc/vintf/manifest/android.hardware.usb.gadget-service.mediatek.xml
+# vendor/bin/hw/android.hardware.usb.gadget-service.mediatekv1.1
+# vendor/etc/init/android.hardware.usb.gadget-service.mediatek.rc
+# vendor/etc/vintf/manifest/android.hardware.usb.gadget-service.mediatek.xml
 
 # Wi-Fi
 vendor/bin/wlan_assistant
