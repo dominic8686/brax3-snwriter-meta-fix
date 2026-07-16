@@ -1209,10 +1209,10 @@ vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
 vendor/bin/meta_tst
 # vendor/etc/apdb/APDB_MT6835___W2421_ENUM
 # vendor/etc/apdb/APDB_MT6835___W2421
-# vendor/lib64/libhfmanagerwrapper.so
-# vendor/lib64/libwifinvram.so
-# vendor/lib64/libkmsetkey.so
-# vendor/lib64/libwifical.so
+vendor/lib64/libhfmanagerwrapper.so
+vendor/lib64/libwifinvram.so
+vendor/lib64/libkmsetkey.so
+vendor/lib64/libwifical.so
 # vendor/etc/init/hw/meta_init.rc
 # vendor/etc/init/hw/factory_init.connectivity.rc
 # vendor/etc/init/hw/factory_init.rc
@@ -1290,7 +1290,7 @@ vendor/bin/audiocmdservice_atci
 vendor/etc/init/atcid.rc
 vendor/etc/init/audiocmdservice_atci.rc
 vendor/lib64/vendor.mediatek.hardware.atci@1.0.so
-# vendor/lib64/libwifitest.so
+vendor/lib64/libwifitest.so
 
 # vendor/bin/bip_ap
 # vendor/etc/init/init.bip_ap.rc
