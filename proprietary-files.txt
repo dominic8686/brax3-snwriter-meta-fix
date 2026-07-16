@@ -1266,21 +1266,21 @@ vendor/lib64/libwifical.so
 # system_ext/bin/loghidlsysservice
 # system_ext/etc/init/loghidlsysservice.rc
 
-# system_ext/app/EngineerMode/EngineerMode.apk
+system_ext/app/EngineerMode/EngineerMode.apk
 # system_ext/lib/libem_support_jni.so
-# system_ext/lib64/libem_support_jni.so
+system_ext/lib64/libem_support_jni.so
 # system_ext/lib/libaudiotoolkit.so
 # system_ext/lib/libem_aoltest_jni.so
 # system_ext/lib/libem_audio_jni.so
 # system_ext/lib/libem_wifi_jni.so
-# system_ext/lib64/libaudiotoolkit.so
-# system_ext/lib64/libem_aoltest_jni.so
-# system_ext/lib64/libem_audio_jni.so
-# system_ext/lib64/libem_wifi_jni.so
-# system_ext/etc/init/em_svr_user.rc
-# system_ext/bin/em_svr
+system_ext/lib64/libaudiotoolkit.so
+system_ext/lib64/libem_aoltest_jni.so
+system_ext/lib64/libem_audio_jni.so
+system_ext/lib64/libem_wifi_jni.so
+system_ext/etc/init/em_svr_user.rc
+system_ext/bin/em_svr
 # system_ext/lib/libsysenv_system.so
-# system_ext/lib64/libsysenv_system.so
+system_ext/lib64/libsysenv_system.so
 
 
 vendor/bin/atcid
