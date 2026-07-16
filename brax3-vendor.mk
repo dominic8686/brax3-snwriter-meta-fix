@@ -6,6 +6,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/brax/brax3
 
 PRODUCT_COPY_FILES += \
+    vendor/brax/brax3/proprietary/system_ext/etc/init/em_svr_user.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/em_svr_user.rc \
     vendor/brax/brax3/proprietary/system_ext/etc/init/init.vtservice.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.vtservice.rc \
     vendor/brax/brax3/proprietary/system_ext/etc/sysconfig/com.mediatek.ims.config.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/sysconfig/com.mediatek.ims.config.xml \
     vendor/brax/brax3/proprietary/vendor/app/mcRegistry/020f0000000000000000000000000000.drbin:$(TARGET_COPY_OUT_VENDOR)/app/mcRegistry/020f0000000000000000000000000000.drbin \
@@ -1074,7 +1075,12 @@ PRODUCT_PACKAGES += \
     vendor.mediatek.hardware.pq_aidl-V1-ndk \
     vendor.mediatek.hardware.rcs@2.0 \
     vendor.mediatek.hardware.videotelephony@1.0_vendor \
+    libaudiotoolkit \
     libcomutils \
+    libem_aoltest_jni \
+    libem_audio_jni \
+    libem_support_jni \
+    libem_wifi_jni \
     libged_sys \
     libgralloc_extra_sys \
     libimsma \
@@ -1087,12 +1093,14 @@ PRODUCT_PACKAGES += \
     libsignal \
     libsink-mtk \
     libsource \
+    libsysenv_system \
     libvcodec_cap \
     libvcodec_capenc \
     libvsim-adaptor-client \
     libvt_avsync \
     vendor.mediatek.hardware.videotelephony-V1-ndk \
     vendor.mediatek.hardware.videotelephony@1.0 \
+    EngineerMode \
     ImsService \
     MtkGbaService \
     mediatek-ims-base \
@@ -1153,6 +1161,7 @@ PRODUCT_PACKAGES += \
     wlan_assistant \
     wmt_launcher \
     wmt_loader \
+    em_svr \
     vtservice
 
 PRODUCT_PACKAGES += \
