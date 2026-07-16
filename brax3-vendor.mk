@@ -201,6 +201,8 @@ PRODUCT_COPY_FILES += \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.secure_element@1.2-service-mediatek.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.secure_element@1.2-service-mediatek.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.security.keymint@2.0-service.trustonic.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.security.keymint@2.0-service.trustonic.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/android.hardware.thermal@2.0-service.mtk.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.thermal@2.0-service.mtk.rc \
+    vendor/brax/brax3/proprietary/vendor/etc/init/atcid.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/atcid.rc \
+    vendor/brax/brax3/proprietary/vendor/etc/init/audiocmdservice_atci.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/audiocmdservice_atci.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/bootperf.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/bootperf.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/camerahalserver.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/camerahalserver.rc \
     vendor/brax/brax3/proprietary/vendor/etc/init/chipinfo_init.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/chipinfo_init.rc \
@@ -846,6 +848,7 @@ PRODUCT_PACKAGES += \
     libgz_uree \
     libheichal \
     libhfmanager \
+    libhfmanagerwrapper \
     libhwm \
     libifcutils_mtk \
     libimagebuffer_wrapper \
@@ -857,6 +860,7 @@ PRODUCT_PACKAGES += \
     libipsec_ims_shr \
     libjpeg-alpha-oal_vendor \
     libjpeg-alpha_vendor \
+    libkmsetkey \
     libksensor \
     libladder \
     liblpcnr \
@@ -987,6 +991,9 @@ PRODUCT_PACKAGES += \
     libviamipc-ril \
     libvow_comp_test \
     libwifi-hal-mtk \
+    libwifical \
+    libwifinvram \
+    libwifitest \
     libwpfa \
     libwvaidl \
     mtk000_mipi_raw_IdxMgr \
@@ -999,6 +1006,7 @@ PRODUCT_PACKAGES += \
     s5k3l8_mipi_raw_tuning \
     libaudiopreprocessing_mtk \
     libspatializer \
+    vendor.mediatek.hardware.atci@1.0 \
     vendor.mediatek.hardware.audio@6.1 \
     vendor.mediatek.hardware.audio@7.1 \
     vendor.mediatek.hardware.audio@8.1 \
@@ -1104,6 +1112,8 @@ PRODUCT_PACKAGES += \
     manifest_hwcomposer.xml \
     manifest_media_c2_V1_1_default.xml \
     oem-iptables-init \
+    atcid \
+    audiocmdservice_atci \
     ccci_mdinit \
     ccci_rpcd \
     chipinfo \
@@ -1131,6 +1141,7 @@ PRODUCT_PACKAGES += \
     ipsec_mon \
     lbs_hidl_service \
     mcDriverDaemon \
+    meta_tst \
     mnld \
     mtk_agpsd \
     nvram_daemon \

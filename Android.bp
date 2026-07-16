@@ -10665,6 +10665,32 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libhfmanagerwrapper",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libhfmanagerwrapper.so",
+            ],
+            shared_libs: [
+                "libhardware",
+                "libhfmanager",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libhwm",
     owner: "brax",
     strip: {
@@ -10959,6 +10985,35 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "libjpeg-alpha-oal_vendor",
                 "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libkmsetkey",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libkmsetkey.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libutils",
+                "libMcClient",
+                "libcutils",
+                "libsysenv",
                 "libc++",
                 "libc",
                 "libm",
@@ -15242,6 +15297,87 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libwifical",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libwifical.so",
+            ],
+            shared_libs: [
+                "libwifinvram",
+                "libcutils",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libwifinvram",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libwifinvram.so",
+            ],
+            shared_libs: [
+                "libcutils",
+                "liblog",
+                "libnvram",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libwifitest",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libwifitest.so",
+            ],
+            shared_libs: [
+                "libcutils",
+                "libnvram",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libwpfa",
     owner: "brax",
     strip: {
@@ -15686,6 +15822,34 @@ cc_prebuilt_library_shared {
     },
     compile_multilib: "64",
     relative_install_path: "soundfx",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "vendor.mediatek.hardware.atci@1.0",
+    owner: "brax",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/vendor.mediatek.hardware.atci@1.0.so",
+            ],
+            shared_libs: [
+                "libhidlbase",
+                "liblog",
+                "libutils",
+                "libcutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
     prefer: true,
     soc_specific: true,
 }
@@ -18490,6 +18654,73 @@ sh_binary {
 }
 
 cc_prebuilt_binary {
+    name: "atcid",
+    owner: "brax",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/atcid",
+            ],
+            shared_libs: [
+                "libmtkcutils",
+                "libmtkutils",
+                "libmtkrillog",
+                "libmtkproperty",
+                "vendor.mediatek.hardware.atci@1.0",
+                "libhidlbase",
+                "libhidltransport",
+                "libhwbinder",
+                "libnvram",
+                "libfile_op",
+                "libmipc",
+                "libtrm",
+                "libwifitest",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
+    name: "audiocmdservice_atci",
+    owner: "brax",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/audiocmdservice_atci",
+            ],
+            shared_libs: [
+                "libcutils",
+                "libutils",
+                "libbinder",
+                "liblog",
+                "libaudiocompensationfilter_vendor",
+                "libaudioprimarydevicehalifclient",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
     name: "ccci_mdinit",
     owner: "brax",
     target: {
@@ -19338,6 +19569,51 @@ cc_prebuilt_binary {
             ],
             shared_libs: [
                 "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
+    name: "meta_tst",
+    owner: "brax",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/meta_tst",
+            ],
+            shared_libs: [
+                "libhardware_legacy",
+                "libcutils",
+                "libbase",
+                "liblog",
+                "libutils",
+                "libccci_util",
+                "libhfmanagerwrapper",
+                "libnetutils",
+                "libwifical",
+                "libwifinvram",
+                "libselinux",
+                "vendor.mediatek.hardware.nvram@1.1",
+                "libnvram",
+                "libfile_op",
+                "libhardware",
+                "libbinder",
+                "libhidlbase",
+                "libhidltransport",
+                "vendor.mediatek.hardware.lbs@1.0",
+                "libkmsetkey",
+                "libsysenv",
                 "libc++",
                 "libc",
                 "libm",
