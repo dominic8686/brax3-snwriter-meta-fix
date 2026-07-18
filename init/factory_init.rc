@@ -13,8 +13,18 @@ import /vendor/etc/init/microtrust.rc
 import /vendor/etc/init/hw/init.aee.rc
 import /system_ext/etc/init/hw/init.aee.rc
 import /vendor/etc/init/vendor.mediatek.hardware.mtkpower@1.0-service.rc
-import /vendor/etc/init/android.hardware.boot@1.2-service.rc
-import /vendor/etc/init/android.hardware.boot@1.2-service-lazy.rc
+# The HIDL boot@1.2 rc files these imports pointed at do not exist in this
+# build: the boot-control HAL ships as the vendor APEX com.android.hardware.boot
+# and its rc is only parsed at perform_apex_config (post-fs-data) -- a stage
+# factory mode never reaches, because mount_all --late (see `on late-fs`) blocks
+# in vold waiting on IBootControl to resolve the A/B slot for super's logical
+# partitions. init skips missing imports silently, so class_start early_hal was
+# starting every early HAL except the one vold needs. Define the service here.
+service vendor.boot-default /apex/com.android.hardware.boot/bin/hw/android.hardware.boot-service.default
+    interface aidl android.hardware.boot.IBootControl/default
+    class early_hal
+    user root
+    group root
 import /vendor/etc/init/vendor.mediatek.hardware.thp@1.0-service.rc
 import /vendor/etc/init/android.hardware.health-service.example.rc
 

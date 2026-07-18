@@ -6,3 +6,4 @@
 
 # SEC NFC
 /(vendor|system/vendor)/bin/hw/android\.hardware\.nfc@1\.2-service.sec                 u:object_r:hal_nfc_default_exec:s0
+

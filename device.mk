@@ -173,6 +173,10 @@ PRODUCT_PACKAGES += \
     multi_init.rc \
     vendor_init_as_system.rc
 
+# TEMP: META diagnostic capture script -> /vendor/bin/brax-metadiag.sh
+PRODUCT_PACKAGES += \
+    brax-metadiag.sh
+
 # Keymint
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \

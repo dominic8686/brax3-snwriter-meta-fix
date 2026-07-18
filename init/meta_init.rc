@@ -11,8 +11,17 @@ import /vendor/etc/init/trustonic.rc
 import /vendor/etc/init/hw/meta_init.connectivity.rc
 import /vendor/etc/init/hw/meta_init.project.rc
 import /vendor/etc/init/microtrust.rc
-import /vendor/etc/init/android.hardware.boot@1.2-service.rc
-import /vendor/etc/init/android.hardware.boot@1.2-service-lazy.rc
+# The HIDL boot@1.2 rc files these imports pointed at do not exist in this
+# build: the boot-control HAL ships as the vendor APEX com.android.hardware.boot
+# and its rc is only parsed at perform_apex_config (post-fs-data) -- a stage
+# META never reaches, because mount_all --late deadlocks waiting on
+# IBootControl. Define the service here so class_start early_hal (late-fs)
+# can start it, matching how the MTK BSP handles META (bootctl in early_hal).
+service vendor.boot-default /apex/com.android.hardware.boot/bin/hw/android.hardware.boot-service.default
+    interface aidl android.hardware.boot.IBootControl/default
+    class early_hal
+    user root
+    group root
 import /vendor/etc/init/android.hardware.health-service.example.rc
 import /vendor/etc/init/android.hardware.health-service.mediatek.rc
 
@@ -199,10 +208,13 @@ on post-fs
     mkdir /mnt/vendor/nvdata/media 0771 media audio
     restorecon_recursive /mnt/vendor/nvdata
 
+    # TEMP DIAG - not for commit. Started at post-fs (a separate process) so it
+    # still completes even if a later init stage stalls.
+    start brax_metadiag
 #INTERNAL_END
 
 on late-fs
-    start keystore2
+    # keystore2 NOT started (Option A deadlocks on A15/16 -- see meta_init.system.rc).
     start vendor.keymaster-3-0
     start vendor.keymaster-3-0-trustonic
     start vendor.keymaster-4-0
@@ -218,7 +230,14 @@ on late-fs
     class_start early_hal
     start keymaster_attestation-1-1
     exec_start wait_for_keymaster
-    mount_all --late
+    # APEXFIX flow (best working state): raw ext4 /data mount, no keystore2/vold.
+    # mount_all --late would deadlock (keystore2 can't link -- see meta_init.system.rc).
+    # META is healthy this way: IMEI + modem NVRAM work; only the SetCleanBootFlag
+    # backup times out (needs TEE/RPMB which needs keystore2/TEE-daemon that can't
+    # link). Raw mount fails harmlessly on encrypted userdata; META works without /data.
+    mount ext4 /dev/block/by-name/userdata /data noatime nosuid nodev noauto_da_alloc discard wait
+    chmod 0771 /data
+    chown system system /data
 
 on post-fs-data
     write /proc/bootprof "INIT:post-fs-data"
@@ -323,6 +342,16 @@ service meta_tst /vendor/bin/meta_tst
     user root
     group radio system wifi audio bluetooth media gps
     socket meta-atci stream 660 radio system
+
+# TEMP DIAG - not for commit. seclabel MUST be su:s0, not shell:s0: under
+# ENFORCING, shell is denied write to nvdata_file, so a shell-labelled dump
+# would silently produce nothing.
+service brax_metadiag /system/bin/sh /vendor/bin/brax-metadiag.sh
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:su:s0
 
 service factory_no_image /vendor/bin/factory
     user root

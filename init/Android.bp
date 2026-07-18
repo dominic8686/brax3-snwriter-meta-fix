@@ -184,3 +184,10 @@ prebuilt_etc {
     sub_dir: "init/hw",
     system_ext_specific: true,
 }
+
+// TEMP diagnostic capture script (brax-metadiag). Installs to /vendor/bin.
+sh_binary {
+    name: "brax-metadiag.sh",
+    src: "brax-metadiag.sh",
+    vendor: true,
+}
