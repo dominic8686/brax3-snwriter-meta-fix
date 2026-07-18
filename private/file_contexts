@@ -60,6 +60,14 @@
 /postinstall         u:object_r:postinstall_mnt_dir:s0
 
 /apex/(\.(bootstrap|default)-)?apex-info-list.xml u:object_r:apex_info_file:s0
+# A15/16 apexd writes the bootstrap manifest under a top-level /bootstrap-apex/
+# (no per-file f_c entry upstream), so it inherits apex_mnt_dir and
+# servicemanager/hwservicemanager (allowed apex_info_file, not apex_mnt_dir:file)
+# get EPERM -> NULL VINTF manifest -> every AIDL HAL fails to register
+# (aidlStatus=-3): keymint, boot, health, modem HALs, etc. Relabel it to the type
+# those readers already have access to (via use_apex_info). Root cause of the META
+# HAL crash storm behind snWriter's modem/backup failures.
+/bootstrap-apex/apex-info-list\.xml u:object_r:apex_info_file:s0
 
 # Symlinks
 /bin                u:object_r:rootfs:s0
