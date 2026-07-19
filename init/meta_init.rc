@@ -214,7 +214,8 @@ on post-fs
 #INTERNAL_END
 
 on late-fs
-    # keystore2 NOT started (Option A deadlocks on A15/16 -- see meta_init.system.rc).
+    # keystore2 started: linkerconfig is seeded in on-early-init so it links now.
+    start keystore2
     start vendor.keymaster-3-0
     start vendor.keymaster-3-0-trustonic
     start vendor.keymaster-4-0
@@ -230,14 +231,12 @@ on late-fs
     class_start early_hal
     start keymaster_attestation-1-1
     exec_start wait_for_keymaster
-    # APEXFIX flow (best working state): raw ext4 /data mount, no keystore2/vold.
-    # mount_all --late would deadlock (keystore2 can't link -- see meta_init.system.rc).
-    # META is healthy this way: IMEI + modem NVRAM work; only the SetCleanBootFlag
-    # backup times out (needs TEE/RPMB which needs keystore2/TEE-daemon that can't
-    # link). Raw mount fails harmlessly on encrypted userdata; META works without /data.
-    mount ext4 /dev/block/by-name/userdata /data noatime nosuid nodev noauto_da_alloc discard wait
-    chmod 0771 /data
-    chown system system /data
+    # mount_all --late: with keystore2 now linking (linkerconfig seeded), vold unwraps
+    # FBE and mounts the normal encrypted userdata -> /data/vendor/mcRegistry (TEE
+    # secure storage) present -> RPMB works -> modem completes SetCleanBootFlag ->
+    # snWriter backup passes. No userdata wipe needed. This also lets the post-fs-data
+    # /data-dependent block run, so perform_apex_config regenerates the full linkerconfig.
+    mount_all --late
 
 on post-fs-data
     write /proc/bootprof "INIT:post-fs-data"
