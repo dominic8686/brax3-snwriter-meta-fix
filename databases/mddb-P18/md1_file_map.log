@@ -1,0 +1,13 @@
+md1_filter=catcher_filter.bin
+md1_filter_1_Moderate=catcher_filter_1_Moderate.bin
+md1_filter_2_Standard=catcher_filter_2_Standard.bin
+md1_filter_3_Slim=catcher_filter_3_Slim.bin
+md1_filter_4_UltraSlim=catcher_filter_4_UltraSlim.bin
+md1_filter_PLS_PS_ONLY=catcher_filter_PLS_PS_ONLY.bin
+md1_filter_LowPowerMonitor=catcher_filter_LowPowerMonitor.bin
+md1_emfilter=em_filter.bin
+md1_dbginfodsp=DbgInfo_DSP_MT6835_MOLY.NR17.R1.MP3.RC.MP.V19.10.P18_2026_01_16_11_43.xz
+md1_dbginfo=DbgInfo_NR17.R1.MP3.RC.MP_TK_MD_MOLY_NR17_R1_MP3_RC_MP_V19_10_P18_2026_03_17_15_00.xz
+md1_mddbmetaodb=MDDB.META.ODB_MT6835_S00_MOLY_NR17_R1_MP3_RC_MP_V19_10_P18.XML.GZ
+md1_mddb=MDDB_InfoCustomAppSrcP_MT6835_S00_MOLY_NR17_R1_MP3_RC_MP_V19_10_P18.EDB
+md1_mdmlayout=mdm_layout_desc.dat

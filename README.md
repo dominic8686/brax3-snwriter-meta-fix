@@ -1,109 +1,318 @@
-# BraX3 (MT6835) — snWriter / META provisioning fixes for iodéOS
+# BraX3 (MT6835) — factory provisioning fixes for iodéOS
 
-Changes that make **MediaTek SN Writer (Coosea V10.2324, IMEI/serial factory
-provisioning) pass GREEN** on the iodé/LineageOS BraX3 build **under SELinux
-enforcing**. Verified on device 2026-07-19: **PASS, Pass:1 Fail:0, "All Operate
-successfully!!"** — reproduced twice (fix build + clean canonical rebuild).
+Three related fixes that restore **factory provisioning** on the iodé/LineageOS
+BraX3 build. The headline result:
 
-## Repository layout
+> **MediaTek SN Writer now passes GREEN under SELinux enforcing.**
+> Verified on device 2026-07-19 — `PASS, Pass:1 Fail:0, "All Operate successfully!!"`
+> Reproduced twice (initial fix build + clean canonical rebuild).
+
+## What's in here
+
+| # | Change | Status | Test procedure |
+|---|---|---|---|
+| 1 | **snWriter / META provisioning** — IMEI + serial writing | ✅ **Verified green on device** | [Test A](#test-a--snwriter-provisioning-the-main-fix) |
+| 2 | **EngineerMode** — MTK engineering app set restored | ✅ **Verified working** | [Test B](#test-b--engineermode) |
+| 3 | **Factory mode** — same fix ported to `factory_init.rc` | ⚠️ **Untested — needs verification** | [Test C](#test-c--factory-mode-needs-verification) |
+
+Branches:
 
 | Branch | Content |
 |---|---|
-| `main` | This README + the patch series under `patches/` |
-| `device_brax_brax3` | Full history of `device/brax/brax3` with the 7-commit series (based on iodé v7.6) |
-| `system_sepolicy` | iodé `system/sepolicy` with the 1-line labeling prerequisite (to be upstreamed to iodé) |
+| `main` | This README + the patch series in `patches/` |
+| `device_brax_brax3` | `device/brax/brax3` with the 7-commit series (on top of iodé v7.6) |
+| `system_sepolicy` | `system/sepolicy` + the 1-line prerequisite (**upstream candidate for iodé**) |
 
-## The problem
+---
 
-On the iodé build, snWriter wrote and verified the IMEI correctly, but its final
-step — `REQ_BackupNvram2BinRegion` / `SP_META_SetCleanBootFlag_r` — timed out
-after exactly 15 s, so the tool reported **FAIL**. The factory line requires a
-green PASS. The stock MTK BSP (Android 13) passed; iodé (Android 16) did not.
-Permissive SELinux made it pass, enforcing made it fail — but no AVC was ever
-logged.
+## The bug
 
-## Root cause (the interesting part)
+snWriter wrote and verified the IMEI correctly, then its **final** step —
+`REQ_BackupNvram2BinRegion` / `SP_META_SetCleanBootFlag_r` — timed out after
+exactly 15 s, so the tool reported **FAIL**. The factory line requires a green
+PASS, so this blocked production.
 
-An **Android 13 → 16 porting gap in MediaTek's META-mode init**:
+Confusing symptoms that made this hard:
 
-1. META mode boots with a dedicated init script
-   (`androidboot.init_rc=/system_ext/etc/init/hw/meta_init.system.rc`), derived
-   from MTK's Android-13 BSP.
-2. On A13, `apexd` itself restorecons the `apex-info-list.xml` it writes
-   (`RestoreconPath` at the end of `EmitApexInfoList`). On A16 that
-   responsibility moved: normal `init.rc` runs **`perform_apex_config`**
-   immediately after `exec_start apexd-bootstrap`, and *that* restorecons the
-   manifest (and generates the linker configuration).
-3. The A13-derived META init never ran `perform_apex_config`. Result: in META
-   the manifest kept its tmpfs parent label `apex_mnt_dir`;
-   `servicemanager`/`hwservicemanager` are only allowed to read
-   `apex_info_file` → **"NULL VINTF MANIFEST"** → **no HAL could register**,
-   including `vendor.mediatek.hardware.nvram@1.1::INvram`.
-4. When snWriter sent `FT_UTILCMD_SET_CLEAN_BOOT_FLAG`, MTK's `meta_tst`
-   called `INvram::getService()`, got **null**, logged `client is NULL` — and
-   then dereferenced it anyway (`client->BackupToBinRegion_All_Exx`) →
-   **SIGSEGV**. The PC waited its configured 15 s timeout on a dead process.
-5. IMEI writing itself never broke because it uses an in-process editor
-   (`META_Editor_WriteFile_OP`), not the HIDL service — which is why only the
-   backup failed.
+- The stock MTK BSP (Android 13) passed; iodé (Android 16) failed.
+- **Permissive** SELinux passed, **enforcing** failed — but **no AVC was ever logged**.
+- The IMEI itself was written correctly and persisted, so provisioning "almost" worked.
 
-Permissive "fixed" it because the mislabeled file could still be read, so the
-HAL registered and the backup completed (~214 ms).
+## Root cause — an Android 13 → 16 porting gap in MTK's META init
+
+1. META mode boots a dedicated init script
+   (`androidboot.init_rc=/system_ext/etc/init/hw/meta_init.system.rc`), inherited
+   from MediaTek's **Android 13** BSP.
+2. On A13, `apexd` restorecon'd the `apex-info-list.xml` it wrote (`RestoreconPath`
+   at the end of `EmitApexInfoList`). **On A16 that responsibility moved**: normal
+   `init.rc` runs **`perform_apex_config`** right after `exec_start apexd-bootstrap`,
+   and *that* restorecons the manifest (and generates the linker configuration).
+3. The A13-derived META init never ran `perform_apex_config`. So in META the
+   manifest kept its tmpfs parent label `apex_mnt_dir`. `servicemanager` /
+   `hwservicemanager` may only read `apex_info_file` → **"NULL VINTF MANIFEST"**
+   → **no HAL could register**, including `vendor.mediatek.hardware.nvram@1.1::INvram`.
+4. On `FT_UTILCMD_SET_CLEAN_BOOT_FLAG`, MTK's `meta_tst` called
+   `INvram::getService()`, got **null**, logged `client is NULL` — **and then
+   dereferenced it anyway** (`client->BackupToBinRegion_All_Exx`) → **SIGSEGV**.
+   The PC then simply waited out its configured 15 s timeout on a dead process.
+5. IMEI writing kept working because it uses an in-process editor
+   (`META_Editor_WriteFile_OP`), **not** the HIDL service — which is exactly why
+   only the *backup* step failed.
+
+Permissive "worked" because the mislabeled file was still readable, so the HAL
+registered and the backup completed in ~214 ms.
+
+> **Debugging note for reviewers:** the process was *crashing*, not hanging. An
+> earlier kernel-stack capture appeared to show `meta_tst` blocked reading a CCCI
+> modem port — but that was the **auto-restarted** `meta_tst` idling normally; the
+> original PID had already SIGSEGV'd seconds earlier. Check PIDs across the
+> timeline before trusting a "hang" stack.
 
 ## The fixes
 
-### device/brax/brax3 (branch `device_brax_brax3`, 7 commits)
+### `device_brax_brax3` — 7 commits
 
 | # | Commit | What |
 |---|---|---|
-| 1 | `re-enable MTK ATCI + meta_tst provisioning blobs` | The open-source blob scrub had removed ATCI/meta_tst — nothing serviced META. Prerequisite. |
-| 2 | `pull in ATCI/meta_tst transitive vendor libs` | Their transitive lib deps. |
-| 3 | `enable EngineerMode app set` | Restores MTK EngineerMode (confirmed working). |
-| 4 | `exclude isolated apps from gralloc tmpfs grant` | sepolicy build fix encountered on the way. |
-| 5 | `META snWriter backup timeout - root cause + APEXFIX state (WIP)` | Investigation state: inline boot-HAL service for META, diagnostics. |
-| 6 | **`META - run perform_apex_config after apexd-bootstrap`** | **The fix.** Restores the A16 contract in `meta_init.system.rc` (+ belt-and-suspenders `restorecon /bootstrap-apex/apex-info-list.xml`). Also replaces a dead A13 `exec /system/bin/bootstrap/linkerconfig` with the A16 stub-write pattern, and restores keystore2 + `mount_all --late`, which the fix makes viable. **Verified: snWriter GREEN PASS under enforcing.** |
-| 7 | `factory mode - port the A16 perform_apex_config fix from META` | Same latent bug in `factory_init.rc`; identical fix. Untested in factory mode (mirrors the proven META state). |
+| 1 | `re-enable MTK ATCI + meta_tst provisioning blobs` | The open-source blob scrub had removed ATCI/`meta_tst`, so nothing serviced META at all. Prerequisite. |
+| 2 | `pull in ATCI/meta_tst transitive vendor libs` | Their transitive library deps. |
+| 3 | `enable EngineerMode app set` | Restores the MTK EngineerMode apps (**change #2**). |
+| 4 | `exclude isolated apps from gralloc tmpfs grant` | sepolicy build fix hit along the way. |
+| 5 | `META snWriter backup timeout — root cause + APEXFIX state (WIP)` | Investigation state: inline boot-HAL service for META + diagnostics. |
+| 6 | **`META — run perform_apex_config after apexd-bootstrap`** | **The fix (change #1).** Restores the A16 contract in `meta_init.system.rc`, plus a belt-and-suspenders `restorecon /bootstrap-apex/apex-info-list.xml`. Also replaces a dead A13 `exec /system/bin/bootstrap/linkerconfig` (that binary moved into the runtime APEX on A15/16) with the A16 stub-write pattern, and restores `keystore2` + `mount_all --late`, which this fix makes viable. |
+| 7 | `factory mode — port the A16 perform_apex_config fix from META` | **Change #3.** `factory_init.rc` has the identical latent bug; same fix applied. **Not yet tested in factory mode.** |
 
-### system/sepolicy (branch `system_sepolicy`, 1 commit — **upstream candidate for iodé**)
+### `system_sepolicy` — 1 commit (upstream candidate)
 
 ```
 /bootstrap-apex/apex-info-list\.xml  u:object_r:apex_info_file:s0
 ```
 
-One line in `private/file_contexts`. A15/16 `apexd` writes the bootstrap
-manifest to `/bootstrap-apex/apex-info-list.xml`, but upstream file_contexts
-only labels the `/apex/` paths — so the file is created as `apex_mnt_dir` and
-stays unreadable to service managers until something relabels it. This defines
-the label that `perform_apex_config`'s restorecon applies. **This is not
-BraX3-specific** — any A15/16 device that runs a non-standard init sequence
-(META/factory mode, recovery-like environments) around apexd-bootstrap can hit
-it, which is why it belongs upstream (iodé, and arguably AOSP: `apexd` could
-restorecon the bootstrap manifest itself like A13 did).
+One line in `private/file_contexts`. A15/16 `apexd` writes the bootstrap manifest
+to `/bootstrap-apex/apex-info-list.xml`, but upstream `file_contexts` only labels
+the `/apex/` paths — so the file inherits `apex_mnt_dir` and stays unreadable to
+the service managers until something relabels it. This defines the label that
+`perform_apex_config`'s restorecon then applies.
 
-## Verification
+**This is not BraX3-specific.** Any A15/16 device running a non-standard init
+sequence around `apexd-bootstrap` (META, factory, recovery-like environments) can
+hit it — which is why it belongs upstream in iodé, and arguably in AOSP (`apexd`
+could restorecon the bootstrap manifest itself, as it did on A13).
 
-- snWriter V10.2324.0.18, EU config, APDB P27 / MDDB P18 (from DUT):
-  **GREEN PASS under enforcing**, twice (initial fix build + clean rebuild).
-- IMEI written and persisting across reboots.
-- Normal boot: `/bootstrap-apex/apex-info-list.xml` = `apex_info_file`,
-  zero `NULL VINTF MANIFEST`, all HALs registered, `getenforce` = Enforcing.
-- KeyMint (TEE), Gatekeeper, FBE unaffected.
+---
 
-## Applying
+# How to test
 
-With the iodé v7.6 BraX3 tree:
+## Prerequisites
+
+**Build and flash the images**
 
 ```bash
-cd device/brax/brax3   && git am <this-repo>/patches/device_brax_brax3/*.patch
-cd system/sepolicy     && git am <this-repo>/patches/system_sepolicy/*.patch
+# in the iodé BraX3 tree, with both patch sets applied (see "Applying" below)
+source build/envsetup.sh
+lunch lineage_brax3-bp4a-userdebug
 m vendorimage systemextimage superimage
 ```
 
-Both fixes ride in `super.img` (system_ext + vendor); no boot-chain images
-change.
+Both fixes ride inside `super.img` (system_ext + vendor). **No boot-chain images
+change**, so a `super`-only flash is sufficient for all three tests.
+
+Flash with **SP Flash Tool V6.2404**, "Download Only", `super` checked. Power the
+phone fully **off**, press Download, then plug in USB.
+
+**Sanity check after boot** (all three tests depend on this):
+
+```bash
+adb shell getenforce
+# -> Enforcing
+
+adb shell ls -Z /bootstrap-apex/apex-info-list.xml
+# -> u:object_r:apex_info_file:s0     (NOT apex_mnt_dir)
+
+adb shell "logcat -b all -d | grep -c 'NULL VINTF'"
+# -> 0
+```
+
+If the label is wrong or NULL VINTF appears, the fix is not active — stop here.
 
 ---
-*Root-caused and fixed 2026-07-18/19. The final crash-not-hang insight came
-from adversarial review of the retained failure capture — the kernel-stack
-"hang" being observed belonged to the auto-restarted meta_tst, not the
-original crashed one.*
+
+## Test A — snWriter provisioning (the main fix)
+
+**Tool:** Coosea SN Writer **V10.2324.0.18** (`SN_Writer.exe`). See
+[Tooling](#tooling) — the tool is not in this repo.
+
+**Configuration** (System Config dialog):
+
+| Setting | Value |
+|---|---|
+| ComPort | USB VCOM |
+| Target Type | Smart Phone |
+| Country | EU |
+| IMEI | checked |
+| Load AP DB from DUT | checked |
+| Load Modem DB from DUT | checked |
+| AP_DB (fallback) | `databases/apdb-P27/APDB_MT6835___W2421` |
+| MDDB1 (fallback) | `databases/mddb-P18/MDDB.META.ODB_MT6835_S00_MOLY_NR17_R1_MP3_RC_MP_V19_10_P18.XML.GZ` |
+
+Both databases are included in this repo under **`databases/`** — see
+[Databases](#databases). "From DUT" is preferred (the device serves the matching
+pair itself); the bundled files are the fallback when it can't.
+
+**Procedure**
+
+> ⚠️ `adb reboot meta` does **not** work on this device — it just reboots to the
+> normal OS. META is only reachable through snWriter's preloader handshake:
+
+1. Power the phone **completely off**.
+2. Click **Start** in snWriter *first*.
+3. *Then* plug in the USB cable, so the tool catches the preloader port.
+4. Let it run to completion.
+
+**Expected result — PASS**
+
+- Large green **`PASS`**, `Total: 1  Pass: 1  Fail: 0`, "All Operate successfully!!"
+- The whole run completes in seconds; the backup step returns in roughly **0.2 s**.
+
+**Failure signature this fix removes**
+
+- Progress reaches the final step, then stalls for exactly **15 s** → red **FAIL**.
+- Device-side (`adb logcat` after returning to normal boot, or a META capture):
+  `client is NULL`, then a `SIGSEGV` / `fault addr 0x0` tombstone in
+  `FtModUtility::exec`, and `Could not register service ... INVram`.
+
+**Verify the IMEI persisted**
+
+```bash
+adb shell "service call iphonesubinfo 1"   # or dial *#06#
+adb reboot     # then re-check: it must survive the reboot
+```
+
+---
+
+## Test B — EngineerMode
+
+**Procedure**
+
+```bash
+# launch the MTK EngineerMode app
+adb shell am start -n com.mediatek.engineermode/.EngineerMode
+```
+
+Or dial **`*#*#3646633#*#*`** on the dialer.
+
+**Expected result**
+
+- The EngineerMode UI opens with its tab set (Telephony / Connectivity /
+  Hardware Testing / Location / Log and Debugging …).
+- Sub-menus open without force-closing — in particular anything touching
+  **Telephony**, which needs the ATCI/`meta_tst` blobs restored by commits 1–2.
+
+**Failure signature before the fix**
+
+- `Activity class ... does not exist` (app absent), or the app opens and
+  immediately crashes when entering a telephony menu (missing ATCI libs).
+
+---
+
+## Test C — Factory mode (needs verification)
+
+⚠️ **This is the one change not yet validated on device.** It mirrors the proven
+META fix exactly, but factory mode has not had its own test cycle. Reviewers:
+this is where to focus.
+
+**What it should fix:** the same `NULL VINTF` cascade in factory mode.
+`factory_init.rc` had the identical A13-derived defects — no `perform_apex_config`,
+plus a dead `exec /system/bin/bootstrap/linkerconfig`. In factory mode the visible
+symptom is different from META's: `mount_all --late` blocks in `vold` waiting for
+`IBootControl` (which cannot register without a readable VINTF manifest), so the
+boot stalls.
+
+**Procedure**
+
+Enter factory mode by the ODM's normal route (factory key combo / the factory
+test app, per the ODM SOP).
+
+**Expected result**
+
+- Factory mode boots to its test menu instead of stalling.
+- With adb available:
+
+```bash
+adb shell ls -Z /bootstrap-apex/apex-info-list.xml   # -> apex_info_file
+adb shell "logcat -b all -d | grep -c 'NULL VINTF'"  # -> 0
+adb shell "logcat -b all -d | grep -iE 'IBootControl|early_hal'"   # HAL registered
+adb shell "dmesg | grep -i 'mount_all'"              # completes, no vold block
+```
+
+- Run the ODM's factory test items (RF, camera, sensors, touch) and confirm they
+  execute rather than hanging at startup.
+
+**If it still fails**, capture and attach:
+
+```bash
+adb shell "logcat -b all -d" > factory-logcat.txt
+adb shell dmesg               > factory-dmesg.txt
+adb shell "ls -Z /bootstrap-apex/"
+```
+
+---
+
+# Applying
+
+Against an iodé v7.6 BraX3 tree:
+
+```bash
+cd device/brax/brax3 && git am /path/to/patches/device_brax_brax3/*.patch
+cd system/sepolicy   && git am /path/to/patches/system_sepolicy/*.patch
+```
+
+Or fetch the branches directly:
+
+```bash
+git -C device/brax/brax3 fetch <this-repo> device_brax_brax3
+git -C system/sepolicy   fetch <this-repo> system_sepolicy
+```
+
+**Both parts are required.** The sepolicy commit defines the label; the device
+commit runs the restorecon that applies it. Either alone does nothing.
+
+# Databases
+
+`databases/` holds the two MediaTek databases snWriter needs. They are firmware-
+matched metadata (no keys, no credentials, no IMEI data) and **must** match the
+build on the device:
+
+| File | What | Matches |
+|---|---|---|
+| `databases/apdb-P27/APDB_MT6835___W2421` | AP database | AP build **P27** (verified byte-identical to the ODM's, and to `/vendor/etc/apdb` on the BSP device) |
+| `databases/apdb-P27/APDB_MT6835___W2421_ENUM` | AP enum table | companion to the above |
+| `databases/mddb-P18/MDDB.META.ODB_...V19_10_P18.XML.GZ` | Modem NVRAM database | modem **P18** = `MOLY.NR17.R1.MP3.RC.MP.V19.10.P18` (check with `adb shell getprop gsm.version.baseband`) |
+| `databases/mddb-P18/md1_file_map.log` | modem file map | pulled alongside the MDDB |
+
+> **Version matching is not optional.** snWriter needs the modem DB to match the
+> running modem firmware exactly. A mismatched MDDB is its own separate failure
+> mode (unrelated to the fixes here). Note the modem DB is an **ODB `.XML.GZ`**,
+> not the `.EDB` you may expect — searching for `*.EDB` will find nothing.
+>
+> Preferred setup is **"Load AP DB from DUT" + "Load Modem DB from DUT"**, where
+> the device serves the matching pair itself (the BSP ships them at
+> `/vendor/etc/apdb` and `/data/vendor_de/meta/mddb`). The bundled copies here are
+> the fallback for when from-DUT is unavailable.
+
+# Tooling
+
+The **Coosea SN Writer Tool v1.2324.0.18** (`SN_Writer.exe`) is *not* included.
+It is MediaTek/Coosea proprietary, and the distribution ships with live RKP
+credentials (`RKP/cred.json`), serial/IMEI provisioning data (`SNDATA`), and MTK
+Serial Link Authentication components (`SLA_Challenge.dll`) — none of which
+belong in version control. Obtain it from the ODM or the internal share, then use
+the configuration table in [Test A](#test-a--snwriter-provisioning-the-main-fix)
+together with the databases above.
+
+Also needed: **SP Flash Tool V6.2404** for flashing.
+
+---
+
+*Root-caused and fixed 2026-07-18/19 on device `BYHQ7TFQHQI7PR7P`
+(iodé 7.6, BP4A.251205.006, Android 16).*
