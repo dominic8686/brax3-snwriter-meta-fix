@@ -1,0 +1,275 @@
+From 00438d493398b2ec6256a34fb8e743574ce29c15 Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Sat, 18 Jul 2026 16:59:18 +0000
+Subject: [PATCH 5/7] brax3: META snWriter backup timeout - root cause +
+ APEXFIX state (WIP)
+
+Root-caused the snWriter final-step timeout (REQ_BackupNvram2BinRegion /
+SP_META_SetCleanBootFlag_r) end-to-end. IMEI provisioning itself works under
+enforcing; the failure is the modem clean-boot confirmation.
+
+Chain: meta_tst blocks reading the CCCI modem port for SetCleanBootFlag
+confirmation, modem needs RPMB secure storage, RPMB/TEE fail, keystore2 AND
+TeeMcDaemon crash on link ("libandroidicu.so not found ... namespace default"),
+vold cannot unwrap FBE, /data never mounts. keystore2 needs the FULL linkerconfig
+(com.android.i18n apex libs) which perform_apex_config generates at post-fs-data,
+AFTER late-fs; mount_all --late deadlocks before reaching it. Circular; an
+A13->A15/16 regression (works on the A13 BSP, not iode A15/16).
+
+Kept (real fix): apex-info-list relabel makes META healthy (IMEI + modem NVRAM
+work). See the system/sepolicy commit.
+
+Reverted: Option A (start keystore2 + mount_all --late) - DEADLOCKS on A15/16.
+Staying on APEXFIX: no keystore2, raw ext4 /data mount (fails harmlessly).
+
+Diagnostic scaffolding (REMOVE before merge): init/brax-metadiag.sh + its
+sh_binary/PRODUCT_PACKAGES wiring - dumps kernel stacks + logs to
+/mnt/vendor/nvdata during META for backup diagnosis.
+
+Full detail: BSP docs/07-snwriter-meta-worklog.md (2026-07-18 session 2).
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+Change-Id: I80e8c55d103255964ca9f57aa2c82ba0d7c77b97
+---
+ device.mk                     |  4 +++
+ init/Android.bp               |  7 ++++++
+ init/brax-metadiag.sh         | 47 +++++++++++++++++++++++++++++++++++
+ init/factory_init.rc          | 14 +++++++++--
+ init/meta_init.rc             | 37 ++++++++++++++++++++++++---
+ init/meta_init.system.rc      | 21 +++++++++++++---
+ sepolicy/vendor/file_contexts |  1 +
+ 7 files changed, 121 insertions(+), 10 deletions(-)
+ create mode 100644 init/brax-metadiag.sh
+
+diff --git a/device.mk b/device.mk
+index 4abcdf6..bb94742 100644
+--- a/device.mk
++++ b/device.mk
+@@ -173,6 +173,10 @@ PRODUCT_PACKAGES += \
+     multi_init.rc \
+     vendor_init_as_system.rc
+ 
++# TEMP: META diagnostic capture script -> /vendor/bin/brax-metadiag.sh
++PRODUCT_PACKAGES += \
++    brax-metadiag.sh
++
+ # Keymint
+ PRODUCT_COPY_FILES += \
+     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \
+diff --git a/init/Android.bp b/init/Android.bp
+index 0e4fef5..6e6658a 100644
+--- a/init/Android.bp
++++ b/init/Android.bp
+@@ -184,3 +184,10 @@ prebuilt_etc {
+     sub_dir: "init/hw",
+     system_ext_specific: true,
+ }
++
++// TEMP diagnostic capture script (brax-metadiag). Installs to /vendor/bin.
++sh_binary {
++    name: "brax-metadiag.sh",
++    src: "brax-metadiag.sh",
++    vendor: true,
++}
+diff --git a/init/brax-metadiag.sh b/init/brax-metadiag.sh
+new file mode 100644
+index 0000000..02eebdb
+--- /dev/null
++++ b/init/brax-metadiag.sh
+@@ -0,0 +1,47 @@
++#!/system/bin/sh
++# TEMP META diagnostic - NOT for commit. Captures WHY snWriter's final backup
++# (REQ_BackupNvram2BinRegion / SP_META_SetCleanBootFlag_r) times out (15s) even
++# though META is healthy (IMEI + modem NVRAM work). Runs as u:r:su:s0.
++#
++# Key addition: every 2s it dumps the KERNEL STACK (/proc/<pid>/stack), state and
++# wchan of each backup actor, so during the 15s hang we can see exactly what the
++# handler is blocked on (a syscall / mutex / modem-CCCI wait / socket / block I/O).
++# Also keeps dmesg/logcat/avc and a full ps of D-state + nvram/meta/ccci procs.
++D=/mnt/vendor/nvdata
++auditctl -r 0 -b 16384 2>/dev/null
++: > $D/bx-stacks.txt
++: > $D/bx-ps.txt
++getprop > $D/bx-props.txt 2>&1
++getenforce > $D/bx-enforce.txt 2>&1
++
++ACTORS="nvram_daemon meta_tst mtk_hal_nvramagent nvram_agent ccci_mdinit ccci_rpcd atcid md_ctrl"
++
++i=0
++while [ $i -lt 90 ]; do
++    auditctl -r 0 2>/dev/null
++    UP=$(cat /proc/uptime 2>/dev/null | cut -d. -f1)
++    {
++        echo "======== loop $i  up=${UP}s  $(date) ========"
++        for a in $ACTORS; do
++            for pid in $(pidof "$a" 2>/dev/null); do
++                STATE=$(awk '{print $3}' /proc/$pid/stat 2>/dev/null)
++                WCHAN=$(cat /proc/$pid/wchan 2>/dev/null)
++                echo "--- $a pid=$pid state=$STATE wchan=$WCHAN ---"
++                cat /proc/$pid/stack 2>/dev/null
++                echo "  syscall: $(cat /proc/$pid/syscall 2>/dev/null)"
++            done
++        done
++    } >> $D/bx-stacks.txt 2>&1
++
++    ps -A -o PID,PPID,STAT,WCHAN:24,NAME 2>/dev/null | grep -iE "STAT|nvram|meta|ccci|md_|atci| D " >> $D/bx-ps.txt 2>&1
++    echo "---- loop $i up=${UP}s ----" >> $D/bx-ps.txt 2>&1
++
++    dmesg 2>/dev/null | grep -i "avc:" > $D/.bx-avc.tmp 2>&1; mv $D/.bx-avc.tmp $D/bx-avc.txt 2>/dev/null
++    if [ $((i % 3)) -eq 0 ]; then
++        dmesg > $D/.d.tmp 2>&1; mv $D/.d.tmp $D/bx-dmesg2.txt 2>/dev/null
++        logcat -b all -d > $D/.l.tmp 2>&1; mv $D/.l.tmp $D/bx-logcat2.txt 2>/dev/null
++    fi
++    sync
++    i=$((i+1))
++    sleep 2
++done
+diff --git a/init/factory_init.rc b/init/factory_init.rc
+index 92ec323..eb259b3 100644
+--- a/init/factory_init.rc
++++ b/init/factory_init.rc
+@@ -13,8 +13,18 @@ import /vendor/etc/init/microtrust.rc
+ import /vendor/etc/init/hw/init.aee.rc
+ import /system_ext/etc/init/hw/init.aee.rc
+ import /vendor/etc/init/vendor.mediatek.hardware.mtkpower@1.0-service.rc
+-import /vendor/etc/init/android.hardware.boot@1.2-service.rc
+-import /vendor/etc/init/android.hardware.boot@1.2-service-lazy.rc
++# The HIDL boot@1.2 rc files these imports pointed at do not exist in this
++# build: the boot-control HAL ships as the vendor APEX com.android.hardware.boot
++# and its rc is only parsed at perform_apex_config (post-fs-data) -- a stage
++# factory mode never reaches, because mount_all --late (see `on late-fs`) blocks
++# in vold waiting on IBootControl to resolve the A/B slot for super's logical
++# partitions. init skips missing imports silently, so class_start early_hal was
++# starting every early HAL except the one vold needs. Define the service here.
++service vendor.boot-default /apex/com.android.hardware.boot/bin/hw/android.hardware.boot-service.default
++    interface aidl android.hardware.boot.IBootControl/default
++    class early_hal
++    user root
++    group root
+ import /vendor/etc/init/vendor.mediatek.hardware.thp@1.0-service.rc
+ import /vendor/etc/init/android.hardware.health-service.example.rc
+ 
+diff --git a/init/meta_init.rc b/init/meta_init.rc
+index d5d23c8..c56dc5d 100644
+--- a/init/meta_init.rc
++++ b/init/meta_init.rc
+@@ -11,8 +11,17 @@ import /vendor/etc/init/trustonic.rc
+ import /vendor/etc/init/hw/meta_init.connectivity.rc
+ import /vendor/etc/init/hw/meta_init.project.rc
+ import /vendor/etc/init/microtrust.rc
+-import /vendor/etc/init/android.hardware.boot@1.2-service.rc
+-import /vendor/etc/init/android.hardware.boot@1.2-service-lazy.rc
++# The HIDL boot@1.2 rc files these imports pointed at do not exist in this
++# build: the boot-control HAL ships as the vendor APEX com.android.hardware.boot
++# and its rc is only parsed at perform_apex_config (post-fs-data) -- a stage
++# META never reaches, because mount_all --late deadlocks waiting on
++# IBootControl. Define the service here so class_start early_hal (late-fs)
++# can start it, matching how the MTK BSP handles META (bootctl in early_hal).
++service vendor.boot-default /apex/com.android.hardware.boot/bin/hw/android.hardware.boot-service.default
++    interface aidl android.hardware.boot.IBootControl/default
++    class early_hal
++    user root
++    group root
+ import /vendor/etc/init/android.hardware.health-service.example.rc
+ import /vendor/etc/init/android.hardware.health-service.mediatek.rc
+ 
+@@ -199,10 +208,13 @@ on post-fs
+     mkdir /mnt/vendor/nvdata/media 0771 media audio
+     restorecon_recursive /mnt/vendor/nvdata
+ 
++    # TEMP DIAG - not for commit. Started at post-fs (a separate process) so it
++    # still completes even if a later init stage stalls.
++    start brax_metadiag
+ #INTERNAL_END
+ 
+ on late-fs
+-    start keystore2
++    # keystore2 NOT started (Option A deadlocks on A15/16 -- see meta_init.system.rc).
+     start vendor.keymaster-3-0
+     start vendor.keymaster-3-0-trustonic
+     start vendor.keymaster-4-0
+@@ -218,7 +230,14 @@ on late-fs
+     class_start early_hal
+     start keymaster_attestation-1-1
+     exec_start wait_for_keymaster
+-    mount_all --late
++    # APEXFIX flow (best working state): raw ext4 /data mount, no keystore2/vold.
++    # mount_all --late would deadlock (keystore2 can't link -- see meta_init.system.rc).
++    # META is healthy this way: IMEI + modem NVRAM work; only the SetCleanBootFlag
++    # backup times out (needs TEE/RPMB which needs keystore2/TEE-daemon that can't
++    # link). Raw mount fails harmlessly on encrypted userdata; META works without /data.
++    mount ext4 /dev/block/by-name/userdata /data noatime nosuid nodev noauto_da_alloc discard wait
++    chmod 0771 /data
++    chown system system /data
+ 
+ on post-fs-data
+     write /proc/bootprof "INIT:post-fs-data"
+@@ -324,6 +343,16 @@ service meta_tst /vendor/bin/meta_tst
+     group radio system wifi audio bluetooth media gps
+     socket meta-atci stream 660 radio system
+ 
++# TEMP DIAG - not for commit. seclabel MUST be su:s0, not shell:s0: under
++# ENFORCING, shell is denied write to nvdata_file, so a shell-labelled dump
++# would silently produce nothing.
++service brax_metadiag /system/bin/sh /vendor/bin/brax-metadiag.sh
++    user root
++    group root system
++    disabled
++    oneshot
++    seclabel u:r:su:s0
++
+ service factory_no_image /vendor/bin/factory
+     user root
+     group radio system wifi media gps audio bluetooth wakelock nfc
+diff --git a/init/meta_init.system.rc b/init/meta_init.system.rc
+index 3db5879..4b10e31 100644
+--- a/init/meta_init.system.rc
++++ b/init/meta_init.system.rc
+@@ -29,7 +29,14 @@ import /system/etc/init/storagemanagerd.rc
+ import /system_ext/etc/init/mobile_log_d.rc
+ import /system/etc/init/android.system.suspend-service.rc
+ import /system/etc/init/wait_for_keymaster.rc
+-import /system/etc/init/keystore2.rc
++# keystore2 NOT started in META. Option A (keystore2 + mount_all --late) DEADLOCKS
++# on A15/16: keystore2 crashes on link ("libandroidicu.so not found ... in namespace
++# default") because the full /linkerconfig (routing the com.android.i18n apex libs)
++# is only generated by perform_apex_config at post-fs-data -- AFTER late-fs -- and
++# mount_all --late's wait-for-keystore2 deadlock prevents ever reaching post-fs-data.
++# Circular; an A13->A15/16 regression (works on the A13 BSP). See worklog 2026-07-18
++# session 2. Stay on the healthy APEXFIX flow (relabel + no keystore2 + raw /data).
++#import /system/etc/init/keystore2.rc
+ import /system_ext/etc/init/emdlogger.rc
+ 
+ #end
+@@ -52,10 +59,16 @@ on early-init
+     mkdir /linkerconfig/bootstrap 0755
+     mkdir /linkerconfig/default 0755
+ 
+-    # Generate ld.config.txt for early executed processes
+-    exec -- /system/bin/bootstrap/linkerconfig --target /linkerconfig/bootstrap
++    # Seed a stub ld.config.txt for early-executed processes. The A13-era line
++    # `exec /system/bin/bootstrap/linkerconfig --target ...` was inherited from the
++    # BSP but that binary does NOT exist on A15/16 (linkerconfig moved into
++    # com.android.runtime APEX), so the exec failed, the bootstrap stub was never
++    # created, and update_linker_config never produced /linkerconfig/ld.config.txt
++    # -> keystore2 could not link -> mount_all --late deadlocked -> META backup
++    # (SetCleanBootFlag) hung. This matches iode's OWN normal-boot init.rc (A15/16).
++    write /linkerconfig/bootstrap/ld.config.txt \#
++    write /linkerconfig/default/ld.config.txt \#
+     chmod 644 /linkerconfig/bootstrap/ld.config.txt
+-    copy /linkerconfig/bootstrap/ld.config.txt /linkerconfig/default/ld.config.txt
+     chmod 644 /linkerconfig/default/ld.config.txt
+ 
+     # Mount bootstrap linker configuration as current
+diff --git a/sepolicy/vendor/file_contexts b/sepolicy/vendor/file_contexts
+index 06fa06b..10c99c6 100644
+--- a/sepolicy/vendor/file_contexts
++++ b/sepolicy/vendor/file_contexts
+@@ -6,3 +6,4 @@
+ 
+ # SEC NFC
+ /(vendor|system/vendor)/bin/hw/android\.hardware\.nfc@1\.2-service.sec                 u:object_r:hal_nfc_default_exec:s0
++
+-- 
+2.53.0
+

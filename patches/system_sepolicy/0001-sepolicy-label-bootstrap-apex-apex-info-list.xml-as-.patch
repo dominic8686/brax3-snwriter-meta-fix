@@ -1,0 +1,46 @@
+From b2cffb30de66469cc342661043d05484f238da1d Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Sat, 18 Jul 2026 16:59:50 +0000
+Subject: [PATCH] sepolicy: label /bootstrap-apex/apex-info-list.xml as
+ apex_info_file
+
+On A15/16 apexd writes the bootstrap APEX manifest to a top-level
+/bootstrap-apex/apex-info-list.xml. file_contexts labels the directory
+(/bootstrap-apex -> apex_mnt_dir) but has no per-file entry, so the xml inherits
+apex_mnt_dir. servicemanager/hwservicemanager are allowed apex_info_file:file but
+not apex_mnt_dir:file, so they get EPERM reading it -> NULL VINTF manifest ->
+every AIDL HAL fails to register (aidlStatus=-3): keymint, boot, modem HALs, etc.
+
+This broke MediaTek META mode on the BraX3 (snWriter): the HAL crash storm left
+the modem/keymaster unavailable. Relabel the file to the type its readers already
+have via the use_apex_info macro (no new allow rule needed).
+
+Verified: with this, META boots healthy and snWriter writes IMEI + modem NVRAM.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+---
+ private/file_contexts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/private/file_contexts b/private/file_contexts
+index f654ba7da..001c0b602 100644
+--- a/private/file_contexts
++++ b/private/file_contexts
+@@ -60,6 +60,14 @@
+ /postinstall         u:object_r:postinstall_mnt_dir:s0
+ 
+ /apex/(\.(bootstrap|default)-)?apex-info-list.xml u:object_r:apex_info_file:s0
++# A15/16 apexd writes the bootstrap manifest under a top-level /bootstrap-apex/
++# (no per-file f_c entry upstream), so it inherits apex_mnt_dir and
++# servicemanager/hwservicemanager (allowed apex_info_file, not apex_mnt_dir:file)
++# get EPERM -> NULL VINTF manifest -> every AIDL HAL fails to register
++# (aidlStatus=-3): keymint, boot, health, modem HALs, etc. Relabel it to the type
++# those readers already have access to (via use_apex_info). Root cause of the META
++# HAL crash storm behind snWriter's modem/backup failures.
++/bootstrap-apex/apex-info-list\.xml u:object_r:apex_info_file:s0
+ 
+ # Symlinks
+ /bin                u:object_r:rootfs:s0
+-- 
+2.53.0
+

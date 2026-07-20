@@ -1,0 +1,212 @@
+From 45921b57ae229dfc2f8f6d36b611ce71022c3a3e Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Sun, 19 Jul 2026 07:56:42 +0000
+Subject: [PATCH 6/7] brax3: META - run perform_apex_config after
+ apexd-bootstrap (snWriter GREEN PASS)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Root cause of the snWriter REQ_BackupNvram2BinRegion 15s timeout under
+enforcing: the A13-derived meta_init.system.rc never ran the A16
+post-bootstrap APEX step. A16 apexd no longer restorecons the
+apex-info-list.xml it writes (A13 did, apexd.cpp RestoreconPath); normal
+A16 init.rc compensates by running perform_apex_config right after
+exec_start apexd-bootstrap. Without it in META the manifest keeps the
+tmpfs label apex_mnt_dir -> servicemanager denied read -> NULL VINTF ->
+no HAL can register (incl vendor.mediatek.hardware.nvram@1.1::INvram) ->
+meta_tst INvram::getService()==NULL -> FtModule dereferences the null
+client (logs "client is NULL" but does not return) -> SIGSEGV in
+FtModUtility::exec -> PC times out after 15s -> FAIL.
+
+Fix: perform_apex_config (+ belt-and-suspenders restorecon of
+/bootstrap-apex/apex-info-list.xml) after exec_start apexd-bootstrap.
+It also natively generates the linker config and parses APEX rc files.
+Requires the file_contexts entry from system/sepolicy b2cffb30d.
+
+VERIFIED: snWriter V10.2324.0.18 GREEN PASS (Pass:1 Fail:0), SELinux
+enforcing, iodé 7.6 BP4A, device BYHQ7TFQHQI7PR7P, 2026-07-19.
+Also includes the late-fs keystore2 + mount_all --late restore
+(meta_init.rc) that this fix makes viable, and the metadiag capture
+script updates used during diagnosis.
+
+Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+Change-Id: I602ace533332f287da2e33e7774d19682df55c72
+---
+ init/brax-metadiag.sh    | 47 ++++++++++++++++++++++++++--------------
+ init/meta_init.rc        | 17 +++++++--------
+ init/meta_init.system.rc | 36 +++++++++++++++++++++++-------
+ 3 files changed, 67 insertions(+), 33 deletions(-)
+
+diff --git a/init/brax-metadiag.sh b/init/brax-metadiag.sh
+index 02eebdb..285faf3 100644
+--- a/init/brax-metadiag.sh
++++ b/init/brax-metadiag.sh
+@@ -1,42 +1,57 @@
+ #!/system/bin/sh
+-# TEMP META diagnostic - NOT for commit. Captures WHY snWriter's final backup
+-# (REQ_BackupNvram2BinRegion / SP_META_SetCleanBootFlag_r) times out (15s) even
+-# though META is healthy (IMEI + modem NVRAM work). Runs as u:r:su:s0.
++# TEMP META diagnostic - NOT for commit. Runs as u:r:su:s0, writes /mnt/vendor/nvdata.
+ #
+-# Key addition: every 2s it dumps the KERNEL STACK (/proc/<pid>/stack), state and
+-# wchan of each backup actor, so during the 15s hang we can see exactly what the
+-# handler is blocked on (a syscall / mutex / modem-CCCI wait / socket / block I/O).
+-# Also keeps dmesg/logcat/avc and a full ps of D-state + nvram/meta/ccci procs.
++# HYPOTHESIS TEST: /linkerconfig/ld.config.txt stays a 1-byte stub in META because
++# perform_apex_config never runs (its post-fs-data block breaks on /data-dependent
++# bind mounts, since /data is not mounted). The linkerconfig BINARY works fine.
++# So: explicitly regenerate /linkerconfig here, then test whether keystore2 can link.
++# If it links after regen -> the fix is "generate the config in META" (then restore
++# keystore2 + mount_all). bx-keystore2.txt holds the before/after.
+ D=/mnt/vendor/nvdata
+ auditctl -r 0 -b 16384 2>/dev/null
+-: > $D/bx-stacks.txt
+-: > $D/bx-ps.txt
++for f in stacks ps linker keystore2; do : > $D/bx-$f.txt; done
+ getprop > $D/bx-props.txt 2>&1
+ getenforce > $D/bx-enforce.txt 2>&1
+ 
+ ACTORS="nvram_daemon meta_tst mtk_hal_nvramagent nvram_agent ccci_mdinit ccci_rpcd atcid md_ctrl"
++LC=/linkerconfig/ld.config.txt
+ 
+ i=0
+ while [ $i -lt 90 ]; do
+     auditctl -r 0 2>/dev/null
+     UP=$(cat /proc/uptime 2>/dev/null | cut -d. -f1)
++
++    # --- backup-actor kernel stacks ---
+     {
+         echo "======== loop $i  up=${UP}s  $(date) ========"
+         for a in $ACTORS; do
+             for pid in $(pidof "$a" 2>/dev/null); do
+-                STATE=$(awk '{print $3}' /proc/$pid/stat 2>/dev/null)
+-                WCHAN=$(cat /proc/$pid/wchan 2>/dev/null)
+-                echo "--- $a pid=$pid state=$STATE wchan=$WCHAN ---"
++                echo "--- $a pid=$pid state=$(awk '{print $3}' /proc/$pid/stat 2>/dev/null) wchan=$(cat /proc/$pid/wchan 2>/dev/null) ---"
+                 cat /proc/$pid/stack 2>/dev/null
+-                echo "  syscall: $(cat /proc/$pid/syscall 2>/dev/null)"
+             done
+         done
+     } >> $D/bx-stacks.txt 2>&1
+-
+     ps -A -o PID,PPID,STAT,WCHAN:24,NAME 2>/dev/null | grep -iE "STAT|nvram|meta|ccci|md_|atci| D " >> $D/bx-ps.txt 2>&1
+-    echo "---- loop $i up=${UP}s ----" >> $D/bx-ps.txt 2>&1
+ 
+-    dmesg 2>/dev/null | grep -i "avc:" > $D/.bx-avc.tmp 2>&1; mv $D/.bx-avc.tmp $D/bx-avc.txt 2>/dev/null
++    # --- linkerconfig state each loop ---
++    {
++        echo "==== linker loop $i up=${UP}s  apexd.status=$(getprop apexd.status) ===="
++        echo "ld.config.txt bytes : $(wc -c < $LC 2>/dev/null)"
++        echo "default.links       : $(grep -m1 '^namespace.default.links' $LC 2>/dev/null)"
++        echo "i18n apex lib       : $(ls /apex/com.android.i18n/lib64/libandroidicu.so 2>/dev/null || echo MISSING)"
++    } >> $D/bx-linker.txt 2>&1
++
++    # --- keystore2 link test (no LD_DEBUG; 'CANNOT LINK' => broken, runs => links).
++    #     NO script-side regen here -- the init `exec linkerconfig` must do it. ---
++    if [ $((i % 2)) -eq 0 ]; then
++        {
++            echo "==== keystore2 loop $i up=${UP}s (config=$(wc -c < $LC 2>/dev/null)B) ===="
++            timeout 3 /system/bin/keystore2 2>&1 | head -6
++            echo "(done)"
++        } >> $D/bx-keystore2.txt 2>&1
++    fi
++
++    dmesg 2>/dev/null | grep -i "avc:" > $D/.a.tmp 2>&1; mv $D/.a.tmp $D/bx-avc.txt 2>/dev/null
+     if [ $((i % 3)) -eq 0 ]; then
+         dmesg > $D/.d.tmp 2>&1; mv $D/.d.tmp $D/bx-dmesg2.txt 2>/dev/null
+         logcat -b all -d > $D/.l.tmp 2>&1; mv $D/.l.tmp $D/bx-logcat2.txt 2>/dev/null
+diff --git a/init/meta_init.rc b/init/meta_init.rc
+index c56dc5d..6ecd9a0 100644
+--- a/init/meta_init.rc
++++ b/init/meta_init.rc
+@@ -214,7 +214,8 @@ on post-fs
+ #INTERNAL_END
+ 
+ on late-fs
+-    # keystore2 NOT started (Option A deadlocks on A15/16 -- see meta_init.system.rc).
++    # keystore2 started: linkerconfig is seeded in on-early-init so it links now.
++    start keystore2
+     start vendor.keymaster-3-0
+     start vendor.keymaster-3-0-trustonic
+     start vendor.keymaster-4-0
+@@ -230,14 +231,12 @@ on late-fs
+     class_start early_hal
+     start keymaster_attestation-1-1
+     exec_start wait_for_keymaster
+-    # APEXFIX flow (best working state): raw ext4 /data mount, no keystore2/vold.
+-    # mount_all --late would deadlock (keystore2 can't link -- see meta_init.system.rc).
+-    # META is healthy this way: IMEI + modem NVRAM work; only the SetCleanBootFlag
+-    # backup times out (needs TEE/RPMB which needs keystore2/TEE-daemon that can't
+-    # link). Raw mount fails harmlessly on encrypted userdata; META works without /data.
+-    mount ext4 /dev/block/by-name/userdata /data noatime nosuid nodev noauto_da_alloc discard wait
+-    chmod 0771 /data
+-    chown system system /data
++    # mount_all --late: with keystore2 now linking (linkerconfig seeded), vold unwraps
++    # FBE and mounts the normal encrypted userdata -> /data/vendor/mcRegistry (TEE
++    # secure storage) present -> RPMB works -> modem completes SetCleanBootFlag ->
++    # snWriter backup passes. No userdata wipe needed. This also lets the post-fs-data
++    # /data-dependent block run, so perform_apex_config regenerates the full linkerconfig.
++    mount_all --late
+ 
+ on post-fs-data
+     write /proc/bootprof "INIT:post-fs-data"
+diff --git a/init/meta_init.system.rc b/init/meta_init.system.rc
+index 4b10e31..b688d6c 100644
+--- a/init/meta_init.system.rc
++++ b/init/meta_init.system.rc
+@@ -29,14 +29,10 @@ import /system/etc/init/storagemanagerd.rc
+ import /system_ext/etc/init/mobile_log_d.rc
+ import /system/etc/init/android.system.suspend-service.rc
+ import /system/etc/init/wait_for_keymaster.rc
+-# keystore2 NOT started in META. Option A (keystore2 + mount_all --late) DEADLOCKS
+-# on A15/16: keystore2 crashes on link ("libandroidicu.so not found ... in namespace
+-# default") because the full /linkerconfig (routing the com.android.i18n apex libs)
+-# is only generated by perform_apex_config at post-fs-data -- AFTER late-fs -- and
+-# mount_all --late's wait-for-keystore2 deadlock prevents ever reaching post-fs-data.
+-# Circular; an A13->A15/16 regression (works on the A13 BSP). See worklog 2026-07-18
+-# session 2. Stay on the healthy APEXFIX flow (relabel + no keystore2 + raw /data).
+-#import /system/etc/init/keystore2.rc
++# keystore2 restored: the explicit linkerconfig regen in on-early-init (above) now
++# seeds /linkerconfig with the com.android.i18n routing, so keystore2 links (PROVEN
++# in DIAG4). It can now come up for vold's mount_all --late FBE unwrap.
++import /system/etc/init/keystore2.rc
+ import /system_ext/etc/init/emdlogger.rc
+ 
+ #end
+@@ -82,8 +78,32 @@ on early-init
+     # the libraries are available to the processes started after this statement.
+     exec_start apexd-bootstrap
+ 
++    # A16 CONTRACT FIX (snWriter backup root cause): normal A16 init.rc runs
++    # perform_apex_config immediately after apexd-bootstrap
++    # (system/core/rootdir/init.rc). Unlike A13, A16 apexd no longer restorecons
++    # the apex-info-list.xml it writes; perform_apex_config does it instead
++    # (builtins.cpp do_perform_apex_config -> restorecon /apex/apex-info-list.xml,
++    # the same inode init sees at /bootstrap-apex/apex-info-list.xml). This
++    # A13-derived META rc omitted the step, so the manifest kept the tmpfs label
++    # apex_mnt_dir -> servicemanager/hwservicemanager denied read -> "NULL VINTF
++    # MANIFEST" -> no HAL could register (incl. vendor.mediatek nvram INvram) ->
++    # meta_tst INvram::getService()==NULL -> SIGSEGV in FtModUtility::exec on
++    # SET_CLEAN_BOOT_FLAG -> snWriter backup 15s timeout. perform_apex_config also
++    # parses APEX-shipped init .rc files and generates the linker config natively.
++    perform_apex_config
++    # Belt-and-suspenders: apply the file_contexts label (sepolicy commit
++    # b2cffb30d) to the bootstrap-view path directly as well.
++    restorecon /bootstrap-apex/apex-info-list.xml
++
+     # Generate linker config based on apex mounted in bootstrap namespace
+     update_linker_config
++    # update_linker_config (builtin) does NOT land the config in META, and the
++    # full perform_apex_config (post-fs-data) never runs because its block breaks
++    # on /data-dependent bind mounts (/data isn't mounted in META). So /linkerconfig
++    # stays a 1-byte stub and keystore2 can't link libandroidicu (com.android.i18n
++    # apex) -> deadlock. Run linkerconfig explicitly here (PROVEN: regenerating it
++    # -> keystore2 links). The bootstrap-apex context config still routes i18n.
++    exec -- /apex/com.android.runtime/bin/linkerconfig --target /linkerconfig
+ 
+ on init
+     sysclktz 0
+-- 
+2.53.0
+

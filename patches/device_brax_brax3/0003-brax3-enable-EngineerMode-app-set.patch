@@ -1,0 +1,54 @@
+From 7845fab235038a30cebe285b541b83cfe93cc06b Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Thu, 16 Jul 2026 08:28:53 +0000
+Subject: [PATCH 3/7] brax3: enable EngineerMode app set
+
+Re-enable the system_ext EngineerMode factory app, the em_svr backend
+and its JNI libs (64-bit) in the proprietary-files list. Provides the
+on-device Engineering Mode menu backend alongside the ATCI/meta_tst
+provisioning path.
+
+Co-Authored-By: Oz <oz-agent@warp.dev>
+Change-Id: I577a20bdddc8c3fe7df77761f39a898b143bcccb
+---
+ proprietary-files.txt | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/proprietary-files.txt b/proprietary-files.txt
+index d15d475..143f3b2 100644
+--- a/proprietary-files.txt
++++ b/proprietary-files.txt
+@@ -1266,21 +1266,21 @@ vendor/lib64/libwifical.so
+ # system_ext/bin/loghidlsysservice
+ # system_ext/etc/init/loghidlsysservice.rc
+ 
+-# system_ext/app/EngineerMode/EngineerMode.apk
++system_ext/app/EngineerMode/EngineerMode.apk
+ # system_ext/lib/libem_support_jni.so
+-# system_ext/lib64/libem_support_jni.so
++system_ext/lib64/libem_support_jni.so
+ # system_ext/lib/libaudiotoolkit.so
+ # system_ext/lib/libem_aoltest_jni.so
+ # system_ext/lib/libem_audio_jni.so
+ # system_ext/lib/libem_wifi_jni.so
+-# system_ext/lib64/libaudiotoolkit.so
+-# system_ext/lib64/libem_aoltest_jni.so
+-# system_ext/lib64/libem_audio_jni.so
+-# system_ext/lib64/libem_wifi_jni.so
+-# system_ext/etc/init/em_svr_user.rc
+-# system_ext/bin/em_svr
++system_ext/lib64/libaudiotoolkit.so
++system_ext/lib64/libem_aoltest_jni.so
++system_ext/lib64/libem_audio_jni.so
++system_ext/lib64/libem_wifi_jni.so
++system_ext/etc/init/em_svr_user.rc
++system_ext/bin/em_svr
+ # system_ext/lib/libsysenv_system.so
+-# system_ext/lib64/libsysenv_system.so
++system_ext/lib64/libsysenv_system.so
+ 
+ 
+ vendor/bin/atcid
+-- 
+2.53.0
+

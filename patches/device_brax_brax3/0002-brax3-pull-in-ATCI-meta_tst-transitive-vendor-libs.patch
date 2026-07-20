@@ -1,0 +1,49 @@
+From 6dc7d79e6541e6aecab44373be06aa1bf963f0a7 Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Thu, 16 Jul 2026 07:19:55 +0000
+Subject: [PATCH 2/7] brax3: pull in ATCI/meta_tst transitive vendor libs
+
+meta_tst and atcid link several MTK vendor libs that were commented out
+in the proprietary-files list. Re-enable them so the restored
+provisioning binaries resolve at load time:
+
+  meta_tst -> libhfmanagerwrapper, libwifical, libwifinvram, libkmsetkey
+  atcid    -> libwifitest
+
+Co-Authored-By: Oz <oz-agent@warp.dev>
+Change-Id: Iaf070fcdf702e5a4822f2e78cd864ab9df8eb6ba
+---
+ proprietary-files.txt | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/proprietary-files.txt b/proprietary-files.txt
+index a25d76f..d15d475 100644
+--- a/proprietary-files.txt
++++ b/proprietary-files.txt
+@@ -1209,10 +1209,10 @@ vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
+ vendor/bin/meta_tst
+ # vendor/etc/apdb/APDB_MT6835___W2421_ENUM
+ # vendor/etc/apdb/APDB_MT6835___W2421
+-# vendor/lib64/libhfmanagerwrapper.so
+-# vendor/lib64/libwifinvram.so
+-# vendor/lib64/libkmsetkey.so
+-# vendor/lib64/libwifical.so
++vendor/lib64/libhfmanagerwrapper.so
++vendor/lib64/libwifinvram.so
++vendor/lib64/libkmsetkey.so
++vendor/lib64/libwifical.so
+ # vendor/etc/init/hw/meta_init.rc
+ # vendor/etc/init/hw/factory_init.connectivity.rc
+ # vendor/etc/init/hw/factory_init.rc
+@@ -1290,7 +1290,7 @@ vendor/bin/audiocmdservice_atci
+ vendor/etc/init/atcid.rc
+ vendor/etc/init/audiocmdservice_atci.rc
+ vendor/lib64/vendor.mediatek.hardware.atci@1.0.so
+-# vendor/lib64/libwifitest.so
++vendor/lib64/libwifitest.so
+ 
+ # vendor/bin/bip_ap
+ # vendor/etc/init/init.bip_ap.rc
+-- 
+2.53.0
+

@@ -1,0 +1,27 @@
+From 29bc74d854cbdecca0ebbd373f49b493290d9632 Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Thu, 16 Jul 2026 12:15:52 +0000
+Subject: [PATCH 4/7] brax3: exclude isolated apps from gralloc tmpfs grant
+
+The build-time sepolicy_test rejects granting
+hal_graphics_allocator_default_tmpfs:file to isolated_compute_app (an
+isolated-like domain). The device rule granted it to every
+hal_graphics_allocator_client domain with no exclusion; scope it with
+-isolated_app_all to match MTK's base policy and pass sepolicy_test.
+
+Co-Authored-By: Oz <oz-agent@warp.dev>
+Change-Id: Ie83bc1be086b5075d652854c5599b6747b5d7945
+---
+ sepolicy/vendor/hal_graphics_allocator.te | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sepolicy/vendor/hal_graphics_allocator.te b/sepolicy/vendor/hal_graphics_allocator.te
+index cf4fe6d..3991430 100644
+--- a/sepolicy/vendor/hal_graphics_allocator.te
++++ b/sepolicy/vendor/hal_graphics_allocator.te
+@@ -1 +1 @@
+-allow hal_graphics_allocator_client hal_graphics_allocator_default_tmpfs:file rw_file_perms;
++allow { hal_graphics_allocator_client -isolated_app_all } hal_graphics_allocator_default_tmpfs:file rw_file_perms;
+-- 
+2.53.0
+

@@ -1,0 +1,48 @@
+From 4bb0b18731cb549fbbd66ad813f1dbf44690166b Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Thu, 16 Jul 2026 06:38:02 +0000
+Subject: [PATCH 1/7] brax3: re-enable MTK ATCI + meta_tst provisioning blobs
+
+Fixes snWriter (META/AT) and Engineering Mode backend by restoring atcid, audiocmdservice_atci, meta_tst and the atci@1.0 HAL that were commented out. Blobs to be restored from the BSP vendor image.
+
+Co-Authored-By: Oz <oz-agent@warp.dev>
+Change-Id: I9f5ce3eee16c2a1161d7181742733e99af293409
+---
+ proprietary-files.txt | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/proprietary-files.txt b/proprietary-files.txt
+index ee2cf62..a25d76f 100644
+--- a/proprietary-files.txt
++++ b/proprietary-files.txt
+@@ -1206,7 +1206,7 @@ vendor/etc/init/networksetting.rc
+ vendor/etc/init/wlan_assistant.rc
+ vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
+ 
+-# vendor/bin/meta_tst
++vendor/bin/meta_tst
+ # vendor/etc/apdb/APDB_MT6835___W2421_ENUM
+ # vendor/etc/apdb/APDB_MT6835___W2421
+ # vendor/lib64/libhfmanagerwrapper.so
+@@ -1283,13 +1283,13 @@ vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
+ # system_ext/lib64/libsysenv_system.so
+ 
+ 
+-# vendor/bin/atcid
+-# vendor/bin/audiocmdservice_atci
++vendor/bin/atcid
++vendor/bin/audiocmdservice_atci
+ # vendor/bin/mt6660_calibration
+ # vendor/bin/rt5512_calibration
+-# vendor/etc/init/atcid.rc
+-# vendor/etc/init/audiocmdservice_atci.rc
+-# vendor/lib64/vendor.mediatek.hardware.atci@1.0.so
++vendor/etc/init/atcid.rc
++vendor/etc/init/audiocmdservice_atci.rc
++vendor/lib64/vendor.mediatek.hardware.atci@1.0.so
+ # vendor/lib64/libwifitest.so
+ 
+ # vendor/bin/bip_ap
+-- 
+2.53.0
+
