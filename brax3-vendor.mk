@@ -1100,6 +1100,7 @@ PRODUCT_PACKAGES += \
     libvt_avsync \
     vendor.mediatek.hardware.videotelephony-V1-ndk \
     vendor.mediatek.hardware.videotelephony@1.0 \
+    PriFactoryTest \
     EngineerMode \
     ImsService \
     MtkGbaService \
