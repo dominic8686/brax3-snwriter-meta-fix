@@ -1,6 +1,15 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
+# ODM factory hardware-test app. The APK is extracted through
+# proprietary-files.txt and re-signed with the iodé platform certificate by
+# the generated android_app_import module, which is required for uid 1000.
+PRODUCT_PACKAGES += \
+    PriFactoryTest
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-com.pri.factorytest.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-com.pri.factorytest.xml
+
 # A/B
 PRODUCT_PACKAGES += \
     com.android.hardware.boot \
