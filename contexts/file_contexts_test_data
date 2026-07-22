@@ -44,6 +44,7 @@
 /apex/.bootstrap-apex-info-list.xml                               apex_info_file
 /apex/.default-apex-info-list.xml                                 apex_info_file
 /apex/apex-info-list.xml                                          apex_info_file
+/bootstrap-apex/apex-info-list.xml                                apex_info_file
 
 /bin                                                              rootfs
 /bugreports                                                       rootfs
