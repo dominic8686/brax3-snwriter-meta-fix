@@ -1,0 +1,2 @@
+# PriFactoryTest reads these read-only ODM product configuration properties.
+product_internal_prop(prifactorytest_config_prop)

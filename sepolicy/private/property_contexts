@@ -1,5 +1,8 @@
 persist.sys.factory. u:object_r:system_mtk_factory_prop:s0
 
+ro.odm.factory_default_lang_en u:object_r:prifactorytest_config_prop:s0 exact bool
+ro.odm.del_lan_switch_btn      u:object_r:prifactorytest_config_prop:s0 exact bool
+
 debuglog.drv u:object_r:vendor_mtk_camera_prop:s0
 debuglog.drv. u:object_r:vendor_mtk_camera_prop:s0
 ro.debug_level u:object_r:vendor_mtk_camera_prop:s0

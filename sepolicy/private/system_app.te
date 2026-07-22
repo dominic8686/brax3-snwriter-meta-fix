@@ -1,0 +1,3 @@
+# PriFactoryTest runs in the shared system_app domain and selects its factory
+# UI language from read-only ODM product configuration.
+get_prop(system_app, prifactorytest_config_prop)
