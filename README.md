@@ -1,6 +1,6 @@
 # BraX3 (MT6835) — factory provisioning fixes for iodéOS
 
-Three related fixes that restore **factory provisioning** on the iodé/LineageOS
+Four related fixes that restore **factory provisioning** on the iodé/LineageOS
 BraX3 build. The headline result:
 
 > **MediaTek SN Writer now passes GREEN under SELinux enforcing.**
@@ -13,15 +13,16 @@ BraX3 build. The headline result:
 |---|---|---|---|
 | 1 | **snWriter / META provisioning** — IMEI + serial writing | ✅ **Verified green on device** | [Test A](#test-a--snwriter-provisioning-the-main-fix) |
 | 2 | **EngineerMode** — MTK engineering app set restored | ✅ **Verified working** | [Test B](#test-b--engineermode) |
-| 3 | **Factory mode** — same fix ported to `factory_init.rc` | ⚠️ **Untested — needs verification** | [Test C](#test-c--factory-mode-needs-verification) |
+| 3 | **Native factory boot** — A16 APEX fix ported to `factory_init.rc` | ⚠️ **Untested — needs verification** | [Test C](#test-c--factory-mode-needs-verification) |
+| 4 | **PriFactoryTest Android app** — prebuilt integration + bilingual UI policy | ⚠️ **Build-verified; flash retest required** | [Test D](#test-d--prifactorytest-android-factory-app) |
 
 Branches:
 
 | Branch | Content |
 |---|---|
 | `main` | This README + the patch series in `patches/` |
-| `device_brax_brax3` | `device/brax/brax3` with the 7-commit series (on top of iodé v7.6) |
-| `system_sepolicy` | `system/sepolicy` + the 1-line prerequisite (**upstream candidate for iodé**) |
+| `device_brax_brax3` | `device/brax/brax3` with the 10-commit series (on top of iodé v7.6) |
+| `system_sepolicy` | `system/sepolicy` label prerequisite + its A16 context-test fixture (**upstream candidate for iodé**) |
 
 ---
 
@@ -70,7 +71,7 @@ registered and the backup completed in ~214 ms.
 
 ## The fixes
 
-### `device_brax_brax3` — 7 commits
+### `device_brax_brax3` — 10 commits
 
 | # | Commit | What |
 |---|---|---|
@@ -81,8 +82,11 @@ registered and the backup completed in ~214 ms.
 | 5 | `META snWriter backup timeout — root cause + APEXFIX state (WIP)` | Investigation state: inline boot-HAL service for META + diagnostics. |
 | 6 | **`META — run perform_apex_config after apexd-bootstrap`** | **The fix (change #1).** Restores the A16 contract in `meta_init.system.rc`, plus a belt-and-suspenders `restorecon /bootstrap-apex/apex-info-list.xml`. Also replaces a dead A13 `exec /system/bin/bootstrap/linkerconfig` (that binary moved into the runtime APEX on A15/16) with the A16 stub-write pattern, and restores `keystore2` + `mount_all --late`, which this fix makes viable. |
 | 7 | `factory mode — port the A16 perform_apex_config fix from META` | **Change #3.** `factory_init.rc` has the identical latent bug; same fix applied. **Not yet tested in factory mode.** |
+| 8 | `add PriFactoryTest factory hardware test app` | Extracts the ODM APK as a platform-signed privileged system app and grants its declared privileged permissions. |
+| 9 | `PriFactoryTest factory language defaults` | Adds `ro.odm.factory_default_lang_en=1` and `ro.odm.del_lan_switch_btn=1`: English startup plus the APK's built-in English/Simplified-Chinese switch. |
+| 10 | `allow PriFactoryTest to read language properties` | Gives the two exact properties a dedicated SELinux type and allows `system_app` to read it. Without this, Android labels arbitrary `ro.odm.*` keys `vendor_default_prop`; the APK receives empty values, falls back to Chinese, and hides the switch. |
 
-### `system_sepolicy` — 1 commit (upstream candidate)
+### `system_sepolicy` — 2 commits (upstream candidate)
 
 ```
 /bootstrap-apex/apex-info-list\.xml  u:object_r:apex_info_file:s0
@@ -98,6 +102,11 @@ the service managers until something relabels it. This defines the label that
 sequence around `apexd-bootstrap` (META, factory, recovery-like environments) can
 hit it — which is why it belongs upstream in iodé, and arguably in AOSP (`apexd`
 could restorecon the bootstrap manifest itself, as it did on A13).
+
+The follow-up commit adds `/bootstrap-apex/apex-info-list.xml` to
+`contexts/file_contexts_test_data`. Android 16's `plat_file_contexts_data_test`
+requires a test-data match for every platform file-context rule; without it a
+clean `m selinux_policy` build fails even though the runtime label is correct.
 
 ---
 
@@ -255,6 +264,85 @@ adb shell "logcat -b all -d" > factory-logcat.txt
 adb shell dmesg               > factory-dmesg.txt
 adb shell "ls -Z /bootstrap-apex/"
 ```
+
+---
+
+## Test D — PriFactoryTest Android factory app
+
+This is separate from MediaTek's native factory boot in Test C. Test C repairs
+the alternate `factory_init.rc` boot environment. PriFactoryTest is an ODM
+Android APK (`com.pri.factorytest`) that runs after Android's framework is up.
+
+The APK already contains default-English and `zh-rCN` resources. It does not
+follow the system locale at startup: it reads two ODM properties instead.
+
+```text
+ro.odm.factory_default_lang_en=1  -> start in English
+ro.odm.del_lan_switch_btn=1       -> show the English/Chinese switch
+```
+
+Both values are in the generated ODM build properties. They also need the exact
+SELinux property contexts included in device commit 10. Otherwise PriFactoryTest
+runs as `system_app`, receives empty values, switches its configuration from
+`en_US` to `zh_CN`, and logs:
+
+```text
+Access denied finding property "ro.odm.del_lan_switch_btn"
+Access denied finding property "ro.odm.factory_default_lang_en"
+```
+
+### Manual launch test
+
+The proprietary manifest deliberately sets `android:enabled="false"` on the
+application, and all three launcher aliases are disabled by APK boolean
+resources. This keeps the broad factory surface unavailable during normal
+retail use. Enable it temporarily, then launch an exported activity explicitly:
+
+```bash
+adb shell pm enable --user 0 com.pri.factorytest
+
+# Interactive grid of individual hardware tests
+adb shell am start -W \
+  -n com.pri.factorytest/.PrizeFactoryTestListActivity
+
+# Automatic sequence; immediately enters its first enabled item (normally LCD)
+adb shell am start -W \
+  -n com.pri.factorytest/.PrizeFactoryTestActivity
+```
+
+Expected result after flashing the new policy:
+
+- the interactive grid is visible and its translated labels are English;
+- the main factory UI retains the built-in English/Simplified-Chinese switch;
+- both activities remain alive with no `FATAL EXCEPTION`;
+- logcat contains no access-denied lines for the two language properties.
+
+```bash
+adb logcat -d | grep -F 'factory_default_lang_en'
+adb logcat -d | grep -F 'del_lan_switch_btn'
+# both commands should produce no "Access denied finding property" line
+```
+
+Restore the retail-safe package state after manual testing:
+
+```bash
+adb shell am force-stop com.pri.factorytest
+adb shell pm disable-user --user 0 com.pri.factorytest
+```
+
+### Automatic factory-boot launch is still a separate integration
+
+Including the APK and repairing native factory boot does **not** automatically
+launch the Android application. The current device tree has no boot-mode
+coordinator, and init cannot safely start an Android activity before Package
+Manager and Activity Manager are ready.
+
+The production design is a small platform-signed coordinator that runs only
+after framework boot, checks `ro.bootmode=factory`, enables PriFactoryTest for
+that factory session, and explicitly starts the selected entry activity. On the
+next normal boot it must restore the package to disabled state. Until that
+coordinator is implemented, use the ADB procedure above; entering factory mode
+or pressing the ODM key combination alone will not launch PriFactoryTest.
 
 ---
 

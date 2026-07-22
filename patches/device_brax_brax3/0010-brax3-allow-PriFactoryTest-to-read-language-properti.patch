@@ -1,0 +1,49 @@
+From 1d0bedb985dcc94ecacdc8a0fcad0001383459d0 Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Wed, 22 Jul 2026 15:16:54 +0000
+Subject: [PATCH 10/10] brax3: allow PriFactoryTest to read language properties
+
+Label the two factory language keys with a dedicated product property type and grant system_app read access. Otherwise they inherit vendor_default_prop, so the factory APK falls back to Chinese and hides its language switch.
+
+Change-Id: I7cf60249fd4b303f7e36ea3373bf087c5a28d94d
+---
+ sepolicy/private/property.te       | 2 ++
+ sepolicy/private/property_contexts | 3 +++
+ sepolicy/private/system_app.te     | 3 +++
+ 3 files changed, 8 insertions(+)
+ create mode 100644 sepolicy/private/property.te
+ create mode 100644 sepolicy/private/system_app.te
+
+diff --git a/sepolicy/private/property.te b/sepolicy/private/property.te
+new file mode 100644
+index 0000000..8331eac
+--- /dev/null
++++ b/sepolicy/private/property.te
+@@ -0,0 +1,2 @@
++# PriFactoryTest reads these read-only ODM product configuration properties.
++product_internal_prop(prifactorytest_config_prop)
+diff --git a/sepolicy/private/property_contexts b/sepolicy/private/property_contexts
+index 0af9a09..11bdad7 100644
+--- a/sepolicy/private/property_contexts
++++ b/sepolicy/private/property_contexts
+@@ -1,5 +1,8 @@
+ persist.sys.factory. u:object_r:system_mtk_factory_prop:s0
+ 
++ro.odm.factory_default_lang_en u:object_r:prifactorytest_config_prop:s0 exact bool
++ro.odm.del_lan_switch_btn      u:object_r:prifactorytest_config_prop:s0 exact bool
++
+ debuglog.drv u:object_r:vendor_mtk_camera_prop:s0
+ debuglog.drv. u:object_r:vendor_mtk_camera_prop:s0
+ ro.debug_level u:object_r:vendor_mtk_camera_prop:s0
+diff --git a/sepolicy/private/system_app.te b/sepolicy/private/system_app.te
+new file mode 100644
+index 0000000..bdd86ef
+--- /dev/null
++++ b/sepolicy/private/system_app.te
+@@ -0,0 +1,3 @@
++# PriFactoryTest runs in the shared system_app domain and selects its factory
++# UI language from read-only ODM product configuration.
++get_prop(system_app, prifactorytest_config_prop)
+-- 
+2.53.0
+

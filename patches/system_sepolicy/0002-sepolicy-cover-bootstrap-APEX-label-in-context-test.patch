@@ -1,0 +1,25 @@
+From 78c6524424cb16e516a2f55c6edb11b7dfd7db3b Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Wed, 22 Jul 2026 15:17:03 +0000
+Subject: [PATCH] sepolicy: cover bootstrap APEX label in context test
+
+Android 16 requires every platform file_contexts rule to have a matching file_contexts_test_data entry. Keep the bootstrap APEX label build-valid.
+---
+ contexts/file_contexts_test_data | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/contexts/file_contexts_test_data b/contexts/file_contexts_test_data
+index 17e2b49bf..73a1433fa 100644
+--- a/contexts/file_contexts_test_data
++++ b/contexts/file_contexts_test_data
+@@ -44,6 +44,7 @@
+ /apex/.bootstrap-apex-info-list.xml                               apex_info_file
+ /apex/.default-apex-info-list.xml                                 apex_info_file
+ /apex/apex-info-list.xml                                          apex_info_file
++/bootstrap-apex/apex-info-list.xml                                apex_info_file
+ 
+ /bin                                                              rootfs
+ /bugreports                                                       rootfs
+-- 
+2.53.0
+

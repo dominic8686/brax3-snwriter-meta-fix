@@ -1,0 +1,36 @@
+From 3cd7d1f55ad50692f41863468e0059901b9fdfff Mon Sep 17 00:00:00 2001
+From: Dominic Gingras <dominic8686@gmail.com>
+Date: Wed, 22 Jul 2026 11:36:55 +0000
+Subject: [PATCH 09/10] brax3: PriFactoryTest factory language defaults (EN
+ default + lang switch)
+
+Uncommitted ODM factory language props captured so the patch set is
+drift-free: default the factory app to English and expose its built-in
+EN/zh-CN switch for bilingual factory stations.
+
+Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+Change-Id: I4c86500e95014ed3bfccb541c7ff29507501e863
+---
+ device.mk | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/device.mk b/device.mk
+index 49e4d3d..7474991 100644
+--- a/device.mk
++++ b/device.mk
+@@ -10,6 +10,12 @@ PRODUCT_PACKAGES += \
+ PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/configs/permissions/privapp-permissions-com.pri.factorytest.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-com.pri.factorytest.xml
+ 
++# Default PriFactoryTest to English and expose its built-in switch between
++# English and Simplified Chinese for bilingual factory stations.
++PRODUCT_ODM_PROPERTIES += \
++    ro.odm.factory_default_lang_en=1 \
++    ro.odm.del_lan_switch_btn=1
++
+ # A/B
+ PRODUCT_PACKAGES += \
+     com.android.hardware.boot \
+-- 
+2.53.0
+
