@@ -10,6 +10,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/permissions/privapp-permissions-com.pri.factorytest.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-com.pri.factorytest.xml
 
+# Default PriFactoryTest to English and expose its built-in switch between
+# English and Simplified Chinese for bilingual factory stations.
+PRODUCT_ODM_PROPERTIES += \
+    ro.odm.factory_default_lang_en=1 \
+    ro.odm.del_lan_switch_btn=1
+
 # A/B
 PRODUCT_PACKAGES += \
     com.android.hardware.boot \
