@@ -1,5 +1,7 @@
 # BraX3 (MT6835) — factory provisioning fixes for iodéOS
 
+> ⚡ **Quick start:** For brief instructions on applying the fixes that switch the device into a mode allowing the MediaTek SN Writer tool to write the SN/IMEI, see [QUICK-START.md](QUICK-START.md).
+
 Related fixes that restore **factory provisioning** on the iodé/LineageOS
 BraX3 build. The headline result:
 
