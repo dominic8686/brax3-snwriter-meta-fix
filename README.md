@@ -42,10 +42,17 @@ GitHub's limits and painful to clone forever — to deliver a **2-patch,
 ~250-line** change. Apply the patch files instead; please don't "fix" this
 asymmetry by pushing the branch.
 
-All four patch sets are in `patches/`: device 10, frameworks_base 2,
-system_sepolicy 2, vendor_brax_brax3 3 — **17 patches**. The blob-carrying repos
-additionally have branches, which are the lighter route for those (git-compressed
-rather than base64-in-patch).
+**Five** patch sets are in `patches/`: device 10, `hardware_mediatek` 1,
+frameworks_base 2, system_sepolicy 2, vendor_brax_brax3 3 — **18 patches**. The
+blob-carrying repos additionally have branches, which are the lighter route for
+those (git-compressed rather than base64-in-patch).
+
+> ⚠️ **`hardware_mediatek` is required and easy to miss.** It defines the
+> `vendor.mediatek.hardware.nvram-V1.0-java` module that
+> `patches/frameworks_base/0001` links into `framework-internal-utils`. Without
+> it the build fails with
+> `"framework-internal-utils" depends on undefined module "vendor.mediatek.hardware.nvram-V1.0-java"`.
+> Apply it **before or together with** `frameworks_base`.
 
 ---
 

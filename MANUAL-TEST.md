@@ -74,20 +74,30 @@ Base revisions the patches apply onto:
 
 ---
 
-## 2. Apply the patches (4 repos — don't skip vendor)
+## 2. Apply the patches (**5 repos** — don't skip vendor or hardware/mediatek)
 
 ```bash
-cd device/brax/brax3   && git am /path/to/patches/device_brax_brax3/*.patch
-cd frameworks/base     && git am /path/to/patches/frameworks_base/*.patch
-cd system/sepolicy     && git am /path/to/patches/system_sepolicy/*.patch
+cd device/brax/brax3     && git am /path/to/patches/device_brax_brax3/*.patch
+cd hardware/mediatek     && git am /path/to/patches/hardware_mediatek/*.patch
+cd frameworks/base       && git am /path/to/patches/frameworks_base/*.patch
+cd system/sepolicy       && git am /path/to/patches/system_sepolicy/*.patch
 
-cd vendor/brax/brax3   && git am /path/to/patches/vendor_brax_brax3/*.patch
+cd vendor/brax/brax3     && git am /path/to/patches/vendor_brax_brax3/*.patch
 # (or fetch the vendor_brax_brax3 branch instead — see §0.1)
 ```
 
-**All four are required.** Common failure: applying only device+sepolicy →
-factory app crashes with `NoClassDefFoundError: com.pri.utils.NvramUtils`
-(missing `frameworks_base`), or snWriter never connects (missing vendor blobs).
+Apply `hardware_mediatek` **before or together with** `frameworks_base` — the
+latter references the module the former defines.
+
+**All five are required.** What breaks if you skip one:
+
+| Skipped | Symptom |
+|---|---|
+| `hardware_mediatek` | **Build break:** `frameworks/base/Android.bp:205:1: "framework-internal-utils" depends on undefined module "vendor.mediatek.hardware.nvram-V1.0-java"`. That module is *defined* here; `frameworks_base` only references it. |
+| `frameworks_base` | Factory app crashes with `NoClassDefFoundError: com.pri.utils.NvramUtils`, and stays disabled (no enable hook) so `*#*#8804#*#*` does nothing |
+| `vendor_brax_brax3` | snWriter can't work at all (no `meta_tst`/ATCI); EngineerMode + PriFactoryTest absent |
+| `system_sepolicy` | snWriter FAILs at 15 s (missing the apex-label prerequisite) |
+| `device_brax_brax3` | Nothing is wired in |
 
 ---
 
