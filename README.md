@@ -1,11 +1,13 @@
 # BraX3 (MT6835) — factory provisioning fixes for iodéOS
 
-Four related fixes that restore **factory provisioning** on the iodé/LineageOS
+Related fixes that restore **factory provisioning** on the iodé/LineageOS
 BraX3 build. The headline result:
 
-> **MediaTek SN Writer now passes GREEN under SELinux enforcing.**
-> Verified on device 2026-07-19 — `PASS, Pass:1 Fail:0, "All Operate successfully!!"`
-> Reproduced twice (initial fix build + clean canonical rebuild).
+> **MediaTek SN Writer passes GREEN under SELinux enforcing**, and the ODM
+> factory test app opens from the `*#*#8804#*#*` dial code on a clean flash.
+> **Re-verified 2026-07-23 on a from-scratch build** — drift-free tree,
+> `m installclean`, patch presence checked *inside* the packed `super` before
+> flashing, full flash + wiped userdata, enforcing, **nothing enabled by hand**.
 
 ## What's in here
 
@@ -13,8 +15,14 @@ BraX3 build. The headline result:
 |---|---|---|---|
 | 1 | **snWriter / META provisioning** — IMEI + serial writing | ✅ **Verified green on device** | [Test A](#test-a--snwriter-provisioning-the-main-fix) |
 | 2 | **EngineerMode** — MTK engineering app set restored | ✅ **Verified working** | [Test B](#test-b--engineermode) |
-| 3 | **Native factory boot** — A16 APEX fix ported to `factory_init.rc` | ⚠️ **Untested — needs verification** | [Test C](#test-c--factory-mode-needs-verification) |
-| 4 | **PriFactoryTest Android app** — prebuilt integration + bilingual UI policy | ⚠️ **Build-verified; flash retest required** | [Test D](#test-d--prifactorytest-android-factory-app) |
+| 3 | **Native factory boot** — A16 APEX fix ported to `factory_init.rc` | ➖ **Defensive only** — this LK never selects `factory_init.rc` | [Test C](#test-c--factory-mode-needs-verification) |
+| 4 | **PriFactoryTest Android app** — prebuilt integration + bilingual UI policy | ✅ **Verified on device** — opens via `*#*#8804#*#*`, runs tests, no crash | [Test D](#test-d--prifactorytest-android-factory-app) |
+| 5 | **Framework support** — `NvramUtils` compat API + boot-time package enable | ✅ **Verified on device** | [Test D](#test-d--prifactorytest-android-factory-app) |
+
+**Change #5 is required for #4 to work at all.** Without the `NvramUtils`
+framework class the app dies with `NoClassDefFoundError` as soon as it starts;
+without the boot-time enable the manifest-disabled package is unreachable, so
+*neither* `am start` *nor* the dial code can open it.
 
 Branches:
 
@@ -22,6 +30,7 @@ Branches:
 |---|---|
 | `main` | This README + the patch series in `patches/` |
 | `device_brax_brax3` | `device/brax/brax3` with the 10-commit series (on top of iodé v7.6) |
+| `frameworks_base` | `frameworks/base` — `NvramUtils` compat API + the `PhoneWindowManager` enable hook |
 | `system_sepolicy` | `system/sepolicy` label prerequisite + its A16 context-test fixture (**upstream candidate for iodé**) |
 
 ---
@@ -107,6 +116,17 @@ The follow-up commit adds `/bootstrap-apex/apex-info-list.xml` to
 `contexts/file_contexts_test_data`. Android 16's `plat_file_contexts_data_test`
 requires a test-data match for every platform file-context rule; without it a
 clean `m selinux_policy` build fails even though the runtime label is correct.
+
+### `frameworks_base` — 2 commits (required for the factory app)
+
+| # | Commit | What |
+|---|---|---|
+| 1 | `add PriFactoryTest NVRAM compatibility API` | Provides `com.pri.utils.NvramUtils`, the **only** framework-level `com.pri.*` class the APK needs (the other ~230 `com.pri.*` refs are its own classes, inside the APK). The ODM added this to `framework.jar`; iodé lacks it, so the app died with `NoClassDefFoundError` the moment `FactoryTestApplication` loaded. Implemented as a Java-only HIDL client over the existing `vendor.mediatek.hardware.nvram@1.0` prebuilt — no native replacement, path allowlist, offset/length validation. |
+| 2 | `enable the ODM factory test app at systemReady` | Ports the ODM's `PhoneWindowManager` `setApplicationEnabledSetting(ENABLED)` hook. Required because the APK's `<application android:enabled="false">` is a **hardcoded literal** (no RRO can override it) and iodé has no `config_forceEnabledComponents`. Hardened: early-out when already reachable, `getPackageInfo` guard (clean no-op when the app isn't shipped — the BSP version throws), try/catch around `systemReady`. |
+
+Both land on the **boot classpath**: `NvramUtils` in `framework.jar`
+(`classes6.dex`), the enable hook in `services.jar` (`classes2.dex`) — verified
+in the packed images before flashing.
 
 ---
 
@@ -226,16 +246,30 @@ Or dial **`*#*#3646633#*#*`** on the dialer.
 
 ## Test C — Factory mode (needs verification)
 
-⚠️ **This is the one change not yet validated on device.** It mirrors the proven
-META fix exactly, but factory mode has not had its own test cycle. Reviewers:
-this is where to focus.
+➖ **Defensive only — this bootloader never selects `factory_init.rc`.**
+Verified in LK source and against the shipping image:
 
-**What it should fix:** the same `NULL VINTF` cascade in factory mode.
-`factory_init.rc` had the identical A13-derived defects — no `perform_apex_config`,
-plus a dead `exec /system/bin/bootstrap/linkerconfig`. In factory mode the visible
-symptom is different from META's: `mount_all --late` blocks in `vold` waiting for
-`IBootControl` (which cannot register without a readable VINTF manifest), so the
-boot stalls.
+- `mt_boot.c` defines `FACTORY_INIT_RC = "/vendor/etc/init/hw/factory_init.rc"`
+  but **never uses it**; the `FACTORY_BOOT` / `ATE_FACTORY_BOOT` path falls through
+  to `androidboot.init_rc=` **`meta_init.system.rc`**.
+- `strings lk.img | grep init_rc` on the shipping `lk.img` yields exactly one
+  match: `…/meta_init.system.rc`. `factory_init.rc` appears nowhere.
+
+**So native factory boot runs `meta_init.system.rc` — already covered by change
+#1.** Patch 7 keeps the two files in sync and is correct *if* a future LK ever
+selects `factory_init.rc`, but it is inert on this bootloader. Native factory
+boot is entered by a preloader handshake (`FACTFACT`, like snWriter's `METAMETA`),
+not a key combo.
+
+For the **factory test app** — which is what "factory mode" means in practice
+here — see [Test D](#test-d--prifactorytest-android-factory-app); that path is
+verified working.
+
+**Historical note (what this patch was written for):** the same `NULL VINTF`
+cascade would hit `factory_init.rc` if it were used — it had the identical
+A13-derived defects (no `perform_apex_config`, plus a dead
+`exec /system/bin/bootstrap/linkerconfig`), and the symptom would differ from
+META's: `mount_all --late` blocking in `vold` waiting for `IBootControl`.
 
 **Procedure**
 
@@ -296,10 +330,15 @@ Access denied finding property "ro.odm.factory_default_lang_en"
 The proprietary manifest deliberately sets `android:enabled="false"` on the
 application, and all three launcher aliases are disabled by APK boolean
 resources. This keeps the broad factory surface unavailable during normal
-retail use. Enable it temporarily, then launch an exported activity explicitly:
+retail use.
+
+> **Since the enable hook was ported** (see [below](#the-enable-hook-is-now-ported-2026-07-23--verified-on-device)),
+> the package is enabled automatically at boot and `*#*#8804#*#*` just works —
+> the `pm enable` below is **no longer required**. It is kept for reference and
+> for bisecting against builds without `patches/frameworks_base/0002`.
 
 ```bash
-adb shell pm enable --user 0 com.pri.factorytest
+adb shell pm enable --user 0 com.pri.factorytest   # no longer needed
 
 # Interactive grid of individual hardware tests
 adb shell am start -W \
@@ -385,11 +424,41 @@ Source and runtime verification also found:
 - the ODM button-policy changes only pass keys to PriFactoryTest while it is
   already foreground; they do not form a launch combination.
 
-The current iodé branch includes the APK, privileged permissions, language
-properties, and SELinux property access, but it does **not** yet include the
-ODM `PhoneWindowManager` enable hook. Consequently, after a clean flash or
-factory reset the dial-code receiver remains disabled until the package is
-explicitly enabled. Use the ADB procedure above for this patch series.
+### The enable hook is now ported (2026-07-23) — verified on device
+
+The iodé branch **now includes** the `PhoneWindowManager` enable hook
+(`patches/frameworks_base/0002`), so the manual `pm enable` step above is **no
+longer required**. Why a framework patch was the only option:
+
+- the APK sets `<application android:enabled="false">` as a **hardcoded literal**,
+  so an RRO/resource overlay **cannot** override it;
+- iodé's framework has **no** `config_forceEnabledComponents` mechanism;
+- so the ODM's own approach — enable the package at `systemReady()` — is the
+  correct route.
+
+Hardened over the ODM version: it early-outs when the app is already reachable,
+guards with `getPackageInfo` so it is a clean **no-op on builds that don't ship
+the app** (the BSP version would throw `IllegalArgumentException`), and wraps the
+call in try/catch so it can never destabilise `systemReady()`.
+
+Verified on a clean flash with **nothing done by hand**:
+
+```bash
+adb shell "dumpsys package com.pri.factorytest | grep -m1 -oE 'enabled=[0-9]'"
+# -> enabled=1          (explicitly ENABLED; a fresh flash defaults to 0)
+adb shell "pm list packages -d | grep -c factorytest"
+# -> 0                  (no longer in the disabled list)
+```
+
+then dialling `*#*#8804#*#*` opens the factory app, and
+`am start -n com.pri.factorytest/.PrizeFactoryTestActivity` runs a test
+(observed sitting on `.LCD.LCD`) with no `FATAL EXCEPTION` and a working NVRAM
+path (`NVM_…Check Success`).
+
+**The launcher aliases stay disabled on purpose.** Enabling the *application*
+does not enable the three aliases (their own `bool/is_*_launcher_enabled` are
+`false`), so there is still **no app-drawer icon** — entry remains the dial code.
+This matches ODM BSP behaviour exactly and keeps the retail surface hidden.
 
 ---
 
