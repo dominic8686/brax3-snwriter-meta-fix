@@ -330,19 +330,66 @@ adb shell am force-stop com.pri.factorytest
 adb shell pm disable-user --user 0 com.pri.factorytest
 ```
 
-### Automatic factory-boot launch is still a separate integration
+### What the ODM BSP actually does: enable at boot, launch by trigger
 
-Including the APK and repairing native factory boot does **not** automatically
-launch the Android application. The current device tree has no boot-mode
-coordinator, and init cannot safely start an Android activity before Package
-Manager and Activity Manager are ready.
+The ODM BSP does **not** contain an automatic factory-boot launcher for
+PriFactoryTest. The previously proposed boot-mode coordinator was speculative,
+not source-derived.
 
-The production design is a small platform-signed coordinator that runs only
-after framework boot, checks `ro.bootmode=factory`, enables PriFactoryTest for
-that factory session, and explicitly starts the selected entry activity. On the
-next normal boot it must restore the package to disabled state. Until that
-coordinator is implemented, use the ADB procedure above; entering factory mode
-or pressing the ODM key combination alone will not launch PriFactoryTest.
+Instead, the ODM patches `PhoneWindowManager.systemReady()` to enable the
+manifest-disabled application after Package Manager is available:
+
+```java
+// frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+if (!isFactoryTestActivitySupport(mContext)) {
+    enableFactoryTestApplication(mContext);
+}
+
+private static boolean isFactoryTestActivitySupport(Context context) {
+    PackageManager pm = context.getPackageManager();
+    Intent intent = new Intent().setClassName(
+            "com.pri.factorytest",
+            "com.pri.factorytest.PrizeFactoryTestActivity");
+    List<ResolveInfo> list =
+            pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+    return list.size() > 0;
+}
+
+private static void enableFactoryTestApplication(Context context) {
+    final PackageManager pm = context.getPackageManager();
+    pm.setApplicationEnabledSetting(
+            "com.pri.factorytest",
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP);
+}
+```
+
+This hook enables the package; it does not start an activity. For this ODM
+configuration, the normal launch flow is:
+
+```text
+*#*#8804#*#*
+  -> TelephonyManager.sendDialerSpecialCode("8804")
+  -> com.pri.factorytest.GoogleDialerReceiver
+  -> FactoryMainTestHostHandle
+  -> PrizeFactoryTestActivity (isAutoTest=true)
+```
+
+Source and runtime verification also found:
+
+- `factory_init.rc` contains no `am start` or PriFactoryTest component;
+- PriFactoryTest's `BOOT_COMPLETED` receiver performs initialization and may
+  resume an NV-requested aging test, but does not launch the main factory UI;
+- the APK declares no activity for Android's legacy
+  `android.intent.action.FACTORY_TEST` automatic-start mechanism;
+- the ODM button-policy changes only pass keys to PriFactoryTest while it is
+  already foreground; they do not form a launch combination.
+
+The current iodé branch includes the APK, privileged permissions, language
+properties, and SELinux property access, but it does **not** yet include the
+ODM `PhoneWindowManager` enable hook. Consequently, after a clean flash or
+factory reset the dial-code receiver remains disabled until the package is
+explicitly enabled. Use the ADB procedure above for this patch series.
 
 ---
 
