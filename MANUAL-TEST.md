@@ -6,23 +6,31 @@ skipping them produces false PASS/FAIL results.
 
 ---
 
-## 0. ⚠️ What is NOT in this repo — get these first
+## 0. ⚠️ Before you start — what you need
 
-You **cannot** complete this test with the repo alone. Two things are missing by
-design:
+Only **one** thing is missing from this repo: the snWriter tool itself (§0.2).
+Everything else, including the vendor blobs, is here.
 
-### 0.1 Vendor proprietary blobs — **REQUIRED**
+### 0.1 Vendor proprietary blobs — **REQUIRED, and they ARE in this repo**
 
 The device patches reference these via `proprietary-files.txt`. Without them the
 build produces an image where **snWriter cannot work at all** (no `meta_tst`),
 EngineerMode is absent, and PriFactoryTest is absent.
 
-Get from the Brax Gerrit:
+Shipped here two ways — use either:
 
+```bash
+# preferred: fetch the branch (git-compressed, ~162 MB)
+cd vendor/brax/brax3
+git fetch <this-repo> vendor_brax_brax3 && git checkout FETCH_HEAD
+
+# or apply the patch files
+cd vendor/brax/brax3 && git am /path/to/patches/vendor_brax_brax3/*.patch
 ```
-https://brax3-iodeos-review.os-source.co/Brax3_IodeOs/vendor_brax_brax3
-branch: brax3-prifactorytest-app
-```
+
+Upstream source of truth remains the Brax Gerrit:
+`https://brax3-iodeos-review.os-source.co/Brax3_IodeOs/vendor_brax_brax3`
+(branch `brax3-prifactorytest-app`).
 
 Three commits provide them:
 
@@ -32,8 +40,8 @@ Three commits provide them:
 | `9cc8eb5` | `EngineerMode.apk`, `bin/em_svr`, `libem_*_jni.so`, `libaudiotoolkit.so`, `libsysenv_system.so` |
 | `1776d78` | `PriFactoryTest.apk` (49 MB) |
 
-They are MediaTek/ODM proprietary binaries, which is why they live in the
-private vendor repo and not here.
+These are MediaTek/ODM **proprietary binaries** — treat this repo accordingly
+(it is private, and must stay private).
 
 ### 0.2 The snWriter tool — **REQUIRED for Test A**
 
@@ -73,9 +81,8 @@ cd device/brax/brax3   && git am /path/to/patches/device_brax_brax3/*.patch
 cd frameworks/base     && git am /path/to/patches/frameworks_base/*.patch
 cd system/sepolicy     && git am /path/to/patches/system_sepolicy/*.patch
 
-# vendor: fetch the branch from the Brax Gerrit (see §0.1) — NOT in this repo
-cd vendor/brax/brax3
-git fetch <brax-gerrit> brax3-prifactorytest-app && git checkout FETCH_HEAD
+cd vendor/brax/brax3   && git am /path/to/patches/vendor_brax_brax3/*.patch
+# (or fetch the vendor_brax_brax3 branch instead — see §0.1)
 ```
 
 **All four are required.** Common failure: applying only device+sepolicy →

@@ -30,8 +30,22 @@ Branches:
 |---|---|
 | `main` | This README + the patch series in `patches/` |
 | `device_brax_brax3` | `device/brax/brax3` with the 10-commit series (on top of iodé v7.6) |
-| `frameworks_base` | `frameworks/base` — `NvramUtils` compat API + the `PhoneWindowManager` enable hook |
+| `vendor_brax_brax3` | `vendor/brax/brax3` — the proprietary blobs the device patches reference (meta_tst/ATCI, EngineerMode, PriFactoryTest) |
 | `system_sepolicy` | `system/sepolicy` label prerequisite + its A16 context-test fixture (**upstream candidate for iodé**) |
+| *(no `frameworks_base` branch)* | **By design** — see the note below |
+
+`frameworks/base` changes ship as **patches only**
+(`patches/frameworks_base/`). That repo carries the entire AOSP framework
+history — **7.32 GiB**, versus 1 MB / 41 MB / 162 MB for the other three.
+Pushing it as a branch would take this repo from ~39 MB to ~7.4 GB — past
+GitHub's limits and painful to clone forever — to deliver a **2-patch,
+~250-line** change. Apply the patch files instead; please don't "fix" this
+asymmetry by pushing the branch.
+
+All four patch sets are in `patches/`: device 10, frameworks_base 2,
+system_sepolicy 2, vendor_brax_brax3 3 — **17 patches**. The blob-carrying repos
+additionally have branches, which are the lighter route for those (git-compressed
+rather than base64-in-patch).
 
 ---
 
