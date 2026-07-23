@@ -1,0 +1,275 @@
+From 25af55eb9197c1341a62c9e726ab5b7f774cf160 Mon Sep 17 00:00:00 2001
+From: dominicg <dominicg@brax3.local>
+Date: Tue, 21 Jul 2026 05:07:27 +0000
+Subject: [PATCH 1/2] framework: add PriFactoryTest NVRAM compatibility API
+
+Provide the com.pri.utils.NvramUtils ABI expected by the ODM factory-test APK and link the MediaTek NVRAM HIDL Java client into framework-internal-utils.
+
+Keep all reads and writes behind the existing NVRAM HAL, restrict requests to the factory/user/product-info records used by the APK, validate offsets and buffer lengths, and preserve the ODM prefix-read behavior.
+---
+ Android.bp                              |   1 +
+ core/java/com/pri/utils/NvramUtils.java | 240 ++++++++++++++++++++++++
+ 2 files changed, 241 insertions(+)
+ create mode 100644 core/java/com/pri/utils/NvramUtils.java
+
+diff --git a/Android.bp b/Android.bp
+index 939c2417a627..e29617f9342e 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -256,6 +256,7 @@ java_library {
+         "com.android.sysprop.localization",
+         "PlatformProperties",
+         "SurfaceFlingerProperties",
++        "vendor.mediatek.hardware.nvram-V1.0-java",
+     ],
+     sdk_version: "core_platform",
+     installable: false,
+diff --git a/core/java/com/pri/utils/NvramUtils.java b/core/java/com/pri/utils/NvramUtils.java
+new file mode 100644
+index 000000000000..4a20c3a74ba5
+--- /dev/null
++++ b/core/java/com/pri/utils/NvramUtils.java
+@@ -0,0 +1,240 @@
++/*
++ * Copyright (C) 2026 The iodéOS Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++package com.pri.utils;
++
++import android.os.RemoteException;
++import android.util.Log;
++
++import java.nio.charset.StandardCharsets;
++import java.util.ArrayList;
++import java.util.NoSuchElementException;
++
++import vendor.mediatek.hardware.nvram.V1_0.INvram;
++
++/**
++ * Compatibility API used by the BraX3 factory-test application.
++ *
++ * <p>Access remains behind the MediaTek NVRAM HAL. This class deliberately does
++ * not open files below {@code /mnt/vendor/nvdata} directly.</p>
++ *
++ * @hide
++ */
++public class NvramUtils {
++    private static final String TAG = "NvramUtils";
++
++    private static final String USER_INFO_PATH =
++            "/mnt/vendor/nvdata/APCFG/APRDEB/PRIZE_USER_INFO";
++    private static final String FACTORY_INFO_PATH =
++            "/mnt/vendor/nvdata/APCFG/APRDEB/PRIZE_FACTORY_INFO";
++    private static final String PRODUCT_INFO_PATH =
++            "/vendor/nvdata/APCFG/APRDEB/PRODUCT_INFO";
++    private static final String MOUNTED_PRODUCT_INFO_PATH =
++            "/mnt/vendor/nvdata/APCFG/APRDEB/PRODUCT_INFO";
++
++    // These fields are intentionally mutable for binary compatibility with the
++    // ODM framework API consumed by the prebuilt factory-test APK.
++    public static String PRIZE_USER_INFO_PATH = USER_INFO_PATH;
++    public static String PRIZE_FACTORY_INFO_PATH = FACTORY_INFO_PATH;
++    public static int PRIZE_FACTORY_BARCODE_OFFSET = 0;
++    public static int PRIZE_FACTORY_BBARCODE_END = 149;
++    public static int PRIZE_FACTORY_FACTORY_INFO_OFFSET = 150;
++    public static int PRIZE_FACTORY_FACTORY_INFO_END = 349;
++
++    private static final Object SERVICE_LOCK = new Object();
++    private static volatile INvram sNvram;
++
++    public NvramUtils() {}
++
++    public static boolean writeFactoryNvramInfo(int offset, int length, String info) {
++        return writeNvramInfo(PRIZE_FACTORY_INFO_PATH, offset, length, info);
++    }
++
++    public static boolean writeUserNvramInfo(int offset, int length, String info) {
++        return writeNvramInfo(PRIZE_USER_INFO_PATH, offset, length, info);
++    }
++
++    public static String readFactoryNvramInfo(int offset, int length) {
++        return getNvramInfo(PRIZE_FACTORY_INFO_PATH, offset, length);
++    }
++
++    public static String readUserNvramInfo(int offset, int length) {
++        return getNvramInfo(PRIZE_USER_INFO_PATH, offset, length);
++    }
++
++    public static boolean writeNvramInfo(String fileName, int offset, int length, String info) {
++        if (!isSupportedPath(fileName) || info == null || checkedSize(offset, length) < 0) {
++            Log.e(TAG, "Rejected invalid NVRAM write request");
++            return false;
++        }
++
++        final INvram nvram = getNvramService();
++        if (nvram == null) {
++            Log.e(TAG, "NVRAM HAL is unavailable");
++            return false;
++        }
++        return writeHidlNvramInfo(nvram, fileName, offset, length, info);
++    }
++
++    public static synchronized boolean writeHidlNvramInfo(INvram nvram, String fileName,
++            int offset, int length, String info) {
++        final int size = checkedSize(offset, length);
++        if (nvram == null || !isSupportedPath(fileName) || info == null || size < 0) {
++            return false;
++        }
++
++        final byte[] infoBytes = info.getBytes(StandardCharsets.UTF_8);
++        if (infoBytes.length < length) {
++            Log.e(TAG, "NVRAM write length exceeds encoded input");
++            return false;
++        }
++
++        try {
++            final byte[] data = decodeHalResult(nvram.readFileByName(fileName, size));
++            if (data == null || data.length < size) {
++                Log.e(TAG, "NVRAM HAL returned a short or malformed buffer");
++                return false;
++            }
++
++            System.arraycopy(infoBytes, 0, data, offset, length);
++            final ArrayList<Byte> output = new ArrayList<>(size);
++            for (int i = 0; i < size; i++) {
++                output.add(data[i]);
++            }
++
++            final byte status = nvram.writeFileByNamevec(fileName, size, output);
++            final boolean success = status >= 0;
++            Log.d(TAG, "NVRAM HAL write " + (success ? "succeeded" : "failed")
++                    + " for " + fileName);
++            return success;
++        } catch (RemoteException | RuntimeException e) {
++            clearService(nvram);
++            Log.e(TAG, "NVRAM HAL write failed for " + fileName, e);
++            return false;
++        }
++    }
++
++    public static String getNvramInfo(String fileName, int offset, int length) {
++        if (!isSupportedPath(fileName) || checkedSize(offset, length) < 0) {
++            Log.e(TAG, "Rejected invalid NVRAM read request");
++            return "";
++        }
++
++        final INvram nvram = getNvramService();
++        if (nvram == null) {
++            Log.e(TAG, "NVRAM HAL is unavailable");
++            return "";
++        }
++        return getHidlNvramInfo(nvram, fileName, offset, length);
++    }
++
++    public static String getHidlNvramInfo(INvram nvram, String fileName,
++            int offset, int length) {
++        final int size = checkedSize(offset, length);
++        if (nvram == null || !isSupportedPath(fileName) || size < 0) {
++            return "";
++        }
++
++        try {
++            final byte[] data = decodeHalResult(nvram.readFileByName(fileName, size));
++            if (data == null) {
++                Log.e(TAG, "NVRAM HAL returned malformed data for " + fileName);
++                return "";
++            }
++
++            // The ODM API returns the complete prefix through offset + length,
++            // rather than slicing at offset. Preserve that behavior for the APK.
++            final char[] output = new char[data.length];
++            for (int i = 0; i < data.length; i++) {
++                // Preserve the ODM's signed byte-to-char conversion, including
++                // its U+FF80..U+FFFF mapping for bytes with the high bit set.
++                output[i] = (char) data[i];
++            }
++            return new String(output);
++        } catch (RemoteException | RuntimeException e) {
++            clearService(nvram);
++            Log.e(TAG, "NVRAM HAL read failed for " + fileName, e);
++            return "";
++        }
++    }
++
++    private static INvram getNvramService() {
++        INvram nvram = sNvram;
++        if (nvram != null) {
++            return nvram;
++        }
++
++        synchronized (SERVICE_LOCK) {
++            nvram = sNvram;
++            if (nvram != null) {
++                return nvram;
++            }
++            try {
++                nvram = INvram.getService(false);
++                sNvram = nvram;
++            } catch (RemoteException | NoSuchElementException e) {
++                Log.e(TAG, "Unable to obtain the NVRAM HIDL service", e);
++            }
++            return nvram;
++        }
++    }
++
++    private static void clearService(INvram failedService) {
++        synchronized (SERVICE_LOCK) {
++            if (sNvram == failedService) {
++                sNvram = null;
++            }
++        }
++    }
++
++    private static int checkedSize(int offset, int length) {
++        if (offset < 0 || length < 0 || offset > Integer.MAX_VALUE - length) {
++            return -1;
++        }
++        return offset + length;
++    }
++
++    private static boolean isSupportedPath(String fileName) {
++        return USER_INFO_PATH.equals(fileName)
++                || FACTORY_INFO_PATH.equals(fileName)
++                || PRODUCT_INFO_PATH.equals(fileName)
++                || MOUNTED_PRODUCT_INFO_PATH.equals(fileName);
++    }
++
++    private static byte[] decodeHalResult(String result) {
++        if (result == null || result.isEmpty()) {
++            return null;
++        }
++
++        // MediaTek's HIDL service appends a NUL terminator to the hexadecimal
++        // payload. The ODM implementation unconditionally removes that byte.
++        final String hex = result.substring(0, result.length() - 1);
++        if ((hex.length() & 1) != 0) {
++            return null;
++        }
++
++        final byte[] output = new byte[hex.length() / 2];
++        for (int i = 0; i < output.length; i++) {
++            final int high = Character.digit(hex.charAt(i * 2), 16);
++            final int low = Character.digit(hex.charAt(i * 2 + 1), 16);
++            if (high < 0 || low < 0) {
++                return null;
++            }
++            output[i] = (byte) ((high << 4) | low);
++        }
++        return output;
++    }
++}
+-- 
+2.53.0
+

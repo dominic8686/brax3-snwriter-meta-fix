@@ -1,0 +1,90 @@
+From 4bc70031afe48feee6e958cba3c9feb68565b79b Mon Sep 17 00:00:00 2001
+From: Dominic Gingras <dominic8686@gmail.com>
+Date: Thu, 23 Jul 2026 04:53:59 +0000
+Subject: [PATCH 2/2] framework: enable the ODM factory test app at systemReady
+
+PriFactoryTest ships with <application android:enabled="false"> in its
+manifest (a hardcoded literal, so it cannot be overridden by an RRO), and iode
+has no config_forceEnabledComponents mechanism. Nothing therefore reaches the
+package on a clean boot: both am start and the *#*#8804#*#* dial code fail with
+START_CLASS_NOT_FOUND.
+
+The ODM BSP solves this in PhoneWindowManager by calling
+setApplicationEnabledSetting(ENABLED) at systemReady; port that here.
+
+Hardened over the BSP version: early-out when the app is already reachable,
+getPackageInfo guard so it is a clean no-op on builds that do not ship the app
+(the BSP version would throw), and try/catch so it can never destabilise
+systemReady.
+
+Note this only ENABLES the package - it does not auto-launch it; launch remains
+the 8804 dial code.
+
+Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+---
+ .../server/policy/PhoneWindowManager.java     | 42 +++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+
+diff --git a/services/core/java/com/android/server/policy/PhoneWindowManager.java b/services/core/java/com/android/server/policy/PhoneWindowManager.java
+index 6237311b4578..77c558477683 100644
+--- a/services/core/java/com/android/server/policy/PhoneWindowManager.java
++++ b/services/core/java/com/android/server/policy/PhoneWindowManager.java
+@@ -305,6 +305,10 @@ import java.util.function.Supplier;
+ public class PhoneWindowManager implements WindowManagerPolicy {
+     static final String TAG = "WindowManager";
+     static final boolean localLOGV = false;
++
++    // BraX3: ODM factory hardware-test app; manifest-disabled, enabled at systemReady.
++    private static final String FACTORY_TEST_PACKAGE = "com.pri.factorytest";
++
+     static final boolean DEBUG_INPUT = false;
+     static final boolean DEBUG_KEYGUARD = false;
+     static final boolean DEBUG_WAKEUP = false;
+@@ -6743,6 +6747,44 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+ 
+         mAutofillManagerInternal = LocalServices.getService(AutofillManagerInternal.class);
+         mGestureLauncherService = LocalServices.getService(GestureLauncherService.class);
++
++        // BraX3: the ODM factory hardware-test app ships with
++        // <application android:enabled="false"> in its manifest, so nothing can reach
++        // it until something enables the package at runtime -- am start and the
++        // *#*#8804#*#* dial code both fail with START_CLASS_NOT_FOUND. The ODM BSP
++        // enables it here in PhoneWindowManager; port that so factory testing works.
++        // No-op on builds that do not ship the app.
++        enableFactoryTestApplicationIfNeeded(mContext);
++    }
++
++    /**
++     * BraX3 factory test app (ported from the ODM BSP): the app is manifest-disabled,
++     * so enable the package once it is installed. Guarded so it is a no-op when the
++     * app is absent or already reachable.
++     */
++    private static void enableFactoryTestApplicationIfNeeded(Context context) {
++        final PackageManager pm = context.getPackageManager();
++        // Already reachable? nothing to do.
++        final Intent intent = new Intent().setClassName(FACTORY_TEST_PACKAGE,
++                FACTORY_TEST_PACKAGE + ".PrizeFactoryTestActivity");
++        final List<ResolveInfo> list =
++                pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
++        if (list != null && !list.isEmpty()) {
++            return;
++        }
++        // Only touch the package if this build actually ships it.
++        try {
++            pm.getPackageInfo(FACTORY_TEST_PACKAGE, PackageManager.MATCH_DISABLED_COMPONENTS);
++        } catch (PackageManager.NameNotFoundException e) {
++            return;
++        }
++        try {
++            pm.setApplicationEnabledSetting(FACTORY_TEST_PACKAGE,
++                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
++            Log.i(TAG, "Enabled factory test application " + FACTORY_TEST_PACKAGE);
++        } catch (RuntimeException e) {
++            Log.w(TAG, "Could not enable " + FACTORY_TEST_PACKAGE, e);
++        }
+     }
+ 
+     /** {@inheritDoc} */
+-- 
+2.53.0
+
